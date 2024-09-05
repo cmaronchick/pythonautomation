@@ -167,7 +167,7 @@ def add_hyperlink(paragraph, text, url):
 # url https://donate.bloodworksnw.org/donor/schedules/zip
 
 url = ""
-today = endDate = datetime.date.today()
+today = datetime.date.today()
 endDate = today + datetime.timedelta(days=30)
 print('endDate: ', endDate)
 datestring = str(endDate.month) + "/" + str(endDate.day) + "/" + str(endDate.year)
@@ -221,7 +221,10 @@ for z in zipcodes:
     endDateBox.click()
     endDateBox.send_keys(Keys.END)
     endDateBox.send_keys(Keys.SHIFT + Keys.HOME)
-    endDateBox.send_keys(datestring)
+    endDateBox.send_keys(Keys.DELETE)
+    for letter in datestring:
+        print('letter: ', letter)
+        endDateBox.send_keys(letter)
     endDateBox.send_keys(Keys.TAB)
     searchBtn.click()
 

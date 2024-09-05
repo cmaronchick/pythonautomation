@@ -1,0 +1,36 @@
+Week,Week Type,Start,End
+15,REG,2024-08-19T16:00:00Z,2024-08-20T16:00:00Z
+Game Type,Question,Question Type,Swap Type
+Thursday Night,GAMECHANGERS_QUESTION_14,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [7], 'Value': 3}"
+Saturday,GAMECHANGERS_QUESTION_21,SWAP,"{'Type': 'Team Compare', 'CalculationType': 1, 'Info': ['timeOfPos']}"
+Sunday,GAMECHANGERS_QUESTION_25,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [12], 'Value': 100, 'Amount': 5}"
+Sunday Night,GAMECHANGERS_QUESTION_10,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [24]}"
+Monday Night,GAMECHANGERS_QUESTION_05,TEXT,"{'Type': 'Team Stats', 'CalculationType': 1, 'Info': ['rushYds'], 'Value': 120}"
+16,REG,2024-08-20T16:00:00Z,2024-08-21T16:00:00Z
+Game Type,Question,Question Type,Swap Type
+Thursday Night,GAMECHANGERS_QUESTION_14,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [7], 'Value': 3}"
+Saturday,GAMECHANGERS_QUESTION_21,SWAP,"{'Type': 'Team Compare', 'CalculationType': 1, 'Info': ['timeOfPos']}"
+Sunday,GAMECHANGERS_QUESTION_25,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [12], 'Value': 100, 'Amount': 5}"
+Sunday Night,GAMECHANGERS_QUESTION_10,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [24]}"
+Monday Night,GAMECHANGERS_QUESTION_05,TEXT,"{'Type': 'Team Stats', 'CalculationType': 1, 'Info': ['rushYds'], 'Value': 120}"
+Thursday Night,GAMECHANGERS_QUESTION_19,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [36]}"
+Saturday,GAMECHANGERS_QUESTION_21,SWAP,"{'Type': 'Team Compare', 'CalculationType': 1, 'Info': ['timeOfPos']}"
+Sunday,GAMECHANGERS_QUESTION_23,TEXT,"{'Type': 'Overtime', 'CalculationType': 1}"
+Sunday Night,GAMECHANGERS_QUESTION_21,SWAP,"{'Type': 'Team Compare', 'CalculationType': 1, 'Info': ['timeOfPos']}"
+Monday Night,KICKER,ROSTER,
+1,REG,2024-08-21T19:00:00Z,2024-08-28T19:00:00Z
+Game Type,Question,Question Type,Swap Type
+Thursday Night,GAMECHANGERS_QUESTION_14,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [7], 'Value': 3}"
+Saturday,GAMECHANGERS_QUESTION_21,SWAP,"{'Type': 'Team Compare', 'CalculationType': 1, 'Info': ['timeOfPos']}"
+Sunday,GAMECHANGERS_QUESTION_25,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [12], 'Value': 100, 'Amount': 5}"
+Sunday Night,GAMECHANGERS_QUESTION_10,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [24]}"
+Monday Night,GAMECHANGERS_QUESTION_05,TEXT,"{'Type': 'Team Stats', 'CalculationType': 1, 'Info': ['rushYds'], 'Value': 120}"
+Thursday Night,GAMECHANGERS_QUESTION_19,TEXT,"{'Type': 'Player Total', 'CalculationType': 1, 'StatIds': [36]}"
+Saturday,GAMECHANGERS_QUESTION_21,SWAP,"{'Type': 'Team Compare', 'CalculationType': 1, 'Info': ['timeOfPos']}"
+Sunday,GAMECHANGERS_QUESTION_23,TEXT,"{'Type': 'Overtime', 'CalculationType': 1}"
+Sunday Night,GAMECHANGERS_QUESTION_21,SWAP,"{'Type': 'Team Compare', 'CalculationType': 1, 'Info': ['timeOfPos']}"
+Monday Night,KICKER,ROSTER,
+Thursday Night,KICKER,ROSTER,
+Sunday,KICKER,ROSTER,
+Sunday Night,KICKER,ROSTER,
+Monday Night,KICKER,ROSTER,
