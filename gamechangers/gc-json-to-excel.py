@@ -2,7 +2,7 @@
 import json, csv, datetime
 
 today = datetime.date.today()
-with open('gc-' + str(today) + '.csv', 'a') as csvfile:
+with open('gc-' + str(today) + '.csv', 'a', newline='') as csvfile:
     fieldNames = ["Week","Week Type", "Start", "End"]
     # gcwriter = csv.DictWriter(csvfile, fieldnames=fieldNames) #, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL
     # gcwriter.writeheader()

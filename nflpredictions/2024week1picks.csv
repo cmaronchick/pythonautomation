@@ -1,17 +1,103 @@
-Winner,Score,Loser,Score
-Falcons, 24,Steelers, 17
-Chiefs, 24,Ravens, 20
-Packers, 27,Eagles, 24
-Vikings, 21,Giants, 14
-Texans, 27,Colts, 17
-Bills, 30,Cardinals, 27
-Bears, 26,Titans, 17
-Bengals, 28,Patriots, 13
-Dolphins, 30,Jaguars, 24
-Saints, 24,Panthers, 21
-Raiders, 23,Chargers, 21
-Seahawks, 27,Broncos, 20
-Browns, 23,Cowboys, 20
-Buccaneers, 24,Commanders, 21
-Lions, 33,Rams, 24
-49ers, 26,Jets, 23 
+Source,Winner,Score,Loser,Score
+TerrySullivan,Falcons,24,Steelers,17
+TerrySullivan,Chiefs,24,Ravens,20
+TerrySullivan,Packers,27,Eagles,24
+TerrySullivan,Vikings,21,Giants,14
+TerrySullivan,Texans,27,Colts,17
+TerrySullivan,Bills,30,Cardinals,27
+TerrySullivan,Bears,26,Titans,17
+TerrySullivan,Bengals,28,Patriots,13
+TerrySullivan,Dolphins,30,Jaguars,24
+TerrySullivan,Saints,24,Panthers,21
+TerrySullivan,Raiders,23,Chargers,21
+TerrySullivan,Seahawks,27,Broncos,20
+TerrySullivan,Browns,23,Cowboys,20
+TerrySullivan,Buccaneers,24,Commanders,21
+TerrySullivan,Lions,33,Rams,24
+TerrySullivan,49ers,26,Jets,23
+PetePrisco,Chiefs,24,Ravens,18
+PetePrisco,Packers,33,Eagles,28
+PetePrisco,Falcons,23,Steelers,17
+PetePrisco,Bills,27,Cardinals,24
+PetePrisco,Bears,23,Titans,21
+PetePrisco,Bengals,26,Pats,17
+PetePrisco,Colts,24,Texans,23
+PetePrisco,Jaguars,34,Dolphins,31
+PetePrisco,Saints,29,Panthers,16
+PetePrisco,Giants,23,Vikings,21
+PetePrisco,Chargers,28,Raiders,17
+PetePrisco,Seahawks,30,Broncos,17
+PetePrisco,Cowboys,22,Browns,20
+PetePrisco,Bucs,27,Commanders,20
+PetePrisco,Lions,28,Rams,21
+PetePrisco,49ers,23,Jets,21
+DataSkrive,Ravens,22,Chiefs,18
+DataSkrive,Packers,26,Eagles,22
+DataSkrive,Saints,30,Panthers,11
+DataSkrive,Vikings,22,Giants,18
+DataSkrive,Bears,24,Titans,17
+DataSkrive,Bengals,27,Patriots,13
+DataSkrive,Dolphins,26,Jaguars,21
+DataSkrive,Bills,32,Cardinals,14
+DataSkrive,Steelers,22,Falcons,17
+DataSkrive,Colts,24,Texans,23
+DataSkrive,Seahawks,25,Broncos,20
+DataSkrive,Raiders,21,Chargers,20
+DataSkrive,Buccaneers,32,Commanders,13
+DataSkrive,Cowboys,25,Browns,24
+DataSkrive,Lions,26,Rams,22
+DataSkrive,49ers,32,Jets,9
+Jeremy Cluff,Chiefs,24,Ravens,23
+Jeremy Cluff,Packers,27,Eagles,21
+Jeremy Cluff,Falcons,24,Steelers,20
+Jeremy Cluff,Bills,27,Cardinals,20
+Jeremy Cluff,Bears,20,Titans,13
+Jeremy Cluff,Bengals,27,Patriots,14
+Jeremy Cluff,Texans,24,Colts,20
+Jeremy Cluff,Dolphins,35,Jaguars,27
+Jeremy Cluff,Saints,24,Panthers,16
+Jeremy Cluff,Vikings,17,Giants,13
+Jeremy Cluff,Chargers,23,Raiders,20
+Jeremy Cluff,Seahawks,24,Broncos,17
+Jeremy Cluff,Browns,21,Cowboys,20
+Jeremy Cluff,Commanders,20,Buccaneers,17
+Jeremy Cluff,Lions,24,Rams,23
+Jeremy Cluff,49ers,28,Jets,27
+BleacherReport,Ravens,24,Chiefs,21
+BleacherReport,Eagles,28,Packers,23
+BleacherReport,Bengals,24,Patriots,12
+BleacherReport,Bills,25,Cardinals,21
+BleacherReport,Dolphins,31,Jaguars,27
+BleacherReport,Texans,28,Colts,22
+BleacherReport,Bears,24,Titans,21
+BleacherReport,Steelers,21,Falcons,20
+BleacherReport,Vikings,20,Giants,17
+BleacherReport,Saints,21,Panthers,16
+BleacherReport,Seahawks,23,Broncos,19
+BleacherReport,Buccaneers,24,Commanders,20
+BleacherReport,Rams,33,Lions,30
+BillBender,Bears,24,Titans,21
+BillBender,Saints,25,Panthers,16
+BillBender,Giants,21,Vikings,18
+BillBender,Chargers,23,Raiders,20
+BillBender,Seahawks,21,Broncos,17
+BillBender,Cowboys,21,Browns,20
+BillBender,Buccaneers,26,Commanders,18
+BillBender,Lions,31,Rams,24
+BillBender,49ers,21,Jets,18
+Sportsnaut,Chiefs,27,Ravens,21
+Sportsnaut,Packers,31,Eagles,30
+Sportsnaut,Falcons,20,Steelers,17
+Sportsnaut,Bills,34,Cardinals,24
+Sportsnaut,Bears,24,Titans,20
+Sportsnaut,Bengals,27,Patriots,17
+Sportsnaut,Texans,34,Colts,27
+Sportsnaut,Dolphins,27,Jaguars,23
+Sportsnaut,Saints,21,Panthers,13
+Sportsnaut,Vikings,17,Giants,10
+Sportsnaut,Raiders,27,Chargers,24
+Sportsnaut,Seahawks,30,Broncos,21
+Sportsnaut,Browns,20,Cowboys,17
+Sportsnaut,Buccaneers,28,Commanders,20
+Sportsnaut,Lions,35,Rams,31
+Sportsnaut,49ers,20,Jets,16

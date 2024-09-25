@@ -181,7 +181,7 @@ try:
 
     # # sportsnaut formatting
 
-    response = requests.get('https://sportsnaut.com/list/nfl-week-2-predictions-2024/')
+    response = requests.get('https://sportsnaut.com/list/nfl-week-3-predictions-2024/')
     print(response)
     soup = BeautifulSoup(response.text, 'html.parser')
     picks = soup.find_all('h2') #, attrs={'class': 'Article-content'}
@@ -308,31 +308,34 @@ try:
     g = 0
     while g < len(games)-1: 
         teams = driver.find_elements(By.CLASS_NAME, "team-column")
-        wait.until(lambda d : teams[0].is_displayed())
-        scores = driver.find_elements(By.CLASS_NAME, "score")
-        awayTeam = teams[0].text
-        awayScore = scores[0].text
-        homeTeam = teams[1].text
-        homeScore = scores[1].text
-        
-        
-        print('awayTeam, awayScore, homeTeam, homeScore: ', awayTeam, awayScore, homeTeam, homeScore)
-        if awayScore > homeScore:
-            winner = awayTeam
-            winnerScore = awayScore
-            loser = homeTeam
-            loserScore = homeScore
-        else:
-            winner = homeTeam
-            winnerScore = homeScore
-            loser = awayTeam
-            loserScore = awayScore    
+        if teams is not None and len(teams) > 0:
+            wait.until(lambda d : teams[0].is_displayed())
+            scores = driver.find_elements(By.CLASS_NAME, "score")
+            awayTeam = teams[0].text
+            awayScore = scores[0].text
+            homeTeam = teams[1].text
+            homeScore = scores[1].text
             
-        rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
-        navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
-        navButtons[1].click()
-        g = g + 1
-        print('g:', g)    
+            
+            print('awayTeam, awayScore, homeTeam, homeScore: ', awayTeam, awayScore, homeTeam, homeScore)
+            if awayScore > homeScore:
+                winner = awayTeam
+                winnerScore = awayScore
+                loser = homeTeam
+                loserScore = homeScore
+            else:
+                winner = homeTeam
+                winnerScore = homeScore
+                loser = awayTeam
+                loserScore = awayScore    
+                
+            rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
+            navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
+            navButtons[1].click()
+            g = g + 1
+            print('g:', g)
+        else:
+            g = g + 1
 
     ### Final Row for printing picks ###
     week1picks = open("2024week" + str(weeknum) + "picks.csv", 'w+', newline='')
