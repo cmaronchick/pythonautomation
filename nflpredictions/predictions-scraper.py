@@ -100,7 +100,16 @@ iyer = {
     'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-4-cowboys-chiefs/babdc8e304317864905e3647'
 }
 
-writersArray = [ts, pp, bleacher, bender, pfn, breech, sz, foxsports] #, foxsports, azc, 
+thirtythirdteam = {
+    'url': 'https://www.the33rdteam.com/2024-nfl-week-4-expert-picks-predictions-for-every-game/',
+    'name': 'MarcusMosher',
+    'searchTerm': 'Score Prediction:',
+    'searchTag': 'strong',
+    'separator': ', '
+
+}
+
+writersArray = [ts, pp, bleacher, bender, pfn, breech, sz, foxsports, thirtythirdteam] #, foxsports, azc, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
 
 chrome_driver_path = './chromedriver'
@@ -340,6 +349,51 @@ try:
             print('g:', g)
         else:
             g = g + 1
+
+    # usatoday formatting
+
+    driver.get('https://www.usatoday.com/story/sports/nfl/2024/09/25/dallas-cowboys-new-york-giants-picks-predictions-odds-week-4/75300481007/')
+    wait = WebDriverWait(driver, timeout=2)
+    # driver.implicitly_wait(10)
+    # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
+    articleBody = driver.find_element(By.TAG_NAME, "article")
+    pickLinkIndex = 0
+    wait.until(lambda d : articleBody.is_displayed())
+    pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')    # pickLinks2 = driver.find_elements(By.XPATH, "/html/body/div[3]/main/article/div[5]/p[10]/a")
+    print(len(pickLinks))
+    while pickLinkIndex < len(pickLinks):
+        pickLinks[pickLinkIndex].click()
+        articleBody = driver.find_element(By.TAG_NAME, "article")
+        wait.until(lambda d : articleBody.is_displayed())
+        title = driver.find_element(By.TAG_NAME, "h1")
+        wait.until(lambda d : title.is_displayed())
+        headers = driver.find_elements(By.TAG_NAME, "h2")
+        headerIndex = 0
+        for header in headers:
+            if headerIndex > 1:
+                separatorIndex = header.text.find(":")
+                author = header.text[:separatorIndex].replace(" ","")
+                winner = header.text[separatorIndex+2:header.text.find(",")].split(" ")
+                winningTeam = winner[0]
+                winningScore = winner[1]
+                loser = header.text[header.text.find(",")+2:].split(" ")
+                losingTeam = loser[0]
+                losingScore = loser[1]
+                print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
+                rows.append([author,winningTeam, winningScore, losingTeam, losingScore])                    
+            headerIndex = headerIndex + 1
+        pickLinkIndex = pickLinkIndex + 1 
+        driver.get('https://www.usatoday.com/story/sports/nfl/2024/09/25/dallas-cowboys-new-york-giants-picks-predictions-odds-week-4/75300481007/')
+        popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
+        if len(popup) > 0:
+            popup[0].click()
+        articleBody = driver.find_element(By.TAG_NAME, "article")
+        wait.until(lambda d : articleBody.is_displayed())
+
+        pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')
+        print(len(pickLinks))
+        
+                # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
 
     ### Final Row for printing picks ###
     week1picks = open("2024week" + str(weeknum) + "picks.csv", 'w+', newline='')

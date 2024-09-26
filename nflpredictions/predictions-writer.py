@@ -2,7 +2,7 @@ from pymongo import MongoClient, UpdateOne
 import csv
 from datetime import date
 
-weeknum = 3
+weeknum = 4
 
 predictions = open("2024week" + str(weeknum) + "picks.csv",newline='')
 
