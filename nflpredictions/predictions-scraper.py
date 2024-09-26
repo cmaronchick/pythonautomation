@@ -11,7 +11,7 @@ from docx import Document
 import urllib3.request
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-3-odds-picks-spreads-caleb-williams-and-bears-upset-colts-packers-stay-hot-under-malik-willis/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-4-odds-picks-best-bets-steelers-stay-perfect-with-win-in-indy-rams-upset-bears-in-chicago/',
     'name': 'TerrySullivan',
     'searchTerm': 'Projected score',
     'searchTag': 'strong',
@@ -20,7 +20,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-3-nfl-picks-vikings-top-texans-to-remain-unbeaten-chargers-upend-steelers/',
+    'url': 'https://www.cbssports.com/nfl/news/pete-priscos-week-4-nfl-picks-ravens-cool-off-unbeaten-bills-packers-hand-vikings-first-loss/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -29,7 +29,7 @@ pp = {
 }
 
 foxsports = {
-    'url': 'https://www.foxsports.com/articles/nfl/2024-nfl-week-3-predictions-betting-odds-tv-schedule',
+    'url': 'https://www.foxsports.com/articles/nfl/2024-nfl-week-4-predictions-betting-odds-tv-schedule',
     'name': 'DataSkrive',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -46,8 +46,8 @@ azc = {
 }
 
 pfn = {
-    'url': 'https://www.profootballnetwork.com/week-3-nfl-picks-predictions-2024/',
-    'name': 'Ben Rolfe',
+    'url': 'https://www.profootballnetwork.com/week-4-nfl-picks-predictions-2024/',
+    'name': 'PFN',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
     'separator': ', '
@@ -55,7 +55,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/posts/2024-nfl-picks-score-predictions-for-week-3-01j7xet93n9e',
+    'url': 'https://nflspinzone.com/posts/2024-nfl-picks-score-predictions-for-week-4-games-01j8fna52mnw',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -71,7 +71,7 @@ cowherd = {
 }
 
 bleacher = {
-    'url': 'https://bleacherreport.com/articles/10135758-bleacher-reports-week-3-nfl-picks',
+    'url': 'https://bleacherreport.com/articles/10136706-bleacher-reports-week-4-nfl-picks',
     'name': 'BleacherReport',
     'searchTerm': 'Score Prediction:',
     'searchTag': 'b',
@@ -79,7 +79,7 @@ bleacher = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-3-picks-cowboys-stun-ravens-drop-baltimore-to-0-3-chargers-shock-steelers-saints-roll-past-eagles/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-4-picks-ravens-shock-undefeated-bills-raiders-top-browns-falcons-beat-saints-in-thriller/',
     'name': 'JohnBreech',
     'searchTerm': 'The pick:',
     'searchTag': 'strong',
@@ -88,12 +88,16 @@ breech = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-3-picks-chargers-steelers-cowboys/78dcf80fa10971cb2446b856',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-4-straight-vikings-bills/11a57cad6fbfa3f125c16478',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
     'separator': ', '
     # https://www.sportingnews.com/us/author/bill-bender
+}
+
+iyer = {
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-4-cowboys-chiefs/babdc8e304317864905e3647'
 }
 
 writersArray = [ts, pp, bleacher, bender, pfn, breech, sz, foxsports] #, foxsports, azc, 
@@ -102,7 +106,7 @@ request_headers = {'User-Agent': 'Mozilla/5.0'}
 chrome_driver_path = './chromedriver'
 
 
-weeknum = 3
+weeknum = 4
 
 # article = driver.find_element(By.CLASS_NAME, "Article-content")
 # picks = driver.find_element(By.TAG_NAME, "strong")
@@ -181,7 +185,7 @@ try:
 
     # # sportsnaut formatting
 
-    response = requests.get('https://sportsnaut.com/list/nfl-week-3-predictions-2024/')
+    response = requests.get('https://sportsnaut.com/list/nfl-week-4-predictions-2024/')
     print(response)
     soup = BeautifulSoup(response.text, 'html.parser')
     picks = soup.find_all('h2') #, attrs={'class': 'Article-content'}
@@ -206,7 +210,7 @@ try:
             print(ValueError)
 
     # vinnie iyer formatting
-    driver.get('https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-3-chargers-texans/5d2794c40246483844cff988')
+    driver.get(iyer["url"])
     wait = WebDriverWait(driver, timeout=2)
     driver.implicitly_wait(10)
     # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
