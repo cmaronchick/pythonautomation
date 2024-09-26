@@ -11,8 +11,8 @@ db = client['pcsm']
 collection = db['games']
 predictionsCollection = db['predictions']
 
-games = collection.find({ "sport": 'nfl', "season": "reg", "year": 2024, "gameWeek": weeknum})
-
+games = list(collection.find({ "sport": 'nfl', "season": "reg", "year": 2024, "gameWeek": weeknum}))
+print(len(games))
 def filterGames(awayCode,homeCode):
     for game in games:
         if awayCode == game["awayTeam"]["code"] is True or homeCode == game["homeTeam"]["code"] is True:
@@ -23,7 +23,10 @@ updates = []
 with predictions as csvfile:
     csvreader = csv.reader(predictions,delimiter=",")
     for row in csvreader:
+        print('row:', row)
         if row[0] != "Source":
+            awayCode = row[6]
+            homeCode = row[7]
             awayScore = int(row[8])
             homeScore = int(row[9])
             gameObj = {
@@ -32,11 +35,11 @@ with predictions as csvfile:
                 "season": "reg",
                 "gameWeek": weeknum,
                 "awayTeam": {
-                    "code": row[6],
+                    "code": awayCode,
                     "score": awayScore
                 },
                 "homeTeam": {
-                    "code": row[7],
+                    "code": homeCode,
                     "score": homeScore
                 },
                 "userId": row[0],
@@ -45,9 +48,11 @@ with predictions as csvfile:
                 "spread": homeScore - awayScore,
                 "total": homeScore + awayScore
             }
+            print('games:', len(games))
             gameId = None
             for game in games:
-                if gameObj["awayTeam"]["code"] == game["awayTeam"]["code"] is True or gameObj["homeTeam"]["code"] == game["homeTeam"]["code"]:
+                print('game:', game["awayTeam"]["code"], game["homeTeam"]["code"], awayCode, homeCode)
+                if awayCode == game["awayTeam"]["code"] is True or homeCode == game["homeTeam"]["code"]:
                     gameObj["gameId"] = game["gameId"]
                     gameObj["odds"] = {
                         "spread": game["odds"]["spread"],
@@ -55,16 +60,18 @@ with predictions as csvfile:
                     }
             
             # print("gameObj: ", gameObj)
-            updates.append(UpdateOne({
-            "year": 2024,
-            "sport": "nfl",
-            "season": "reg",
-            "gameWeek": weeknum,
-            "userId": row[0]
-            }, {"$set": gameObj}, upsert=True))
+            if "gameId" in gameObj:
+                updates.append(UpdateOne({
+                "year": 2024,
+                "sport": "nfl",
+                "season": "reg",
+                "gameWeek": weeknum,
+                "userId": row[0],
+                "gameId": gameObj["gameId"]
+                }, {"$set": gameObj}, upsert=True))
     print('updates:', len(updates))
     predictionsUpdateResponse = predictionsCollection.bulk_write(updates)
-    print('predictionsUpdateResponse: ', predictionsUpdateResponse)
+    print('predictionsUpdateResponse: ', predictionsUpdateResponse.bulk_api_result)
 
         # print('awayCode, homeCode:', awayCode, homeCode)
         # filteredGame = list(filter(lambda game: awayCode == game["awayTeam"]["code"] is True or homeCode == game["homeTeam"]["code"] is True, games))
