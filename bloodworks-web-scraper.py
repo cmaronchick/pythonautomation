@@ -223,7 +223,6 @@ for z in zipcodes:
     endDateBox.send_keys(Keys.SHIFT + Keys.HOME)
     endDateBox.send_keys(Keys.DELETE)
     for letter in datestring:
-        print('letter: ', letter)
         endDateBox.send_keys(letter)
     endDateBox.send_keys(Keys.TAB)
     searchBtn.click()
