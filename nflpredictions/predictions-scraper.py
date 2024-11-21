@@ -122,7 +122,7 @@ usatoday = {
     # https://www.usatoday.com/sports/nfl/
 }
 
-writersArray = [ts, pp, bleacher, bender, pfn, breech, sz, foxsports, thirtythirdteam] #, foxsports, azc, 
+writersArray = [ts, pp, bleacher, bender, pfn, sz, foxsports, thirtythirdteam] #, foxsports, azc, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
 
 chrome_driver_path = './chromedriver'
@@ -197,7 +197,7 @@ try:
                 winner = predictionString[:firstSpace]
                 winnerScore = predictionString[firstSpace:separator]
                 loser = predictionString[separator+2:secondSpace]
-                loserScore = predictionString[secondSpace:]
+                loserScore = predictionString[secondSpace:].strip()
                 # print([writer['name'],winner, winnerScore, loser, loserScore])
                 try:
                     rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
@@ -205,6 +205,31 @@ try:
                     print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
                 # print(winner, int(winnerScore), loser, int(loserScore))
 
+    # # johnbreech formatting
+
+    response = requests.get(breech['url'])
+    print(response)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    picks = soup.find_all(breech['searchTerm']) #, attrs={'class': 'Article-content'}
+
+    # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+
+    for p in picks:
+        predictionString = p.text
+        separator = predictionString.find("-")
+        lastSpace = predictionString.rfind(" ")
+        thirdSpace = predictionString.rfind(" ", 0, lastSpace)
+        secondSpace = predictionString.rfind(" ", 0, separator)
+        firstSpace = predictionString.rfind(" ", 0, secondSpace)
+        winner = predictionString[:firstSpace]
+        winnerScore = predictionString[firstSpace:separator]
+        loser = predictionString[lastSpace:]
+        loserScore = predictionString[separator+1:predictionString.find(" over")]
+        # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
+        try:
+            rows.append(['JohnBreech',winner, int(winnerScore), loser, int(loserScore)])
+        except ValueError:
+            print(ValueError)
     # # sportsnaut formatting
 
     response = requests.get(sportsnaut['url'])
