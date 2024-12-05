@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
-import csv, traceback
+import csv, traceback, array
 
 weeknum = 12
 
@@ -122,7 +122,12 @@ usatoday = {
     # https://www.usatoday.com/sports/nfl/
 }
 
-writersArray = [ts, pp, bleacher, bender, pfn, breech, sz, foxsports, thirtythirdteam] #, foxsports, azc, 
+espn = {
+    'url': 'https://www.espn.com/nfl/story/_/page/nflviewguide-42531064/nfl-week-12-picks-schedule-fantasy-football-odds-injuries-stats-2024'
+    # https://www.usatoday.com/sports/nfl/
+}
+
+writersArray = [ts, pp, bleacher, bender, pfn, sz, foxsports, thirtythirdteam] #, foxsports, azc, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
 
 chrome_driver_path = './chromedriver'
@@ -140,105 +145,219 @@ weboptions = webdriver.ChromeOptions()
 weboptions.accept_insecure_certs = True
 driver = webdriver.Chrome(options=weboptions)
 try:
-    for writer in writersArray:
+    # for writer in writersArray:
         
-        print('writer[\'name\']:', writer['name'])
-        # response = requests.get(writer['url'], headers=request_headers)
-        # response = requests.get(writer['url'])
-        # print(response)
-        # soup = BeautifulSoup(response.text, 'html.parser')
-        # picks = soup.find_all('strong', string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
+    #     print('writer[\'name\']:', writer['name'])
+    #     # response = requests.get(writer['url'], headers=request_headers)
+    #     # response = requests.get(writer['url'])
+    #     # print(response)
+    #     # soup = BeautifulSoup(response.text, 'html.parser')
+    #     # picks = soup.find_all('strong', string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
 
-        # http = urllib3.PoolManager()
-        # response = http.request('GET', writer['url'], headers=request_headers)
-        # print(response.status)
-        # soup = BeautifulSoup(response.data, 'html.parser')
+    #     # http = urllib3.PoolManager()
+    #     # response = http.request('GET', writer['url'], headers=request_headers)
+    #     # print(response.status)
+    #     # soup = BeautifulSoup(response.data, 'html.parser')
         
-        # weboptions.add_argument("silentDriverLogs=true")
-        # weboptions.set_capability("accept")
-        # weboptions.add_argument('--ignore-certificate-errors')
-        # weboptions.add_argument('--ignore-ssl-errors')
+    #     # weboptions.add_argument("silentDriverLogs=true")
+    #     # weboptions.set_capability("accept")
+    #     # weboptions.add_argument('--ignore-certificate-errors')
+    #     # weboptions.add_argument('--ignore-ssl-errors')
 
-        driver.get(writer['url'])
-        wait = WebDriverWait(driver, timeout=2)
-        driver.implicitly_wait(10)
-        # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-        # wait.until(lambda d : resultsTable.is_displayed())
+    #     driver.get(writer['url'])
+    #     wait = WebDriverWait(driver, timeout=2)
+    #     driver.implicitly_wait(10)
+    #     # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
+    #     # wait.until(lambda d : resultsTable.is_displayed())
 
-        picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
-        #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-        # if writer['name'] == 'PetePrisco':
-        #     print(response.data)
-        # picks = soup.find_all(writer['searchTag'], string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
+    #     picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
+    #     #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
+    #     # if writer['name'] == 'PetePrisco':
+    #     #     print(response.data)
+    #     # picks = soup.find_all(writer['searchTag'], string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
 
-        # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
-        print('picks length: ', len(picks))
-        for p in picks:
-            # parent = p.parent.text        
-            # colonIndex = parent.find(':')
-            pText = p.text
-            # print('p:', pText)
-            colonIndex = pText.find(':')
-            pickIndex = None
-            if "endPickTerm" in writer:
-                pickIndex = pText.find(writer['endPickTerm'])
-            print(colonIndex, pickIndex)
-            if colonIndex == -1:
-                print(p)
-            if (colonIndex > 0):
-                predictionString = ""
-                if pickIndex is not None:
-                    predictionString = pText[colonIndex+2:pickIndex]
-                else:
-                    predictionString = pText[colonIndex+2:]
-                firstSpace = predictionString.find(" ")
-                separator = predictionString.find(writer['separator'])
-                secondSpace = predictionString.find(" ", separator+len(writer['separator']))
-                winner = predictionString[:firstSpace]
-                winnerScore = predictionString[firstSpace:separator]
-                loser = predictionString[separator+2:secondSpace]
-                loserScore = predictionString[secondSpace:]
-                # print([writer['name'],winner, winnerScore, loser, loserScore])
-                try:
-                    rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
-                except ValueError:
-                    print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
-                # print(winner, int(winnerScore), loser, int(loserScore))
+    #     # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+    #     print('picks length: ', len(picks))
+    #     for p in picks:
+    #         # parent = p.parent.text        
+    #         # colonIndex = parent.find(':')
+    #         pText = p.text
+    #         # print('p:', pText)
+    #         colonIndex = pText.find(':')
+    #         pickIndex = None
+    #         if "endPickTerm" in writer:
+    #             pickIndex = pText.find(writer['endPickTerm'])
+    #         print(colonIndex, pickIndex)
+    #         if colonIndex == -1:
+    #             print(p)
+    #         if (colonIndex > 0):
+    #             predictionString = ""
+    #             if pickIndex is not None:
+    #                 predictionString = pText[colonIndex+2:pickIndex]
+    #             else:
+    #                 predictionString = pText[colonIndex+2:]
+    #             firstSpace = predictionString.find(" ")
+    #             separator = predictionString.find(writer['separator'])
+    #             secondSpace = predictionString.find(" ", separator+len(writer['separator']))
+    #             winner = predictionString[:firstSpace]
+    #             winnerScore = predictionString[firstSpace:separator]
+    #             loser = predictionString[separator+2:secondSpace]
+    #             loserScore = predictionString[secondSpace:].strip()
+    #             # print([writer['name'],winner, winnerScore, loser, loserScore])
+    #             try:
+    #                 rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
+    #             except ValueError:
+    #                 print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
+    #             # print(winner, int(winnerScore), loser, int(loserScore))
 
-    # # sportsnaut formatting
+    # # # johnbreech formatting
 
-    response = requests.get(sportsnaut['url'])
-    print(response)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    picks = soup.find_all('h2') #, attrs={'class': 'Article-content'}
+    # response = requests.get(breech['url'])
+    # print(response)
+    # soup = BeautifulSoup(response.text, 'html.parser')
+    # picks = soup.find_all(breech['searchTerm']) #, attrs={'class': 'Article-content'}
 
-    # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+    # # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
 
-    for p in picks:
-        predictionString = p.text
-        separator = predictionString.find(", ")
-        lastSpace = predictionString.rfind(" ")
-        thirdSpace = predictionString.rfind(" ", 0, lastSpace)
-        secondSpace = predictionString.rfind(" ", 0, separator)
-        firstSpace = predictionString.rfind(" ", 0, secondSpace)
-        winner = predictionString[firstSpace+1:secondSpace]
-        winnerScore = predictionString[secondSpace:separator]
-        loser = predictionString[thirdSpace+1:lastSpace]
-        loserScore = predictionString[lastSpace:]
-        # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
-        try:
-            rows.append(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
-        except ValueError:
-            print(ValueError)
+    # for p in picks:
+    #     predictionString = p.text
+    #     separator = predictionString.find("-")
+    #     lastSpace = predictionString.rfind(" ")
+    #     thirdSpace = predictionString.rfind(" ", 0, lastSpace)
+    #     secondSpace = predictionString.rfind(" ", 0, separator)
+    #     firstSpace = predictionString.rfind(" ", 0, secondSpace)
+    #     winner = predictionString[:firstSpace]
+    #     winnerScore = predictionString[firstSpace:separator]
+    #     loser = predictionString[lastSpace:]
+    #     loserScore = predictionString[separator+1:predictionString.find(" over")]
+    #     # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
+    #     try:
+    #         rows.append(['JohnBreech',winner, int(winnerScore), loser, int(loserScore)])
+    #     except ValueError:
+    #         print(ValueError)
+    # # # sportsnaut formatting
 
-    # vinnie iyer formatting
-    driver.get(iyer["url"])
+    # response = requests.get(sportsnaut['url'])
+    # print(response)
+    # soup = BeautifulSoup(response.text, 'html.parser')
+    # picks = soup.find_all('h2') #, attrs={'class': 'Article-content'}
+
+    # # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+
+    # for p in picks:
+    #     predictionString = p.text
+    #     separator = predictionString.find(", ")
+    #     lastSpace = predictionString.rfind(" ")
+    #     thirdSpace = predictionString.rfind(" ", 0, lastSpace)
+    #     secondSpace = predictionString.rfind(" ", 0, separator)
+    #     firstSpace = predictionString.rfind(" ", 0, secondSpace)
+    #     winner = predictionString[firstSpace+1:secondSpace]
+    #     winnerScore = predictionString[secondSpace:separator]
+    #     loser = predictionString[thirdSpace+1:lastSpace]
+    #     loserScore = predictionString[lastSpace:]
+    #     # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
+    #     try:
+    #         rows.append(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
+    #     except ValueError:
+    #         print(ValueError)
+
+    # # vinnie iyer formatting
+    # driver.get(iyer["url"])
+    # wait = WebDriverWait(driver, timeout=2)
+    # driver.implicitly_wait(10)
+    # # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
+    # # wait.until(lambda d : resultsTable.is_displayed())
+    # games = driver.find_elements(By.TAG_NAME,"h3")
+    # picks = driver.find_elements(By.XPATH, "//*[contains(text(), 'Pick:')]/parent::*")
+    # # response = requests.get()
+    # # print(response)
+    # # soup = BeautifulSoup(response.text, 'html.parser')
+    # # games = soup.find_all('h3')
+    # # picks = soup.find_all('strong', string="Pick: ") #, attrs={'class': 'Article-content'}
+
+    # # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+    # gamesObject = {}
+    # print('VI games:', len(games))
+    # for g in games:    
+    #     gameString = g.text
+    #     separatorString = " at "
+    #     separator = gameString.find(separatorString)
+    #     if separator == -1:
+    #         separatorString = " over "
+    #         separator = gameString.find(separatorString)
+    #     oddsIndex = gameString.find("(")
+    #     colonIndex = gameString.find(":")
+    #     addedSpaces = 2
+    #     if colonIndex == -1:
+    #         colonIndex = 0
+    #         addedSpaces = 0
+    #     lastSpace = None
+    #     awayTeam = None
+    #     homeTeam = None
+    #     # print('oddsIndex:', gameString, separator, oddsIndex)
+    #     # "at " appears before the odds; odds are at the end
+    #     if separator < oddsIndex:
+    #         lastSpace = gameString.rfind(" ", 0, oddsIndex)
+    #         homeTeam = gameString[separator+len(separatorString):oddsIndex].strip()
+    #         # print('lastSpace: ', lastSpace, homeTeam)
+    #     else:
+    #         lastSpace = gameString.rfind(" ")
+    #         homeTeam = gameString[lastSpace:].strip()
+    #         # print('lastSpace2: ', lastSpace, homeTeam)
+    #     firstSpace = gameString.find(" ",colonIndex+addedSpaces)
+    #     if (firstSpace == 0):
+    #         firstSpace = gameString.find(" ",1)
+    #     print('firstSpace: ', firstSpace)
+    #     awayTeam = gameString[colonIndex+addedSpaces:firstSpace].strip()
+    #     gamesObject[homeTeam] = {
+    #         "awayTeam": awayTeam,
+    #         "homeTeam": homeTeam
+    #     }
+        
+    #     gamesObject[awayTeam] = {
+    #         "awayTeam": awayTeam,
+    #         "homeTeam": homeTeam
+    #     }
+    # print('gamesObject: ', gamesObject)
+    # print('VI picks:', len(picks))
+    # for p in picks:
+    #     #Texans win 20-17 and cover the spread.
+    #     predictionString = p.text
+    #     colonIndex = predictionString.find(":")
+    #     scoreSeparatorIndex = predictionString.find("-")
+    #     firstSpace = predictionString.find(" ",colonIndex+2)
+    #     winningTeam = predictionString[colonIndex+2:firstSpace]
+    #     separator = predictionString.find(" win ")
+    #     separatorLength = len(" win ")
+    #     if (separator == -1):
+    #         separator = predictionString.find(" in ")
+    #         separatorLength = len(" in ")
+    #     winnerScore = predictionString[separator+separatorLength:scoreSeparatorIndex]
+    #     lastSpace = predictionString.find(" ",scoreSeparatorIndex)
+    #     loserScore = predictionString[scoreSeparatorIndex+1:lastSpace]
+    #     print('winningTeam, winningScore, losingScore', winningTeam, winnerScore, loserScore)
+        
+    #     winner = None
+    #     loser = None
+    #     if winningTeam != "Vinnie":
+    #         if gamesObject[winningTeam]["awayTeam"] == winningTeam:
+    #             winner = gamesObject[winningTeam]["awayTeam"]
+    #             loser = gamesObject[winningTeam]["homeTeam"]
+    #         else:
+    #             winner = gamesObject[winningTeam]["homeTeam"]
+    #             loser = gamesObject[winningTeam]["awayTeam"]
+    #     print(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
+    #     rows.append(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
+
+
+    # espn formatting
+    driver.get(espn["url"])
     wait = WebDriverWait(driver, timeout=2)
     driver.implicitly_wait(10)
     # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
     # wait.until(lambda d : resultsTable.is_displayed())
-    games = driver.find_elements(By.TAG_NAME,"h3")
-    picks = driver.find_elements(By.XPATH, "//*[contains(text(), 'Pick:')]/parent::*")
+    gamesBody = driver.find_element(By.CLASS_NAME, "article-body")
+    picksGraph = gamesBody.find_elements(By.XPATH, "//*[contains(text(), 'pick:')]/parent::*")  
     # response = requests.get()
     # print(response)
     # soup = BeautifulSoup(response.text, 'html.parser')
@@ -246,78 +365,45 @@ try:
     # picks = soup.find_all('strong', string="Pick: ") #, attrs={'class': 'Article-content'}
 
     # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
-    gamesObject = {}
-    print('VI games:', len(games))
-    for g in games:    
-        gameString = g.text
-        separatorString = " at "
-        separator = gameString.find(separatorString)
+    print('ESPN picks:', len(picksGraph))
+    picks = []
+    for graphs in picksGraph:
+        splitPicks = graphs.text.split("\n")
+        # print('splitPicks:', splitPicks)
+        for pick in splitPicks:
+            picks.append(pick)
+    print('picks:', len(picks))
+    for predictionString in picks:
+        if predictionString.find("FPI") > -1:
+            continue
+        separatorString = ", "
+        separator = predictionString.find(separatorString)
         if separator == -1:
             separatorString = " over "
-            separator = gameString.find(separatorString)
-        oddsIndex = gameString.find("(")
-        colonIndex = gameString.find(":")
+            separator = predictionString.find(separatorString)
+        separatorLength = len(separatorString)
+        colonIndex = predictionString.find(":")
         addedSpaces = 2
         if colonIndex == -1:
             colonIndex = 0
             addedSpaces = 0
         lastSpace = None
-        awayTeam = None
-        homeTeam = None
-        # print('oddsIndex:', gameString, separator, oddsIndex)
-        # "at " appears before the odds; odds are at the end
-        if separator < oddsIndex:
-            lastSpace = gameString.rfind(" ", 0, oddsIndex)
-            homeTeam = gameString[separator+len(separatorString):oddsIndex].strip()
-            # print('lastSpace: ', lastSpace, homeTeam)
-        else:
-            lastSpace = gameString.rfind(" ")
-            homeTeam = gameString[lastSpace:].strip()
-            # print('lastSpace2: ', lastSpace, homeTeam)
-        firstSpace = gameString.find(" ",colonIndex+addedSpaces)
-        if (firstSpace == 0):
-            firstSpace = gameString.find(" ",1)
-        print('firstSpace: ', firstSpace)
-        awayTeam = gameString[colonIndex+addedSpaces:firstSpace].strip()
-        gamesObject[homeTeam] = {
-            "awayTeam": awayTeam,
-            "homeTeam": homeTeam
-        }
-        
-        gamesObject[awayTeam] = {
-            "awayTeam": awayTeam,
-            "homeTeam": homeTeam
-        }
-    print('gamesObject: ', gamesObject)
-    print('VI picks:', len(picks))
-    for p in picks:
-        #Texans win 20-17 and cover the spread.
-        predictionString = p.text
-        colonIndex = predictionString.find(":")
-        scoreSeparatorIndex = predictionString.find("-")
+        winningTeam = None
+        losingTeam = None
+        apostrophe = predictionString.find("'s")
+        writer = predictionString[:apostrophe]
+        print('writer:', writer)
         firstSpace = predictionString.find(" ",colonIndex+2)
-        winningTeam = predictionString[colonIndex+2:firstSpace]
-        separator = predictionString.find(" win ")
-        separatorLength = len(" win ")
-        if (separator == -1):
-            separator = predictionString.find(" in ")
-            separatorLength = len(" in ")
-        winnerScore = predictionString[separator+separatorLength:scoreSeparatorIndex]
-        lastSpace = predictionString.find(" ",scoreSeparatorIndex)
-        loserScore = predictionString[scoreSeparatorIndex+1:lastSpace]
-        print('winningTeam, winningScore, losingScore', winningTeam, winnerScore, loserScore)
+        print('firstSpace: ', firstSpace)
+        winningTeam = predictionString[colonIndex+2:firstSpace].strip()
+        winnerScore = predictionString[firstSpace+1:separator]
+        lastSpace = predictionString.rfind(" ")
+        losingTeam = predictionString[separator+separatorLength:lastSpace].strip()
+        loserScore = predictionString[lastSpace+1:].strip()
+        print('winningTeam, winningScore, losingScore', winningTeam, winnerScore, losingTeam, loserScore)
         
-        winner = None
-        loser = None
-        if winningTeam != "Vinnie":
-            if gamesObject[winningTeam]["awayTeam"] == winningTeam:
-                winner = gamesObject[winningTeam]["awayTeam"]
-                loser = gamesObject[winningTeam]["homeTeam"]
-            else:
-                winner = gamesObject[winningTeam]["homeTeam"]
-                loser = gamesObject[winningTeam]["awayTeam"]
-        print(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
-        rows.append(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
+        print([writer + 'ESPN',winningTeam, winnerScore, losingTeam, loserScore])
+        rows.append([writer + 'ESPN',winningTeam, winnerScore, losingTeam, loserScore])
 
     # dimers formatting
     driver.get('https://www.dimers.com/bet-hub/nfl/schedule')
@@ -372,56 +458,56 @@ try:
 
     # usatoday formatting
     
-    driver.get(usatoday['url'])
-    wait = WebDriverWait(driver, timeout=2)
-    # driver.implicitly_wait(10)
-    # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-    articleBody = driver.find_element(By.TAG_NAME, "article")
-    pickLinkIndex = 0
-    wait.until(lambda d : articleBody.is_displayed())
-    pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')    # pickLinks2 = driver.find_elements(By.XPATH, "/html/body/div[3]/main/article/div[5]/p[10]/a")
-    print(len(pickLinks))
-    while pickLinkIndex < len(pickLinks):
+    # driver.get(usatoday['url'])
+    # wait = WebDriverWait(driver, timeout=2)
+    # # driver.implicitly_wait(10)
+    # # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
+    # articleBody = driver.find_element(By.TAG_NAME, "article")
+    # pickLinkIndex = 0
+    # wait.until(lambda d : articleBody.is_displayed())
+    # pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')    # pickLinks2 = driver.find_elements(By.XPATH, "/html/body/div[3]/main/article/div[5]/p[10]/a")
+    # print(len(pickLinks))
+    # while pickLinkIndex < len(pickLinks):
         
-        popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
-        if len(popup) > 0:
-            popup[0].click()
-        pickLinks[pickLinkIndex].click()
-        articleBody = driver.find_element(By.TAG_NAME, "article")
-        wait.until(lambda d : articleBody.is_displayed())
-        title = driver.find_element(By.TAG_NAME, "h1")
-        wait.until(lambda d : title.is_displayed())
-        headers = driver.find_elements(By.TAG_NAME, "h2")
-        headerIndex = 0
-        for header in headers:
-            winnerScore = None
-            winningTeam = None
-            losingScore = None
-            losingTeam = None
-            if headerIndex > 1:
-                separatorIndex = header.text.find(":")
-                author = header.text[:separatorIndex].replace(" ","")
-                winner = header.text[separatorIndex+2:header.text.find(",")].split(" ")
-                winningTeam = winner[0]
-                if len(winner) > 1:
-                    winningScore = winner[1]
-                loser = header.text[header.text.find(",")+2:].split(" ")
-                losingTeam = loser[0]
-                if len(loser) > 1:
-                    losingScore = loser[1]
-                print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
-                rows.append([author,winningTeam, winningScore, losingTeam, losingScore])                    
-            headerIndex = headerIndex + 1
-        pickLinkIndex = pickLinkIndex + 1 
-        driver.get(usatoday['url'])
-        popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
-        if len(popup) > 0:
-            popup[0].click()
-        articleBody = driver.find_element(By.TAG_NAME, "article")
-        wait.until(lambda d : articleBody.is_displayed())
+    #     popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
+    #     if len(popup) > 0:
+    #         popup[0].click()
+    #     pickLinks[pickLinkIndex].click()
+    #     articleBody = driver.find_element(By.TAG_NAME, "article")
+    #     wait.until(lambda d : articleBody.is_displayed())
+    #     title = driver.find_element(By.TAG_NAME, "h1")
+    #     wait.until(lambda d : title.is_displayed())
+    #     headers = driver.find_elements(By.TAG_NAME, "h2")
+    #     headerIndex = 0
+    #     for header in headers:
+    #         winnerScore = None
+    #         winningTeam = None
+    #         losingScore = None
+    #         losingTeam = None
+    #         if headerIndex > 1:
+    #             separatorIndex = header.text.find(":")
+    #             author = header.text[:separatorIndex].replace(" ","")
+    #             winner = header.text[separatorIndex+2:header.text.find(",")].split(" ")
+    #             winningTeam = winner[0]
+    #             if len(winner) > 1:
+    #                 winningScore = winner[1]
+    #             loser = header.text[header.text.find(",")+2:].split(" ")
+    #             losingTeam = loser[0]
+    #             if len(loser) > 1:
+    #                 losingScore = loser[1]
+    #             print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
+    #             rows.append([author,winningTeam, winningScore, losingTeam, losingScore])                    
+    #         headerIndex = headerIndex + 1
+    #     pickLinkIndex = pickLinkIndex + 1 
+    #     driver.get(usatoday['url'])
+    #     popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
+    #     if len(popup) > 0:
+    #         popup[0].click()
+    #     articleBody = driver.find_element(By.TAG_NAME, "article")
+    #     wait.until(lambda d : articleBody.is_displayed())
 
-        pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')
-        print(len(pickLinks))
+    #     pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')
+    #     print(len(pickLinks))
         
                 # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
 
