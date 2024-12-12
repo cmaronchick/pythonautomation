@@ -59,7 +59,7 @@ azc = {
 }
 
 pfn = {
-    'url': 'https://www.profootballnetwork.com/early-nfl-picks-predictions-week-' + str(weeknum) + '-2024/',
+    'url': 'https://www.profootballnetwork.com/early-nfl-picks-and-predictions-week-13-2024/',
     'name': 'PFN',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -415,6 +415,10 @@ try:
     matchgrid = driver.find_element(By.CLASS_NAME, "match-list-grid")
     games = matchgrid.find_elements(By.CLASS_NAME,"game-link")    
     firstGame = matchgrid.find_element(By.CLASS_NAME,"game-link")
+    
+    popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
+    if len(popup) > 0:
+        popup[0].click()
     firstGame.click()
     # response = requests.get()
     # print(response)
@@ -472,6 +476,7 @@ try:
         rows.append(nflrow)
         
                 # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
+
 
     ### Final Row for printing picks ###
     week1picks = open("2024week" + str(weeknum) + "picks.csv", 'w+', newline='')
