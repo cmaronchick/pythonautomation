@@ -315,3 +315,48 @@ BrookeNFL,Falcons,23,Raiders,17,ATLLV,ATL,Falcons,Atlanta Falcons,LV,Raiders,Las
 DanNFL,Falcons,24,Raiders,19,ATLLV,ATL,Falcons,Atlanta Falcons,LV,Raiders,Las Vegas Raiders,24,19
 GennaroNFL,Falcons,19,Raiders,16,ATLLV,ATL,Falcons,Atlanta Falcons,LV,Raiders,Las Vegas Raiders,19,16
 TomNFL,Falcons,24,Raiders,17,ATLLV,ATL,Falcons,Atlanta Falcons,LV,Raiders,Las Vegas Raiders,24,17
+KahlerESPN,Chiefs,24,Browns,17,KCCLE,KC,Chiefs,Kansas City Chiefs,CLE,Browns,Cleveland Browns,24,17
+MoodyESPN,Chiefs,23,Browns,20,KCCLE,KC,Chiefs,Kansas City Chiefs,CLE,Browns,Cleveland Browns,23,20
+WalderESPN,Browns,26,Chiefs,23,KCCLE,KC,Chiefs,Kansas City Chiefs,CLE,Browns,Cleveland Browns,23,26
+KahlerESPN,Bengals,35,Titans,20,CINTEN,CIN,Bengals,Cincinnati Bengals,TEN,Titans,Tennessee Titans,35,20
+MoodyESPN,Bengals,35,Titans,21,CINTEN,CIN,Bengals,Cincinnati Bengals,TEN,Titans,Tennessee Titans,35,21
+WalderESPN,Bengals,42,Titans,14,CINTEN,CIN,Bengals,Cincinnati Bengals,TEN,Titans,Tennessee Titans,42,14
+KahlerESPN,Commanders,28,Saints,21,WASNO,WAS,Commanders,Washington Commanders,NO,Saints,New Orleans Saints,28,21
+MoodyESPN,Commanders,30,Saints,13,WASNO,WAS,Commanders,Washington Commanders,NO,Saints,New Orleans Saints,30,13
+WalderESPN,Commanders,24,Saints,6,WASNO,WAS,Commanders,Washington Commanders,NO,Saints,New Orleans Saints,24,6
+KahlerESPN,Ravens,30,Giants,17,BALNYG,BAL,Ravens,Baltimore Ravens,NYG,N.Y. Giants,New York Giants,30,17
+MoodyESPN,Ravens,34,Giants,17,BALNYG,BAL,Ravens,Baltimore Ravens,NYG,N.Y. Giants,New York Giants,34,17
+WalderESPN,Ravens,30,Giants,13,BALNYG,BAL,Ravens,Baltimore Ravens,NYG,N.Y. Giants,New York Giants,30,13
+KahlerESPN,Panthers,27,Cowboys,23,DALCAR,DAL,Cowboys,Dallas Cowboys,CAR,Panthers,Carolina Panthers,23,27
+MoodyESPN,Panthers,28,Cowboys,24,DALCAR,DAL,Cowboys,Dallas Cowboys,CAR,Panthers,Carolina Panthers,24,28
+WalderESPN,Cowboys,19,Panthers,16,DALCAR,DAL,Cowboys,Dallas Cowboys,CAR,Panthers,Carolina Panthers,19,16
+KahlerESPN,Jets,21,Jaguars,17,NYJJAC,NYJ,Jets,New York Jets,JAC,Jaguars,Jacksonville Jaguars,21,17
+MoodyESPN,Jets,20,Jaguars,13,NYJJAC,NYJ,Jets,New York Jets,JAC,Jaguars,Jacksonville Jaguars,20,13
+WalderESPN,Jets,20,Jaguars,17,NYJJAC,NYJ,Jets,New York Jets,JAC,Jaguars,Jacksonville Jaguars,20,17
+KahlerESPN,Dolphins,28,Texans,26,MIAHOU,MIA,Dolphins,Miami Dolphins,HOU,Texans,Houston Texans,28,26
+MoodyESPN,Texans,31,Dolphins,28,MIAHOU,MIA,Dolphins,Miami Dolphins,HOU,Texans,Houston Texans,28,31
+WalderESPN,Dolphins,23,Texans,20,MIAHOU,MIA,Dolphins,Miami Dolphins,HOU,Texans,Houston Texans,23,20
+KahlerESPN,Broncos,28,Colts,17,INDDEN,IND,Colts,Indianapolis Colts,DEN,Broncos,Denver Broncos,17,28
+MoodyESPN,Broncos,24,Colts,19,INDDEN,IND,Colts,Indianapolis Colts,DEN,Broncos,Denver Broncos,19,24
+WalderESPN,Broncos,24,Colts,17,INDDEN,IND,Colts,Indianapolis Colts,DEN,Broncos,Denver Broncos,17,24
+KahlerESPN,Lions,30,Bills,28,BUFDET,BUF,Bills,Buffalo Bills,DET,Lions,Detroit Lions,28,30
+MoodyESPN,Bills,33,Lions,30,BUFDET,BUF,Bills,Buffalo Bills,DET,Lions,Detroit Lions,33,30
+WalderESPN,Lions,30,Bills,24,BUFDET,BUF,Bills,Buffalo Bills,DET,Lions,Detroit Lions,24,30
+KahlerESPN,Steelers,24,Eagles,22,PITPHI,PIT,Steelers,Pittsburgh Steelers,PHI,Eagles,Philadelphia Eagles,24,22
+MoodyESPN,Eagles,27,Steelers,23,PITPHI,PIT,Steelers,Pittsburgh Steelers,PHI,Eagles,Philadelphia Eagles,23,27
+WalderESPN,Steelers,26,Eagles,24,PITPHI,PIT,Steelers,Pittsburgh Steelers,PHI,Eagles,Philadelphia Eagles,26,24
+KahlerESPN,Cardinals,24,Patriots,17,NEARI,NE,Patriots,New England Patriots,ARI,Cardinals,Arizona Cardinals,17,24
+MoodyESPN,Cardinals,20,Patriots,19,NEARI,NE,Patriots,New England Patriots,ARI,Cardinals,Arizona Cardinals,19,20
+WalderESPN,Cardinals,21,Patriots,17,NEARI,NE,Patriots,New England Patriots,ARI,Cardinals,Arizona Cardinals,17,21
+KahlerESPN,Chargers,24,Buccaneers,20,TBLAC,TB,Buccaneers,Tampa Bay Buccaneers,LAC,L.A. Chargers,Los Angeles Chargers,20,24
+MoodyESPN,Chargers,24,Buccaneers,21,TBLAC,TB,Buccaneers,Tampa Bay Buccaneers,LAC,L.A. Chargers,Los Angeles Chargers,21,24
+WalderESPN,Chargers,24,Buccaneers,16,TBLAC,TB,Buccaneers,Tampa Bay Buccaneers,LAC,L.A. Chargers,Los Angeles Chargers,16,24
+KahlerESPN,Packers,19,Seahawks,17,GBSEA,GB,Packers,Green Bay Packers,SEA,Seahawks,Seattle Seahawks,19,17
+MoodyESPN,Seahawks,26,Packers,19,GBSEA,GB,Packers,Green Bay Packers,SEA,Seahawks,Seattle Seahawks,19,26
+WalderESPN,Seahawks,20,Packers,17,GBSEA,GB,Packers,Green Bay Packers,SEA,Seahawks,Seattle Seahawks,17,20
+KahlerESPN,Vikings,30,Bears,20,CHIMIN,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,20,30
+MoodyESPN,Vikings,34,Bears,27,CHIMIN,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,27,34
+WalderESPN,Vikings,31,Bears,13,CHIMIN,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,13,31
+KahlerESPN,Falcons,24,Raiders,17,ATLLV,ATL,Falcons,Atlanta Falcons,LV,Raiders,Las Vegas Raiders,24,17
+MoodyESPN,Raiders,23,Falcons,20,ATLLV,ATL,Falcons,Atlanta Falcons,LV,Raiders,Las Vegas Raiders,20,23
+WalderESPN,Falcons,26,Raiders,16,ATLLV,ATL,Falcons,Atlanta Falcons,LV,Raiders,Las Vegas Raiders,26,16
