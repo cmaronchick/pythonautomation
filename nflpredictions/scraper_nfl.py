@@ -25,7 +25,7 @@ def fetch_nfl_data(weeknum):
         articleBody = driver.find_element(By.CLASS_NAME, "nfl-c-article__body")
         wait.until(lambda d : articleBody.is_displayed())
         tables = driver.find_elements(By.CLASS_NAME, "d3-o-table--detailed")
-        print(len(tables))
+        print('nfltables:', len(tables))
         tableIndex = 0
         gamesObject = {}
         matchups = driver.find_elements(By.CLASS_NAME, "nfl-o-ranked-item--side-by-side")

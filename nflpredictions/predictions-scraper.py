@@ -13,10 +13,10 @@ from scraper_usatoday import fetch_usatoday_data
 from scraper_espn import fetch_espn_data
 
 
-weeknum = 15
+weeknum = 16
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-15-odds-picks-steelers-upset-eagles-in-pennsylvania-showdown-panthers-take-down-cowboys/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-16-odds-picks-josh-allen-bills-clear-massive-spread-vs-patriots-steelers-upset-ravens/',
     'name': 'TerrySullivan',
     'searchTerm': 'Projected score',
     'searchTag': 'strong',
@@ -25,7 +25,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-15-nfl-picks-eagles-prevail-in-battle-of-pennsylvania-bills-take-down-lions-in-thriller/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-16-nfl-picks-commanders-hand-eagles-first-loss-since-september-bucs-top-cowboys-to-stay-hot/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -34,7 +34,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-15-picks-and-score-predictions-eagles-win-thriller-over-steelers-lions-beat-bills-by-a-touchdown/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-16-picks-and-score-predictions-ravens-top-steelers-in-afc-north-showdown-eagles-win-11th-straight/',
     'name': 'JohnBreech',
     'searchTerm': 'The pick:',
     'searchTag': 'strong',
@@ -60,7 +60,7 @@ azc = {
 }
 
 pfn = {
-    'url': 'https://www.profootballnetwork.com/early-nfl-picks-and-predictions-week-13-2024/',
+    'url': 'https://www.profootballnetwork.com/early-nfl-picks-predictions-week-16-2024/',
     'name': 'PFN',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -69,7 +69,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2024-nfl-picks-and-score-predictions-for-week-15-games-01jenxhtrr34',
+    'url': 'https://nflspinzone.com/2024-nfl-picks-and-score-predictions-for-week-16-games-01jf8123k1m8',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -86,7 +86,7 @@ cowherd = {
 }
 
 bleacher = {
-    'url': 'https://bleacherreport.com/articles/10146756-bleacher-reports-expert-week-15-nfl-picks',
+    'url': 'https://bleacherreport.com/articles/10147611-bleacher-reports-expert-week-16-nfl-picks',
     'name': 'BleacherReport',
     'searchTerm': 'Score Prediction:',
     'searchTag': 'b',
@@ -95,7 +95,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-15-eagles-steelers-bills-lions/1e119d8238c5b049c21606e7',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-16-eagles-buccaneers-cowboys/53ec91052758a315e14e4f2f',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -104,7 +104,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-15-lions-seahawks/dc19e94f89d3fb93483d6ff8'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-16-ravens-chiefs/e01332095e28deff8bb29360'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -123,12 +123,12 @@ sportsnaut = {
 }
 
 usatoday = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2024/12/11/rams-49ers-picks-predictions-odds-week-15/76801894007/'
+    'url': 'https://www.usatoday.com/story/sports/nfl/2024/12/18/broncos-chargers-game-predictions-picks-odds-week-16/76950456007/'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/page/nflviewguide-42937521/nfl-week-15-picks-schedule-fantasy-football-odds-injuries-stats-2024'
+    'url': 'https://www.espn.com/nfl/story/_/page/nflviewguide-43064489/nfl-week-16-picks-schedule-fantasy-football-odds-injuries-stats-2024'
     # https://www.usatoday.com/sports/nfl/
 }
 
@@ -192,9 +192,9 @@ try:
             pickIndex = None
             if "endPickTerm" in writer:
                 pickIndex = pText.find(writer['endPickTerm'])
-            print(colonIndex, pickIndex)
+            print('195', colonIndex, pickIndex)
             if colonIndex == -1:
-                print(p)
+                print('pick: ', p)
             if (colonIndex > 0):
                 predictionString = ""
                 if pickIndex is not None:
@@ -218,7 +218,7 @@ try:
     # # johnbreech formatting
 
     response = requests.get(breech['url'])
-    print(response)
+    # print(response)
     soup = BeautifulSoup(response.text, 'html.parser')
     picks = soup.find_all(breech['searchTerm']) #, attrs={'class': 'Article-content'}
 
@@ -243,7 +243,7 @@ try:
     # # sportsnaut formatting
 
     response = requests.get(sportsnaut['url'])
-    print(response)
+    # print(response)
     soup = BeautifulSoup(response.text, 'html.parser')
     picks = soup.find_all('h2') #, attrs={'class': 'Article-content'}
 
@@ -323,7 +323,7 @@ try:
             "awayTeam": awayTeam,
             "homeTeam": homeTeam
         }
-    print('gamesObject: ', gamesObject)
+    print('VI gamesObject: ', gamesObject)
     print('VI picks:', len(picks))
     for p in picks:
         #Texans win 20-17 and cover the spread.
@@ -345,12 +345,15 @@ try:
         winner = None
         loser = None
         if winningTeam != "Vinnie":
-            if gamesObject[winningTeam]["awayTeam"] == winningTeam:
-                winner = gamesObject[winningTeam]["awayTeam"]
-                loser = gamesObject[winningTeam]["homeTeam"]
+            if winningTeam in gamesObject:
+                if gamesObject[winningTeam]["awayTeam"] == winningTeam:
+                    winner = gamesObject[winningTeam]["awayTeam"]
+                    loser = gamesObject[winningTeam]["homeTeam"]
+                else:
+                    winner = gamesObject[winningTeam]["homeTeam"]
+                    loser = gamesObject[winningTeam]["awayTeam"]
             else:
-                winner = gamesObject[winningTeam]["homeTeam"]
-                loser = gamesObject[winningTeam]["awayTeam"]
+                print('winningTeam not found:', winningTeam)
         print(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
         rows.append(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
 
@@ -413,7 +416,7 @@ try:
 
     # usatoday formatting
     
-    usatodayrows = fetch_usatoday_data(weeknum)
+    usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
     for usatodayrow in usatodayrows:
         rows.append(usatodayrow)
         
