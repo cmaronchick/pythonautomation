@@ -34,11 +34,11 @@ def fetch_nfl_data(weeknum):
             awayMascot = awayTeam[awayTeam.rfind(" "):].strip()
             homeTeam = matchup.find_elements(By.CLASS_NAME, "nfl-o-ranked-item__title")[1].text
             homeMascot = homeTeam[homeTeam.rfind(" "):].strip()
-            gamesObject[homeMascot] = {
+            gamesObject[homeMascot.lower()] = {
                 "awayTeam": awayMascot,
                 "homeTeam": homeMascot
             }
-            gamesObject[awayMascot] = {
+            gamesObject[awayMascot.lower()] = {
                 "awayTeam": awayMascot,
                 "homeTeam": homeMascot
             }
@@ -61,12 +61,12 @@ def fetch_nfl_data(weeknum):
                     winner = writerPrediction[:writerPrediction.find(" ")].strip()
                     winningScore = writerPrediction[writerPrediction.find(" ")+1:writerPrediction.find("-")].strip()
                     losingScore = writerPrediction[writerPrediction.rfind("-")+1:].strip()
-                    if gamesObject[winner]["awayTeam"] == winner:
-                        winningTeam = gamesObject[winner]["awayTeam"]
-                        losingTeam = gamesObject[winner]["homeTeam"]
+                    if gamesObject[winner.lower()]["awayTeam"] == winner:
+                        winningTeam = gamesObject[winner.lower()]["awayTeam"]
+                        losingTeam = gamesObject[winner.lower()]["homeTeam"]
                     else:
-                        winningTeam = gamesObject[winner]["homeTeam"]
-                        losingTeam = gamesObject[winner]["awayTeam"]
+                        winningTeam = gamesObject[winner.lower()]["homeTeam"]
+                        losingTeam = gamesObject[winner.lower()]["awayTeam"]
 
                     nflrows.append([author,winningTeam, winningScore, losingTeam, losingScore]) 
             tableIndex = tableIndex + 1

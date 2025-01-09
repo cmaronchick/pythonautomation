@@ -13,10 +13,10 @@ from scraper_usatoday import fetch_usatoday_data
 from scraper_espn import fetch_espn_data
 
 
-weeknum = 16
+weeknum = 1
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-16-odds-picks-josh-allen-bills-clear-massive-spread-vs-patriots-steelers-upset-ravens/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-1-odds-expert-picks-best-bets-teasers-spreads-survivor-picks-tv-streaming-more/',
     'name': 'TerrySullivan',
     'searchTerm': 'Projected score',
     'searchTag': 'strong',
@@ -25,7 +25,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-16-nfl-picks-commanders-hand-eagles-first-loss-since-september-bucs-top-cowboys-to-stay-hot/',
+    'url': 'https://www.cbssports.com/nfl/news/pete-priscos-week-1-nfl-picks-jaguars-outscore-dolphins-colts-upset-texans-giants-over-vikings/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -34,7 +34,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-16-picks-and-score-predictions-ravens-top-steelers-in-afc-north-showdown-eagles-win-11th-straight/',
+    'url': 'https://www.cbssports.com/nfl/news/2024-nfl-week-1-picks-dolphins-roll-over-jaguars-jets-upset-49ers-rams-win-thriller-over-lions/',
     'name': 'JohnBreech',
     'searchTerm': 'The pick:',
     'searchTag': 'strong',
@@ -60,7 +60,7 @@ azc = {
 }
 
 pfn = {
-    'url': 'https://www.profootballnetwork.com/early-nfl-picks-predictions-week-16-2024/',
+    'url': 'https://www.profootballnetwork.com/week-1-nfl-picks-predictions-2024/',
     'name': 'PFN',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -69,7 +69,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2024-nfl-picks-and-score-predictions-for-week-16-games-01jf8123k1m8',
+    'url': 'https://nflspinzone.com/2024-nfl-picks-and-score-predictions-for-week-18-action-01jgchm4ytxr',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -86,7 +86,7 @@ cowherd = {
 }
 
 bleacher = {
-    'url': 'https://bleacherreport.com/articles/10147611-bleacher-reports-expert-week-16-nfl-picks',
+    'url': 'https://bleacherreport.com/articles/10134134-bleacher-reports-expert-week-1-nfl-picks',
     'name': 'BleacherReport',
     'searchTerm': 'Score Prediction:',
     'searchTag': 'b',
@@ -95,7 +95,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-16-eagles-buccaneers-cowboys/53ec91052758a315e14e4f2f',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-1-straight-cowboys-chargers/b5dc4eb1ed2f7cec6447f19a',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -104,7 +104,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-16-ravens-chiefs/e01332095e28deff8bb29360'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-spread-week-1/f80d17b370f1ff4eed5be8ba'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -123,19 +123,17 @@ sportsnaut = {
 }
 
 usatoday = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2024/12/18/broncos-chargers-game-predictions-picks-odds-week-16/76950456007/'
+    'url': 'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-1/default:ml/types:ml,ats,ou,props/extras:condensed/performances:bboverall,overall?id=23f825eb-6e7d-46f6-954d-6affff3926c5'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/page/nflviewguide-43064489/nfl-week-16-picks-schedule-fantasy-football-odds-injuries-stats-2024'
+    'url': 'https://www.espn.com/nfl/story/_/id/41108396/nfl-week-1-picks-schedule-fantasy-football-odds-injuries-stats-2024'
     # https://www.usatoday.com/sports/nfl/
 }
 
 writersArray = [ts, pp, bleacher, bender, pfn, sz, foxsports, thirtythirdteam] #, foxsports, azc, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
-
-chrome_driver_path = './chromedriver'
 
 
 
@@ -147,8 +145,15 @@ chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
 weboptions = webdriver.ChromeOptions()
-weboptions.accept_insecure_certs = True
-driver = webdriver.Chrome(options=weboptions)
+weboptions.add_argument("start-maximized"); # https://stackoverflow.com/a/26283818/1689770
+weboptions.add_argument("enable-automation"); # https://stackoverflow.com/a/43840128/1689770
+# weboptions.add_argument("--headless"); # only if you are ACTUALLY running headless
+weboptions.add_argument("--no-sandbox"); # https://stackoverflow.com/a/50725918/1689770
+weboptions.add_argument("--disable-dev-shm-usage"); # https://stackoverflow.com/a/50725918/1689770
+weboptions.add_argument("--disable-browser-side-navigation"); # https://stackoverflow.com/a/49123152/1689770
+weboptions.add_argument("--disable-gpu"); # https://stackoverflow.com/questions/51959986/how-to-solve-selenium-chromedriver-timed-out-receiving-message-from-renderer-exc
+
+driver = webdriver.Chrome(weboptions)
 try:
     for writer in writersArray:
         
@@ -354,8 +359,13 @@ try:
                     loser = gamesObject[winningTeam]["awayTeam"]
             else:
                 print('winningTeam not found:', winningTeam)
-        print(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
-        rows.append(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
+        try: 
+            print(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
+            rows.append(['VinnieIyer',winner, int(winnerScore), loser, int(loserScore)])
+        except ValueError:
+            print(ValueError)
+            print(['VinnieIyer',winner, winnerScore, loser, loserScore])
+            rows.append(['VinnieIyer',winner, winnerScore, loser, loserScore])
 
 
     espnrows = fetch_espn_data(weeknum, espn['url'])
@@ -409,6 +419,7 @@ try:
             rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
             navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
             navButtons[1].click()
+            wait.until(EC.staleness_of(teams[0]))
             g = g + 1
             print('g:', g)
         else:
