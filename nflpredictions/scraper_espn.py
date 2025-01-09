@@ -1,4 +1,4 @@
-import requests, sys, datetime
+import requests, sys, datetime, csv
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -77,3 +77,29 @@ def fetch_espn_data(weeknum, url):
     except Exception as e:
         print('espn exception: ', e)
         return espnrows
+def main(weeknum):
+    print('weeknum:', weeknum)
+    html_content = fetch_espn_data(1,'https://www.espn.com/nfl/story/_/id/41108396/nfl-week-1-picks-schedule-fantasy-football-odds-injuries-stats-2024')
+    if html_content:
+        print(html_content)
+        return html_content
+    else:
+        print("Failed to retrieve data")
+
+if __name__ == "__main__":
+    espnrows = main(sys.argv[1])
+    print('espnrows:', espnrows)
+
+    week1picks = open("2024week" + str(sys.argv[1]) + "espnpicks.csv", 'w+', newline='')
+    with week1picks as csvfile:
+        
+        # creating a csv writer object  
+        csvwriter = csv.writer(csvfile)  
+            
+        # writing the fields  
+        
+        fields = ['Source', 'Winner', 'Winner Score', 'Loser', 'Loser Score']
+        csvwriter.writerow(fields)  
+            
+        # writing the data rows  
+        csvwriter.writerows(espnrows) 

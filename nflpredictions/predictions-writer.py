@@ -4,7 +4,7 @@ from datetime import date, datetime
 
 sns = boto3.client('sns', region_name='us-west-2')
 
-weeknum = 15
+weeknum = 1
 if (len(sys.argv) > 1):
     weeknum = int(sys.argv[1])
 print('weeknum:', weeknum)
