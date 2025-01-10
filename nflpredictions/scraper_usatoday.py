@@ -10,31 +10,31 @@ from selenium.webdriver.support import expected_conditions as EC
 # Setup the Chrome WebDriver
 
 imageTable = {
-    'Entity_1569032072644.png': 'Pittsburgh Steelers',
-    'Entity_1569032074922.png': 'Kansas City Chiefs',
-    'Entity_1569032070684.png': 'Baltimore Ravens',
-    'Entity_1569032081184.png': 'Seattle Seahawks',
-    'Entity_1569032075269.png': 'Los Angeles Chargers',
-    'Entity_1569032070001.png': 'New England Patriots',
-    'Entity_1569032074570.png': 'Denver Broncos',
-    'Entity_1569032071904.png': 'Cincinnati Bengals',
-    'Entity_1599884617535.png': 'Los Angeles Rams',
-    'Entity_1569032080155.png': 'Arizona Cardinals',
-    'Entity_1569032074153.png': 'Tennessee Titans',
-    'Entity_1569032073772.png': 'Jacksonville Jaguars',
-    'Entity_1569032079814.png': 'Tampa Bay Buccaneers',
-    'Entity_1569032073400.png': 'Indianapolis Colts',
-    'Entity_1569032075665.png': 'Las Vegas Raiders',
-    'Entity_1569032079464.png': 'New Orleans Saints',
-    'Entity_1569032069354.png': 'Buffalo Bills',
-    'Entity_1569032076658.png': 'Philadelphia Eagles',
-    'Entity_1569032072269.png': 'Cleveland Browns',
-    'Entity_1569032069679.png': 'Miami Dolphins',
-    'Entity_1569032078418.png': 'Minnesota Vikings',
-    'Entity_1569032078079.png': 'Green Bay Packers',
-    'Entity_1569032078724.png': 'Atlanta Falcons',
-    'washington-football-team.png': 'Washington Commanders',
-    'Entity_1569032077717.png': 'Detroit Lions'
+    'Entity_1569032072644.png': 'Steelers',
+    'Entity_1569032074922.png': ' Chiefs',
+    'https://images.jifo.co/21540751_1589234633468.png': 'Ravens',
+    'Entity_1569032081184.png': 'Seahawks',
+    'https://images.jifo.co/21540751_1589234284171.png': 'Chargers', #https://images.jifo.co/21540751_1589234284171.png
+    'Entity_1569032070001.png': 'Patriots',
+    'Entity_1569032074570.png': 'Broncos',
+    'Entity_1569032071904.png': 'Bengals',
+    'Entity_1599884617535.png': 'Rams',
+    'Entity_1569032080155.png': 'Cardinals',
+    'Entity_1569032074153.png': 'Titans',
+    'Entity_1569032073772.png': 'Jaguars',
+    'https://images.jifo.co/21540751_1589235745366.png': 'Buccaneers',
+    'Entity_1569032073400.png': 'Colts',
+    'Entity_1569032075665.png': 'Raiders',
+    'Entity_1569032079464.png': 'Saints',
+    'https://images.jifo.co/21540751_1589234933718.png': 'Bills',
+    'https://images.jifo.co/21540751_1589235782787.png': 'Eagles',
+    'Entity_1569032072269.png': 'Browns',
+    'Entity_1569032069679.png': 'Dolphins',
+    'https://images.jifo.co/21540751_1589235378659.png': 'Vikings',
+    'Entity_1569032078079.png': 'Packers',
+    'Entity_1569032078724.png': 'Falcons',
+    'https://images.jifo.co/21540751_1652361392787.png': 'Commanders',
+    'Entity_1569032077717.png': 'Lions'
 }
 
 chrome_driver_path = './chromedriver'
@@ -50,12 +50,11 @@ def fetch_usatoday_data(weeknum, url):
     usatodayrows = []
     try:
         # usatoday formatting
-            
         driver.get(url)
         wait = WebDriverWait(driver, timeout=2)
         driver.implicitly_wait(3)
         writersText = []
-        
+            
         # original_window = driver.current_window_handle
         # windowhandles = len(driver.window_handles)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
@@ -68,10 +67,9 @@ def fetch_usatoday_data(weeknum, url):
         writersText = []
         writerIndex = 0
         for writer in writers:
-            if writerIndex > 0:
-                writersText.append({ "name": re.sub(r'\s+', '', writer.text), "prediction": "", "index": writerIndex})
+            writersText.append({ "name": re.sub(r'\s+', '', writer.text), "prediction": "", "index": writerIndex})
             writerIndex = writerIndex + 1
-        
+        print('writersText:', writersText)
         # use for tallysight URL
         tableBody = table.find_element(By.TAG_NAME, "tbody")
         tableRows = tableBody.find_elements(By.TAG_NAME, "tr")
@@ -79,41 +77,111 @@ def fetch_usatoday_data(weeknum, url):
             # if len(specialOffer) > 0:
             #     # articleBody.send_keys(Keys.ESCAPE)
             #     driver.switch_to
-        print(len(tableRows))
-        for tableRow in tableRows:
-            columnIndex = 0
-            columns = tableRow.find_elements(By.TAG_NAME, "td")
-            awayTeam = ""
-            homeTeam = ""
-            for column in columns:
-                if columnIndex == 0:
-                    teamSpans = column.find_elements(By.TAG_NAME, "span")
-                    awayTeam = teamSpans[0].text
-                    homeTeam = teamSpans[1].text
-                    print(awayTeam, homeTeam)
-                else:
-                    spans = column.find_elements(By.TAG_NAME, "span")
-                    print(len(spans))
-                    if len(spans) == 1:
-                        print(spans[0].text)
-                        continue
-                    winningTeam = None
-                    losingScore = None
-                    losingTeam = None
-                    winningTeam = spans[0].text.strip()
-                    score = spans[1].text
-                    winningScore = score[:score.find("-")].strip()
-                    losingScore = score[score.rfind("-")+1:].strip()
-                    if winningTeam == awayTeam:
-                        losingTeam = homeTeam
+        if url.find("tallysight") > -1:
+            print(len(tableRows))
+            for tableRow in tableRows:
+                columnIndex = 0
+                columns = tableRow.find_elements(By.TAG_NAME, "td")
+                awayTeam = ""
+                homeTeam = ""
+                for column in columns:
+                    if columnIndex == 0:
+                        teamSpans = column.find_elements(By.TAG_NAME, "span")
+                        awayTeam = teamSpans[0].text
+                        homeTeam = teamSpans[1].text
+                        print(awayTeam, homeTeam)
                     else:
-                        losingTeam = awayTeam
-                    author = writersText[columnIndex-1]["name"]
+                        spans = column.find_elements(By.TAG_NAME, "span")
+                        print(len(spans))
+                        if len(spans) == 1:
+                            print(spans[0].text)
+                            continue
+                        winningTeam = None
+                        losingScore = None
+                        losingTeam = None
+                        winningTeam = spans[0].text.strip()
+                        score = spans[1].text
+                        winningScore = score[:score.find("-")].strip()
+                        losingScore = score[score.rfind("-")+1:].strip()
+                        if winningTeam == awayTeam:
+                            losingTeam = homeTeam
+                        else:
+                            losingTeam = awayTeam
+                        author = writersText[columnIndex-1]["name"]
 
-                    
-                    print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
-                    usatodayrows.append([author,winningTeam, winningScore, losingTeam, losingScore])
-                columnIndex = columnIndex + 1
+                        
+                        print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
+                        usatodayrows.append([author,winningTeam, winningScore, losingTeam, losingScore])
+                    columnIndex = columnIndex + 1
+        elif url.find("infogram") > -1:
+            rowIndex = 0
+            predictions = []
+            currentGame = None
+            for tableRow in tableRows:
+                columnIndex = 0
+                # rows are paired so you need an index to identify the first of two rows
+                columns = tableRow.find_elements(By.TAG_NAME, "td")
+                awayTeam = ""
+                homeTeam = ""
+                winningTeam = None
+                losingTeam = None
+                winningScore = None
+                losingScore = None
+                predictionRow = False
+                print('columns:', len(columns))
+                for column in columns:
+                    print('rowIndex:', rowIndex, 'columnIndex:', columnIndex, column.text.find(" at "))
+                    if rowIndex == 0:
+                        if columnIndex == 0:
+                            if column.text.find(" at ") > -1:
+
+                                predictionRow = True
+                                teamSpans = column.find_element(By.TAG_NAME, "span")
+                                openParenthesis = teamSpans.text.find("(")
+                                closeParenthesis = teamSpans.text.find(")")
+                                separator = teamSpans.text.find(" at ")
+                                awayTeam = ""
+                                homeTeam = ""
+                                if openParenthesis > separator:
+                                    awayTeam = teamSpans.text[:separator]
+                                    homeTeam = teamSpans.text[separator+4:openParenthesis-1]
+                                else:
+                                    awayTeam = teamSpans.text[:openParenthesis-1]
+                                    homeTeam = teamSpans.text[separator+4:]
+                                print(awayTeam, homeTeam)
+                        else:
+                            if predictionRow == True:
+                                teamImage = column.find_element(By.TAG_NAME, "img")
+                                teamImageSrc = teamImage.get_attribute("src")
+                                # print('teamImageSrc:', teamImageSrc)
+                                winningTeam = imageTable[teamImageSrc]
+                                if winningTeam == awayTeam:
+                                    losingTeam = homeTeam
+                                else:
+                                    losingTeam = awayTeam
+                                print('winningTeam:', winningTeam, 'losingTeam:', losingTeam)
+                                author = writersText[columnIndex-1]["name"] 
+                                predictions.append({"author": author,"winningTeam": winningTeam, "losingTeam": losingTeam})
+                        if predictionRow == True and columnIndex == len(columns)-1:
+                            rowIndex = 1
+                        columnIndex = columnIndex + 1
+                    elif rowIndex == 1:
+                        scoreSeparator = column.text.find("-")
+                        if scoreSeparator > -1:
+                            winningScore = column.text[:scoreSeparator].strip()
+                            losingScore = column.text[scoreSeparator+1:].strip()
+                            print('winningScore:', winningScore, 'losingScore:', losingScore)
+                            predictions[columnIndex-1]["winningScore"] = winningScore
+                            predictions[columnIndex-1]["losingScore"] = losingScore
+                            print('predictions:', predictions)
+                            if columnIndex == len(columns)-1:
+                                for prediction in predictions:
+                                    print('author:', prediction["author"], prediction["winningTeam"], prediction["winningScore"], prediction["losingTeam"], prediction["losingScore"])
+                                    usatodayrows.append([prediction["author"], prediction["winningTeam"], prediction["winningScore"], prediction["losingTeam"], prediction["losingScore"]])
+                                    predictions = []
+                                rowIndex = 0
+                        columnIndex = columnIndex + 1
+                        
 
         # pickLinkIndex = 0
         # wait.until(lambda d : articleBody.is_displayed())
@@ -171,7 +239,7 @@ def fetch_usatoday_data(weeknum, url):
 
 
 def main(weeknum):
-    html_content = fetch_usatoday_data(weeknum, 'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c')
+    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed') #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:
