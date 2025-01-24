@@ -1,21 +1,25 @@
 from pymongo import MongoClient, UpdateOne
 import csv, boto3, sys
 from datetime import date, datetime
+import config
+
 
 sns = boto3.client('sns', region_name='us-west-2')
 
-weeknum = 1
+weeknum = 3
+season = "post"
+year = 2024
 if (len(sys.argv) > 1):
     weeknum = int(sys.argv[1])
 print('weeknum:', weeknum)
-predictions = open("2024week" + str(weeknum) + "picks.csv",newline='')
+predictions = open(str(year) + season + "week" + str(weeknum) + "picks.csv",newline='')
 
-client = MongoClient("mongodb+srv://pcsm-user:*dZ2HaWN@pcsm.lwx4u.mongodb.net/pcsm?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://" + config.username + ":" + config.password + "@pcsm.lwx4u.mongodb.net/pcsm?retryWrites=true&w=majority")
 db = client['pcsm']
 collection = db['games']
 predictionsCollection = db['predictions']
 
-games = list(collection.find({ "sport": 'nfl', "season": "reg", "year": 2024, "gameWeek": weeknum}))
+games = list(collection.find({ "sport": 'nfl', "season": season, "year": year, "gameWeek": weeknum}))
 print(len(games))
 def filterGames(awayCode,homeCode):
     for game in games:
@@ -39,9 +43,9 @@ with predictions as csvfile:
             awayScore = int(row[12])
             homeScore = int(row[13])
             gameObj = {
-                "year": 2024,
+                "year": year,
                 "sport": "nfl",
-                "season": "reg",
+                "season": season,
                 "gameWeek": weeknum,
                 "awayTeam": {
                     "code": awayCode,
@@ -75,14 +79,14 @@ with predictions as csvfile:
             # print("gameObj: ", gameObj)
             if "gameId" in gameObj:
                 updates.append(UpdateOne({
-                "year": 2024,
+                "year": year,
                 "sport": "nfl",
-                "season": "reg",
+                "season": season,
                 "gameWeek": weeknum,
                 "userId": row[0],
                 "gameId": gameObj["gameId"]
                 }, {"$set": gameObj}, upsert=True))
-                updateGameIds.append({"gameId": gameObj["gameId"], "gameWeek": weeknum, "sport": "nfl", "season": "reg", "year": 2024})
+                updateGameIds.append({"gameId": gameObj["gameId"], "gameWeek": weeknum, "sport": "nfl", "season": season, "year": year})
     print('updates:', len(updates))
     predictionsUpdateResponse = predictionsCollection.bulk_write(updates)
     print('predictionsUpdateResponse: ', predictionsUpdateResponse) # len(predictionsUpdateResponse.bulk_api_result["modifiedCount"])

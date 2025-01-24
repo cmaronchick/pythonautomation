@@ -13,10 +13,12 @@ from scraper_usatoday import fetch_usatoday_data
 from scraper_espn import fetch_espn_data
 
 
-weeknum = 1
+weeknum = 2
+season = "post"
+year = 2024
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-1-odds-expert-picks-best-bets-teasers-spreads-survivor-picks-tv-streaming-more/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-playoff-bracket-odds-best-bets-for-afc-nfc-championships-which-teams-advance-to-super-bowl-lix/',
     'name': 'TerrySullivan',
     'searchTerm': 'Projected score',
     'searchTag': 'strong',
@@ -25,7 +27,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/pete-priscos-week-1-nfl-picks-jaguars-outscore-dolphins-colts-upset-texans-giants-over-vikings/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-2025-nfl-playoff-picks-backing-the-road-underdogs-in-nfc-afc-championship-games/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -34,7 +36,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/2024-nfl-week-1-picks-dolphins-roll-over-jaguars-jets-upset-49ers-rams-win-thriller-over-lions/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-playoff-picks-predicting-winners-for-bills-chiefs-afc-championship-commanders-eagles-nfc-title-game/',
     'name': 'JohnBreech',
     'searchTerm': 'The pick:',
     'searchTag': 'strong',
@@ -60,7 +62,7 @@ azc = {
 }
 
 pfn = {
-    'url': 'https://www.profootballnetwork.com/week-1-nfl-picks-predictions-2024/',
+    'url': 'https://www.profootballnetwork.com/early-nfl-picks-predictions-conference-championship-2025/',
     'name': 'PFN',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -69,7 +71,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2024-nfl-picks-and-score-predictions-for-week-18-action-01jgchm4ytxr',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-afc-nfc-championship-games-01jj22bgrffd',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -86,7 +88,7 @@ cowherd = {
 }
 
 bleacher = {
-    'url': 'https://bleacherreport.com/articles/10134134-bleacher-reports-expert-week-1-nfl-picks',
+    'url': 'https://bleacherreport.com/articles/10151752-bleacher-reports-expert-afc-and-nfc-championship-nfl-picks',
     'name': 'BleacherReport',
     'searchTerm': 'Score Prediction:',
     'searchTag': 'b',
@@ -95,7 +97,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-1-straight-cowboys-chargers/b5dc4eb1ed2f7cec6447f19a',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-eagles-commanders-chiefs-bills/ae0de87a5e4d960401a99823',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -104,12 +106,12 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-spread-week-1/f80d17b370f1ff4eed5be8ba'
+    'url': 'https://www.sportingnews.com/us/nfl/news/eagles-commanders-pick-against-spread-nfc-championship/0b273c5898712e9904f99f89'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
 thirtythirdteam = {
-    'url': 'https://www.the33rdteam.com/2024-nfl-week-' + str(weeknum) + '-expert-picks-predictions-for-every-game/',
+    'url': 'https://www.the33rdteam.com/2025-nfl-championship-week-expert-picks-predictions-for-every-game/',#'https://www.the33rdteam.com/2024-nfl-week-' + str(weeknum) + '-expert-picks-predictions-for-every-game/'
     'name': 'MarcusMosher',
     'searchTerm': 'Score Prediction:',
     'searchTag': 'strong',
@@ -118,18 +120,24 @@ thirtythirdteam = {
 }
 
 sportsnaut = {
-    'url': 'https://sportsnaut.com/list/nfl-week-' + str(weeknum) + '-predictions/'
+    'url': 'https://sportsnaut.com/nfl/nfl-analysis/lists/afc-championship-game-predictions-buffalo-bills-vs-kansas-city-chiefs/' # 'https://sportsnaut.com/list/nfl-week-' + str(weeknum) + '-predictions/'
     # https://sportsnaut.com/list/nfl-week-6-predictions-2024/
 }
 
 usatoday = {
-    'url': 'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-1/default:ml/types:ml,ats,ou,props/extras:condensed/performances:bboverall,overall?id=23f825eb-6e7d-46f6-954d-6affff3926c5'
+    'url': 'https://e.infogram.com/2aa199b3-75f0-46dc-90ab-194d634f60cd?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/id/41108396/nfl-week-1-picks-schedule-fantasy-football-odds-injuries-stats-2024'
-    # https://www.usatoday.com/sports/nfl/
+    'url': 'https://www.espn.com/nfl/story/_/page/nflviewguide-43538396/nfl-conference-championship-round-playoffs-picks-schedule-odds-injuries-stats-2024-2025'
+    # https://www.espn.com/nfl/
+}
+
+nfl = {
+    'url': 'https://www.nfl.com/news/nfl-picks-bills-chiefs-commanders-eagles-championship-sunday-2024-nfl-season'
+    # 'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season' - https://www.nfl.com/news/nfl-picks-divisional-round-2024-nfl-season
+
 }
 
 writersArray = [ts, pp, bleacher, bender, pfn, sz, foxsports, thirtythirdteam] #, foxsports, azc, 
@@ -152,6 +160,7 @@ weboptions.add_argument("--no-sandbox"); # https://stackoverflow.com/a/50725918/
 weboptions.add_argument("--disable-dev-shm-usage"); # https://stackoverflow.com/a/50725918/1689770
 weboptions.add_argument("--disable-browser-side-navigation"); # https://stackoverflow.com/a/49123152/1689770
 weboptions.add_argument("--disable-gpu"); # https://stackoverflow.com/questions/51959986/how-to-solve-selenium-chromedriver-timed-out-receiving-message-from-renderer-exc
+weboptions.add_argument("--enable-unsafe-swiftshader")
 
 driver = webdriver.Chrome(weboptions)
 try:
@@ -435,7 +444,7 @@ try:
 
     # nfl formatting
     
-    nflrows = fetch_nfl_data(weeknum)
+    nflrows = fetch_nfl_data(weeknum, nfl['url'])
     for nflrow in nflrows:
         rows.append(nflrow)
         
@@ -443,7 +452,7 @@ try:
 
 
     ### Final Row for printing picks ###
-    week1picks = open("2024week" + str(weeknum) + "picks.csv", 'w+', newline='')
+    week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
     with week1picks as csvfile:
         
         # creating a csv writer object  
@@ -458,7 +467,7 @@ try:
         csvwriter.writerows(rows) 
 except:    
     print(traceback.print_exc())
-    week1picks = open("2024week" + str(weeknum) + "picks.csv", 'w+', newline='')
+    week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
     with week1picks as csvfile:
         
         # creating a csv writer object  

@@ -11,7 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 imageTable = {
     'Entity_1569032072644.png': 'Steelers',
-    'Entity_1569032074922.png': ' Chiefs',
+    'https://images.jifo.co/21540751_1589234309546.png': 'Chiefs',
     'https://images.jifo.co/21540751_1589234633468.png': 'Ravens',
     'Entity_1569032081184.png': 'Seahawks',
     'https://images.jifo.co/21540751_1589234284171.png': 'Chargers', #https://images.jifo.co/21540751_1589234284171.png
@@ -60,24 +60,24 @@ def fetch_usatoday_data(weeknum, url):
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         
         # articleBody = driver.find_element(By.TAG_NAME, "article")
-        table = driver.find_element(By.TAG_NAME, "table")
-        wait.until(lambda d : table.is_displayed())
-        writers = table.find_elements(By.TAG_NAME, "th")
-        
-        writersText = []
-        writerIndex = 0
-        for writer in writers:
-            writersText.append({ "name": re.sub(r'\s+', '', writer.text), "prediction": "", "index": writerIndex})
-            writerIndex = writerIndex + 1
-        print('writersText:', writersText)
-        # use for tallysight URL
-        tableBody = table.find_element(By.TAG_NAME, "tbody")
-        tableRows = tableBody.find_elements(By.TAG_NAME, "tr")
-            # specialOffer = driver.find_elements(By.CSS_SELECTOR, "iframe[title='Special offer']")
-            # if len(specialOffer) > 0:
-            #     # articleBody.send_keys(Keys.ESCAPE)
-            #     driver.switch_to
-        if url.find("tallysight") > -1:
+        if url.find("tallysight") > -1:            
+            table = driver.find_element(By.TAG_NAME, "table")
+            wait.until(lambda d : table.is_displayed())
+            writers = table.find_elements(By.TAG_NAME, "th")
+            
+            writersText = []
+            writerIndex = 0
+            for writer in writers:
+                writersText.append({ "name": re.sub(r'\s+', '', writer.text), "prediction": "", "index": writerIndex})
+                writerIndex = writerIndex + 1
+            print('writersText:', writersText)
+            # use for tallysight URL
+            tableBody = table.find_element(By.TAG_NAME, "tbody")
+            tableRows = tableBody.find_elements(By.TAG_NAME, "tr")
+                # specialOffer = driver.find_elements(By.CSS_SELECTOR, "iframe[title='Special offer']")
+                # if len(specialOffer) > 0:
+                #     # articleBody.send_keys(Keys.ESCAPE)
+                #     driver.switch_to
             print(len(tableRows))
             for tableRow in tableRows:
                 columnIndex = 0
@@ -114,6 +114,19 @@ def fetch_usatoday_data(weeknum, url):
                         usatodayrows.append([author,winningTeam, winningScore, losingTeam, losingScore])
                     columnIndex = columnIndex + 1
         elif url.find("infogram") > -1:
+            table = driver.find_element(By.TAG_NAME, "table")
+            wait.until(lambda d : table.is_displayed())
+            writers = table.find_elements(By.TAG_NAME, "th")
+            
+            writersText = []
+            writerIndex = 0
+            for writer in writers:
+                writersText.append({ "name": re.sub(r'\s+', '', writer.text), "prediction": "", "index": writerIndex})
+                writerIndex = writerIndex + 1
+            print('writersText:', writersText)
+            # use for tallysight URL
+            tableBody = table.find_element(By.TAG_NAME, "tbody")
+            tableRows = tableBody.find_elements(By.TAG_NAME, "tr")
             rowIndex = 0
             predictions = []
             currentGame = None
@@ -153,7 +166,7 @@ def fetch_usatoday_data(weeknum, url):
                             if predictionRow == True:
                                 teamImage = column.find_element(By.TAG_NAME, "img")
                                 teamImageSrc = teamImage.get_attribute("src")
-                                # print('teamImageSrc:', teamImageSrc)
+                                print('teamImageSrc:', imageTable, teamImageSrc)
                                 winningTeam = imageTable[teamImageSrc]
                                 if winningTeam == awayTeam:
                                     losingTeam = homeTeam
@@ -181,55 +194,55 @@ def fetch_usatoday_data(weeknum, url):
                                     predictions = []
                                 rowIndex = 0
                         columnIndex = columnIndex + 1
-                        
+        else:
+            pickLinkIndex = 0
+            articleBody = driver.find_element(By.TAG_NAME, "article")
+            wait.until(lambda d : articleBody.is_displayed())
+            pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')    # pickLinks2 = driver.find_elements(By.XPATH, "/html/body/div[3]/main/article/div[5]/p[10]/a")
+            print('usatoday picklinks 37:', len(pickLinks))
+            while pickLinkIndex < len(pickLinks):
+                
+                popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
+                if len(popup) > 0:
+                    popup[0].click()
+                pickLinks[pickLinkIndex].click()
+                if len(driver.window_handles) > 1:
+                    driver.switch_to.window(driver.window_handles[len(driver.window_handles)-1])
+                articleBody = driver.find_element(By.TAG_NAME, "article")
+                wait.until(lambda d : articleBody.is_displayed())
+                title = driver.find_element(By.TAG_NAME, "h1")
+                wait.until(lambda d : title.is_displayed())
+                headers = driver.find_elements(By.TAG_NAME, "h2")
+                headerIndex = 0
+                for header in headers:
+                    winnerScore = None
+                    winningTeam = None
+                    losingScore = None
+                    losingTeam = None
+                    if headerIndex > 1:
+                        separatorIndex = header.text.find(":")
+                        author = header.text[:separatorIndex].replace(" ","")
+                        winner = header.text[separatorIndex+2:header.text.find(",")].split(" ")
+                        winningTeam = winner[0]
+                        if len(winner) > 1:
+                            winningScore = winner[1]
+                        loser = header.text[header.text.find(",")+2:].split(" ")
+                        losingTeam = loser[0]
+                        if len(loser) > 1:
+                            losingScore = loser[1]
+                        print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
+                        usatodayrows.append([author,winningTeam, winningScore, losingTeam, losingScore])                    
+                    headerIndex = headerIndex + 1
+                pickLinkIndex = pickLinkIndex + 1 
+                driver.get(url)
+                popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
+                if len(popup) > 0:
+                    popup[0].click()
+                articleBody = driver.find_element(By.TAG_NAME, "article")
+                wait.until(lambda d : articleBody.is_displayed())
 
-        # pickLinkIndex = 0
-        # wait.until(lambda d : articleBody.is_displayed())
-        # pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')    # pickLinks2 = driver.find_elements(By.XPATH, "/html/body/div[3]/main/article/div[5]/p[10]/a")
-        # print('usatoday picklinks 37:', len(pickLinks))
-        # while pickLinkIndex < len(pickLinks):
-            
-        #     popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
-        #     if len(popup) > 0:
-        #         popup[0].click()
-        #     pickLinks[pickLinkIndex].click()
-        #     if len(driver.window_handles) > 1:
-        #         driver.switch_to.window(driver.window_handles[len(driver.window_handles)-1])
-        #     articleBody = driver.find_element(By.TAG_NAME, "article")
-        #     wait.until(lambda d : articleBody.is_displayed())
-        #     title = driver.find_element(By.TAG_NAME, "h1")
-        #     wait.until(lambda d : title.is_displayed())
-        #     headers = driver.find_elements(By.TAG_NAME, "h2")
-        #     headerIndex = 0
-        #     for header in headers:
-        #         winnerScore = None
-        #         winningTeam = None
-        #         losingScore = None
-        #         losingTeam = None
-        #         if headerIndex > 1:
-        #             separatorIndex = header.text.find(":")
-        #             author = header.text[:separatorIndex].replace(" ","")
-        #             winner = header.text[separatorIndex+2:header.text.find(",")].split(" ")
-        #             winningTeam = winner[0]
-        #             if len(winner) > 1:
-        #                 winningScore = winner[1]
-        #             loser = header.text[header.text.find(",")+2:].split(" ")
-        #             losingTeam = loser[0]
-        #             if len(loser) > 1:
-        #                 losingScore = loser[1]
-        #             print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
-        #             usatodayrows.append([author,winningTeam, winningScore, losingTeam, losingScore])                    
-        #         headerIndex = headerIndex + 1
-        #     pickLinkIndex = pickLinkIndex + 1 
-        #     driver.get(url)
-        #     popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
-        #     if len(popup) > 0:
-        #         popup[0].click()
-        #     articleBody = driver.find_element(By.TAG_NAME, "article")
-        #     wait.until(lambda d : articleBody.is_displayed())
-
-        #     pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')
-        #     print('usatoday picklinks 80:', len(pickLinks))
+                pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')
+                print('usatoday picklinks 80:', len(pickLinks))
         print('usatodayrows:', usatodayrows)
         return usatodayrows
     except Exception as e:

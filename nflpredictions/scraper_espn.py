@@ -79,7 +79,7 @@ def fetch_espn_data(weeknum, url):
         return espnrows
 def main(weeknum):
     print('weeknum:', weeknum)
-    html_content = fetch_espn_data(1,'https://www.espn.com/nfl/story/_/id/41108396/nfl-week-1-picks-schedule-fantasy-football-odds-injuries-stats-2024')
+    html_content = fetch_espn_data(1,'https://www.espn.com/nfl/story/_/page/nflviewguide-43441049/nfl-divisional-round-playoffs-picks-schedule-odds-injuries-stats-2024-2025')
     if html_content:
         print(html_content)
         return html_content

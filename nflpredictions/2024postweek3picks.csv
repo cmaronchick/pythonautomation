@@ -1,0 +1,41 @@
+Source,Winner,Winner Score,Loser,Loser Score,GameID,Away Code,Away Short Name,Away Full Name,Home Code,Home Short Name,Home Full Name,AwayScore,HomeScore
+TerrySullivan,Eagles,27,Commanders,24,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,24,27
+TerrySullivan,Chiefs,30,Bills,27,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,27,30
+PetePrisco,Commanders,27,Eagles,26,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,27,26
+PetePrisco,Bills,24,Chiefs,23,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,24,23
+BillBender,Bills,28,Chiefs,26,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,28,26
+DataSkrive,Eagles,34,Commanders,17,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,17,34
+DataSkrive,Chiefs,27,Bills,24,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,24,27
+MarcusMosher,Eagles,31,Commanders,23,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,23,31
+MarcusMosher,Chiefs,24,Bills,21,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,21,24
+VinnieIyer,Commanders,31,Eagles,27,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,31,27
+VinnieIyer,Chiefs,27,Bills,24,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,24,27
+KahlerESPN,Commanders,31,Eagles,30,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,31,30
+MoodyESPN,Commanders,34,Eagles,30,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,34,30
+WalderESPN,Eagles,30,Commanders,17,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,17,30
+KahlerESPN,Bills,34,Chiefs,31,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,34,31
+MoodyESPN,Bills,30,Chiefs,29,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,30,29
+WalderESPN,Bills,29,Chiefs,20,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,29,20
+Dimers,EAGLES,26,COMMANDERS,21,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,21,26
+JarrettBell,Eagles,31,Commanders,27,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,27,31
+ChrisBumbaca,Commanders,29,Eagles,28,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,29,28
+NateDavis,Commanders,27,Eagles,24,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,27,24
+TylerDragon,Eagles,30,Commanders,27,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,27,30
+MikeMiddlehurst-Schwartz,Eagles,24,Commanders,20,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,20,24
+LorenzoReyes,Eagles,28,Commanders,18,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,18,28
+JarrettBell,Chiefs,27,Bills,24,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,24,27
+ChrisBumbaca,Bills,26,Chiefs,23,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,26,23
+NateDavis,Chiefs,24,Bills,21,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,21,24
+TylerDragon,Chiefs,26,Bills,22,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,22,26
+MikeMiddlehurst-Schwartz,Bills,23,Chiefs,21,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,23,21
+LorenzoReyes,Bills,31,Chiefs,23,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,31,23
+AliNFL,Eagles,24,Commanders,20,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,20,24
+BrookeNFL,Eagles,26,Commanders,23,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,23,26
+DanNFL,Eagles,26,Commanders,22,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,22,26
+GennaroNFL,Eagles,26,Commanders,14,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,14,26
+TomNFL,Commanders,26,Eagles,22,WASPHI,WAS,Commanders,Washington Commanders,PHI,Eagles,Philadelphia Eagles,26,22
+AliNFL,Chiefs,27,Bills,24,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,24,27
+BrookeNFL,Chiefs,25,Bills,21,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,21,25
+DanNFL,Chiefs,24,Bills,21,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,21,24
+GennaroNFL,Bills,23,Chiefs,21,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,23,21
+TomNFL,Bills,25,Chiefs,23,BUFKC,BUF,Bills,Buffalo Bills,KC,Chiefs,Kansas City Chiefs,25,23
