@@ -14,11 +14,11 @@ weboptions = webdriver.ChromeOptions()
 weboptions.accept_insecure_certs = True
 driver = webdriver.Chrome(options=weboptions)
 
-def fetch_nfl_data(weeknum):
+def fetch_nfl_data(weeknum, url):
     try: 
         # nfl formatting
         nflrows = []
-        driver.get('https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season')
+        driver.get(url) #'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season'
         wait = WebDriverWait(driver, timeout=2)
         # driver.implicitly_wait(10)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
