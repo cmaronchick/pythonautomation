@@ -6,122 +6,136 @@ import config
 
 sns = boto3.client('sns', region_name='us-west-2')
 
-weeknum = 3
-season = "post"
-year = 2024
-if (len(sys.argv) > 1):
-    weeknum = int(sys.argv[1])
-print('weeknum:', weeknum)
-predictions = open(str(year) + season + "week" + str(weeknum) + "picks.csv",newline='')
+weeknum = 1
+season = "reg"
+year = 2025
 
-client = MongoClient("mongodb+srv://" + config.username + ":" + config.password + "@pcsm.lwx4u.mongodb.net/pcsm?retryWrites=true&w=majority")
-db = client['pcsm']
-collection = db['games']
-predictionsCollection = db['predictions']
-
-games = list(collection.find({ "sport": 'nfl', "season": season, "year": year, "gameWeek": weeknum}))
-print(len(games))
 def filterGames(awayCode,homeCode):
     for game in games:
         if awayCode == game["awayTeam"]["code"] is True or homeCode == game["homeTeam"]["code"] is True:
             return True
         else:
             return False
-updates = []
-updateGameIds = []
-with predictions as csvfile:
-    csvreader = csv.reader(predictions,delimiter=",")
-    for row in csvreader:
-        print('row:', row)
-        if row[0] != "Source":
-            awayCode = row[6]
-            awayShortName = row[7]
-            awayFullName = row[8]
-            homeCode = row[9]
-            homeShortName = row[10]
-            homeFullName = row[11]
-            awayScore = int(row[12])
-            homeScore = int(row[13])
-            gameObj = {
-                "year": year,
-                "sport": "nfl",
-                "season": season,
-                "gameWeek": weeknum,
-                "awayTeam": {
-                    "code": awayCode,
-                    "shortName": awayShortName,
-                    "fullName": awayFullName,
-                    "score": awayScore
-                },
-                "homeTeam": {
-                    "code": homeCode,
-                    "shortName": homeShortName,
-                    "fullName": homeFullName,
-                    "score": homeScore
-                },
-                "userId": row[0],
-                "preferred_username": row[0],
-                "submitted": datetime.strptime(str(datetime.now().year) + "-" + str(datetime.now().month) + "-" + str(datetime.now().day) + "T" + str(datetime.now().hour) + ":" + str(datetime.now().minute) + ":" + str(datetime.now().second), '%Y-%m-%dT%H:%M:%S'),
-                "spread": awayScore - homeScore,
-                "total": homeScore + awayScore
-            }
-            print('games:', len(games))
-            gameId = None
-            for game in games:
-                print('game:', game["awayTeam"]["code"], game["homeTeam"]["code"], awayCode, homeCode)
-                if awayCode == game["awayTeam"]["code"] is True or homeCode == game["homeTeam"]["code"]:
-                    gameObj["gameId"] = game["gameId"]
-                    gameObj["odds"] = {
-                        "spread": game["odds"]["spread"],
-                        "total": game["odds"]["total"]
-                    }
-            
-            # print("gameObj: ", gameObj)
-            if "gameId" in gameObj:
-                updates.append(UpdateOne({
-                "year": year,
-                "sport": "nfl",
-                "season": season,
-                "gameWeek": weeknum,
-                "userId": row[0],
-                "gameId": gameObj["gameId"]
-                }, {"$set": gameObj}, upsert=True))
-                updateGameIds.append({"gameId": gameObj["gameId"], "gameWeek": weeknum, "sport": "nfl", "season": season, "year": year})
-    print('updates:', len(updates))
-    predictionsUpdateResponse = predictionsCollection.bulk_write(updates)
-    print('predictionsUpdateResponse: ', predictionsUpdateResponse) # len(predictionsUpdateResponse.bulk_api_result["modifiedCount"])
-    # for update in updateGameIds:
-    #     sns.publish(
-    #         TopicArn="arn:aws:sns:us-west-2:198282214908:predictionSubmitted",
-    #         Message="Prediction for game " + str(update["gameId"]), 
-    #         Subject="Prediction Submitted" + str(update["gameId"]),
-    #         MessageAttributes={ 
-    #             "gameId": {
-    #                 "DataType": "Number",
-    #                 "StringValue": str(update["gameId"])
-    #             },
-    #             "gameWeek": {
-    #                 "DataType": "Number",
-    #                 "StringValue": str(update["gameWeek"])
-    #             },
-    #             "year": {
-    #                 "DataType": "Number",
-    #                 "StringValue": str(update["year"])
-    #             },
-    #             "sport": {
-    #                 "DataType": "String",
-    #                 "StringValue": update["sport"]
-    #             },
-    #             "season": {
-    #                 "DataType": "String",
-    #                 "StringValue": update["season"]
-    #             }
-    #         })
+if (len(sys.argv) > 3):
+    weeknum = int(sys.argv[1])
+    year = int(sys.argv[2])
+    season = sys.argv[3]
+    print('weeknum:', weeknum)
+    predictions = open(str(year) + season + "week" + str(weeknum) + "picks.csv",newline='')
 
-        # print('awayCode, homeCode:', awayCode, homeCode)
-        # filteredGame = list(filter(lambda game: awayCode == game["awayTeam"]["code"] is True or homeCode == game["homeTeam"]["code"] is True, games))
-        # print('len', len(filteredGame))
-        # for fg in filteredGame:
-        #     print('filteredGame:', fg)
+    client = MongoClient("mongodb+srv://" + config.username + ":" + config.password + "@pcsm.lwx4u.mongodb.net/pcsm?retryWrites=true&w=majority")
+    db = client['pcsm']
+    collection = db['games']
+    predictionsCollection = db['predictions']
+
+    games = list(collection.find({ "sport": 'nfl', "season": season, "year": year, "gameWeek": weeknum}))
+    print(len(games))
+    updates = []
+    updateGameIds = []
+    with predictions as csvfile:
+        csvreader = csv.reader(predictions,delimiter=",")
+        for row in csvreader:
+            print('row:', row)
+            if row[0] != "Source":
+                awayCode = row[7]
+                awayShortName = row[8]
+                awayFullName = row[9]
+                homeCode = row[10]
+                homeShortName = row[11]
+                homeFullName = row[12]
+                awayScore = int(row[13])
+                homeScore = int(row[14])
+                gameId = int(row[6])
+                spread = float(row[15])
+                total = float(row[16])
+                gameObj = {
+                    "gameId": gameId,
+                    "year": year,
+                    "sport": "nfl",
+                    "season": season,
+                    "gameWeek": weeknum,
+                    "awayTeam": {
+                        "code": awayCode,
+                        "shortName": awayShortName,
+                        "fullName": awayFullName,
+                        "score": awayScore
+                    },
+                    "homeTeam": {
+                        "code": homeCode,
+                        "shortName": homeShortName,
+                        "fullName": homeFullName,
+                        "score": homeScore
+                    },
+                    "userId": row[0],
+                    "preferred_username": row[0],
+                    "submitted": datetime.strptime(str(datetime.now().year) + "-" + str(datetime.now().month) + "-" + str(datetime.now().day) + "T" + str(datetime.now().hour) + ":" + str(datetime.now().minute) + ":" + str(datetime.now().second), '%Y-%m-%dT%H:%M:%S'),
+                    "spread": awayScore - homeScore,
+                    "total": homeScore + awayScore,
+                    "odds": {
+                        "spread": spread,
+                        "total": total
+                    }
+                }
+                print('games:', len(games))
+                # gameId = None
+                # for game in games:
+                #     print('game:', game["awayTeam"]["code"], game["homeTeam"]["code"], awayCode, homeCode)
+                #     if awayCode == game["awayTeam"]["code"] is True or homeCode == game["homeTeam"]["code"]:
+                #         gameObj["gameId"] = game["gameId"]
+                #         gameObj["odds"] = {
+                #             "spread": game["odds"]["spread"],
+                #             "total": game["odds"]["total"]
+                #         }
+                
+                print("gameObj: ", gameObj)
+                if "gameId" in gameObj:
+                    updates.append(UpdateOne({
+                    "year": year,
+                    "sport": "nfl",
+                    "season": season,
+                    "gameWeek": weeknum,
+                    "userId": row[0],
+                    "gameId": gameObj["gameId"]
+                    }, {"$set": gameObj}, upsert=True))
+                    updateGameIds.append({"gameId": gameObj["gameId"], "gameWeek": weeknum, "sport": "nfl", "season": season, "year": year})
+        print('updates:', len(updates))
+        predictionsUpdateResponse = predictionsCollection.bulk_write(updates)
+        print('predictionsUpdateResponse: ', predictionsUpdateResponse) # len(predictionsUpdateResponse.bulk_api_result["modifiedCount"])
+        # for update in updateGameIds:
+        #     sns.publish(
+        #         TopicArn="arn:aws:sns:us-west-2:198282214908:predictionSubmitted",
+        #         Message="Prediction for game " + str(update["gameId"]), 
+        #         Subject="Prediction Submitted" + str(update["gameId"]),
+        #         MessageAttributes={ 
+        #             "gameId": {
+        #                 "DataType": "Number",
+        #                 "StringValue": str(update["gameId"])
+        #             },
+        #             "gameWeek": {
+        #                 "DataType": "Number",
+        #                 "StringValue": str(update["gameWeek"])
+        #             },
+        #             "year": {
+        #                 "DataType": "Number",
+        #                 "StringValue": str(update["year"])
+        #             },
+        #             "sport": {
+        #                 "DataType": "String",
+        #                 "StringValue": update["sport"]
+        #             },
+        #             "season": {
+        #                 "DataType": "String",
+        #                 "StringValue": update["season"]
+        #             }
+        #         })
+
+            # print('awayCode, homeCode:', awayCode, homeCode)
+            # filteredGame = list(filter(lambda game: awayCode == game["awayTeam"]["code"] is True or homeCode == game["homeTeam"]["code"] is True, games))
+            # print('len', len(filteredGame))
+            # for fg in filteredGame:
+            #     print('filteredGame:', fg)
+
+else: 
+    print('you must submit week, year, and season')
 
 

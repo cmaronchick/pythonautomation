@@ -11,15 +11,19 @@ import csv, traceback, array
 from scraper_nfl import fetch_nfl_data
 from scraper_usatoday import fetch_usatoday_data
 from scraper_espn import fetch_espn_data
+from scraper_oddsshark import fetch_oddsshark_data
+from scraper_dratings import fetch_dratings_data
+from scraper_oddstrader import fetch_oddstrader_data
+from scraper_nflspinzone import fetch_nflspinzone_data
 
 
 weeknum = 2
-season = "post"
-year = 2024
+season = "reg"
+year = 2025
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-playoff-bracket-odds-best-bets-for-afc-nfc-championships-which-teams-advance-to-super-bowl-lix/',
-    'name': 'TerrySullivan',
+    'url': 'https://www.cbssports.com/nfl/news/week-2-nfl-picks-patrick-mahomes-enters-uncharted-territory-bears-dolphins-remain-searching-for-answers/',
+    'name': 'TylerSullivan',
     'searchTerm': 'Projected score',
     'searchTag': 'strong',
     'endPickTerm': 'The pick:',
@@ -27,16 +31,17 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-2025-nfl-playoff-picks-backing-the-road-underdogs-in-nfc-afc-championship-games/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-2-nfl-picks-underdog-chiefs-eagles-aaron-rodgers-steelers/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
-    'separator': ', '
+    'separator': ', ',
+    'endPickTerm': ' | '
     #https://www.cbssports.com/writers/pete-prisco/
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-playoff-picks-predicting-winners-for-bills-chiefs-afc-championship-commanders-eagles-nfc-title-game/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-2-score-predictions-plus-commanders-at-packers-picks-and-5-upsets-that-could-happen/',
     'name': 'JohnBreech',
     'searchTerm': 'The pick:',
     'searchTag': 'strong',
@@ -45,7 +50,7 @@ breech = {
 }
 
 foxsports = {
-    'url': 'https://www.foxsports.com/articles/nfl/2024-nfl-week-' + str(weeknum) + '-predictions-betting-odds-tv-schedule',
+    'url': 'https://www.foxsports.com/articles/nfl/2025-nfl-week-' + str(weeknum) + '-predictions-betting-odds-tv-schedule',
     'name': 'DataSkrive',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -53,7 +58,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2024/09/11/nfl-week-2-predictions-win-probabilities-picks-2024-season/75126241007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2025/09/08/nfl-week-2-picks-predictions-scores-2025-season/83955248007/',
     'name': 'Jeremy Cluff',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -61,8 +66,13 @@ azc = {
     # https://www.azcentral.com/staff/2648096001/jeremy-cluff/
 }
 
+dratings = {
+    'url': 'https://www.dratings.com/predictor/nfl-football-predictions/',
+    'name': 'DRatings'
+}
+
 pfn = {
-    'url': 'https://www.profootballnetwork.com/early-nfl-picks-predictions-conference-championship-2025/',
+    'url': 'https://www.profootballnetwork.com/week-' + str(weeknum) + '-nfl-picks-predictions-2025/',
     'name': 'PFN',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -71,12 +81,12 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-afc-nfc-championship-games-01jj22bgrffd',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-2-game-01k4mymqtnxj',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
     'separator': ', '
-    # https://nflspinzone.com/nfl/
+    #   https://nflspinzone.com/posts/2024-nfl-picks-score-predictions-for-week-3-01j7xet93n9e
 }
 
 cowherd = {
@@ -88,7 +98,7 @@ cowherd = {
 }
 
 bleacher = {
-    'url': 'https://bleacherreport.com/articles/10151752-bleacher-reports-expert-afc-and-nfc-championship-nfl-picks',
+    'url': 'https://bleacherreport.com/articles/10135758-bleacher-reports-week-3-nfl-picks',
     'name': 'BleacherReport',
     'searchTerm': 'Score Prediction:',
     'searchTag': 'b',
@@ -97,7 +107,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-eagles-commanders-chiefs-bills/ae0de87a5e4d960401a99823',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-2/0b7fa48b624d0d671c388691',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -106,12 +116,12 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/eagles-commanders-pick-against-spread-nfc-championship/0b273c5898712e9904f99f89'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-2/01be2ef47ff598aefecd8ec5'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
 thirtythirdteam = {
-    'url': 'https://www.the33rdteam.com/2025-nfl-championship-week-expert-picks-predictions-for-every-game/',#'https://www.the33rdteam.com/2024-nfl-week-' + str(weeknum) + '-expert-picks-predictions-for-every-game/'
+    "url": 'https://www.the33rdteam.com/2025-nfl-week-' + str(weeknum) + '-expert-picks-predictions-for-every-game/',#'url': 'https://www.the33rdteam.com/2025-nfl-championship-week-expert-picks-predictions-for-every-game/', 
     'name': 'MarcusMosher',
     'searchTerm': 'Score Prediction:',
     'searchTag': 'strong',
@@ -120,27 +130,58 @@ thirtythirdteam = {
 }
 
 sportsnaut = {
-    'url': 'https://sportsnaut.com/nfl/nfl-analysis/lists/afc-championship-game-predictions-buffalo-bills-vs-kansas-city-chiefs/' # 'https://sportsnaut.com/list/nfl-week-' + str(weeknum) + '-predictions/'
+    'url': 'https://sportsnaut.com/nfl/nfl-week-2-predictions-projecting-week-2-nfl-schedule/' # 'https://sportsnaut.com/nfl/nfl-analysis/lists/afc-championship-game-predictions-buffalo-bills-vs-kansas-city-chiefs/'
     # https://sportsnaut.com/list/nfl-week-6-predictions-2024/
 }
 
+chatpilot = {
+    'url': 'https://www.msn.com/en-us/sports/nfl/nfl-week-2-predictions-by-microsoft-copilot-ai-for-every-game/ar-AA1MlfXd?ocid=BingNewsSerp',
+    'name': 'ChatPilot',
+    'searchTag': "//*[contains(text(), '')]/parent::*" "//h3[@class='gnt_ar_b_h3']",
+    'separator': ', '
+
+}
+
 usatoday = {
-    'url': 'https://e.infogram.com/2aa199b3-75f0-46dc-90ab-194d634f60cd?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2023-24-week-1/default:ml/types:ml,ats/extras:condensed/performances:bblastweek,bbweekly,lastweek' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/page/nflviewguide-43538396/nfl-conference-championship-round-playoffs-picks-schedule-odds-injuries-stats-2024-2025'
+    'url': 'https://www.espn.com/nfl/story/_/id/46139433/nfl-week-1-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
 nfl = {
-    'url': 'https://www.nfl.com/news/nfl-picks-bills-chiefs-commanders-eagles-championship-sunday-2024-nfl-season'
+    'url': 'https://www.nfl.com/news/nfl-picks-week-' + str(weeknum) + '-2025-nfl-season'
     # 'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season' - https://www.nfl.com/news/nfl-picks-divisional-round-2024-nfl-season
 
 }
 
-writersArray = [ts, pp, bleacher, bender, pfn, sz, foxsports, thirtythirdteam] #, foxsports, azc, 
+clutchpoints = {
+    'url': 'https://clutchpoints.com/nfl/nfl-stories/nfl-picks-predictions-odds-week-2-2025',
+    'name': 'TimCrean',
+    'searchTerm': 'Pick:',
+    'searchTag': 'strong',
+    'separator': '-'
+}
+
+rotowire = {
+    'url': 'https://www.rotowire.com/football/article/beating-book-95983',
+    'name': 'NickWhalen',
+    'searchTerm': 'The pick:',
+    'separator': ' - '
+}
+
+# yardbarker = {
+#     'url': 'https://www.yardbarker.com/nfl/articles/2024_nfl_week_3_expert_picks_predictions_for_every_game/s1_17304_40918862',
+#     'name': 'YardBarker',
+#     'searchTerm': 'Score Prediction:',
+#     'searchTag': 'strong',
+#     'separator': ', '
+# }
+
+writersArray = [ts, pp, bender, sz, foxsports, azc, clutchpoints, chatpilot, rotowire] #, foxsports, azc, pfn, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
 
 
@@ -161,8 +202,11 @@ weboptions.add_argument("--disable-dev-shm-usage"); # https://stackoverflow.com/
 weboptions.add_argument("--disable-browser-side-navigation"); # https://stackoverflow.com/a/49123152/1689770
 weboptions.add_argument("--disable-gpu"); # https://stackoverflow.com/questions/51959986/how-to-solve-selenium-chromedriver-timed-out-receiving-message-from-renderer-exc
 weboptions.add_argument("--enable-unsafe-swiftshader")
+weboptions.page_load_strategy = 'eager'
 
 driver = webdriver.Chrome(weboptions)
+
+driver.set_page_load_timeout(35) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 try:
     for writer in writersArray:
         
@@ -184,12 +228,17 @@ try:
         # weboptions.add_argument('--ignore-ssl-errors')
 
         driver.get(writer['url'])
+        
         wait = WebDriverWait(driver, timeout=2)
         driver.implicitly_wait(10)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         # wait.until(lambda d : resultsTable.is_displayed())
-
-        picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
+        print('hasattr()', writer.get("searchTerm"))
+        searchTerm = writer.get("searchTerm")
+        if searchTerm:
+            picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
+        else:
+            picks = driver.find_elements(By.XPATH, writer["searchTag"])
         #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         # if writer['name'] == 'PetePrisco':
         #     print(response.data)
@@ -197,6 +246,8 @@ try:
 
         # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
         print('picks length: ', len(picks))
+        if len(picks) == 0:
+            print('writer with no picks: ', writer)
         for p in picks:
             # parent = p.parent.text        
             # colonIndex = parent.find(':')
@@ -208,13 +259,14 @@ try:
                 pickIndex = pText.find(writer['endPickTerm'])
             print('195', colonIndex, pickIndex)
             if colonIndex == -1:
-                print('pick: ', p)
+                print('pick: ', pText)
             if (colonIndex > 0):
                 predictionString = ""
                 if pickIndex is not None:
                     predictionString = pText[colonIndex+2:pickIndex]
                 else:
                     predictionString = pText[colonIndex+2:]
+                print('predictionString: ', predictionString)
                 firstSpace = predictionString.find(" ")
                 separator = predictionString.find(writer['separator'])
                 secondSpace = predictionString.find(" ", separator+len(writer['separator']))
@@ -228,6 +280,32 @@ try:
                 except ValueError:
                     print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
                 # print(winner, int(winnerScore), loser, int(loserScore))
+            else:
+                predictionString = ""
+                if pickIndex is not None:
+                    predictionString = pText[colonIndex+2:pickIndex]
+                else:
+                    predictionString = pText[colonIndex+2:]
+                print('predictionString: ', predictionString)
+                spacesNumber = predictionString.rfind(" ", predictionString.find(writer['separator']))
+                firstSpace = predictionString.find(" ")
+                if spacesNumber > firstSpace: # set the first space if there are two spaces before the score
+                    firstSpace = spacesNumber
+                separator = predictionString.find(writer['separator'])
+                secondSpace = predictionString.find(" ", separator+len(writer['separator']))
+                spacesNumber = predictionString.rfind(" ")
+                if spacesNumber > secondSpace:
+                    secondSpace = spacesNumber
+                winner = predictionString[:firstSpace]
+                winnerScore = predictionString[firstSpace:separator]
+                loser = predictionString[separator+2:secondSpace]
+                loserScore = predictionString[secondSpace:].strip()
+                # print([writer['name'],winner, winnerScore, loser, loserScore])
+                try:
+                    rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
+                except ValueError:
+                    print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
+                
 
     # # johnbreech formatting
 
@@ -282,8 +360,8 @@ try:
 
     # vinnie iyer formatting
     driver.get(iyer["url"])
-    wait = WebDriverWait(driver, timeout=2)
-    driver.implicitly_wait(10)
+    # wait = WebDriverWait(driver, timeout=2)
+    # driver.implicitly_wait(10)
     # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
     # wait.until(lambda d : resultsTable.is_displayed())
     games = driver.find_elements(By.TAG_NAME,"h3")
@@ -436,9 +514,9 @@ try:
 
     # usatoday formatting
     
-    usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
-    for usatodayrow in usatodayrows:
-        rows.append(usatodayrow)
+    # usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
+    # for usatodayrow in usatodayrows:
+    #     rows.append(usatodayrow)
         
                 # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
 
@@ -450,6 +528,23 @@ try:
         
                 # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
 
+    oddssharkrows = fetch_oddsshark_data(weeknum)
+    for oddssharkrow in oddssharkrows:
+        rows.append(oddssharkrow)
+        
+    dratingsrow = fetch_dratings_data(weeknum)
+    for dratingsrow in dratingsrow:
+        rows.append(dratingsrow)
+
+    oddstraderrow = fetch_oddstrader_data(weeknum)
+    for oddstraderrow in oddstraderrow:
+        rows.append(oddstraderrow)
+
+        
+
+    nflspinzonerows = fetch_nflspinzone_data(weeknum)
+    for nflspinzonerow in nflspinzonerows:
+        rows.append(nflspinzonerows)
 
     ### Final Row for printing picks ###
     week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')

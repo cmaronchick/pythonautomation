@@ -37,6 +37,11 @@ imageTable = {
     'Entity_1569032077717.png': 'Lions'
 }
 
+articleTable = [
+    {"DALPHI": "https://sportsbookwire.usatoday.com/story/sports/nfl/2025/09/03/cowboys-at-eagles-odds-picks-and-predictions/83524137007/"},
+    
+]
+
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
@@ -44,6 +49,7 @@ weboptions = webdriver.ChromeOptions()
 weboptions.accept_insecure_certs = True
 weboptions.add_argument('--ignore-certificate-errors')
 weboptions.add_argument('disable-notifications')
+weboptions.page_load_strategy = 'eager'
 driver = webdriver.Chrome(options=weboptions)
 def fetch_usatoday_data(weeknum, url):
     print('fetch_usatoday_data:', url)
