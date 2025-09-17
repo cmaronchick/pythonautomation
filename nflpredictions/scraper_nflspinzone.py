@@ -63,21 +63,22 @@ sz = {
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
-    'separator': ', '
+    'separator': '-'
     #   https://nflspinzone.com/posts/2024-nfl-picks-score-predictions-for-week-3-01j7xet93n9e
 }
 
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-weboptions = webdriver.ChromeOptions()
-weboptions.accept_insecure_certs = True
-weboptions.add_argument('--ignore-certificate-errors')
-weboptions.add_argument('disable-notifications')
-weboptions.page_load_strategy = 'eager'
-driver = webdriver.Chrome(options=weboptions)
+# weboptions = webdriver.ChromeOptions()
+# weboptions.accept_insecure_certs = True
+# weboptions.add_argument('--ignore-certificate-errors')
+# weboptions.add_argument('disable-notifications')
+# weboptions.add_argument("--log-level=3")
+# weboptions.page_load_strategy = 'eager'
 articleNumber = 16
-def fetch_nflspinzone_data(weeknum):
+def fetch_nflspinzone_data(weeknum, weboptions):
+    driver = webdriver.Chrome(options=weboptions)
     print('fetch_oddstrader_data:')
     nflspinzonerows = []
     try:
@@ -152,6 +153,7 @@ def fetch_nflspinzone_data(weeknum):
                     except ValueError:
                         print(ValueError, [sz['name'],winner, winnerScore, loser, loserScore])
                     # print(winner, int(winnerScore), loser, int(loserScore))
+                    i = i + 1
                 else:
                     predictionString = ""
                     if pickIndex is not None:
@@ -177,18 +179,20 @@ def fetch_nflspinzone_data(weeknum):
                         nflspinzonerows.append([sz['name'],winner, int(winnerScore), loser, int(loserScore)])
                     except ValueError:
                         print(ValueError, [sz['name'],winner, winnerScore, loser, loserScore])
-                    driver.find_element(By.ID, "next-button-bottom").click()
-                    i = i + 1
+            driver.find_element(By.ID, "next-button-bottom").click()
+            i = i + 1
         print('nflspinzonerows:', nflspinzonerows)
+        driver.close()
         return nflspinzonerows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
+        driver.close()
         return nflspinzonerows
 
 
-def main(weeknum):
-    html_content = fetch_nflspinzone_data(weeknum) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+def main(weeknum, weboptions):
+    html_content = fetch_nflspinzone_data(weeknum, weboptions) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:

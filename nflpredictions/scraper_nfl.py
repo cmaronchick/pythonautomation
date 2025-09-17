@@ -10,11 +10,11 @@ from selenium.webdriver.support import expected_conditions as EC
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-weboptions = webdriver.ChromeOptions()
-weboptions.accept_insecure_certs = True
-driver = webdriver.Chrome(options=weboptions)
+# weboptions = webdriver.ChromeOptions()
+# weboptions.accept_insecure_certs = True
 
-def fetch_nfl_data(weeknum, url):
+def fetch_nfl_data(weeknum, url, weboptions):
+    driver = webdriver.Chrome(options=weboptions)
     try: 
         # nfl formatting
         nflrows = []
@@ -71,9 +71,11 @@ def fetch_nfl_data(weeknum, url):
                     nflrows.append([author,winningTeam, winningScore, losingTeam, losingScore]) 
             tableIndex = tableIndex + 1
         # print(nflrows)
+        driver.close()
         return nflrows
     except Exception as e:
         print('nfl exception: ', e)
+        driver.close()
         return nflrows
 
 def main(weeknum):
