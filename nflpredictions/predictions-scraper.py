@@ -15,23 +15,26 @@ from scraper_oddsshark import fetch_oddsshark_data
 from scraper_dratings import fetch_dratings_data
 from scraper_oddstrader import fetch_oddstrader_data
 from scraper_nflspinzone import fetch_nflspinzone_data
+from scraper_sbr import fetch_sbr_data
+from scraper_clutchpoints import fetch_clutchpoints_data
 
 
-weeknum = 2
-season = "reg"
-year = 2025
+
+weeknum = int(sys.argv[1])
+year = int(sys.argv[2])
+season = sys.argv[3]
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/week-2-nfl-picks-patrick-mahomes-enters-uncharted-territory-bears-dolphins-remain-searching-for-answers/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-7-picks-jets-first-win-eagles-struggles-chiefs-back/',
     'name': 'TylerSullivan',
-    'searchTerm': 'Projected score',
+    'searchTerm': 'Projected',
     'searchTag': 'strong',
     'endPickTerm': 'The pick:',
     'separator': ', '
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-2-nfl-picks-underdog-chiefs-eagles-aaron-rodgers-steelers/',
+    'url': 'https://www.cbssports.com/nfl/news/pete-priscos-week-7-nfl-picks-odds-best-bets-steelers-bengals-lions-buccaneers/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -41,11 +44,11 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-2-score-predictions-plus-commanders-at-packers-picks-and-5-upsets-that-could-happen/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-7-picks-score-predictions-bengals-shock-steelers-rams-top-jaguars-london/',
     'name': 'JohnBreech',
-    'searchTerm': 'The pick:',
+    'searchTerm': 'PICK:',
     'searchTag': 'strong',
-    'separator': '-'
+    'separator': ' over '
     # https://www.cbssports.com/writers/john-breech/
 }
 
@@ -58,7 +61,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2025/09/08/nfl-week-2-picks-predictions-scores-2025-season/83955248007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2025/10/13/nfl-week-7-picks-predictions-scores-2025-season/84235617007/',
     'name': 'Jeremy Cluff',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -81,12 +84,12 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-2-game-01k4mymqtnxj',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-7-game',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
     'separator': ', '
-    #   https://nflspinzone.com/posts/2024-nfl-picks-score-predictions-for-week-3-01j7xet93n9e
+    #   https://nflspinzone.com/author/sayrebedinger/
 }
 
 cowherd = {
@@ -107,7 +110,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-2/0b7fa48b624d0d671c388691',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-7/3219236ec36dc7ee56f7c360',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -116,7 +119,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-2/01be2ef47ff598aefecd8ec5'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-7/12cfb05abe2639c4cb0726be'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -130,25 +133,25 @@ thirtythirdteam = {
 }
 
 sportsnaut = {
-    'url': 'https://sportsnaut.com/nfl/nfl-week-2-predictions-projecting-week-2-nfl-schedule/' # 'https://sportsnaut.com/nfl/nfl-analysis/lists/afc-championship-game-predictions-buffalo-bills-vs-kansas-city-chiefs/'
+    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-projecting-every-game-nfl-schedule-this-week/' # 'https://sportsnaut.com/nfl/nfl-analysis/lists/afc-championship-game-predictions-buffalo-bills-vs-kansas-city-chiefs/'
     # https://sportsnaut.com/list/nfl-week-6-predictions-2024/
 }
 
-chatpilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/09/11/nfl-week-2-ai-picks-predictions/86068334007/',
-    'name': 'ChatPilot',
+copilot = {
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/',
+    'name': 'Copilot',
     'searchTag': "//h3[@class='gnt_ar_b_h3']",
     'separator': ', '
 
 }
 
 usatoday = {
-    'url': 'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2023-24-week-1/default:ml/types:ml,ats/extras:condensed/performances:bblastweek,bbweekly,lastweek' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/d1870792-ebfe-46f3-9734-f9013606d428?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/id/46215166/nfl-week-2-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': 'https://www.espn.com/nfl/story/_/id/46594761/nfl-week-7-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
@@ -159,7 +162,7 @@ nfl = {
 }
 
 clutchpoints = {
-    'url': 'https://clutchpoints.com/nfl/nfl-stories/nfl-picks-predictions-odds-week-2-2025',
+    'url': 'https://clutchpoints.com/nfl/nfl-stories/nfl-picks-predictions-odds-week-' + str(weeknum) + '-2025', #https://clutchpoints.com/nfl/nfl-stories/nfl-picks-predictions-odds-week-3-2025
     'name': 'TimCrean',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -167,10 +170,21 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/beating-book-95983',
+    'url': 'https://www.rotowire.com/football/article/beating-the-book--86106',
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
+}
+
+sbr = {
+    'url': 'https://www.sportsbookreview.com/picks/nfl/ai-predictions-beat-the-bot-week-' + str(weeknum) + '-2025/'
+}
+
+rotoballer = {
+    'url': 'https://www.rotoballer.com/nfl-predictions-week-7-picks-and-analysis-for-every-game-2025/1727445',
+    'name': 'JimNicely',
+    'separator': ', ',
+    'searchTag': 'h2'
 }
 
 # yardbarker = {
@@ -181,7 +195,7 @@ rotowire = {
 #     'separator': ', '
 # }
 
-writersArray = [ts, pp, bender, foxsports, azc, clutchpoints, chatpilot, rotowire] #, sz, foxsports, azc, pfn, 
+writersArray = [ts, pp, bender, foxsports, azc, copilot, rotowire, rotoballer] #, sz, foxsports, azc, pfn, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
 
 
@@ -210,111 +224,117 @@ driver = webdriver.Chrome(options=weboptions)
 driver.set_page_load_timeout(35) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 try:
     i = 0
-    if i % 5 == 0:
-        driver.close()
-        driver = webdriver.Chrome(options=weboptions)
     for writer in writersArray:
         
-        print('writer[\'name\']:', writer['name'])
-        # response = requests.get(writer['url'], headers=request_headers)
-        # response = requests.get(writer['url'])
-        # print(response)
-        # soup = BeautifulSoup(response.text, 'html.parser')
-        # picks = soup.find_all('strong', string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
+        if i % 5 == 0:
+            driver.close()
+            driver = webdriver.Chrome(options=weboptions)
+            driver.set_page_load_timeout(35) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        if writer['url'] != '':
+            print('writer[\'name\']:', writer['name'])
+            # response = requests.get(writer['url'], headers=request_headers)
+            # response = requests.get(writer['url'])
+            # print(response)
+            # soup = BeautifulSoup(response.text, 'html.parser')
+            # picks = soup.find_all('strong', string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
 
-        # http = urllib3.PoolManager()
-        # response = http.request('GET', writer['url'], headers=request_headers)
-        # print(response.status)
-        # soup = BeautifulSoup(response.data, 'html.parser')
-        
-        # weboptions.add_argument("silentDriverLogs=true")
-        # weboptions.set_capability("accept")
-        # weboptions.add_argument('--ignore-certificate-errors')
-        # weboptions.add_argument('--ignore-ssl-errors')
-        print('getting url')
-        driver.get(writer['url'])
-        print('waiting')
-        wait = WebDriverWait(driver, timeout=2)
-        driver.implicitly_wait(10)
-        print('done waiting')
-        # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-        # wait.until(lambda d : resultsTable.is_displayed())
-        print('hasattr()', writer.get("searchTerm"))
-        searchTerm = writer.get("searchTerm")
-        if searchTerm:
-            picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
-        else:
-            picks = driver.find_elements(By.XPATH, writer["searchTag"])
-        #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-        # if writer['name'] == 'PetePrisco':
-        #     print(response.data)
-        # picks = soup.find_all(writer['searchTag'], string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
-
-        # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
-        print('picks length: ', len(picks))
-        if len(picks) == 0:
-            print('writer with no picks: ', writer)
-        for p in picks:
-            # parent = p.parent.text        
-            # colonIndex = parent.find(':')
-            pText = p.text
-            if writer['name'] == "NickWhalen" or writer['name'] == "ChatPilot":
-                print('p:', pText)
-            colonIndex = pText.find(':')
-            pickIndex = None
-            if "endPickTerm" in writer:
-                pickIndex = pText.find(writer['endPickTerm'])
-            print('195', colonIndex, pickIndex)
-            if colonIndex == -1:
-                print('pick: ', pText)
-            if (colonIndex > 0):
-                predictionString = ""
-                if pickIndex is not None:
-                    predictionString = pText[colonIndex+2:pickIndex]
-                else:
-                    predictionString = pText[colonIndex+2:]
-                print('275 predictionString: ', predictionString)
-                firstSpace = predictionString.find(" ")
-                separator = predictionString.find(writer['separator'])
-                secondSpace = predictionString.find(" ", separator+len(writer['separator']))
-                winner = predictionString[:firstSpace]
-                winnerScore = predictionString[firstSpace:separator]
-                loser = predictionString[separator+2:secondSpace]
-                loserScore = predictionString[secondSpace:].strip()
-                # print([writer['name'],winner, winnerScore, loser, loserScore])
-                try:
-                    rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
-                except ValueError:
-                    print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
-                # print(winner, int(winnerScore), loser, int(loserScore))
+            # http = urllib3.PoolManager()
+            # response = http.request('GET', writer['url'], headers=request_headers)
+            # print(response.status)
+            # soup = BeautifulSoup(response.data, 'html.parser')
+            
+            # weboptions.add_argument("silentDriverLogs=true")
+            # weboptions.set_capability("accept")
+            # weboptions.add_argument('--ignore-certificate-errors')
+            # weboptions.add_argument('--ignore-ssl-errors')
+            print('getting url')
+            driver.get(writer['url'])
+            print('waiting')
+            wait = WebDriverWait(driver, timeout=2)
+            driver.implicitly_wait(10)
+            print('done waiting')
+            # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
+            # wait.until(lambda d : resultsTable.is_displayed())
+            print('hasattr()', writer.get("searchTerm"))
+            searchTerm = writer.get("searchTerm")
+            if searchTerm:
+                picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
             else:
-                predictionString = ""
-                if pickIndex is not None:
-                    predictionString = pText[:pickIndex]
+                picks = driver.find_elements(By.TAG_NAME, writer["searchTag"])
+            #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
+            # if writer['name'] == 'PetePrisco':
+            #     print(response.data)
+            # picks = soup.find_all(writer['searchTag'], string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
+
+            # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+            print('picks length: ', len(picks))
+            if len(picks) == 0:
+                print('writer with no picks: ', writer)
+            for p in picks:
+                # parent = p.parent.text        
+                # colonIndex = parent.find(':')
+                pText = p.text
+                if writer['name'] == "NickWhalen" or writer['name'] == "ChatPilot":
+                    print('p:', pText)
+                colonIndex = pText.find(':')
+                pickIndex = None
+                if "endPickTerm" in writer:
+                    pickIndex = pText.find(writer['endPickTerm'])
+                print('195', colonIndex, pickIndex)
+                if colonIndex == -1:
+                    print('pick: ', pText)
+                if (colonIndex > 0):
+                    
+                    try:
+                        predictionString = ""
+                        if pickIndex is not None:
+                            predictionString = pText[colonIndex+2:pickIndex]
+                        else:
+                            predictionString = pText[colonIndex+2:]
+                        print('275 predictionString: ', predictionString)
+                        firstSpace = predictionString.find(" ")
+                        separator = predictionString.find(writer['separator'])
+                        secondSpace = predictionString.find(" ", separator+len(writer['separator']))
+                        winner = predictionString[:firstSpace]
+                        winnerScore = predictionString[firstSpace:separator]
+                        loser = predictionString[separator+len(writer['separator']):secondSpace]
+                        loserScore = predictionString[secondSpace:].strip()
+                        # print([writer['name'],winner, winnerScore, loser, loserScore])
+                    
+                        rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
+                    except ValueError:
+                        print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
+                    # print(winner, int(winnerScore), loser, int(loserScore))
                 else:
-                    predictionString = pText
-                print('295 predictionString: ', predictionString)
-                separator = predictionString.find(writer['separator'])
-                spacesNumber = predictionString.rfind(" ", separator)
-                firstSpace = predictionString.find(" ")
-                print('300 spacesNumber, firstSpace: ', spacesNumber, firstSpace)
-                if spacesNumber > firstSpace: # set the first space if there are two spaces before the score
-                    firstSpace = spacesNumber
-                print('303 firstSpace: ', firstSpace)
-                secondSpace = predictionString.find(" ", separator+len(writer['separator']))
-                winner = predictionString[:firstSpace]
-                winnerScore = predictionString[firstSpace:separator]
-                spacesNumber = predictionString.rfind(" ")
-                if spacesNumber > secondSpace:
-                    secondSpace = spacesNumber
-                print('309 secondspace: ', secondSpace)
-                loser = predictionString[separator+2:secondSpace]
-                loserScore = predictionString[secondSpace:].strip()
-                # print([writer['name'],winner, winnerScore, loser, loserScore])
-                try:
-                    rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
-                except ValueError:
-                    print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
+                    predictionString = ""
+                    
+                    try:
+                        if pickIndex is not None:
+                            predictionString = pText[:pickIndex]
+                        else:
+                            predictionString = pText
+                        print('295 predictionString: ', predictionString)
+                        separator = predictionString.find(writer['separator'])
+                        
+                        spacesNumber = predictionString.rfind(" ", 0, separator)
+                        firstSpace = predictionString.find(" ")
+                        print('300 spacesNumber, firstSpace: ', separator, spacesNumber, firstSpace)
+                        if spacesNumber > firstSpace: # set the first space if there are two spaces before the score
+                            firstSpace = spacesNumber
+                        print('303 firstSpace: ', firstSpace)
+                        secondSpace = predictionString.find(" ", separator+len(writer['separator']))
+                        winner = predictionString[:firstSpace]
+                        winnerScore = predictionString[firstSpace:separator]
+                        spacesNumber = predictionString.rfind(" ")
+                        if spacesNumber > secondSpace:
+                            secondSpace = spacesNumber
+                        print('309 secondspace: ', secondSpace)
+                        loser = predictionString[separator+len(writer['separator']):secondSpace]
+                        loserScore = predictionString[secondSpace:].strip()
+                        # print([writer['name'],winner, winnerScore, loser, loserScore])
+                        rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
+                    except ValueError:
+                        print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
                 
     i + 1
     # # johnbreech formatting
@@ -329,13 +349,13 @@ try:
         for p in picks:
             predictionString = p.text
             separator = predictionString.find("-")
-            lastSpace = predictionString.rfind(" ")
-            thirdSpace = predictionString.rfind(" ", 0, lastSpace)
+            winnerSpace = predictionString.find(" ")
+            overSpace = predictionString.find(" over ")
             secondSpace = predictionString.rfind(" ", 0, separator)
             firstSpace = predictionString.rfind(" ", 0, secondSpace)
-            winner = predictionString[:firstSpace]
+            winner = predictionString[:winnerSpace]
             winnerScore = predictionString[firstSpace:separator]
-            loser = predictionString[lastSpace:]
+            loser = predictionString[overSpace + len(" over "):]
             loserScore = predictionString[separator+1:predictionString.find(" over")]
             # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
             try:
@@ -472,6 +492,8 @@ try:
         print('iyer ValueError: ', ValueError)
         driver.close()
 
+
+
     espnrows = fetch_espn_data(weeknum, espn['url'], weboptions)
     for espnrow in espnrows:
         rows.append(espnrow)
@@ -486,7 +508,9 @@ try:
         
         popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
         if len(popup) > 0:
+            wait.until(EC.element_to_be_clickable(popup[0]))
             popup[0].click()
+        wait.until(EC.element_to_be_clickable(firstGame))
         firstGame.click()
         # response = requests.get()
         # print(response)
@@ -523,6 +547,7 @@ try:
                     
                 rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
                 navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
+                wait.until(EC.element_to_be_clickable(navButtons[1]))
                 navButtons[1].click()
                 wait.until(EC.staleness_of(teams[0]))
                 g = g + 1
@@ -537,9 +562,9 @@ try:
 
     # usatoday formatting
     
-    # usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
-    # for usatodayrow in usatodayrows:
-    #     rows.append(usatodayrow)
+    usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
+    for usatodayrow in usatodayrows:
+        rows.append(usatodayrow)
         
                 # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
 
@@ -555,19 +580,27 @@ try:
     for oddssharkrow in oddssharkrows:
         rows.append(oddssharkrow)
         
-    dratingsrow = fetch_dratings_data(weeknum, weboptions)
-    for dratingsrow in dratingsrow:
+    dratingsrows = fetch_dratings_data(weeknum, weboptions)
+    for dratingsrow in dratingsrows:
         rows.append(dratingsrow)
 
-    oddstraderrow = fetch_oddstrader_data(weeknum, weboptions)
-    for oddstraderrow in oddstraderrow:
+    oddstraderrows = fetch_oddstrader_data(weeknum, weboptions)
+    for oddstraderrow in oddstraderrows:
         rows.append(oddstraderrow)
 
         
 
     nflspinzonerows = fetch_nflspinzone_data(weeknum, weboptions)
     for nflspinzonerow in nflspinzonerows:
-        rows.append(nflspinzonerows)
+        rows.append(nflspinzonerow)
+
+    sbrrows = fetch_sbr_data(weeknum, sbr['url'], weboptions)
+    for sbrrow in sbrrows:
+        rows.append(sbrrow)
+
+    clutchpointsrows = fetch_clutchpoints_data(weeknum, clutchpoints['url'], weboptions)
+    for clutchpointsrow in clutchpointsrows:
+        rows.append(clutchpointsrow)
 
     ### Final Row for printing picks ###
     week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')

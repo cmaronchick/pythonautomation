@@ -59,10 +59,10 @@ articleTable = [
 
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-2-game-01k4mymqtnxj',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-3-game',
     'name': 'NFL Spinzone',
-    'searchTerm': 'Prediction:',
-    'searchTag': 'strong',
+    'searchTerm': 'win ',
+    'searchTag': 'em',
     'separator': '-'
     #   https://nflspinzone.com/posts/2024-nfl-picks-score-predictions-for-week-3-01j7xet93n9e
 }
@@ -70,23 +70,33 @@ sz = {
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-# weboptions = webdriver.ChromeOptions()
-# weboptions.accept_insecure_certs = True
-# weboptions.add_argument('--ignore-certificate-errors')
-# weboptions.add_argument('disable-notifications')
-# weboptions.add_argument("--log-level=3")
-# weboptions.page_load_strategy = 'eager'
+weboptionsHC = webdriver.ChromeOptions()
+weboptionsHC.accept_insecure_certs = True
+weboptionsHC.add_argument('--ignore-certificate-errors')
+weboptionsHC.add_argument('disable-notifications')
+weboptionsHC.add_argument("--log-level=3")
+weboptionsHC.page_load_strategy = 'eager'
 articleNumber = 16
 def fetch_nflspinzone_data(weeknum, weboptions):
+    
+    sz = {
+        'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-' + str(weeknum) + '-game',
+        'name': 'NFL Spinzone',
+        'searchTerm': 'Prediction:',
+        'searchTag': 'strong',
+        'separator': ', '
+        #   https://nflspinzone.com/author/sayrebedinger/
+    }
     driver = webdriver.Chrome(options=weboptions)
-    print('fetch_oddstrader_data:')
+    print('fetch_nflspinzone_data:')
     nflspinzonerows = []
     try:
         i = 0
         driver.get(sz.get('url'))
         
         wait = WebDriverWait(driver, timeout=2)
-        while i < articleNumber:
+        buttonIsClickable = True
+        while buttonIsClickable:
         
             # response = requests.get(writer['url'], headers=request_headers)
             # response = requests.get(writer['url'])
@@ -106,11 +116,11 @@ def fetch_nflspinzone_data(weeknum, weboptions):
 
 
             # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-            # wait.until(lambda d : resultsTable.is_displayed())
+            
             print('hasattr()', sz.get("searchTerm"))
             searchTerm = sz.get("searchTerm")
             if searchTerm:
-                picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + sz['searchTerm'] + "')]/parent::*")
+                picks = driver.find_elements(By.XPATH, "//" + sz['searchTag'] + "[contains(text(), '" + sz['searchTerm'] + "')]/parent::*")
             else:
                 picks = driver.find_elements(By.XPATH, sz["searchTag"])
             #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
@@ -122,64 +132,61 @@ def fetch_nflspinzone_data(weeknum, weboptions):
             print('picks length: ', len(picks))
             if len(picks) == 0:
                 print('writer with no picks: ', sz)
+            # teamPairings = driver.find_elements(By.XPATH, "//h3[contains(text(), '@')]")
+            # teamsArray = []
+            # # for pairing in teamPairings:
+            # for pairing in teamPairings:
+            #     try: 
+            #         teams = pairing.text.split(' @ ')
+            #         t = 0
+            #         teamObject = {}
+            #         for team in teams:
+            #             if t == 0:
+            #                 teamObject["awayTeam"] = team
+            #             elif t == 1:
+            #                 teamObject["homeTeam"] = team[:team.find(",")]
+            #             t = t + 1
+            #             teamsArray.append(teamObject)
+            #     except Exception as e:                    
+            #         print('Exception:', e)
+            #         traceback.print_exc()
+            # print('teamsArray: ', teamsArray)
+            # pInt = 0
+            # 275 predictionString:  Lions 30-27 over Chiefs | Lions +1.5 | Odds via DraftKings, where new users get $200 in bonus bets with a wining $5 wager. Click here to get started:
+            # # <class 'ValueError'> ['JohnBreech', 'Lions', ' 30', '27', 'over Chiefs | Lions +1.5 | Odds via DraftKings, where new users get $200 in bonus bets with a wining $5 wager. Click here to get started:']
             for p in picks:
-                winner = ''
-                loser = ''
-                # parent = p.parent.text        
-                # colonIndex = parent.find(':')
-                pText = p.text
-                # print('p:', pText)
-                colonIndex = pText.find(':')
-                pickIndex = None
-                print('195', colonIndex, pickIndex)
-                if colonIndex == -1:
-                    print('pick: ', pText)
-                if (colonIndex > 0):
+                try: 
+                    winner = ''
+                    loser = ''
+                    # parent = p.parent.text        
+                    # colonIndex = parent.find(':')
+                    pText = p.text
+                    print('p:', pText)
                     predictionString = ""
-                    if pickIndex is not None:
-                        predictionString = pText[colonIndex+2:pickIndex]
-                    else:
-                        predictionString = pText[colonIndex+2:]
+                    predictionString = pText
                     print('predictionString: ', predictionString)
-                    firstSpace = predictionString.find(" ")
-                    separator = predictionString.find(sz['separator'])
-                    secondSpace = predictionString.rfind(" ", separator+len(sz['separator']))
-                    winner = predictionString[:firstSpace]
-                    winnerScore = predictionString[secondSpace:separator]
-                    loserScore = predictionString[separator:].strip()
+                    winIndex = predictionString.find(" win ")
+                    dashIndex = predictionString.find("-")
+                    winner = predictionString[:winIndex]
+                    winnerScore = predictionString[winIndex + len(" win "):dashIndex]
+                    loserScore = predictionString[dashIndex+1:].strip()
                     # print([sz['name'],winner, winnerScore, loser, loserScore])
                     try:
-                        nflspinzonerows.append([sz['name'],winner, int(winnerScore), loser, int(loserScore)])
+                        nflspinzonerows.append(['NFLSpinzone',winner, int(winnerScore), loser, int(loserScore)])
+                        # nflspinzonerows.append(['oddsshark', awayTeam, awayTeamScore, homeTeam, homeTeamScore])
                     except ValueError:
                         print(ValueError, [sz['name'],winner, winnerScore, loser, loserScore])
-                    # print(winner, int(winnerScore), loser, int(loserScore))
-                    i = i + 1
-                else:
-                    predictionString = ""
-                    if pickIndex is not None:
-                        predictionString = pText[colonIndex+2:pickIndex]
-                    else:
-                        predictionString = pText[colonIndex+2:]
-                    print('predictionString: ', predictionString)
-                    spacesNumber = predictionString.rfind(" ", predictionString.find(sz['separator']))
-                    firstSpace = predictionString.find(" ")
-                    if spacesNumber > firstSpace: # set the first space if there are two spaces before the score
-                        firstSpace = spacesNumber
-                    separator = predictionString.find(sz['separator'])
-                    # secondSpace = predictionString.rfind(" ", separator+len(sz['separator']))
-                    # spacesNumber = predictionString.rfind(" ")
-                    # if spacesNumber > secondSpace:
-                    #     secondSpace = spacesNumber
-                    secondSpace = predictionString.rfind(" ", separator+len(sz['separator']))
-                    winner = predictionString[:firstSpace]
-                    winnerScore = predictionString[secondSpace:separator]
-                    loserScore = predictionString[separator:].strip()
-                    # print([sz['name'],winner, winnerScore, loser, loserScore])
-                    try:
-                        nflspinzonerows.append([sz['name'],winner, int(winnerScore), loser, int(loserScore)])
-                    except ValueError:
-                        print(ValueError, [sz['name'],winner, winnerScore, loser, loserScore])
-            driver.find_element(By.ID, "next-button-bottom").click()
+                    # pInt = pInt + 1
+                except Exception as e:
+                    print('Exception:', e)
+                    traceback.print_exc()
+            nextButton = driver.find_element(By.ID, "next-button")
+            wait.until(EC.element_to_be_clickable(nextButton))
+            print('nextButton.get_attribute(\'disabled\'):', nextButton.get_attribute('disabled'))
+            if nextButton.get_attribute('disabled') is not None:
+                buttonIsClickable = False
+            else:
+                nextButton.click()
             i = i + 1
         print('nflspinzonerows:', nflspinzonerows)
         driver.close()
@@ -200,4 +207,4 @@ def main(weeknum, weboptions):
 
 if __name__ == "__main__":
     weeknum = sys.argv[0]
-    main(weeknum)
+    main(weeknum, weboptionsHC)

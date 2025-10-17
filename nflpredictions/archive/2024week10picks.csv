@@ -1,0 +1,166 @@
+Source,Winner,Winner Score,Loser,Loser Score,GameID,Away Code,Away Short Name,Away Full Name,Home Code,Home Short Name,Home Full Name,AwayScore,HomeScore
+PetePrisco,Falcons,30,Saints,17,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,30,17
+BleacherReport,Falcons,23,Saints,20,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,23,20
+BillBender,Falcons,31,Saints,27,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,31,27
+DataSkrive,Falcons,27,Saints,22,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,27,22
+MarcusMosher,Falcons,28,Saints,24,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,28,24
+Sportsnaut,Falcons,28,Saints,17,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,28,17
+VinnieIyer,Saints,24,Falcons,21,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,21,24
+Dimers,FALCONS,25,SAINTS,21,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,25,21
+LorenzoReyes,Falcons,27,Saints,21,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,27,21
+TylerDragon,Falcons,25,Saints,20,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,25,20
+RichardMorin,Falcons,24,Saints,9,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,24,9
+JordanMendoza,Falcons,27,Saints,20,ATLNO,ATL,Falcons,Atlanta Falcons,NO,Saints,New Orleans Saints,27,20
+PetePrisco,Bills,30,Colts,17,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,30,17
+BleacherReport,Bills,27,Colts,20,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,27,20
+BillBender,Bills,30,Colts,20,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,30,20
+DataSkrive,Bills,26,Colts,20,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,26,20
+MarcusMosher,Colts,27,Bills,24,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,24,27
+Sportsnaut,Bills,31,Colts,21,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,31,21
+VinnieIyer,Bills,27,Colts,13,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,27,13
+Dimers,BILLS,25,COLTS,21,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,25,21
+LorenzoReyes,Bills,28,Colts,17,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,28,17
+TylerDragon,Bills,28,Colts,18,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,28,18
+RichardMorin,Bills,33,Colts,10,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,33,10
+JordanMendoza,Bills,31,Colts,23,BUFIND,BUF,Bills,Buffalo Bills,IND,Colts,Indianapolis Colts,31,23
+PetePrisco,Ravens,34,Bengals,33,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,33,34
+BleacherReport,Ravens,30,Bengals,23,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,23,30
+BillBender,Ravens,32,Bengals,28,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,28,32
+DataSkrive,Ravens,34,Bengals,20,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,20,34
+MarcusMosher,Ravens,31,Bengals,27,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,27,31
+Sportsnaut,Ravens,34,Bengals,27,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,27,34
+VinnieIyer,Ravens,27,Bengals,24,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,24,27
+Dimers,RAVENS,30,BENGALS,23,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,23,30
+LorenzoReyes,Ravens,26,Bengals,24,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,24,26
+TylerDragon,Ravens,26,Bengals,24,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,24,26
+RichardMorin,Ravens,30,Bengals,23,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,23,30
+JordanMendoza,Bengals,29,Ravens,27,CINBAL,CIN,Bengals,Cincinnati Bengals,BAL,Ravens,Baltimore Ravens,29,27
+PetePrisco,Chiefs,29,Broncos,17,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,17,29
+BleacherReport,Chiefs,23,Broncos,17,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,17,23
+BillBender,Chiefs,27,Broncos,17,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,17,27
+DataSkrive,Chiefs,25,Broncos,16,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,16,25
+MarcusMosher,Chiefs,22,Broncos,16,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,16,22
+Sportsnaut,Chiefs,20,Broncos,16,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,16,20
+VinnieIyer,Chiefs,30,Broncos,14,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,14,30
+Dimers,CHIEFS,25,BRONCOS,18,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,18,25
+LorenzoReyes,Chiefs,26,Broncos,20,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,20,26
+TylerDragon,Chiefs,27,Broncos,16,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,16,27
+RichardMorin,Chiefs,25,Broncos,13,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,13,25
+JordanMendoza,Chiefs,22,Broncos,19,DENKC,DEN,Broncos,Denver Broncos,KC,Chiefs,Kansas City Chiefs,19,22
+PetePrisco,Texans,28,Lions,27,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,27,28
+BleacherReport,Lions,29,Texans,24,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,29,24
+BillBender,Lions,31,Texans,20,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,31,20
+DataSkrive,Lions,28,Texans,20,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,28,20
+MarcusMosher,Lions,27,Texans,20,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,27,20
+Sportsnaut,Lions,27,Texans,17,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,27,17
+VinnieIyer,Lions,27,Texans,20,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,27,20
+Dimers,LIONS,26,TEXANS,23,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,26,23
+LorenzoReyes,Lions,31,Texans,23,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,31,23
+TylerDragon,Lions,27,Texans,21,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,27,21
+RichardMorin,Lions,31,Texans,20,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,31,20
+JordanMendoza,Lions,33,Texans,29,DETHOU,DET,Lions,Detroit Lions,HOU,Texans,Houston Texans,33,29
+PetePrisco,Rams,31,Dolphins,23,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,23,31
+BleacherReport,Dolphins,28,Rams,24,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,28,24
+BillBender,Rams,28,Dolphins,26,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,26,28
+DataSkrive,Rams,29,Dolphins,13,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,13,29
+MarcusMosher,Dolphins,30,Rams,26,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,30,26
+Sportsnaut,Rams,31,Dolphins,28,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,28,31
+VinnieIyer,Rams,24,Dolphins,20,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,20,24
+LorenzoReyes,Rams,24,Dolphins,20,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,20,24
+TylerDragon,Rams,24,Dolphins,22,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,22,24
+RichardMorin,Dolphins,30,Rams,20,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,30,20
+JordanMendoza,Rams,25,Dolphins,21,MIALAR,MIA,Dolphins,Miami Dolphins,LAR,L.A. Rams,Los Angeles Rams,21,25
+PetePrisco,Vikings,31,Jaguars,23,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,31,23
+BleacherReport,Vikings,31,Jaguars,24,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,31,24
+BillBender,Vikings,28,Jaguars,21,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,28,21
+DataSkrive,Vikings,31,Jaguars,16,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,31,16
+MarcusMosher,Vikings,28,Jaguars,21,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,28,21
+Sportsnaut,Vikings,31,Jaguars,21,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,31,21
+VinnieIyer,Vikings,30,Jaguars,20,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,30,20
+Dimers,VIKINGS,25,JAGUARS,18,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,25,18
+LorenzoReyes,Vikings,23,Jaguars,14,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,23,14
+TylerDragon,Vikings,24,Jaguars,17,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,24,17
+RichardMorin,Jaguars,24,Vikings,21,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,21,24
+JordanMendoza,Vikings,24,Jaguars,22,MINJAC,MIN,Vikings,Minnesota Vikings,JAC,Jaguars,Jacksonville Jaguars,24,22
+PetePrisco,Bears,27,Patriots,16,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,16,27
+BleacherReport,Bears,21,Patriots,17,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,17,21
+BillBender,Bears,21,Patriots,16,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,16,21
+DataSkrive,Bears,27,Patriots,13,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,13,27
+MarcusMosher,Bears,21,Patriots,16,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,16,21
+Sportsnaut,Bears,28,Patriots,20,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,20,28
+Dimers,BEARS,22,PATRIOTS,17,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,17,22
+LorenzoReyes,Bears,17,Patriots,14,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,14,17
+TylerDragon,Bears,21,Patriots,17,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,17,21
+RichardMorin,Bears,26,Patriots,20,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,20,26
+JordanMendoza,Bears,22,Patriots,10,NECHI,NE,Patriots,New England Patriots,CHI,Bears,Chicago Bears,10,22
+PetePrisco,Giants,21,Panthers,14,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,21,14
+BleacherReport,Giants,24,Panthers,17,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,24,17
+BillBender,Giants,22,Panthers,17,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,22,17
+DataSkrive,Giants,25,Panthers,18,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,25,18
+MarcusMosher,Giants,23,Panthers,17,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,23,17
+Sportsnaut,Giants,28,Panthers,17,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,28,17
+VinnieIyer,Giants,24,Panthers,17,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,24,17
+Dimers,GIANTS,24,PANTHERS,17,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,24,17
+LorenzoReyes,Giants,19,Panthers,10,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,19,10
+TylerDragon,Giants,17,Panthers,16,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,17,16
+RichardMorin,Panthers,16,Giants,7,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,7,16
+JordanMendoza,Giants,17,Panthers,13,NYGCAR,NYG,Giants,New York Giants,CAR,Panthers,Carolina Panthers,17,13
+PetePrisco,Jets,24,Cardinals,21,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,24,21
+BleacherReport,Jets,27,Cardinals,24,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,27,24
+BillBender,Jets,19,Cardinals,18,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,19,18
+DataSkrive,Cardinals,27,Jets,16,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,16,27
+MarcusMosher,Cardinals,24,Jets,20,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,20,24
+Sportsnaut,Jets,28,Cardinals,23,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,28,23
+VinnieIyer,Jets,27,Cardinals,17,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,27,17
+Dimers,JETS,24,CARDINALS,23,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,24,23
+LorenzoReyes,Cardinals,24,Jets,20,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,20,24
+TylerDragon,Jets,24,Cardinals,20,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,24,20
+RichardMorin,Cardinals,27,Jets,21,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,21,27
+JordanMendoza,Jets,24,Cardinals,23,NYJARI,NYJ,Jets,New York Jets,ARI,Cardinals,Arizona Cardinals,24,23
+PetePrisco,Eagles,24,Cowboys,21,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,24,21
+BleacherReport,Eagles,34,Cowboys,20,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,34,20
+BillBender,Eagles,28,Cowboys,18,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,28,18
+DataSkrive,Eagles,28,Cowboys,19,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,28,19
+MarcusMosher,Eagles,31,Cowboys,17,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,31,17
+Sportsnaut,Eagles,23,Cowboys,10,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,23,10
+VinnieIyer,Eagles,24,Cowboys,23,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,24,23
+Dimers,EAGLES,25,COWBOYS,18,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,25,18
+LorenzoReyes,Eagles,34,Cowboys,13,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,34,13
+TylerDragon,Eagles,30,Cowboys,20,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,30,20
+RichardMorin,Cowboys,30,Eagles,26,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,26,30
+JordanMendoza,Eagles,31,Cowboys,17,PHIDAL,PHI,Eagles,Philadelphia Eagles,DAL,Cowboys,Dallas Cowboys,31,17
+PetePrisco,Commanders,23,Steelers,17,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,17,23
+BleacherReport,Steelers,23,Commanders,21,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,23,21
+BillBender,Steelers,24,Commanders,20,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,24,20
+DataSkrive,Commanders,24,Steelers,20,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,20,24
+MarcusMosher,Steelers,24,Commanders,17,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,24,17
+Sportsnaut,Commanders,24,Steelers,23,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,23,24
+VinnieIyer,Commanders,23,Steelers,20,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,20,23
+Dimers,COMMANDERS,25,STEELERS,21,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,21,25
+LorenzoReyes,Steelers,24,Commanders,17,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,24,17
+TylerDragon,Commanders,23,Steelers,21,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,21,23
+RichardMorin,Commanders,20,Steelers,14,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,14,20
+JordanMendoza,Commanders,20,Steelers,17,PITWAS,PIT,Steelers,Pittsburgh Steelers,WAS,Commanders,Washington Commanders,17,20
+PetePrisco,49ers,28,Bucs,20,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,28,20
+BleacherReport,49ers,26,Buccaneers,23,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,26,23
+BillBender,49ers,32,Buccaneers,29,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,32,29
+DataSkrive,Buccaneers,31,49ers,21,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,21,31
+MarcusMosher,49ers,28,Buccaneers,20,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,28,20
+VinnieIyer,49ers,27,Buccaneers,22,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,27,22
+Dimers,49ERS,27,BUCCANEERS,23,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,27,23
+LorenzoReyes,49ers,28,Buccaneers,20,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,28,20
+TylerDragon,49ers,25,Bucs,21,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,25,21
+RichardMorin,49ers,28,Buccaneers,27,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,28,27
+JordanMendoza,49ers,23,Buccaneers,16,SFTB,SF,49ers,San Francisco 49ers,TB,Buccaneers,Tampa Bay Buccaneers,23,16
+PetePrisco,Chargers,28,Titans,17,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,17,28
+BleacherReport,Chargers,24,Titans,13,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,13,24
+BillBender,Chargers,27,Titans,13,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,13,27
+DataSkrive,Chargers,29,Titans,9,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,9,29
+MarcusMosher,Chargers,24,Titans,13,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,13,24
+Sportsnaut,Chargers,17,Titans,10,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,10,17
+VinnieIyer,Chargers,34,Titans,14,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,14,34
+Dimers,CHARGERS,23,TITANS,16,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,16,23
+LorenzoReyes,Chargers,29,Titans,7,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,7,29
+TylerDragon,Chargers,23,Titans,14,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,14,23
+RichardMorin,Chargers,28,Titans,17,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,17,28
+JordanMendoza,Chargers,22,Titans,9,TENLAC,TEN,Titans,Tennessee Titans,LAC,L.A. Chargers,Los Angeles Chargers,9,22

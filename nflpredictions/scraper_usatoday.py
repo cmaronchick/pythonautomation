@@ -1,40 +1,52 @@
 # Python script for web scraping to extract data from a website
-import sys, re, traceback
+import sys, re, traceback, requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+# from bs4 import BeautifulSoup
+
 
 # Setup the Chrome WebDriver
 
 imageTable = {
-    'Entity_1569032072644.png': 'Steelers',
+    'https://images.jifo.co/21540751_1589234381582.png': 'Steelers',
     'https://images.jifo.co/21540751_1589234309546.png': 'Chiefs',
     'https://images.jifo.co/21540751_1589234633468.png': 'Ravens',
-    'Entity_1569032081184.png': 'Seahawks',
     'https://images.jifo.co/21540751_1589234284171.png': 'Chargers', #https://images.jifo.co/21540751_1589234284171.png
-    'Entity_1569032070001.png': 'Patriots',
-    'Entity_1569032074570.png': 'Broncos',
-    'Entity_1569032071904.png': 'Bengals',
+    'https://images.jifo.co/21540751_1589234903354.png': 'Patriots',
+    'https://images.jifo.co/21540751_1589234344689.png': 'Broncos',
+    'https://images.jifo.co/21540751_1589234683953.png': 'Bengals',
     'Entity_1599884617535.png': 'Rams',
     'Entity_1569032080155.png': 'Cardinals',
-    'Entity_1569032074153.png': 'Titans',
+    'https://images.jifo.co/21540751_1589234794134.png': 'Titans',
     'Entity_1569032073772.png': 'Jaguars',
     'https://images.jifo.co/21540751_1589235745366.png': 'Buccaneers',
     'Entity_1569032073400.png': 'Colts',
-    'Entity_1569032075665.png': 'Raiders',
-    'Entity_1569032079464.png': 'Saints',
+    'https://images.jifo.co/21540751_1589234329160.png': 'Raiders',
+    'https://images.jifo.co/21540751_1589235648280.png': 'Saints',
     'https://images.jifo.co/21540751_1589234933718.png': 'Bills',
     'https://images.jifo.co/21540751_1589235782787.png': 'Eagles',
     'Entity_1569032072269.png': 'Browns',
-    'Entity_1569032069679.png': 'Dolphins',
+    'https://images.jifo.co/21540751_1589235026280.png': 'Dolphins',
     'https://images.jifo.co/21540751_1589235378659.png': 'Vikings',
-    'Entity_1569032078079.png': 'Packers',
-    'Entity_1569032078724.png': 'Falcons',
+    'https://images.jifo.co/21540751_1589235547463.png': 'Packers',
+    'https://images.jifo.co/21540751_1589235620028.png': 'Falcons',
     'https://images.jifo.co/21540751_1652361392787.png': 'Commanders',
-    'Entity_1569032077717.png': 'Lions'
+    'https://images.jifo.co/21540751_1589235580554.png': 'Lions',
+    'https://images.jifo.co/21540751_1652361392655.png': 'Rams',
+    'https://images.jifo.co/21540751_1589235820974.png': 'Cowboys',
+    'https://images.jifo.co/21540751_1589234722688.png': 'Colts',
+    'https://images.jifo.co/21540751_1589236085652.png': 'Seahawks',
+    'https://images.jifo.co/21540751_1589234758244.png': 'Jaguars',
+    'https://images.jifo.co/21540751_1757107639027.png': 'Browns',
+    'https://images.jifo.co/21540751_1589235427498.png': 'Bears',
+    'https://images.jifo.co/21540751_1721324476152.png': 'Jets',
+    'https://images.jifo.co/21540751_1589235730471.png': 'Panthers',
+    'https://images.jifo.co/21540751_1589235220318.png': '49ers',
+    'https://images.jifo.co/21540751_1589234832987.png': 'Texans'
 }
 
 articleTable = [
@@ -172,7 +184,7 @@ def fetch_usatoday_data(weeknum, url):
                             if predictionRow == True:
                                 teamImage = column.find_element(By.TAG_NAME, "img")
                                 teamImageSrc = teamImage.get_attribute("src")
-                                print('teamImageSrc:', imageTable, teamImageSrc)
+                                # print('teamImageSrc:', imageTable, teamImageSrc)
                                 winningTeam = imageTable[teamImageSrc]
                                 if winningTeam == awayTeam:
                                     losingTeam = homeTeam
@@ -200,6 +212,89 @@ def fetch_usatoday_data(weeknum, url):
                                     predictions = []
                                 rowIndex = 0
                         columnIndex = columnIndex + 1
+        elif url.find('sportsdata') > -1:
+            print('trying sportsdata', url)
+            try:
+                mainDiv = driver.find_element(By.ID, "__next")
+                print('mainDiv: ', mainDiv.text)
+                wait.until(lambda d : mainDiv.is_displayed())
+                picks = mainDiv.find_elements(By.XPATH, "//*[contains(text(), 'Projected scoring')]")
+                print ('picks:', len(picks))
+
+                currentGame = None
+                for p in picks:
+                    parentDiv = p.find_element(By.XPATH, '..')
+                    parentElements = parentDiv.find_element(By.XPATH, '..')
+                    print('parent elements: ', parentElements.text)
+                    if parentElements is not None:
+                        awayTeamDiv = parentElements[0]
+                        homeTeamDiv = parentElements[2]
+                        print('awayTeamDiv: ', awayTeamDiv.text, 'homeTeamDiv: ', homeTeamDiv.text)
+                        awayTeam = ""
+                        homeTeam = ""
+                        winningTeam = None
+                        losingTeam = None
+                        winningScore = None
+                        losingScore = None
+                        predictionRow = False
+                        # print('columns:', len(columns))
+                        # for column in columns:
+                        #     print('rowIndex:', rowIndex, 'columnIndex:', columnIndex, column.text.find(" at "))
+                        #     if rowIndex == 0:
+                        #         if columnIndex == 0:
+                        #             if column.text.find(" at ") > -1:
+
+                        #                 predictionRow = True
+                        #                 teamSpans = column.find_element(By.TAG_NAME, "span")
+                        #                 openParenthesis = teamSpans.text.find("(")
+                        #                 closeParenthesis = teamSpans.text.find(")")
+                        #                 separator = teamSpans.text.find(" at ")
+                        #                 awayTeam = ""
+                        #                 homeTeam = ""
+                        #                 if openParenthesis > separator:
+                        #                     awayTeam = teamSpans.text[:separator]
+                        #                     homeTeam = teamSpans.text[separator+4:openParenthesis-1]
+                        #                 else:
+                        #                     awayTeam = teamSpans.text[:openParenthesis-1]
+                        #                     homeTeam = teamSpans.text[separator+4:]
+                        #                 print(awayTeam, homeTeam)
+                        #         else:
+                        #             if predictionRow == True:
+                        #                 teamImage = column.find_element(By.TAG_NAME, "img")
+                        #                 teamImageSrc = teamImage.get_attribute("src")
+                        #                 print('teamImageSrc:', imageTable, teamImageSrc)
+                        #                 winningTeam = imageTable[teamImageSrc]
+                        #                 if winningTeam == awayTeam:
+                        #                     losingTeam = homeTeam
+                        #                 else:
+                        #                     losingTeam = awayTeam
+                        #                 print('winningTeam:', winningTeam, 'losingTeam:', losingTeam)
+                        #                 author = writersText[columnIndex-1]["name"] 
+                        #                 predictions.append({"author": author,"winningTeam": winningTeam, "losingTeam": losingTeam})
+                        #         if predictionRow == True and columnIndex == len(columns)-1:
+                        #             rowIndex = 1
+                        #         columnIndex = columnIndex + 1
+                        #     elif rowIndex == 1:
+                        #         scoreSeparator = column.text.find("-")
+                        #         if scoreSeparator > -1:
+                        #             winningScore = column.text[:scoreSeparator].strip()
+                        #             losingScore = column.text[scoreSeparator+1:].strip()
+                        #             print('winningScore:', winningScore, 'losingScore:', losingScore)
+                        #             predictions[columnIndex-1]["winningScore"] = winningScore
+                        #             predictions[columnIndex-1]["losingScore"] = losingScore
+                        #             print('predictions:', predictions)
+                        #             if columnIndex == len(columns)-1:
+                        #                 for prediction in predictions:
+                        #                     print('author:', prediction["author"], prediction["winningTeam"], prediction["winningScore"], prediction["losingTeam"], prediction["losingScore"])
+                        #                     usatodayrows.append([prediction["author"], prediction["winningTeam"], prediction["winningScore"], prediction["losingTeam"], prediction["losingScore"]])
+                        #                     predictions = []
+                        #                 rowIndex = 0
+                        #         columnIndex = columnIndex + 1
+                    else:
+                        print('parent elements not found', parentElements.text)
+            except Exception as e:
+                print('Exception:', e)
+                traceback.print_exc()
         else:
             pickLinkIndex = 0
             articleBody = driver.find_element(By.TAG_NAME, "article")
@@ -258,7 +353,7 @@ def fetch_usatoday_data(weeknum, url):
 
 
 def main(weeknum):
-    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed') #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/d1870792-ebfe-46f3-9734-f9013606d428?src=embed#async_embed') #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:
