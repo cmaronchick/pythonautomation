@@ -80,10 +80,10 @@ articleNumber = 16
 def fetch_nflspinzone_data(weeknum, weboptions):
     
     sz = {
-        'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-' + str(weeknum) + '-game',
+        'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game', # https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game
         'name': 'NFL Spinzone',
         'searchTerm': 'Prediction:',
-        'searchTag': 'strong',
+        'searchTag': 'em',
         'separator': ', '
         #   https://nflspinzone.com/author/sayrebedinger/
     }
@@ -95,6 +95,7 @@ def fetch_nflspinzone_data(weeknum, weboptions):
         driver.get(sz.get('url'))
         
         wait = WebDriverWait(driver, timeout=2)
+        driver.implicitly_wait(5)
         buttonIsClickable = True
         while buttonIsClickable:
         
@@ -181,6 +182,7 @@ def fetch_nflspinzone_data(weeknum, weboptions):
                     print('Exception:', e)
                     traceback.print_exc()
             nextButton = driver.find_element(By.ID, "next-button")
+            wait.until(lambda d : nextButton.is_displayed())
             wait.until(EC.element_to_be_clickable(nextButton))
             print('nextButton.get_attribute(\'disabled\'):', nextButton.get_attribute('disabled'))
             if nextButton.get_attribute('disabled') is not None:

@@ -25,7 +25,7 @@ year = int(sys.argv[2])
 season = sys.argv[3]
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-7-picks-jets-first-win-eagles-struggles-chiefs-back/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-8-picks-best-bets-odds-buccaneers-aaron-rodgers-steelers/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -34,7 +34,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/pete-priscos-week-7-nfl-picks-odds-best-bets-steelers-bengals-lions-buccaneers/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-8-nfl-picks-cowboys-beat-broncos-in-shootout-packers-spoil-aaron-rodgers-revenge-game/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -44,7 +44,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-7-picks-score-predictions-bengals-shock-steelers-rams-top-jaguars-london/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-8-picks-and-score-predictions-best-bets-odds-upsets/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -61,7 +61,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2025/10/13/nfl-week-7-picks-predictions-scores-2025-season/84235617007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2025/10/20/nfl-week-8-picks-predictions-scores-2025-season/84249478007/',
     'name': 'Jeremy Cluff',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -84,7 +84,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-7-game',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -110,7 +110,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-7/3219236ec36dc7ee56f7c360',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-8/819b0c7f595d88b36a8b0a4f',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -119,7 +119,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-7/12cfb05abe2639c4cb0726be'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-8/1250835d42d3485832c2d54b'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -138,20 +138,20 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/',
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/10/23/nfl-week-8-picks-predictions-ai/86820172007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
     'name': 'Copilot',
-    'searchTag': "//h3[@class='gnt_ar_b_h3']",
+    'searchTag': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
 
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/d1870792-ebfe-46f3-9734-f9013606d428?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/eda0301e-44aa-4eeb-9b37-cfb37d9ab322?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/id/46594761/nfl-week-7-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': ''
     # https://www.espn.com/nfl/
 }
 
@@ -493,71 +493,80 @@ try:
         driver.close()
 
 
+    if espn['url'] is not None:
+        espnrows = fetch_espn_data(weeknum, espn['url'], weboptions)
+        for espnrow in espnrows:
+            rows.append(espnrow)
 
-    espnrows = fetch_espn_data(weeknum, espn['url'], weboptions)
-    for espnrow in espnrows:
-        rows.append(espnrow)
+        # dimers formatting
+        try:
+            driver.get('https://www.dimers.com/bet-hub/nfl/schedule') # https://www.dimers.com/bet-hub/nfl/schedule
+            driver.implicitly_wait(10)
+            driver.refresh()
+            driver.implicitly_wait(10)
 
-    # dimers formatting
-    try:
-        driver.get('https://www.dimers.com/bet-hub/nfl/schedule')
-        driver.implicitly_wait(10)
-        matchgrid = driver.find_element(By.CLASS_NAME, "match-list-grid")
-        games = matchgrid.find_elements(By.CLASS_NAME,"game-link")    
-        firstGame = matchgrid.find_element(By.CLASS_NAME,"game-link")
-        
-        popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
-        if len(popup) > 0:
-            wait.until(EC.element_to_be_clickable(popup[0]))
-            popup[0].click()
-        wait.until(EC.element_to_be_clickable(firstGame))
-        firstGame.click()
-        # response = requests.get()
-        # print(response)
-        # soup = BeautifulSoup(response.text, 'html.parser')
-        # games = soup.find_all('h3')
-        # picks = soup.find_all('strong', string="Pick: ") #, attrs={'class': 'Article-content'}
+            matchgrid = driver.find_element(By.CLASS_NAME, "match-list-grid")
+            games = matchgrid.find_elements(By.CLASS_NAME,"game-link")    
+            firstGame = matchgrid.find_element(By.CLASS_NAME,"game-link")
+            
+            popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
+            if len(popup) > 0:
+                wait.until(EC.element_to_be_clickable(popup[0]))
+                popup[0].click()
+            pageBlocker = driver.find_element(By.CLASS_NAME, 'ab-page-blocker')
+            if pageBlocker is not None:
+                closeButton = driver.find_element(By.CLASS_NAME, "ab-close-button")
+                wait.until(EC.element_to_be_clickable(closeButton))
+                closeButton.click()
+            
+            wait.until(EC.element_to_be_clickable(firstGame))
+            firstGame.click()
+            # response = requests.get()
+            # print(response)
+            # soup = BeautifulSoup(response.text, 'html.parser')
+            # games = soup.find_all('h3')
+            # picks = soup.find_all('strong', string="Pick: ") #, attrs={'class': 'Article-content'}
 
-        # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
-        
-        # print('gamesObject: ', gamesObject)
-        g = 0
-        while g < len(games)-1: 
-            teams = driver.find_elements(By.CLASS_NAME, "team-column")
-            if teams is not None and len(teams) > 0:
-                wait.until(lambda d : teams[0].is_displayed())
-                scores = driver.find_elements(By.CLASS_NAME, "score")
-                awayTeam = teams[0].text
-                awayScore = scores[0].text
-                homeTeam = teams[1].text
-                homeScore = scores[1].text
-                
-                
-                print('awayTeam, awayScore, homeTeam, homeScore: ', awayTeam, awayScore, homeTeam, homeScore)
-                if awayScore > homeScore:
-                    winner = awayTeam
-                    winnerScore = awayScore
-                    loser = homeTeam
-                    loserScore = homeScore
-                else:
-                    winner = homeTeam
-                    winnerScore = homeScore
-                    loser = awayTeam
-                    loserScore = awayScore    
+            # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+            
+            # print('gamesObject: ', gamesObject)
+            g = 0
+            while g < len(games)-1: 
+                teams = driver.find_elements(By.CLASS_NAME, "team-column")
+                if teams is not None and len(teams) > 0:
+                    wait.until(lambda d : teams[0].is_displayed())
+                    scores = driver.find_elements(By.CLASS_NAME, "score")
+                    awayTeam = teams[0].text
+                    awayScore = scores[0].text
+                    homeTeam = teams[1].text
+                    homeScore = scores[1].text
                     
-                rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
-                navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
-                wait.until(EC.element_to_be_clickable(navButtons[1]))
-                navButtons[1].click()
-                wait.until(EC.staleness_of(teams[0]))
-                g = g + 1
-                print('g:', g)
-            else:
-                g = g + 1
-    except ValueError:
-        print(ValueError)
-        print(['VinnieIyer',winner, winnerScore, loser, loserScore])
-        rows.append(['VinnieIyer',winner, winnerScore, loser, loserScore])
+                    
+                    print('awayTeam, awayScore, homeTeam, homeScore: ', awayTeam, awayScore, homeTeam, homeScore)
+                    if awayScore > homeScore:
+                        winner = awayTeam
+                        winnerScore = awayScore
+                        loser = homeTeam
+                        loserScore = homeScore
+                    else:
+                        winner = homeTeam
+                        winnerScore = homeScore
+                        loser = awayTeam
+                        loserScore = awayScore    
+                        
+                    rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
+                    navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
+                    wait.until(EC.element_to_be_clickable(navButtons[1]))
+                    navButtons[1].click()
+                    wait.until(EC.staleness_of(teams[0]))
+                    g = g + 1
+                    print('g:', g)
+                else:
+                    g = g + 1
+        except ValueError:
+            print(ValueError)
+            print(['espn',winner, winnerScore, loser, loserScore])
+            rows.append(['espn',winner, winnerScore, loser, loserScore])
 
 
     # usatoday formatting

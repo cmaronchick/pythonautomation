@@ -76,9 +76,9 @@ def fetch_oddsshark_data(weeknum, weboptions):
                     continue
                 awayTeamScore = round(float(scores[1].text))
                 homeTeamScore = round(float(scores [3].text))
-                print('awayTeam, awayTeamScore, homeTeam, homeTeamScore:', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
+                # print('awayTeam, awayTeamScore, homeTeam, homeTeamScore:', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
                 oddssharkrows.append(['oddsshark', awayTeam, awayTeamScore, homeTeam, homeTeamScore])
-        print('dratingsrows:', oddssharkrows)
+        # print('dratingsrows:', oddssharkrows)
         driver.close()
         return oddssharkrows
     except Exception as e:

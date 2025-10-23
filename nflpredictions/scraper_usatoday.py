@@ -128,7 +128,7 @@ def fetch_usatoday_data(weeknum, url):
                         author = writersText[columnIndex-1]["name"]
 
                         
-                        print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
+                        # print('author:', author, winningTeam, winningScore, losingTeam, losingScore)
                         usatodayrows.append([author,winningTeam, winningScore, losingTeam, losingScore])
                     columnIndex = columnIndex + 1
         elif url.find("infogram") > -1:
@@ -159,9 +159,9 @@ def fetch_usatoday_data(weeknum, url):
                 winningScore = None
                 losingScore = None
                 predictionRow = False
-                print('columns:', len(columns))
+                # print('columns:', len(columns))
                 for column in columns:
-                    print('rowIndex:', rowIndex, 'columnIndex:', columnIndex, column.text.find(" at "))
+                    # print('rowIndex:', rowIndex, 'columnIndex:', columnIndex, column.text.find(" at "))
                     if rowIndex == 0:
                         if columnIndex == 0:
                             if column.text.find(" at ") > -1:
@@ -190,7 +190,7 @@ def fetch_usatoday_data(weeknum, url):
                                     losingTeam = homeTeam
                                 else:
                                     losingTeam = awayTeam
-                                print('winningTeam:', winningTeam, 'losingTeam:', losingTeam)
+                                # print('winningTeam:', winningTeam, 'losingTeam:', losingTeam)
                                 author = writersText[columnIndex-1]["name"] 
                                 predictions.append({"author": author,"winningTeam": winningTeam, "losingTeam": losingTeam})
                         if predictionRow == True and columnIndex == len(columns)-1:
@@ -201,10 +201,10 @@ def fetch_usatoday_data(weeknum, url):
                         if scoreSeparator > -1:
                             winningScore = column.text[:scoreSeparator].strip()
                             losingScore = column.text[scoreSeparator+1:].strip()
-                            print('winningScore:', winningScore, 'losingScore:', losingScore)
+                            # print('winningScore:', winningScore, 'losingScore:', losingScore)
                             predictions[columnIndex-1]["winningScore"] = winningScore
                             predictions[columnIndex-1]["losingScore"] = losingScore
-                            print('predictions:', predictions)
+                            # print('predictions:', predictions)
                             if columnIndex == len(columns)-1:
                                 for prediction in predictions:
                                     print('author:', prediction["author"], prediction["winningTeam"], prediction["winningScore"], prediction["losingTeam"], prediction["losingScore"])
@@ -344,7 +344,7 @@ def fetch_usatoday_data(weeknum, url):
 
                 pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')
                 print('usatoday picklinks 80:', len(pickLinks))
-        print('usatodayrows:', usatodayrows)
+        print('usatodayrows: done') # usatodayrows
         return usatodayrows
     except Exception as e:
         print('Exception:', e)

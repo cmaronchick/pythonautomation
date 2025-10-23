@@ -39,7 +39,8 @@ imageTable = {
 
 articleTable = [
     "https://www.dratings.com/predictor/nfl-football-predictions/#scroll-upcoming",
-    "https://www.dratings.com/predictor/nfl-football-predictions/upcoming/2#scroll-upcoming"
+    "https://www.dratings.com/predictor/nfl-football-predictions/upcoming/4#scroll-upcoming",
+    "https://www.dratings.com/predictor/nfl-football-predictions/upcoming/5#scroll-upcoming"
     
 ]
 
@@ -99,7 +100,7 @@ def fetch_dratings_data(weeknum, weboptions):
                             print('spans: ', spans)
                             awayTeamScore = round(float(spans[0]))
                             homeTeamScore = round(float(spans[1]))                        
-                            print('author:', 'DRatings', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
+                            # print('author:', 'DRatings', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
                             dratingsrows.append(['DRatings',awayTeam, awayTeamScore, homeTeam, homeTeamScore])
                     columnIndex = columnIndex + 1
         print('dratingsrows:', dratingsrows)
