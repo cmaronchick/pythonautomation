@@ -18,9 +18,11 @@ if (len(sys.argv) > 3):
     collection = db['games']
 
     games = list(collection.find({ "sport": 'nfl', "season": season, "year": year, "gameWeek": weeknum}))
+    gameIds = []
     rows = []
     try:
         for game in games:
+            gameIds.append(game["gameId"])
             print('game: ', game)
             print('awayTeam:', game["awayTeam"]["code"])
             print('homeTeam:', game["homeTeam"]["code"])
@@ -47,6 +49,7 @@ if (len(sys.argv) > 3):
                 
             # writing the data rows  
             csvwriter.writerows(rows) 
+            csvwriter.writerow(["GameIds", gameIds])
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()

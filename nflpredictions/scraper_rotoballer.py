@@ -112,12 +112,25 @@ def fetch_rotoballer_data(weeknum, url, weboptions):
                 predictionString = ""
                 predictionString = pText
                 print('predictionString: ', predictionString)
-                colonIndex = predictionString.find(":")+1
-                firstSpace = predictionString.find(" ", colonIndex+1)
-                dashIndex = predictionString.find("-")
-                winner = predictionString[colonIndex:firstSpace]
-                winnerScore = predictionString[firstSpace + 1:dashIndex]
-                loserScore = predictionString[dashIndex+1:].strip()
+                # colonIndex = predictionString.find(":")+1
+                # firstSpace = predictionString.find(" ", colonIndex+1)
+                # dashIndex = predictionString.find("-")
+                # winner = predictionString[colonIndex:firstSpace]
+                # winnerScore = predictionString[firstSpace + 1:dashIndex]
+                # loserScore = predictionString[dashIndex+1:].strip()
+                teamsArray = predictionString.split(",")
+                print('teamsArray: ', teamsArray)
+                winnerString = teamsArray[0]
+                loserString = teamsArray[1]
+                parenthesisIndex = loserString.find(" (")
+                if parenthesisIndex > -1:
+                    loserString = loserString[:parenthesisIndex]
+                winnerScoreSpace = winnerString.rfind(" ")
+                winner = winnerString[:winnerScoreSpace]
+                winnerScore = winnerString[winnerScoreSpace:]
+                loserScoreSpace = loserString.rfind(" ")
+                loser = loserString[:loserScoreSpace]
+                loserScore = loserString[loserScoreSpace:]
                 # print([rotoballer['name'],winner, winnerScore, loser, loserScore])
                 try:
                     rotoballerrows.append(['rotoballer',winner, int(winnerScore), loser, int(loserScore)])

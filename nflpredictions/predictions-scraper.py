@@ -133,7 +133,7 @@ thirtythirdteam = {
 }
 
 sportsnaut = {
-    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-projecting-every-game-nfl-schedule-this-week/' # 'https://sportsnaut.com/nfl/nfl-analysis/lists/afc-championship-game-predictions-buffalo-bills-vs-kansas-city-chiefs/'
+    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-picks-every-game-nfl-schedule-this-week' # https://sportsnaut.com/nfl/nfl-week-8-predictions-picks-every-game-nfl-schedule-this-week 'https://sportsnaut.com/nfl/nfl-analysis/lists/afc-championship-game-predictions-buffalo-bills-vs-kansas-city-chiefs/'
     # https://sportsnaut.com/list/nfl-week-6-predictions-2024/
 }
 
@@ -151,7 +151,7 @@ usatoday = {
 }
 
 espn = {
-    'url': ''
+    'url': 'https://www.espn.com/nfl/story/_/id/46684415/nfl-week-8-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
@@ -170,7 +170,7 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/beating-the-book--86106',
+    'url': 'https://www.rotowire.com/football/article/beating-the-book-97623',
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
@@ -181,7 +181,7 @@ sbr = {
 }
 
 rotoballer = {
-    'url': 'https://www.rotoballer.com/nfl-predictions-week-7-picks-and-analysis-for-every-game-2025/1727445',
+    'url': 'https://www.rotoballer.com/nfl-predictions-week-8-picks-and-analysis-for-every-game-2025/1734321',
     'name': 'JimNicely',
     'separator': ', ',
     'searchTag': 'h2'
