@@ -46,7 +46,8 @@ imageTable = {
     'https://images.jifo.co/21540751_1721324476152.png': 'Jets',
     'https://images.jifo.co/21540751_1589235730471.png': 'Panthers',
     'https://images.jifo.co/21540751_1589235220318.png': '49ers',
-    'https://images.jifo.co/21540751_1589234832987.png': 'Texans'
+    'https://images.jifo.co/21540751_1589234832987.png': 'Texans',
+    'https://images.jifo.co/21540751_1589235848819.png': 'Giants'
 }
 
 articleTable = [

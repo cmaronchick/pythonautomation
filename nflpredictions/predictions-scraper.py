@@ -25,7 +25,7 @@ year = int(sys.argv[2])
 season = sys.argv[3]
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-8-picks-best-bets-odds-buccaneers-aaron-rodgers-steelers/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-9-picks-betting-underdogs-best-bets/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -34,7 +34,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-8-nfl-picks-cowboys-beat-broncos-in-shootout-packers-spoil-aaron-rodgers-revenge-game/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-9-nfl-picks-best-bets-gambling-bills-beat-chiefs/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -44,7 +44,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-8-picks-and-score-predictions-best-bets-odds-upsets/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-9-picks-score-predictions-colts-destroy-steelers-chiefs-beat-bills/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -61,7 +61,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2025/10/20/nfl-week-8-picks-predictions-scores-2025-season/84249478007/',
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/10/27/nfl-week-9-picks-predictions-scores-2025-season/84309851007/',
     'name': 'Jeremy Cluff',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -84,7 +84,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-9-game-01k8k3hgf11y',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -110,7 +110,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-8/819b0c7f595d88b36a8b0a4f',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-9/86e77db6771728d30325a7a4',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -119,7 +119,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-8/1250835d42d3485832c2d54b'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-9/782b477f429567527928aa44'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -138,7 +138,7 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/10/23/nfl-week-8-picks-predictions-ai/86820172007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/10/30/nfl-week-9-picks-predictions-ai/86965183007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
     'name': 'Copilot',
     'searchTag': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -146,7 +146,7 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/eda0301e-44aa-4eeb-9b37-cfb37d9ab322?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/7634c27f-d9cb-44df-ba58-dd37ac2b3c69?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
@@ -184,7 +184,8 @@ rotoballer = {
     'url': 'https://www.rotoballer.com/nfl-predictions-week-8-picks-and-analysis-for-every-game-2025/1734321',
     'name': 'JimNicely',
     'separator': ', ',
-    'searchTag': 'h2'
+    'searchTag': 'h2',
+    'endPickTerm': ' ('
 }
 
 # yardbarker = {
@@ -197,6 +198,9 @@ rotoballer = {
 
 writersArray = [ts, pp, bender, foxsports, azc, copilot, rotowire, rotoballer] #, sz, foxsports, azc, pfn, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
+
+errors = []
+
 
 
 
@@ -225,7 +229,7 @@ driver.set_page_load_timeout(35) # .manage().timeouts().pageLoadTimeout(100, Tim
 try:
     i = 0
     for writer in writersArray:
-        
+        print('i: ', i)
         if i % 5 == 0:
             driver.close()
             driver = webdriver.Chrome(options=weboptions)
@@ -303,6 +307,7 @@ try:
                     
                         rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
                     except ValueError:
+                        errors.append([writer['name'], traceback.print_exc()])
                         print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
                     # print(winner, int(winnerScore), loser, int(loserScore))
                 else:
@@ -334,9 +339,10 @@ try:
                         # print([writer['name'],winner, winnerScore, loser, loserScore])
                         rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
                     except ValueError:
+                        errors.append([writer['name'], traceback.print_exc()])
                         print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
                 
-    i + 1
+        i = i + 1
     # # johnbreech formatting
     try: 
         response = requests.get(breech['url'])
@@ -362,6 +368,7 @@ try:
                 rows.append(['JohnBreech',winner, int(winnerScore), loser, int(loserScore)])
                 driver.close()
             except ValueError:
+                errors.append(['JohnBreech', traceback.print_exc()])
                 print(ValueError)
                 driver.close()
         # # sportsnaut formatting
@@ -388,8 +395,10 @@ try:
             try:
                 rows.append(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
             except ValueError:
+                errors.append(['Sportsnaut', traceback.print_exc()])
                 print(ValueError)
     except ValueError:
+        errors.append(['Breech/Sportsnaut', traceback.print_exc()])
         print('breech ValueError:', ValueError)
 
     # vinnie iyer formatting
@@ -489,6 +498,7 @@ try:
                 print(['VinnieIyer',winner, winnerScore, loser, loserScore])
                 rows.append(['VinnieIyer',winner, winnerScore, loser, loserScore])
     except ValueError:
+        errors.append(['Iyer', traceback.print_exc()])
         print('iyer ValueError: ', ValueError)
         driver.close()
 
@@ -513,12 +523,14 @@ try:
             if len(popup) > 0:
                 wait.until(EC.element_to_be_clickable(popup[0]))
                 popup[0].click()
-            pageBlocker = driver.find_element(By.CLASS_NAME, 'ab-page-blocker')
-            if pageBlocker is not None:
-                closeButton = driver.find_element(By.CLASS_NAME, "ab-close-button")
-                wait.until(EC.element_to_be_clickable(closeButton))
-                closeButton.click()
-            
+            try: 
+                pageBlocker = driver.find_element(By.CLASS_NAME, 'ab-page-blocker')
+                if pageBlocker is not None:
+                    closeButton = driver.find_element(By.CLASS_NAME, "ab-close-button")
+                    wait.until(EC.element_to_be_clickable(closeButton))
+                    closeButton.click()
+            except:
+                print('ad blocker not found')            
             wait.until(EC.element_to_be_clickable(firstGame))
             firstGame.click()
             # response = requests.get()
@@ -565,8 +577,8 @@ try:
                     g = g + 1
         except ValueError:
             print(ValueError)
-            print(['espn',winner, winnerScore, loser, loserScore])
-            rows.append(['espn',winner, winnerScore, loser, loserScore])
+            print(['dimers',winner, winnerScore, loser, loserScore])
+            rows.append(['dimers',winner, winnerScore, loser, loserScore])
 
 
     # usatoday formatting
@@ -599,7 +611,7 @@ try:
 
         
 
-    nflspinzonerows = fetch_nflspinzone_data(weeknum, weboptions)
+    nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, weboptions)
     for nflspinzonerow in nflspinzonerows:
         rows.append(nflspinzonerow)
 
@@ -625,6 +637,7 @@ try:
             
         # writing the data rows  
         csvwriter.writerows(rows) 
+        csvwriter.writerows(errors)
 except:    
     print(traceback.print_exc())
     week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
@@ -640,4 +653,5 @@ except:
             
         # writing the data rows  
         csvwriter.writerows(rows) 
+        csvwriter.writerows(errors)
 # print(picks)
