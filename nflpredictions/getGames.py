@@ -1,35 +1,42 @@
 from pymongo import MongoClient, UpdateOne
-import csv, boto3, sys, traceback
+import csv, sys, traceback # boto3,
 from datetime import date, datetime
 
-sns = boto3.client('sns', region_name='us-west-2')
+# sns = boto3.client('sns', region_name='us-west-2')
 teams = open("teams.csv", 'r')
 weeknum = 1
+year = 2024
+season = "reg"
 if (len(sys.argv) > 1):
-    weeknum = int(sys.argv[1])
+    year = int(sys.argv[1])
+    season = sys.argv[2]
+    weeknum = int(sys.argv[3])
+
 print('weeknum:', weeknum)
 
 client = MongoClient("mongodb+srv://pcsm-user:*dZ2HaWN@pcsm.lwx4u.mongodb.net/pcsm?retryWrites=true&w=majority")
 db = client['pcsm']
 collection = db['games']
 
-games = list(collection.find({ "sport": 'nfl', "season": "reg", "year": 2024, "gameWeek": weeknum}))
+games = list(collection.find({ "sport": 'nfl', "season": season, "year": year, "gameWeek": weeknum}))
 rows = []
 try:
     for game in games:
         print('awayTeam:', game["awayTeam"]["code"])
         print('homeTeam:', game["homeTeam"]["code"])
-        rows.append([game["awayTeam"]["shortName"], game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"]])
+        rows.append([game["awayTeam"]["shortName"], game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"], game["gameId"]])
         if (game["awayTeam"]["code"] == "TB"):
-            rows.append(["Bucs", game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"]])
+            rows.append(["Bucs", game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"], game["gameId"]])
         if (game["awayTeam"]["code"] == "NE"):
-            rows.append(["Pats", game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"]])
-        rows.append([game["homeTeam"]["shortName"], game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"]])
+            rows.append(["Pats", game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"], game["gameId"]])
+        rows.append([game["homeTeam"]["shortName"], game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"], game["gameId"]])
         if (game["homeTeam"]["code"] == "TB"):
-            rows.append(["Bucs", game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"]])
+            rows.append(["Bucs", game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"], game["gameId"]])
         if (game["homeTeam"]["code"] == "NE"):
-            rows.append(["Pats", game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"]])
-    week1picks = open("2024week" + str(weeknum) + "games.csv", 'w+', newline='')
+            rows.append(["Pats", game["awayTeam"]["code"] + game["homeTeam"]["code"], game["awayTeam"]["code"], game["homeTeam"]["code"], game["gameId"]])
+        
+
+    week1picks = open(str(year) + season + "week" + str(weeknum) + "games.csv", 'w+', newline='')
     with week1picks as csvfile:
         
         # creating a csv writer object  
