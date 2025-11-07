@@ -25,7 +25,7 @@ year = int(sys.argv[2])
 season = sys.argv[3]
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-9-picks-betting-underdogs-best-bets/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-10-picks-predictions-road-teams-betting/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -34,7 +34,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-9-nfl-picks-best-bets-gambling-bills-beat-chiefs/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-10-nfl-picks-buccaneers-slow-down-patriots-packers-edge-eagles/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -44,7 +44,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-9-picks-score-predictions-colts-destroy-steelers-chiefs-beat-bills/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-10-picks-score-predictions-vikings-shock-ravens-colts-win-in-germany/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -61,7 +61,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/10/27/nfl-week-9-picks-predictions-scores-2025-season/84309851007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2025/11/03/nfl-week-10-picks-predictions-scores-2025-season/84327978007/',
     'name': 'Jeremy Cluff',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -84,12 +84,12 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-9-game-01k8k3hgf11y',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-10-game-01k95mpa15r7',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
     'separator': ', '
-    #   https://nflspinzone.com/author/sayrebedinger/
+    #   https://www.bing.com/search?FORM=U523DF&PC=U523&q=spinzone+2025+week+10&PC=U316&FORM=CHROMN
 }
 
 cowherd = {
@@ -110,7 +110,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-9/86e77db6771728d30325a7a4',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-10/8b6c5afbe17f50552b24d376',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -119,7 +119,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-9/782b477f429567527928aa44'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-10/27985c6c376f3e671262dbb3'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -138,20 +138,20 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/10/30/nfl-week-9-picks-predictions-ai/86965183007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/11/06/nfl-week-10-picks-predictions-ai/87108339007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
     'name': 'Copilot',
-    'searchTag': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
+    'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
 
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/7634c27f-d9cb-44df-ba58-dd37ac2b3c69?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/d724b98a-d943-462f-a81c-65aeabfdebbe?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/id/46684415/nfl-week-8-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide46858769/nfl-week-10-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
@@ -170,7 +170,7 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/beating-the-book-97623',
+    'url': 'https://www.rotowire.com/football/article/beating-the-book-nfl-week-10-picks-against-the-spread-score-predictions-98318',
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
@@ -181,11 +181,12 @@ sbr = {
 }
 
 rotoballer = {
-    'url': 'https://www.rotoballer.com/nfl-predictions-week-8-picks-and-analysis-for-every-game-2025/1734321',
+    'url': 'https://www.rotoballer.com/nfl-predictions-week-10-picks-and-analysis-for-every-game-2025/1747881',
     'name': 'JimNicely',
     'separator': ', ',
     'searchTag': 'h2',
     'endPickTerm': ' ('
+    #https://www.rotoballer.com/author/jnice323
 }
 
 # yardbarker = {
@@ -261,10 +262,15 @@ try:
             # wait.until(lambda d : resultsTable.is_displayed())
             print('hasattr()', writer.get("searchTerm"))
             searchTerm = writer.get("searchTerm")
+            searchTag = writer.get("searchTag")
+            searchXPath = writer.get("searchXPath")
+
             if searchTerm:
                 picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
-            else:
+            elif searchTag:
                 picks = driver.find_elements(By.TAG_NAME, writer["searchTag"])
+            else:
+                picks = driver.find_elements(By.TAG_NAME, writer["searchXPath"])
             #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
             # if writer['name'] == 'PetePrisco':
             #     print(response.data)
