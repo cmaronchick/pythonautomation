@@ -17,6 +17,8 @@ from scraper_oddstrader import fetch_oddstrader_data
 from scraper_nflspinzone import fetch_nflspinzone_data
 from scraper_sbr import fetch_sbr_data
 from scraper_clutchpoints import fetch_clutchpoints_data
+from scraper_copilot import fetch_copilot_data
+from scraper_rotowire import fetch_rotowire_data
 
 
 
@@ -25,7 +27,7 @@ year = int(sys.argv[2])
 season = sys.argv[3]
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-10-picks-predictions-road-teams-betting/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-13-picks-predictions-underdogs-upsets/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -34,7 +36,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-10-nfl-picks-buccaneers-slow-down-patriots-packers-edge-eagles/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-13-nfl-picks-packers-over-lions-chiefs-top-cowboys/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -44,7 +46,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-10-picks-score-predictions-vikings-shock-ravens-colts-win-in-germany/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-13-picks-score-predictions-cowboys-stun-chiefs-packers-upset-lions-thanksgiving/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -61,7 +63,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2025/11/03/nfl-week-10-picks-predictions-scores-2025-season/84327978007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2025/11/24/nfl-week-13-picks-predictions-score-projections-thanksgiving-week/84511308007/',
     'name': 'Jeremy Cluff',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -84,7 +86,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-10-game-01k95mpa15r7',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-13-game-01kav4sk8qqv',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -110,7 +112,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-10/8b6c5afbe17f50552b24d376',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-13/a6f8a9e661bc44556ed32141',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -119,7 +121,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-10/27985c6c376f3e671262dbb3'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-13/d9b75296aacafb37181e638c'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -133,12 +135,12 @@ thirtythirdteam = {
 }
 
 sportsnaut = {
-    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-picks-every-game-nfl-schedule-this-week' # https://sportsnaut.com/nfl/nfl-week-8-predictions-picks-every-game-nfl-schedule-this-week 'https://sportsnaut.com/nfl/nfl-analysis/lists/afc-championship-game-predictions-buffalo-bills-vs-kansas-city-chiefs/'
-    # https://sportsnaut.com/list/nfl-week-6-predictions-2024/
+    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-nfl-picks-this-week'
+    # https://sportsnaut.com/nfl/nfl-week-11-predictions-picks-nfl-schdeule-this-week
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/11/06/nfl-week-10-picks-predictions-ai/87108339007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/11/20/nfl-week-12-picks-predictions-ai/87342519007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -146,17 +148,18 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/d724b98a-d943-462f-a81c-65aeabfdebbe?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/927a836d-8219-4344-8a8b-e1ec63e74e55?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide46858769/nfl-week-10-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide47026826/nfl-week-12-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
 nfl = {
-    'url': 'https://www.nfl.com/news/nfl-picks-week-' + str(weeknum) + '-2025-nfl-season'
+    'url': 'https://www.nfl.com/news/nfl-week-13-picks-upset-and-score-predictions-matchup-breakdowns-for-every-game'
+    # https://www.nfl.com/news/nfl-week-12-picks-upset-and-score-predictions-matchup-breakdowns-for-every-game
     # 'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season' - https://www.nfl.com/news/nfl-picks-divisional-round-2024-nfl-season
 
 }
@@ -170,10 +173,17 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/beating-the-book-nfl-week-10-picks-against-the-spread-score-predictions-98318',
+    'url': 'https://www.rotowire.com/football/article/beating-the-book-99145',
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
+}
+
+rotowire2 = {
+    'url': 'https://www.rotowire.com/betting/nfl/odds/week-13',
+    'name': 'Rotowire',
+    'searchTerm': 'Final Score:',
+    'separator': ' | '
 }
 
 sbr = {
@@ -181,7 +191,7 @@ sbr = {
 }
 
 rotoballer = {
-    'url': 'https://www.rotoballer.com/nfl-predictions-week-10-picks-and-analysis-for-every-game-2025/1747881',
+    'url': 'https://www.rotoballer.com/nfl-predictions-week-12-picks-and-analysis-for-every-game-2025/1760598',
     'name': 'JimNicely',
     'separator': ', ',
     'searchTag': 'h2',
@@ -197,10 +207,11 @@ rotoballer = {
 #     'separator': ', '
 # }
 
-writersArray = [ts, pp, bender, foxsports, azc, copilot, rotowire, rotoballer] #, sz, foxsports, azc, pfn, 
+writersArray = [ts, pp, bender, foxsports, azc, rotoballer, rotowire2] #, sz, foxsports, azc, pfn, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
 
 errors = []
+nopicks = []
 
 
 
@@ -280,6 +291,7 @@ try:
             print('picks length: ', len(picks))
             if len(picks) == 0:
                 print('writer with no picks: ', writer)
+                nopicks.append([writer.get('name'), writer.get('url')])
             for p in picks:
                 # parent = p.parent.text        
                 # colonIndex = parent.find(':')
@@ -312,8 +324,15 @@ try:
                         # print([writer['name'],winner, winnerScore, loser, loserScore])
                     
                         rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
+                    except KeyboardInterrupt:
+                        print(f"\nManual skip triggered! Moving to next URL...")
+                        continue  # Skips the rest of this loop iteration
+                    # except TimeoutException:
+                    #     print("Page took too long! Stopping load and skipping...")
+                    #     driver.execute_script("window.stop();") # Stops the loading spinner
+                    #     continue # Proceed to next page logic
                     except ValueError:
-                        errors.append([writer['name'], traceback.print_exc()])
+                        errors.append([writer['name'], traceback.print_exc(), ValueError])
                         print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
                     # print(winner, int(winnerScore), loser, int(loserScore))
                 else:
@@ -344,8 +363,11 @@ try:
                         loserScore = predictionString[secondSpace:].strip()
                         # print([writer['name'],winner, winnerScore, loser, loserScore])
                         rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
+                    except KeyboardInterrupt:
+                        print(f"\nManual skip triggered! Moving to next URL...")
+                        continue  # Skips the rest of this loop iteration
                     except ValueError:
-                        errors.append([writer['name'], traceback.print_exc()])
+                        errors.append([writer['name'], traceback.print_exc(), ValueError])
                         print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
                 
         i = i + 1
@@ -360,6 +382,8 @@ try:
 
         for p in picks:
             predictionString = p.text
+            
+            print('breech: ', predictionString)
             separator = predictionString.find("-")
             winnerSpace = predictionString.find(" ")
             overSpace = predictionString.find(" over ")
@@ -373,8 +397,11 @@ try:
             try:
                 rows.append(['JohnBreech',winner, int(winnerScore), loser, int(loserScore)])
                 driver.close()
+            except KeyboardInterrupt:
+                print(f"\nManual skip triggered! Moving to next URL...")
+                continue  # Skips the rest of this loop iteration
             except ValueError:
-                errors.append(['JohnBreech', traceback.print_exc()])
+                errors.append(['JohnBreech', traceback.print_exc(), ValueError])
                 print(ValueError)
                 driver.close()
         # # sportsnaut formatting
@@ -400,11 +427,17 @@ try:
             # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
             try:
                 rows.append(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
+            except KeyboardInterrupt:
+                print(f"\nManual skip triggered! Moving to next URL...")
+                continue  # Skips the rest of this loop iteration
             except ValueError:
-                errors.append(['Sportsnaut', traceback.print_exc()])
+                errors.append(['Sportsnaut', traceback.print_exc(), ValueError])
                 print(ValueError)
+                
+    except KeyboardInterrupt:
+        print(f"\nManual skip triggered! Moving to next URL...")
     except ValueError:
-        errors.append(['Breech/Sportsnaut', traceback.print_exc()])
+        errors.append(['Breech/Sportsnaut', traceback.print_exc(), ValueError])
         print('breech ValueError:', ValueError)
 
     # vinnie iyer formatting
@@ -503,8 +536,11 @@ try:
                 print(ValueError)
                 print(['VinnieIyer',winner, winnerScore, loser, loserScore])
                 rows.append(['VinnieIyer',winner, winnerScore, loser, loserScore])
+    
+    except KeyboardInterrupt:
+        print(f"\nManual skip triggered! Moving to next URL...")
     except ValueError:
-        errors.append(['Iyer', traceback.print_exc()])
+        errors.append(['Iyer', traceback.print_exc(), ValueError])
         print('iyer ValueError: ', ValueError)
         driver.close()
 
@@ -581,6 +617,9 @@ try:
                     print('g:', g)
                 else:
                     g = g + 1
+                    
+        except KeyboardInterrupt:
+            print(f"\nManual skip triggered! Moving to next URL...")
         except ValueError:
             print(ValueError)
             print(['dimers',winner, winnerScore, loser, loserScore])
@@ -629,6 +668,16 @@ try:
     for clutchpointsrow in clutchpointsrows:
         rows.append(clutchpointsrow)
 
+    
+    copilotrows = fetch_copilot_data(weeknum, copilot['url'], weboptions)
+    for copilotrow in copilotrows:
+        rows.append(copilotrow)
+    
+    rotowirerows = fetch_rotowire_data(weeknum, rotowire['url'], weboptions)
+    for rotowirerow in rotowirerows:
+        rows.append(rotowirerow)
+
+
     ### Final Row for printing picks ###
     week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
     with week1picks as csvfile:
@@ -644,6 +693,10 @@ try:
         # writing the data rows  
         csvwriter.writerows(rows) 
         csvwriter.writerows(errors)
+        csvwriter.writerows(nopicks)
+
+except KeyboardInterrupt:
+    print(f"\nManual skip triggered! Moving to next URL...")
 except:    
     print(traceback.print_exc())
     week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
@@ -660,4 +713,5 @@ except:
         # writing the data rows  
         csvwriter.writerows(rows) 
         csvwriter.writerows(errors)
+        csvwriter.writerows(nopicks)
 # print(picks)

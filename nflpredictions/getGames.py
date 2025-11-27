@@ -44,7 +44,7 @@ if (len(sys.argv) > 3):
                 
             # writing the fields  
             
-            fields = ['SHORT NAME', 'GAMEID', 'AWAY', 'HOME']
+            fields = ['SHORT NAME', 'GAMEID', 'AWAY', 'HOME', 'GAMEINT','SPREAD','TOTAL']
             csvwriter.writerow(fields)  
                 
             # writing the data rows  

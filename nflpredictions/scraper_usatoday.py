@@ -165,13 +165,15 @@ def fetch_usatoday_data(weeknum, url):
                     # print('rowIndex:', rowIndex, 'columnIndex:', columnIndex, column.text.find(" at "))
                     if rowIndex == 0:
                         if columnIndex == 0:
-                            if column.text.find(" at ") > -1:
+                            if column.text.find(" at ") > -1 or column.text.find(" vs. ") > -1:
 
                                 predictionRow = True
                                 teamSpans = column.find_element(By.TAG_NAME, "span")
                                 openParenthesis = teamSpans.text.find("(")
                                 closeParenthesis = teamSpans.text.find(")")
                                 separator = teamSpans.text.find(" at ")
+                                if separator == -1:
+                                    separator = teamSpans.text.find(" vs. ")
                                 awayTeam = ""
                                 homeTeam = ""
                                 if openParenthesis > separator:
@@ -354,7 +356,7 @@ def fetch_usatoday_data(weeknum, url):
 
 
 def main(weeknum):
-    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/d1870792-ebfe-46f3-9734-f9013606d428?src=embed#async_embed') #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/261b9fc7-b905-4282-ac75-00eb799a2a09?src=embed#async_embed') #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:

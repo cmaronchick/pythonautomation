@@ -80,7 +80,7 @@ articleNumber = 16
 def fetch_nflspinzone_data(url, weeknum, weboptions):
     
     sz = {
-        'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game', # https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game
+         # https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game
         'name': 'NFL Spinzone',
         'searchTerm': 'Prediction:',
         'searchTag': 'strong',
@@ -121,7 +121,7 @@ def fetch_nflspinzone_data(url, weeknum, weboptions):
             print('hasattr()', sz.get("searchTerm"))
             searchTerm = sz.get("searchTerm")
             if searchTerm:
-                picks = driver.find_elements(By.XPATH, "//" + sz['searchTag'] + "[contains(text(), '" + sz['searchTerm'] + "')]/parent::*")
+                picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + sz['searchTerm'] + "')]/parent::*")
             else:
                 picks = driver.find_elements(By.XPATH, sz["searchTag"])
             #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
@@ -132,7 +132,7 @@ def fetch_nflspinzone_data(url, weeknum, weboptions):
             # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
             print('picks length: ', len(picks))
             if len(picks) == 0:
-                print('writer with no picks: ', sz)
+                print('writer with no picks: ', url)
             # teamPairings = driver.find_elements(By.XPATH, "//h3[contains(text(), '@')]")
             # teamsArray = []
             # # for pairing in teamPairings:
