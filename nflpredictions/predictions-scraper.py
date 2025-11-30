@@ -140,7 +140,7 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/11/20/nfl-week-12-picks-predictions-ai/87342519007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/11/27/nfl-week-13-picks-predictions-ai/87470679007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -148,12 +148,12 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/927a836d-8219-4344-8a8b-e1ec63e74e55?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/abd3da50-4d4b-472f-8c90-10238106e2da?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide47026826/nfl-week-12-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide47085036/nfl-week-13-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
@@ -191,7 +191,7 @@ sbr = {
 }
 
 rotoballer = {
-    'url': 'https://www.rotoballer.com/nfl-predictions-week-12-picks-and-analysis-for-every-game-2025/1760598',
+    'url': 'https://www.rotoballer.com/nfl-predictions-week-13-picks-and-analysis-for-every-game-2025/1765373',
     'name': 'JimNicely',
     'separator': ', ',
     'searchTag': 'h2',
