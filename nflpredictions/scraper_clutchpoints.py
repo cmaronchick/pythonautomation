@@ -111,7 +111,7 @@ def fetch_clutchpoints_data(weeknum, url, weboptions):
                 print('p:', pText)
                 predictionString = ""
                 predictionString = pText
-                print('predictionString: ', predictionString)
+                # print('predictionString: ', predictionString)
                 colonIndex = predictionString.find(":")+1
                 firstSpace = predictionString.find(" ", colonIndex+1)
                 dashIndex = predictionString.find("-")
@@ -129,7 +129,7 @@ def fetch_clutchpoints_data(weeknum, url, weboptions):
                 print('Exception:', e)
                 # traceback.print_exc()
             pickNum = pickNum + 1
-        print('clutchpointsrows:', clutchpointsrows)
+        # print('clutchpointsrows:', clutchpointsrows)
         driver.close()
         return clutchpointsrows
     except Exception as e:

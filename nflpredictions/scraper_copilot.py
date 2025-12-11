@@ -106,16 +106,16 @@ def fetch_copilot_data(weeknum, url, weboptions):
                 # parent = p.parent.text        
                 # colonIndex = parent.find(':')
                 pText = p.text
-                print('p:', pText)
+                # print('p:', pText)
                 predictionString = ""
                 predictionString = pText
-                print('predictionString: ', predictionString)
+                # print('predictionString: ', predictionString)
                 teams = predictionString.split(",")
                 winningTeam = teams[0]
                 losingTeam = teams[1]
                 firstSpace = winningTeam.rfind(" ")
                 secondSpace = losingTeam.rfind(" ")
-                print('firtSpace, secondSpace: ', firstSpace, secondSpace)
+                # print('firtSpace, secondSpace: ', firstSpace, secondSpace)
                 winner = predictionString[:firstSpace]
                 winnerScore = winningTeam[firstSpace + 1:]
                 loser = losingTeam[:secondSpace]
@@ -131,7 +131,7 @@ def fetch_copilot_data(weeknum, url, weboptions):
                 print('Exception:', e)
                 # traceback.print_exc()
             pickNum = pickNum + 1
-        print('copilotrows:', copilotrows)
+        # print('copilotrows:', copilotrows)
         driver.close()
         return copilotrows
     except Exception as e:

@@ -162,10 +162,10 @@ def fetch_nflspinzone_data(url, weeknum, weboptions):
                     # parent = p.parent.text        
                     # colonIndex = parent.find(':')
                     pText = p.text
-                    print('p:', pText)
+                    # print('p:', pText)
                     predictionString = ""
                     predictionString = pText
-                    print('predictionString: ', predictionString)
+                    # print('predictionString: ', predictionString)
                     winIndex = predictionString.find(" win ")
                     dashIndex = predictionString.find("-")
                     winner = predictionString[:winIndex]
@@ -176,8 +176,8 @@ def fetch_nflspinzone_data(url, weeknum, weboptions):
                         nflspinzonerows.append(['NFLSpinzone',winner, int(winnerScore), loser, int(loserScore)])
                         # nflspinzonerows.append(['oddsshark', awayTeam, awayTeamScore, homeTeam, homeTeamScore])
                     except ValueError:
-                        print(ValueError, [sz['name'],winner, winnerScore, loser, loserScore])
-                    # pInt = pInt + 1
+                        print(ValueError, [sz['name']])
+                    # pInt = pInt + 1 ,winner, winnerScore, loser, loserScore
                 except Exception as e:
                     print('Exception:', e)
                     traceback.print_exc()

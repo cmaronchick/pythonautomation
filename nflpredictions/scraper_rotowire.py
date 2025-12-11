@@ -107,10 +107,10 @@ def fetch_rotowire_data(weeknum, url, weboptions):
                 # parent = p.parent.text        
                 # colonIndex = parent.find(':')
                 pText = p.get_attribute('innerText')
-                print('p:', p.get_attribute('innerText'), pText)
+                # print('p:', p.get_attribute('innerText'), pText)
                 predictionString = ""
                 predictionString = pText
-                print('predictionString: ', predictionString)
+                # print('predictionString: ', predictionString)
                 # colonIndex = predictionString.find(":")+1
                 # firstSpace = predictionString.find(" ", colonIndex+1)
                 # dashIndex = predictionString.find("-")
@@ -118,11 +118,11 @@ def fetch_rotowire_data(weeknum, url, weboptions):
                 # winnerScore = predictionString[firstSpace + 1:dashIndex]
                 # loserScore = predictionString[dashIndex+1:].strip()
                 teamsString = predictionString[predictionString.find(":")+2:]
-                print('teamsString: ', teamsString)
+                # print('teamsString: ', teamsString)
                 firstSpace = teamsString.find(" ")
                 dashSpace = teamsString.find(" – ")
                 lastSpace = teamsString.rfind(" ")
-                print('dashSpace: ', dashSpace)
+                # print('dashSpace: ', dashSpace)
                 winner = teamsString[:firstSpace]
                 winnerScore = teamsString[firstSpace:dashSpace]
                 loser = teamsString[dashSpace+3:lastSpace]
@@ -138,7 +138,7 @@ def fetch_rotowire_data(weeknum, url, weboptions):
                 print('Exception:', e)
                 # traceback.print_exc()
             pickNum = pickNum + 1
-        print('rotowirerows:', rotowirerows)
+        # print('rotowirerows:', rotowirerows)
         driver.close()
         return rotowirerows
     except Exception as e:
