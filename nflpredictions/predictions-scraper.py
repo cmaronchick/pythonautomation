@@ -27,7 +27,7 @@ year = int(sys.argv[2])
 season = sys.argv[3]
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-13-picks-predictions-underdogs-upsets/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-16-picks-predictions-ats-upsets-score-projections/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -36,7 +36,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-13-nfl-picks-packers-over-lions-chiefs-top-cowboys/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-16-nfl-picks-seahawks-top-rams-on-tnf-packers-edge-bears-jaguars-upset-broncos/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -46,7 +46,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-13-picks-score-predictions-cowboys-stun-chiefs-packers-upset-lions-thanksgiving/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-16-picks-score-predictions-odds/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -63,9 +63,9 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2025/11/24/nfl-week-13-picks-predictions-score-projections-thanksgiving-week/84511308007/',
-    'name': 'Jeremy Cluff',
-    'searchTerm': 'Prediction:',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2025/12/15/nfl-week-16-picks-predictions-nfl-playoff-implications-2025-season/84643076007/',
+    'name': 'Jeremy Cluff', # Jenna Ortiz', # 
+    'searchTerm': 'Score prediction:', # cluff: 'Prediction:'
     'searchTag': 'strong',
     'separator': ', '
     # https://www.azcentral.com/staff/2648096001/jeremy-cluff/
@@ -86,7 +86,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-13-game-01kav4sk8qqv',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-16-game-01kcm76c4eqh',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -112,7 +112,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-13/a6f8a9e661bc44556ed32141',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-16/462d587f5262a948a2423513',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -121,7 +121,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-13/d9b75296aacafb37181e638c'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-16/cbb3153f63d035ec4d7a69f2'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -140,7 +140,7 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/11/27/nfl-week-13-picks-predictions-ai/87470679007/', # https://www.usatoday.com/story/sports/nfl/2025/10/16/nfl-week-7-picks-predictions-ai/86697464007/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/12/18/nfl-week-16-picks-predictions-ai/87808256007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -148,18 +148,18 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/abd3da50-4d4b-472f-8c90-10238106e2da?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/e0091166-20b0-4dbd-a6bc-b68fcd865c59?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide47085036/nfl-week-13-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide47337400/nfl-week-16-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
 nfl = {
-    'url': 'https://www.nfl.com/news/nfl-week-13-picks-upset-and-score-predictions-matchup-breakdowns-for-every-game'
-    # https://www.nfl.com/news/nfl-week-12-picks-upset-and-score-predictions-matchup-breakdowns-for-every-game
+    'url': 'https://www.nfl.com/news/nfl-picks-week-16-2025-nfl-season'
+    # https://www.nfl.com/news/series/game-picks-news
     # 'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season' - https://www.nfl.com/news/nfl-picks-divisional-round-2024-nfl-season
 
 }
@@ -173,14 +173,14 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/beating-the-book-99145',
+    'url': 'https://www.rotowire.com/football/article/beating-the-book-100960', # https://www.rotowire.com/football/column/beating-the-book-20
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
 }
 
 rotowire2 = {
-    'url': 'https://www.rotowire.com/betting/nfl/odds/week-13',
+    'url': 'https://www.rotowire.com/betting/nfl/odds/week-' + str(weeknum),
     'name': 'Rotowire',
     'searchTerm': 'Final Score:',
     'separator': ' | '
@@ -207,7 +207,7 @@ rotoballer = {
 #     'separator': ', '
 # }
 
-writersArray = [ts, pp, bender, foxsports, azc, rotoballer, rotowire2] #, sz, foxsports, azc, pfn, 
+writersArray = [ts, pp, bender, foxsports, azc,  rotowire2] #, sz, foxsports, azc, pfn, rotoballer, 
 request_headers = {'User-Agent': 'Mozilla/5.0'}
 
 errors = []
@@ -231,6 +231,7 @@ weboptions.add_argument("--no-sandbox"); # https://stackoverflow.com/a/50725918/
 weboptions.add_argument("--disable-dev-shm-usage"); # https://stackoverflow.com/a/50725918/1689770
 weboptions.add_argument("--disable-browser-side-navigation"); # https://stackoverflow.com/a/49123152/1689770
 weboptions.add_argument("--disable-gpu"); # https://stackoverflow.com/questions/51959986/how-to-solve-selenium-chromedriver-timed-out-receiving-message-from-renderer-exc
+weboptions.add_argument("--disable-webgl")
 weboptions.add_argument("--enable-unsafe-swiftshader")
 weboptions.add_argument("--log-level=3")
 weboptions.page_load_strategy = 'eager'
@@ -574,49 +575,50 @@ try:
             except:
                 print('ad blocker not found')            
             wait.until(EC.element_to_be_clickable(firstGame))
-            firstGame.click()
-            # response = requests.get()
-            # print(response)
-            # soup = BeautifulSoup(response.text, 'html.parser')
-            # games = soup.find_all('h3')
-            # picks = soup.find_all('strong', string="Pick: ") #, attrs={'class': 'Article-content'}
+            if firstGame is not None:
+                firstGame.click()
+                # response = requests.get()
+                # print(response)
+                # soup = BeautifulSoup(response.text, 'html.parser')
+                # games = soup.find_all('h3')
+                # picks = soup.find_all('strong', string="Pick: ") #, attrs={'class': 'Article-content'}
 
-            # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
-            
-            # print('gamesObject: ', gamesObject)
-            g = 0
-            while g < len(games)-1: 
-                teams = driver.find_elements(By.CLASS_NAME, "team-column")
-                if teams is not None and len(teams) > 0:
-                    wait.until(lambda d : teams[0].is_displayed())
-                    scores = driver.find_elements(By.CLASS_NAME, "score")
-                    awayTeam = teams[0].text
-                    awayScore = scores[0].text
-                    homeTeam = teams[1].text
-                    homeScore = scores[1].text
-                    
-                    
-                    print('awayTeam, awayScore, homeTeam, homeScore: ', awayTeam, awayScore, homeTeam, homeScore)
-                    if awayScore > homeScore:
-                        winner = awayTeam
-                        winnerScore = awayScore
-                        loser = homeTeam
-                        loserScore = homeScore
-                    else:
-                        winner = homeTeam
-                        winnerScore = homeScore
-                        loser = awayTeam
-                        loserScore = awayScore    
+                # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+                
+                # print('gamesObject: ', gamesObject)
+                g = 0
+                while g < len(games)-1: 
+                    teams = driver.find_elements(By.CLASS_NAME, "team-column")
+                    if teams is not None and len(teams) > 0:
+                        wait.until(lambda d : teams[0].is_displayed())
+                        scores = driver.find_elements(By.CLASS_NAME, "score")
+                        awayTeam = teams[0].text
+                        awayScore = scores[0].text
+                        homeTeam = teams[1].text
+                        homeScore = scores[1].text
                         
-                    rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
-                    navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
-                    wait.until(EC.element_to_be_clickable(navButtons[1]))
-                    navButtons[1].click()
-                    wait.until(EC.staleness_of(teams[0]))
-                    g = g + 1
-                    print('g:', g)
-                else:
-                    g = g + 1
+                        
+                        print('awayTeam, awayScore, homeTeam, homeScore: ', awayTeam, awayScore, homeTeam, homeScore)
+                        if awayScore > homeScore:
+                            winner = awayTeam
+                            winnerScore = awayScore
+                            loser = homeTeam
+                            loserScore = homeScore
+                        else:
+                            winner = homeTeam
+                            winnerScore = homeScore
+                            loser = awayTeam
+                            loserScore = awayScore    
+                            
+                        rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
+                        navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
+                        wait.until(EC.element_to_be_clickable(navButtons[1]))
+                        navButtons[1].click()
+                        wait.until(EC.staleness_of(teams[0]))
+                        g = g + 1
+                        print('g:', g)
+                    else:
+                        g = g + 1
                     
         except KeyboardInterrupt:
             print(f"\nManual skip triggered! Moving to next URL...")

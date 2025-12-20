@@ -125,8 +125,8 @@ WalderESPN,Buccaneers,22,Falcons,20,TBATL,4765677,TB,Buccaneers,Tampa Bay Buccan
 Dimers,BUCCANEERS,24,FALCONS,22,TBATL,4765677,TB,Buccaneers,Tampa Bay Buccaneers,ATL,Falcons,Atlanta Falcons,24,22,1,47.5
 oddsshark,Buccaneers,24,Falcons,21,TBATL,4765677,TB,Buccaneers,Tampa Bay Buccaneers,ATL,Falcons,Atlanta Falcons,24,21,1,47.5
 DRatings,Buccaneers,25,Falcons,24,TBATL,4765677,TB,Buccaneers,Tampa Bay Buccaneers,ATL,Falcons,Atlanta Falcons,25,24,1,47.5
-PetePrisco,Bucs,28,Falcons,24,TBATL,4765677,TB,Buccaneers,Tampa Bay Buccaneers,ATL,Falcons,Atlanta Falcons,24,24,1,47.5
-TimCrean,Eagles,24,Falcons,20,DALPHI,4765610,DAL,Cowboys,Dallas Cowboys,ATL,Falcons,Atlanta Falcons,20,20,-8,48
+PetePrisco,Buccaneers,28,Falcons,24,TBATL,4765677,TB,Buccaneers,Tampa Bay Buccaneers,ATL,Falcons,Atlanta Falcons,28,24,1,47.5
+TimCrean,Eagles,24,Cowboys,20,DALPHI,4765610,DAL,Cowboys,Dallas Cowboys,PHI,Eagles,Philadelphia Eagles,20,24,-8,48
 TimCrean,Falcons,23,Buccaneers,22,TBATL,4765677,TB,Buccaneers,Tampa Bay Buccaneers,ATL,Falcons,Atlanta Falcons,22,23,1,47.5
 MaldonadoESPN,Falcons,26,Buccaneers,24,TBATL,4765677,TB,Buccaneers,Tampa Bay Buccaneers,ATL,Falcons,Atlanta Falcons,24,26,1,47.5
 TylerSullivan,Jaguars,27,Panthers,20,CARJAC,4765680,CAR,Panthers,Carolina Panthers,JAC,Jaguars,Jacksonville Jaguars,20,27,-3.5,46.5
@@ -147,56 +147,56 @@ GennaroNFL,Jaguars,27,Panthers,16,CARJAC,4765680,CAR,Panthers,Carolina Panthers,
 TomNFL,Jaguars,26,Panthers,20,CARJAC,4765680,CAR,Panthers,Carolina Panthers,JAC,Jaguars,Jacksonville Jaguars,20,26,-3.5,46.5
 oddsshark,Panthers,14,Jaguars,29,CARJAC,4765680,CAR,Panthers,Carolina Panthers,JAC,Jaguars,Jacksonville Jaguars,14,29,-3.5,46.5
 DRatings,Panthers,20,Jaguars,26,CARJAC,4765680,CAR,Panthers,Carolina Panthers,JAC,Jaguars,Jacksonville Jaguars,20,26,-3.5,46.5
-TimCrean,Chargers,28,Chiefs,27,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,27,27,3,47.5
-TylerSullivan,Chiefs,24,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,24,20,3,47.5
-BillBender,Chiefs,24,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,24,20,3,47.5
-DataSkrive,Chiefs,21,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,21,20,3,47.5
-Sportsnaut,Chiefs,23,Chargers,16,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,23,16,3,47.5
-VinnieIyer,Chiefs,23,Chargers,16,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,23,16,3,47.5
-MaldonadoESPN,Chiefs,27,Chargers,24,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,27,24,3,47.5
-MoodyESPN,Chiefs,38,Chargers,23,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,38,23,3,47.5
-WalderESPN,Chiefs,23,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,23,20,3,47.5
-AliNFL,Chiefs,24,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,24,20,3,47.5
-BrookeNFL,Chiefs,26,Chargers,21,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,26,21,3,47.5
-DanNFL,Chiefs,23,Chargers,19,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,23,19,3,47.5
-GennaroNFL,Chiefs,30,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,30,20,3,47.5
-TomNFL,Chiefs,25,Chargers,21,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,L.A. Chargers,Los Angeles Chargers,25,21,3,47.5
-TylerSullivan,Rams,23,Texans,21,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,21,21,-3,42.5
-PetePrisco,Rams,23,Texans,17,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,17,17,-3,42.5
-BillBender,Rams,24,Texans,21,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,21,21,-3,42.5
-DataSkrive,Rams,25,Texans,19,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,19,19,-3,42.5
-Sportsnaut,Rams,24,Texans,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,20,20,-3,42.5
-VinnieIyer,Rams,24,Texans,17,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,17,17,-3,42.5
-MaldonadoESPN,Rams,24,Texans,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,20,20,-3,42.5
-MoodyESPN,Rams,34,Texans,26,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,26,26,-3,42.5
-WalderESPN,Rams,27,Texans,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,20,20,-3,42.5
-Dimers,RAMS,23,TEXANS,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,20,20,-3,42.5
-BrookeNFL,Rams,27,Texans,22,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,22,22,-3,42.5
-DanNFL,Rams,23,Texans,19,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,19,19,-3,42.5
-TomNFL,Rams,24,Texans,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,20,20,-3,42.5
-TimCrean,Texans,28,Rams,24,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,28,24,-3,42.5
-AliNFL,Texans,23,Rams,21,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,23,21,-3,42.5
-GennaroNFL,Texans,19,Rams,16,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,19,16,-3,42.5
-oddsshark,Texans,18,Rams,24,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,18,24,-3,42.5
-DRatings,Texans,22,Rams,23,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,L.A. Rams,Los Angeles Rams,22,23,-3,42.5
-TylerSullivan,Jets,23,Steelers,20,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,20,20,2.5,38
-PetePrisco,Jets,20,Steelers,16,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,16,16,2.5,38
-MaldonadoESPN,Jets,19,Steelers,17,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,17,17,2.5,38
-MoodyESPN,Jets,20,Steelers,17,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,17,17,2.5,38
-AliNFL,Jets,20,Steelers,17,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,17,17,2.5,38
-BrookeNFL,Jets,22,Steelers,20,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,20,20,2.5,38
-BillBender,Steelers,28,Jets,19,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,28,19,2.5,38
-DataSkrive,Steelers,24,Jets,19,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,24,19,2.5,38
-TimCrean,Steelers,16,Jets,10,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,16,10,2.5,38
-Sportsnaut,Steelers,20,Jets,16,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,20,16,2.5,38
-VinnieIyer,Steelers,27,Jets,14,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,27,14,2.5,38
-WalderESPN,Steelers,19,Jets,16,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,19,16,2.5,38
-Dimers,STEELERS,20,JETS,18,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,20,18,2.5,38
-DanNFL,Steelers,20,Jets,16,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,20,16,2.5,38
-GennaroNFL,Steelers,14,Jets,13,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,14,13,2.5,38
-TomNFL,Steelers,21,Jets,17,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,21,17,2.5,38
-oddsshark,Steelers,19,Jets,25,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,19,25,2.5,38
-DRatings,Steelers,21,Jets,18,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,N.Y. Jets,New York Jets,21,18,2.5,38
+TimCrean,Chargers,28,Chiefs,27,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,27,28,3,47.5
+TylerSullivan,Chiefs,24,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,24,20,3,47.5
+BillBender,Chiefs,24,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,24,20,3,47.5
+DataSkrive,Chiefs,21,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,21,20,3,47.5
+Sportsnaut,Chiefs,23,Chargers,16,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,23,16,3,47.5
+VinnieIyer,Chiefs,23,Chargers,16,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,23,16,3,47.5
+MaldonadoESPN,Chiefs,27,Chargers,24,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,27,24,3,47.5
+MoodyESPN,Chiefs,38,Chargers,23,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,38,23,3,47.5
+WalderESPN,Chiefs,23,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,23,20,3,47.5
+AliNFL,Chiefs,24,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,24,20,3,47.5
+BrookeNFL,Chiefs,26,Chargers,21,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,26,21,3,47.5
+DanNFL,Chiefs,23,Chargers,19,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,23,19,3,47.5
+GennaroNFL,Chiefs,30,Chargers,20,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,30,20,3,47.5
+TomNFL,Chiefs,25,Chargers,21,KCLAC,4765668,KC,Chiefs,Kansas City Chiefs,LAC,Chargers,Los Angeles Chargers,25,21,3,47.5
+TylerSullivan,Rams,23,Texans,21,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,21,23,-3,42.5
+PetePrisco,Rams,23,Texans,17,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,17,23,-3,42.5
+BillBender,Rams,24,Texans,21,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,21,24,-3,42.5
+DataSkrive,Rams,25,Texans,19,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,19,25,-3,42.5
+Sportsnaut,Rams,24,Texans,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,20,24,-3,42.5
+VinnieIyer,Rams,24,Texans,17,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,17,24,-3,42.5
+MaldonadoESPN,Rams,24,Texans,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,20,24,-3,42.5
+MoodyESPN,Rams,34,Texans,26,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,26,34,-3,42.5
+WalderESPN,Rams,27,Texans,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,20,27,-3,42.5
+Dimers,RAMS,23,TEXANS,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,20,23,-3,42.5
+BrookeNFL,Rams,27,Texans,22,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,22,27,-3,42.5
+DanNFL,Rams,23,Texans,19,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,19,23,-3,42.5
+TomNFL,Rams,24,Texans,20,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,20,24,-3,42.5
+TimCrean,Texans,28,Rams,24,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,28,24,-3,42.5
+AliNFL,Texans,23,Rams,21,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,23,21,-3,42.5
+GennaroNFL,Texans,19,Rams,16,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,19,16,-3,42.5
+oddsshark,Texans,18,Rams,24,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,18,24,-3,42.5
+DRatings,Texans,22,Rams,23,HOULAR,4765688,HOU,Texans,Houston Texans,LAR,Rams,Los Angeles Rams,22,23,-3,42.5
+TylerSullivan,Jets,23,Steelers,20,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,20,23,2.5,38
+PetePrisco,Jets,20,Steelers,16,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,16,20,2.5,38
+MaldonadoESPN,Jets,19,Steelers,17,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,17,19,2.5,38
+MoodyESPN,Jets,20,Steelers,17,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,17,20,2.5,38
+AliNFL,Jets,20,Steelers,17,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,17,20,2.5,38
+BrookeNFL,Jets,22,Steelers,20,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,20,22,2.5,38
+BillBender,Steelers,28,Jets,19,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,28,19,2.5,38
+DataSkrive,Steelers,24,Jets,19,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,24,19,2.5,38
+TimCrean,Steelers,16,Jets,10,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,16,10,2.5,38
+Sportsnaut,Steelers,20,Jets,16,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,20,16,2.5,38
+VinnieIyer,Steelers,27,Jets,14,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,27,14,2.5,38
+WalderESPN,Steelers,19,Jets,16,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,19,16,2.5,38
+Dimers,STEELERS,20,JETS,18,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,20,18,2.5,38
+DanNFL,Steelers,20,Jets,16,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,20,16,2.5,38
+GennaroNFL,Steelers,14,Jets,13,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,14,13,2.5,38
+TomNFL,Steelers,21,Jets,17,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,21,17,2.5,38
+oddsshark,Steelers,19,Jets,25,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,19,25,2.5,38
+DRatings,Steelers,21,Jets,18,PITNYJ,4765678,PIT,Steelers,Pittsburgh Steelers,NYJ,Jets,New York Jets,21,18,2.5,38
 TylerSullivan,Lions,27,Packers,23,DETGB,4765687,DET,Lions,Detroit Lions,GB,Packers,Green Bay Packers,27,23,-2.5,47.5
 BillBender,Lions,30,Packers,25,DETGB,4765687,DET,Lions,Detroit Lions,GB,Packers,Green Bay Packers,30,25,-2.5,47.5
 DataSkrive,Lions,27,Packers,24,DETGB,4765687,DET,Lions,Detroit Lions,GB,Packers,Green Bay Packers,27,24,-2.5,47.5

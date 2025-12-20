@@ -120,16 +120,17 @@ def fetch_rotowire_data(weeknum, url, weboptions):
                 teamsString = predictionString[predictionString.find(":")+2:]
                 # print('teamsString: ', teamsString)
                 firstSpace = teamsString.find(" ")
-                dashSpace = teamsString.find(" – ")
+                separatorText = " -- "
+                dashSpace = teamsString.find(separatorText)
                 lastSpace = teamsString.rfind(" ")
                 # print('dashSpace: ', dashSpace)
                 winner = teamsString[:firstSpace]
                 winnerScore = teamsString[firstSpace:dashSpace]
-                loser = teamsString[dashSpace+3:lastSpace]
+                loser = teamsString[dashSpace+len(separatorText):lastSpace]
                 loserScore = teamsString[lastSpace:]
                 # print([rotowire['name'],winner, winnerScore, loser, loserScore])
                 try:
-                    rotowirerows.append(['rotowire',winner, int(winnerScore), loser, int(loserScore)])
+                    rotowirerows.append([rotowire['name'],winner, int(winnerScore), loser, int(loserScore)])
                     # rotowirerows.append(['oddsshark', awayTeam, awayTeamScore, homeTeam, homeTeamScore])
                 except ValueError:
                     print(ValueError, [rotowire['name'],winner, winnerScore, loser, loserScore])
