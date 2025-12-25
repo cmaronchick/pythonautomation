@@ -1,5 +1,5 @@
 # Python script for web scraping to extract data from a website
-import requests, sys, datetime, signal
+import requests, sys, datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -9,7 +9,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, WebDriverException
 import csv, traceback, array
-from functools import wraps
 from scraper_nfl import fetch_nfl_data
 from scraper_usatoday import fetch_usatoday_data
 from scraper_espn import fetch_espn_data
@@ -21,30 +20,6 @@ from scraper_sbr import fetch_sbr_data
 from scraper_clutchpoints import fetch_clutchpoints_data
 from scraper_copilot import fetch_copilot_data
 from scraper_rotowire import fetch_rotowire_data
-
-# Timeout decorator to prevent indefinite hangs
-def timeout_handler(signum, frame):
-    raise TimeoutException("Function call timed out")
-
-def with_timeout(timeout_seconds=60):
-    """Decorator to add timeout to function calls"""
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            # Set up signal handler for timeout
-            old_handler = signal.signal(signal.SIGALRM, timeout_handler)
-            signal.alarm(timeout_seconds)
-            try:
-                result = func(*args, **kwargs)
-            except TimeoutException as e:
-                print(f"Function {func.__name__} timed out after {timeout_seconds} seconds")
-                return []
-            finally:
-                signal.alarm(0)  # Disable the alarm
-                signal.signal(signal.SIGALRM, old_handler)
-            return result
-        return wrapper
-    return decorator
 
 weeknum = int(sys.argv[1])
 year = int(sys.argv[2])
