@@ -27,7 +27,7 @@ year = int(sys.argv[2])
 season = sys.argv[3]
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-16-picks-predictions-ats-upsets-score-projections/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-17-picks-bets-predictions-underdogs/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -36,7 +36,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-16-nfl-picks-seahawks-top-rams-on-tnf-packers-edge-bears-jaguars-upset-broncos/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-17-nfl-picks-best-bets-predictions/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -46,7 +46,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-16-picks-score-predictions-odds/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-17-picks-score-predictions-odds-playoffs/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -63,7 +63,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2025/12/15/nfl-week-16-picks-predictions-nfl-playoff-implications-2025-season/84643076007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2025/12/22/nfl-week-17-picks-predictions-projections-game-scores/85063638007/',
     'name': 'Jeremy Cluff', # Jenna Ortiz', # 
     'searchTerm': 'Score prediction:', # cluff: 'Prediction:'
     'searchTag': 'strong',
@@ -86,7 +86,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-16-game-01kcm76c4eqh',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-17-game-01kd1w4bxerd/',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -112,7 +112,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-16/462d587f5262a948a2423513',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-17/d978e065bd0128d1b3b29a2d',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -121,7 +121,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-16/cbb3153f63d035ec4d7a69f2'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-17/3ecdb38d2014637a2ee2fa2c'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -140,7 +140,7 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/12/18/nfl-week-16-picks-predictions-ai/87808256007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2025/12/25/nfl-week-17-picks-predictions-ai/87909937007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -148,7 +148,7 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/e0091166-20b0-4dbd-a6bc-b68fcd865c59?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/fa47e863-f698-447a-8b86-3461a5db4e06?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
@@ -158,7 +158,7 @@ espn = {
 }
 
 nfl = {
-    'url': 'https://www.nfl.com/news/nfl-picks-week-16-2025-nfl-season'
+    'url': 'https://www.nfl.com/news/nfl-picks-week-17-2025-nfl-season'
     # https://www.nfl.com/news/series/game-picks-news
     # 'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season' - https://www.nfl.com/news/nfl-picks-divisional-round-2024-nfl-season
 
