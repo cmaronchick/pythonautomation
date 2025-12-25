@@ -45,13 +45,14 @@ articleTable = [
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-weboptions = webdriver.ChromeOptions()
-weboptions.accept_insecure_certs = True
-weboptions.add_argument('--ignore-certificate-errors')
-weboptions.add_argument('disable-notifications')
-weboptions.page_load_strategy = 'eager'
-driver = webdriver.Chrome(options=weboptions)
-def fetch_oddsshark_data(weeknum):
+# weboptions = webdriver.ChromeOptions()
+# weboptions.accept_insecure_certs = True
+# weboptions.add_argument('--ignore-certificate-errors')
+# weboptions.add_argument('disable-notifications')
+# weboptions.page_load_strategy = 'eager'
+def fetch_oddsshark_data(weeknum, weboptions):
+    
+    driver = webdriver.Chrome(options=weboptions)
     print('fetch_dratings_data:')
     oddssharkrows = []
     try:
@@ -75,13 +76,15 @@ def fetch_oddsshark_data(weeknum):
                     continue
                 awayTeamScore = round(float(scores[1].text))
                 homeTeamScore = round(float(scores [3].text))
-                print('awayTeam, awayTeamScore, homeTeam, homeTeamScore:', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
+                # print('awayTeam, awayTeamScore, homeTeam, homeTeamScore:', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
                 oddssharkrows.append(['oddsshark', awayTeam, awayTeamScore, homeTeam, homeTeamScore])
-        print('dratingsrows:', oddssharkrows)
+        # print('dratingsrows:', oddssharkrows)
+        driver.close()
         return oddssharkrows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
+        driver.close()
         return oddssharkrows
 
 

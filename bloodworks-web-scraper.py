@@ -6,8 +6,11 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
-import csv, docx
+from selenium.webdriver.support import expected_conditions
+import csv, docx, traceback
 from docx import Document
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import StaleElementReferenceException
 
 aos = [
     "Alpines",
@@ -34,6 +37,7 @@ aos = [
     "PBJ - Google Monday",
     "PBJ - Google Thursday",
     "PBJ - Ravenna",
+    "Purple Haze",
     "Perestroika",
     "Rat City",
     "Robinswood",
@@ -70,6 +74,7 @@ zipcodes = [
     98146,
     98007,
     98034,
+    98056,
     98072            
 ]
 
@@ -85,6 +90,7 @@ zipcodesandaos = {
     98036: "Bloodsport",
     98043: "Hawks Nest",
     98052: "Bobcat, Grasslawn",
+    98056: "Purple Haze",
     98072: "Timber, Tundra, Tundra Speed",
     98103: "Gasworks",
     98105: "PBJ - Ravenna",
@@ -123,6 +129,7 @@ aosandzipcodes = {
     "PBJ - Google Thursday": 98033,
     "PBJ - Ravenna": 98105,
     "Perestroika": 98005,
+    "Purple Haze": 98056,
     "Rat City": 98146,
     "Robinswood": 98007,
     "Ruck Mountain": 98033,
@@ -201,7 +208,7 @@ wait = WebDriverWait(driver, timeout=2)
 zipcode_box = driver.find_element(By.NAME, "zipcode")
 wait.until(lambda d : zipcode_box.is_displayed())
 distanceSlider = driver.find_element(By.CLASS_NAME, "slider-handle")
-i = 25
+i = 22
 while i > 0:
     distanceSlider.send_keys(Keys.ARROW_LEFT)
     i = i - 1
@@ -210,70 +217,80 @@ document = Document()
 for z in zipcodes:
     header = zipcodesandaos[z]
     
-    print('header: ', header)
-    zipcode_box = driver.find_element(By.NAME, "zipcode")
-    zipcode_box.click()
-    zipcode_box.send_keys(Keys.HOME)
-    zipcode_box.send_keys(z)
-    searchBtn = driver.find_element(By.ID, "search")
+    print('header: ', header, '; z: ', z)
+    try: 
+        zipcode_box = driver.find_element(By.NAME, "zipcode")
+        zipcode_box.click()
+        zipcode_box.send_keys(Keys.HOME)
+        zipcode_box.send_keys(z)
+        searchBtn = driver.find_element(By.ID, "search")
 
-    endDateBox = driver.find_element(By.NAME, "end_date")
-    endDateBox.click()
-    endDateBox.send_keys(Keys.END)
-    endDateBox.send_keys(Keys.SHIFT + Keys.HOME)
-    endDateBox.send_keys(Keys.DELETE)
-    for letter in datestring:
-        endDateBox.send_keys(letter)
-    endDateBox.send_keys(Keys.TAB)
-    searchBtn.click()
+        endDateBox = driver.find_element(By.NAME, "end_date")
+        endDateBox.click()
+        # endDateBox.send_keys(Keys.END)
+        # endDateBox.send_keys(Keys.SHIFT + Keys.HOME)
+        # endDateBox.send_keys(Keys.DELETE)
+        for letter in datestring:
+            endDateBox.send_keys(letter)
+        endDateBox.send_keys(Keys.TAB)
+        searchBtn.click()
 
-    driver.implicitly_wait(10)
-    resultsTable = driver.find_element(By.ID, "item_table")
-    wait.until(lambda d : resultsTable.is_displayed())
-
-    dateCol = resultsTable.find_element(By.XPATH, "//*[@id=\"item_table\"]/thead/tr/th[4]")
-    dateCol.click()
-    results = resultsTable.find_elements(By.TAG_NAME, "tr")
-    print(len(results))
-    filename = datestring.replace("/", "_")
-    fields = ['AOs', 'Drive Name', 'Drive Date/Time', 'Drive Link']
-    rows = []
-    paginateBtns = len(driver.find_elements(By.CLASS_NAME, "paginate_button")) - 2
-    p = 0
-    while p < paginateBtns:
+        driver.implicitly_wait(10)
+        ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
+        WebDriverWait(driver=driver, timeout=30,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.ID, "item_table")))
         resultsTable = driver.find_element(By.ID, "item_table")
         wait.until(lambda d : resultsTable.is_displayed())
 
+        WebDriverWait(driver=driver, timeout=30,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, "//*[@id=\"item_table\"]/thead/tr/th[4]")))
+        dateCol = resultsTable.find_element(By.XPATH, "//*[@id=\"item_table\"]/thead/tr/th[4]") #//*[@id="item_table"]/thead/tr/th[4]
+        wait.until(lambda d : dateCol.is_displayed())
+        dateCol.click()
+        WebDriverWait(driver=driver, timeout=30,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.TAG_NAME, "tr")))
         results = resultsTable.find_elements(By.TAG_NAME, "tr")
-        nextButton = driver.find_element(By.ID, "item_table_next")
-        nextButtonATag = nextButton.find_element(By.TAG_NAME, "a")
-        for row in results:
-            cols = row.find_elements(By.TAG_NAME, "td")
-            if len(cols) > 0:
-                driveName = cols[0].text
-                driveDateTime = cols[3].text
-                driveDateTime = driveDateTime.replace('\n', ' ')
-                driveLink = cols[4].find_element(By.TAG_NAME, 'a').get_attribute("href")
-                rows.append([zipcodesandaos[z], driveName, driveDateTime, driveLink])
-        nextButtonATag.click()
-        p = p + 1
+        print(len(results))
+        filename = datestring.replace("/", "_")
+        fields = ['AOs', 'Drive Name', 'Drive Date/Time', 'Drive Link']
+        rows = []
+        paginateBtns = len(driver.find_elements(By.CLASS_NAME, "paginate_button")) - 2
+        p = 0
+        while p < paginateBtns:
+            WebDriverWait(driver=driver, timeout=30,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.ID, "item_table")))
+            resultsTable = driver.find_element(By.ID, "item_table")
+            wait.until(lambda d : resultsTable.is_displayed())
 
-    blooddrivescsv = open(filename + ".csv", 'w+')
-    with blooddrivescsv as csvfile:
-        
-        # creating a csv writer object  
-        csvwriter = csv.writer(csvfile)  
-            
-        # writing the fields  
-        csvwriter.writerow(fields)  
-            
-        # writing the data rows  
-        csvwriter.writerows(rows) 
+            results = resultsTable.find_elements(By.TAG_NAME, "tr")
+            nextButton = driver.find_element(By.ID, "item_table_next")
+            nextButtonATag = nextButton.find_element(By.TAG_NAME, "a")
+            for row in results:
+                cols = row.find_elements(By.TAG_NAME, "td")
+                if len(cols) > 0:
+                    driveName = cols[0].text
+                    driveDateTime = cols[3].text
+                    driveDateTime = driveDateTime.replace('\n', ' ')
+                    driveLink = cols[4].find_element(By.TAG_NAME, 'a').get_attribute("href")
+                    rows.append([zipcodesandaos[z], driveName, driveDateTime, driveLink])
+            nextButtonATag.click()
+            p = p + 1
 
-    document.add_heading(str(header) + ' Blood Drives through ' + datestring)
-    for row in rows:
-        p = document.add_paragraph('')
-        add_hyperlink(p, row[1] + ", " + row[2], row[3] )
+        blooddrivescsv = open(filename + ".csv", 'w+')
+        with blooddrivescsv as csvfile:
+            
+            # creating a csv writer object  
+            csvwriter = csv.writer(csvfile)  
+                
+            # writing the fields  
+            csvwriter.writerow(fields)  
+                
+            # writing the data rows  
+            csvwriter.writerows(rows) 
+
+        document.add_heading(str(header) + ' Blood Drives through ' + datestring)
+        for row in rows:
+            p = document.add_paragraph('')
+            add_hyperlink(p, row[1] + ", " + row[2], row[3] )
+    except Exception as e:
+        print('e: ', e )
+        print(traceback.print_exc())
 
 document.save("blood-drives-" + filename + ".docx")
 

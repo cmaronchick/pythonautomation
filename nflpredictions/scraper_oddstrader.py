@@ -45,14 +45,10 @@ articleTable = [
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-weboptions = webdriver.ChromeOptions()
-weboptions.accept_insecure_certs = True
-weboptions.add_argument('--ignore-certificate-errors')
-weboptions.add_argument('disable-notifications')
-weboptions.page_load_strategy = 'eager'
-driver = webdriver.Chrome(options=weboptions)
-def fetch_oddstrader_data(weeknum):
+def fetch_oddstrader_data(weeknum, weboptions):
     print('fetch_oddstrader_data:')
+    
+    driver = webdriver.Chrome(options=weboptions)
     oddstraderrows = []
     try:
         for url in articleTable:
@@ -98,10 +94,12 @@ def fetch_oddstrader_data(weeknum):
                     print('Exception: ', e)
                 columnIndex = columnIndex + 1
         print('oddstraderrows:', oddstraderrows)
+        driver.close()
         return oddstraderrows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
+        driver.close()
         return oddstraderrows
 
 

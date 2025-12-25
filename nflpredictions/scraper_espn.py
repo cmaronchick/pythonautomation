@@ -14,10 +14,11 @@ chrome_driver_path = './chromedriver'
 service = Service(chrome_driver_path)
 weboptions = webdriver.ChromeOptions()
 weboptions.accept_insecure_certs = True
-driver = webdriver.Chrome(options=weboptions)
+weboptions.add_argument("--log-level=3")
 
 # espn formatting
-def fetch_espn_data(weeknum, url):
+def fetch_espn_data(weeknum, url, weboptions):
+    driver = webdriver.Chrome(options=weboptions)
     espnrows = []
     try: 
         driver.get(url)
@@ -38,11 +39,13 @@ def fetch_espn_data(weeknum, url):
         picks = []
         for graphs in picksGraph:
             splitPicks = graphs.text.split("\n")
-            # print('splitPicks:', splitPicks)
+            print('splitPicks:', splitPicks)
             for pick in splitPicks:
                 picks.append(pick)
-        print('picks:', len(picks))
-        for predictionString in picks:
+        print('picks:', len(picks), picks)
+        for pick in picks:
+            predictionString = pick
+            print('predictionString: ', predictionString)
             if predictionString.find("FPI") > -1:
                 continue
             separatorString = ", "
@@ -77,9 +80,9 @@ def fetch_espn_data(weeknum, url):
     except Exception as e:
         print('espn exception: ', e)
         return espnrows
-def main(weeknum):
+def main(weeknum, weboptions):
     print('weeknum:', weeknum)
-    html_content = fetch_espn_data(1,'https://www.espn.com/nfl/story/_/page/nflviewguide-43441049/nfl-divisional-round-playoffs-picks-schedule-odds-injuries-stats-2024-2025')
+    html_content = fetch_espn_data(weeknum,'https://www.espn.com/nfl/story/_/page/viewersguide46941264/nfl-week-11-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025', {})
     if html_content:
         print(html_content)
         return html_content
@@ -87,7 +90,7 @@ def main(weeknum):
         print("Failed to retrieve data")
 
 if __name__ == "__main__":
-    espnrows = main(sys.argv[1])
+    espnrows = main(sys.argv[1], {})
     print('espnrows:', espnrows)
 
     week1picks = open("2024week" + str(sys.argv[1]) + "espnpicks.csv", 'w+', newline='')

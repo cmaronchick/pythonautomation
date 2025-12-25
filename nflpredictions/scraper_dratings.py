@@ -39,21 +39,22 @@ imageTable = {
 
 articleTable = [
     "https://www.dratings.com/predictor/nfl-football-predictions/#scroll-upcoming",
-    "https://www.dratings.com/predictor/nfl-football-predictions/upcoming/3#scroll-upcoming",
-    "https://www.dratings.com/predictor/nfl-football-predictions/upcoming/4#scroll-upcoming"
+    "https://www.dratings.com/predictor/nfl-football-predictions/upcoming/4#scroll-upcoming",
+    "https://www.dratings.com/predictor/nfl-football-predictions/upcoming/5#scroll-upcoming"
     
 ]
 
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-weboptions = webdriver.ChromeOptions()
-weboptions.accept_insecure_certs = True
-weboptions.add_argument('--ignore-certificate-errors')
-weboptions.add_argument('disable-notifications')
-weboptions.page_load_strategy = 'eager'
-driver = webdriver.Chrome(options=weboptions)
-def fetch_dratings_data(weeknum):
+# weboptions = webdriver.ChromeOptions()
+# weboptions.accept_insecure_certs = True
+# weboptions.add_argument('--ignore-certificate-errors')
+# weboptions.add_argument('disable-notifications')
+# weboptions.add_argument("--log-level=3")
+# weboptions.page_load_strategy = 'eager'
+def fetch_dratings_data(weeknum, weboptions):
+    driver = webdriver.Chrome(options=weboptions)
     print('fetch_dratings_data:')
     dratingsrows = []
     try:
@@ -99,7 +100,7 @@ def fetch_dratings_data(weeknum):
                             print('spans: ', spans)
                             awayTeamScore = round(float(spans[0]))
                             homeTeamScore = round(float(spans[1]))                        
-                            print('author:', 'DRatings', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
+                            # print('author:', 'DRatings', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
                             dratingsrows.append(['DRatings',awayTeam, awayTeamScore, homeTeam, homeTeamScore])
                     columnIndex = columnIndex + 1
         print('dratingsrows:', dratingsrows)

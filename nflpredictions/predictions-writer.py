@@ -6,9 +6,11 @@ import config
 
 sns = boto3.client('sns', region_name='us-west-2')
 
-weeknum = 1
+weeknum = 3
 season = "reg"
 year = 2025
+
+byeTeams = [""]
 
 def filterGames(awayCode,homeCode):
     for game in games:
@@ -29,6 +31,8 @@ if (len(sys.argv) > 3):
     predictionsCollection = db['predictions']
 
     games = list(collection.find({ "sport": 'nfl', "season": season, "year": year, "gameWeek": weeknum}))
+
+    
     print(len(games))
     updates = []
     updateGameIds = []
