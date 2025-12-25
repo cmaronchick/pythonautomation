@@ -741,13 +741,15 @@ try:
 
 except KeyboardInterrupt:
     print(f"\nManual skip triggered! Moving to next URL...")
-except:    
+except Exception as e:    
+    print(f"Unexpected error: {e}")
     print(traceback.print_exc())
 finally:
     # Ensure driver is closed properly
     try:
         driver.quit()
-    except:
+    except (NameError, AttributeError):
+        # driver may not be defined or may not have quit method
         pass
     
     # Write results to CSV file
