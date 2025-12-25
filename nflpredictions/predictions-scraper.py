@@ -243,7 +243,7 @@ try:
     for writer in writersArray:
         print('i: ', i)
         if i % 5 == 0:
-            driver.close()
+            driver.quit()
             driver = webdriver.Chrome(options=weboptions)
             driver.set_page_load_timeout(35) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
         if writer['url'] != '':
@@ -405,14 +405,12 @@ try:
             # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
             try:
                 rows.append(['JohnBreech',winner, int(winnerScore), loser, int(loserScore)])
-                driver.close()
             except KeyboardInterrupt:
                 print(f"\nManual skip triggered! Moving to next URL...")
                 continue  # Skips the rest of this loop iteration
             except ValueError:
                 errors.append(['JohnBreech', traceback.print_exc(), ValueError])
                 print(ValueError)
-                driver.close()
         # # sportsnaut formatting
 
         response = requests.get(sportsnaut['url'])
@@ -551,7 +549,6 @@ try:
     except ValueError:
         errors.append(['Iyer', traceback.print_exc(), ValueError])
         print('iyer ValueError: ', ValueError)
-        driver.close()
 
 
     if espn['url'] is not None:
