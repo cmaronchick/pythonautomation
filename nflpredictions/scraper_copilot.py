@@ -26,13 +26,14 @@ def fetch_copilot_data(weeknum, url, weboptions):
         'separator': ', '
     }
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     print('fetch_copilot_data:', url)
     copilotrows = []
     try:
         i = 0
         driver.get(url)
         
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
         
         
         # response = requests.get(writer['url'], headers=request_headers)
@@ -132,12 +133,12 @@ def fetch_copilot_data(weeknum, url, weboptions):
                 # traceback.print_exc()
             pickNum = pickNum + 1
         # print('copilotrows:', copilotrows)
-        driver.close()
+        driver.quit()
         return copilotrows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
-        driver.close()
+        driver.quit()
         return copilotrows
 
 
