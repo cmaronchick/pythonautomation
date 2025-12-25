@@ -351,13 +351,13 @@ def fetch_usatoday_data(weeknum, url):
                 pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')
                 print('usatoday picklinks 80:', len(pickLinks))
         print('usatodayrows: done') # usatodayrows
-        driver.quit()
         return usatodayrows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
-        driver.quit()
         return usatodayrows
+    finally:
+        driver.quit()
 
 
 def main(weeknum):
