@@ -743,15 +743,14 @@ except KeyboardInterrupt:
     print(f"\nManual skip triggered! Moving to next URL...")
 except Exception as e:    
     print(f"Unexpected error: {e}")
-    traceback.print_exc()
 finally:
     # Ensure driver is closed properly
     if 'driver' in locals():
         try:
             driver.quit()
-        except Exception:
-            # Silently ignore any errors during cleanup
-            pass
+        except Exception as cleanup_error:
+            # Log but don't raise - we're already in cleanup
+            print(f"Warning: Error during driver cleanup: {cleanup_error}")
     
     # Write results to CSV file
     week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')

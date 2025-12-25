@@ -58,7 +58,8 @@ articleTable = [
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-# Global driver removed - will be created per function call
+# Global driver removed to prevent resource leaks and hanging issues.
+# Each function now creates and manages its own driver instance for better isolation.
 
 def fetch_usatoday_data(weeknum, url):
     weboptions = webdriver.ChromeOptions()
