@@ -15,11 +15,12 @@ service = Service(chrome_driver_path)
 
 def fetch_nfl_data(weeknum, url, weboptions):
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     try: 
         # nfl formatting
         nflrows = []
         driver.get(url) #'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season'
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
         # driver.implicitly_wait(10)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         articleBody = driver.find_element(By.CLASS_NAME, "nfl-c-article__body")
@@ -71,11 +72,11 @@ def fetch_nfl_data(weeknum, url, weboptions):
                     nflrows.append([author,winningTeam, winningScore, losingTeam, losingScore]) 
             tableIndex = tableIndex + 1
         # print(nflrows)
-        driver.close()
+        driver.quit()
         return nflrows
     except Exception as e:
         print('nfl exception: ', e)
-        driver.close()
+        driver.quit()
         return nflrows
 
 def main(weeknum):

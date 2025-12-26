@@ -19,10 +19,11 @@ weboptions.add_argument("--log-level=3")
 # espn formatting
 def fetch_espn_data(weeknum, url, weboptions):
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     espnrows = []
     try: 
         driver.get(url)
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
         driver.implicitly_wait(10)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         # wait.until(lambda d : resultsTable.is_displayed())
@@ -76,9 +77,11 @@ def fetch_espn_data(weeknum, url, weboptions):
             
             print([writer + 'ESPN',winningTeam, winnerScore, losingTeam, loserScore])
             espnrows.append([writer + 'ESPN',winningTeam, winnerScore, losingTeam, loserScore])
+        driver.quit()
         return espnrows
     except Exception as e:
         print('espn exception: ', e)
+        driver.quit()
         return espnrows
 def main(weeknum, weboptions):
     print('weeknum:', weeknum)

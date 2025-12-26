@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, WebDriverException
 import csv, traceback, array
 from scraper_nfl import fetch_nfl_data
 from scraper_usatoday import fetch_usatoday_data
@@ -19,8 +20,6 @@ from scraper_sbr import fetch_sbr_data
 from scraper_clutchpoints import fetch_clutchpoints_data
 from scraper_copilot import fetch_copilot_data
 from scraper_rotowire import fetch_rotowire_data
-
-
 
 weeknum = int(sys.argv[1])
 year = int(sys.argv[2])
@@ -244,7 +243,7 @@ try:
     for writer in writersArray:
         print('i: ', i)
         if i % 5 == 0:
-            driver.close()
+            driver.quit()
             driver = webdriver.Chrome(options=weboptions)
             driver.set_page_load_timeout(35) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
         if writer['url'] != '':
@@ -265,9 +264,18 @@ try:
             # weboptions.add_argument('--ignore-certificate-errors')
             # weboptions.add_argument('--ignore-ssl-errors')
             print('getting url')
-            driver.get(writer['url'])
+            try:
+                driver.get(writer['url'])
+            except TimeoutException:
+                print(f"Page load timeout for {writer['name']}: {writer['url']}")
+                errors.append([writer['name'], 'Page load timeout', writer['url']])
+                continue
+            except WebDriverException as e:
+                print(f"WebDriver error for {writer['name']}: {e}")
+                errors.append([writer['name'], 'WebDriver error', str(e)])
+                continue
             print('waiting')
-            wait = WebDriverWait(driver, timeout=2)
+            wait = WebDriverWait(driver, timeout=10)
             driver.implicitly_wait(10)
             print('done waiting')
             # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
@@ -397,14 +405,12 @@ try:
             # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
             try:
                 rows.append(['JohnBreech',winner, int(winnerScore), loser, int(loserScore)])
-                driver.close()
             except KeyboardInterrupt:
                 print(f"\nManual skip triggered! Moving to next URL...")
                 continue  # Skips the rest of this loop iteration
             except ValueError:
                 errors.append(['JohnBreech', traceback.print_exc(), ValueError])
                 print(ValueError)
-                driver.close()
         # # sportsnaut formatting
 
         response = requests.get(sportsnaut['url'])
@@ -543,16 +549,21 @@ try:
     except ValueError:
         errors.append(['Iyer', traceback.print_exc(), ValueError])
         print('iyer ValueError: ', ValueError)
-        driver.close()
 
 
     if espn['url'] is not None:
-        espnrows = fetch_espn_data(weeknum, espn['url'], weboptions)
-        for espnrow in espnrows:
-            rows.append(espnrow)
+        print('Fetching ESPN data...')
+        try:
+            espnrows = fetch_espn_data(weeknum, espn['url'], weboptions)
+            for espnrow in espnrows:
+                rows.append(espnrow)
+        except Exception as e:
+            print(f'ESPN fetch error: {e}')
+            errors.append(['ESPN', str(e), traceback.format_exc()])
 
         # dimers formatting
         try:
+            print('Fetching Dimers data...')
             driver.get('https://www.dimers.com/bet-hub/nfl/schedule') # https://www.dimers.com/bet-hub/nfl/schedule
             driver.implicitly_wait(10)
             driver.refresh()
@@ -629,78 +640,119 @@ try:
 
 
     # usatoday formatting
-    
-    usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
-    for usatodayrow in usatodayrows:
-        rows.append(usatodayrow)
+    print('Fetching USA Today data...')
+    try:
+        usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
+        for usatodayrow in usatodayrows:
+            rows.append(usatodayrow)
+    except Exception as e:
+        print(f'USA Today fetch error: {e}')
+        errors.append(['USAToday', str(e), traceback.format_exc()])
         
                 # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
 
     # nfl formatting
-    
-    nflrows = fetch_nfl_data(weeknum, nfl['url'], weboptions)
-    for nflrow in nflrows:
-        rows.append(nflrow)
+    print('Fetching NFL data...')
+    try:
+        nflrows = fetch_nfl_data(weeknum, nfl['url'], weboptions)
+        for nflrow in nflrows:
+            rows.append(nflrow)
+    except Exception as e:
+        print(f'NFL fetch error: {e}')
+        errors.append(['NFL', str(e), traceback.format_exc()])
         
                 # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
 
-    oddssharkrows = fetch_oddsshark_data(weeknum, weboptions)
-    for oddssharkrow in oddssharkrows:
-        rows.append(oddssharkrow)
+    print('Fetching OddsShark data...')
+    try:
+        oddssharkrows = fetch_oddsshark_data(weeknum, weboptions)
+        for oddssharkrow in oddssharkrows:
+            rows.append(oddssharkrow)
+    except Exception as e:
+        print(f'OddsShark fetch error: {e}')
+        errors.append(['OddsShark', str(e), traceback.format_exc()])
         
-    dratingsrows = fetch_dratings_data(weeknum, weboptions)
-    for dratingsrow in dratingsrows:
-        rows.append(dratingsrow)
+    print('Fetching DRatings data...')
+    try:
+        dratingsrows = fetch_dratings_data(weeknum, weboptions)
+        for dratingsrow in dratingsrows:
+            rows.append(dratingsrow)
+    except Exception as e:
+        print(f'DRatings fetch error: {e}')
+        errors.append(['DRatings', str(e), traceback.format_exc()])
 
-    oddstraderrows = fetch_oddstrader_data(weeknum, weboptions)
-    for oddstraderrow in oddstraderrows:
-        rows.append(oddstraderrow)
+    print('Fetching OddsTrader data...')
+    try:
+        oddstraderrows = fetch_oddstrader_data(weeknum, weboptions)
+        for oddstraderrow in oddstraderrows:
+            rows.append(oddstraderrow)
+    except Exception as e:
+        print(f'OddsTrader fetch error: {e}')
+        errors.append(['OddsTrader', str(e), traceback.format_exc()])
 
         
 
-    nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, weboptions)
-    for nflspinzonerow in nflspinzonerows:
-        rows.append(nflspinzonerow)
+    print('Fetching NFLSpinZone data...')
+    try:
+        nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, weboptions)
+        for nflspinzonerow in nflspinzonerows:
+            rows.append(nflspinzonerow)
+    except Exception as e:
+        print(f'NFLSpinZone fetch error: {e}')
+        errors.append(['NFLSpinZone', str(e), traceback.format_exc()])
 
-    sbrrows = fetch_sbr_data(weeknum, sbr['url'], weboptions)
-    for sbrrow in sbrrows:
-        rows.append(sbrrow)
+    print('Fetching SBR data...')
+    try:
+        sbrrows = fetch_sbr_data(weeknum, sbr['url'], weboptions)
+        for sbrrow in sbrrows:
+            rows.append(sbrrow)
+    except Exception as e:
+        print(f'SBR fetch error: {e}')
+        errors.append(['SBR', str(e), traceback.format_exc()])
 
-    clutchpointsrows = fetch_clutchpoints_data(weeknum, clutchpoints['url'], weboptions)
-    for clutchpointsrow in clutchpointsrows:
-        rows.append(clutchpointsrow)
+    print('Fetching ClutchPoints data...')
+    try:
+        clutchpointsrows = fetch_clutchpoints_data(weeknum, clutchpoints['url'], weboptions)
+        for clutchpointsrow in clutchpointsrows:
+            rows.append(clutchpointsrow)
+    except Exception as e:
+        print(f'ClutchPoints fetch error: {e}')
+        errors.append(['ClutchPoints', str(e), traceback.format_exc()])
 
     
-    copilotrows = fetch_copilot_data(weeknum, copilot['url'], weboptions)
-    for copilotrow in copilotrows:
-        rows.append(copilotrow)
+    print('Fetching Copilot data...')
+    try:
+        copilotrows = fetch_copilot_data(weeknum, copilot['url'], weboptions)
+        for copilotrow in copilotrows:
+            rows.append(copilotrow)
+    except Exception as e:
+        print(f'Copilot fetch error: {e}')
+        errors.append(['Copilot', str(e), traceback.format_exc()])
     
-    rotowirerows = fetch_rotowire_data(weeknum, rotowire['url'], weboptions)
-    for rotowirerow in rotowirerows:
-        rows.append(rotowirerow)
+    print('Fetching Rotowire data...')
+    try:
+        rotowirerows = fetch_rotowire_data(weeknum, rotowire['url'], weboptions)
+        for rotowirerow in rotowirerows:
+            rows.append(rotowirerow)
+    except Exception as e:
+        print(f'Rotowire fetch error: {e}')
+        errors.append(['Rotowire', str(e), traceback.format_exc()])
 
-
-    ### Final Row for printing picks ###
-    week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
-    with week1picks as csvfile:
-        
-        # creating a csv writer object  
-        csvwriter = csv.writer(csvfile)  
-            
-        # writing the fields  
-        
-        fields = ['Source', 'Winner', 'Winner Score', 'Loser', 'Loser Score']
-        csvwriter.writerow(fields)  
-            
-        # writing the data rows  
-        csvwriter.writerows(rows) 
-        csvwriter.writerows(errors)
-        csvwriter.writerows(nopicks)
 
 except KeyboardInterrupt:
     print(f"\nManual skip triggered! Moving to next URL...")
-except:    
-    print(traceback.print_exc())
+except Exception as e:    
+    print(f"Unexpected error: {e}")
+finally:
+    # Ensure driver is closed properly
+    if 'driver' in locals():
+        try:
+            driver.quit()
+        except Exception as cleanup_error:
+            # Log but don't raise - we're already in cleanup
+            print(f"Warning: Error during driver cleanup: {cleanup_error}")
+    
+    # Write results to CSV file
     week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
     with week1picks as csvfile:
         

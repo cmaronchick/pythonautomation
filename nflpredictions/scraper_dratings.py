@@ -55,6 +55,7 @@ service = Service(chrome_driver_path)
 # weboptions.page_load_strategy = 'eager'
 def fetch_dratings_data(weeknum, weboptions):
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     print('fetch_dratings_data:')
     dratingsrows = []
     try:
@@ -62,7 +63,7 @@ def fetch_dratings_data(weeknum, weboptions):
             print('url: ', url)
             # dratings formatting
             driver.get(url)
-            wait = WebDriverWait(driver, timeout=2)
+            wait = WebDriverWait(driver, timeout=10)
             driver.implicitly_wait(3)
             writersText = []
             upcomingGames = driver.find_element(By.ID, "scroll-upcoming")
@@ -104,10 +105,12 @@ def fetch_dratings_data(weeknum, weboptions):
                             dratingsrows.append(['DRatings',awayTeam, awayTeamScore, homeTeam, homeTeamScore])
                     columnIndex = columnIndex + 1
         print('dratingsrows:', dratingsrows)
+        driver.quit()
         return dratingsrows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
+        driver.quit()
         return dratingsrows
 
 

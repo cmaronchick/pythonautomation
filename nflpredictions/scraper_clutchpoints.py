@@ -28,13 +28,14 @@ def fetch_clutchpoints_data(weeknum, url, weboptions):
         #   https://clutchpoints.com/author/sayrebedinger/
     }
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     print('fetch_clutchpoints_data:', url)
     clutchpointsrows = []
     try:
         i = 0
         driver.get(url)
         
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
         
         
         # response = requests.get(writer['url'], headers=request_headers)
@@ -130,12 +131,12 @@ def fetch_clutchpoints_data(weeknum, url, weboptions):
                 # traceback.print_exc()
             pickNum = pickNum + 1
         # print('clutchpointsrows:', clutchpointsrows)
-        driver.close()
+        driver.quit()
         return clutchpointsrows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
-        driver.close()
+        driver.quit()
         return clutchpointsrows
 
 
