@@ -28,7 +28,7 @@ year = int(sys.argv[2])
 season = sys.argv[3]
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-17-picks-bets-predictions-underdogs/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-18-picks-best-bets-predictions/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -37,7 +37,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-17-nfl-picks-best-bets-predictions/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-18-picks-and-score-predictions-best-bets-odds/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -47,7 +47,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-17-picks-score-predictions-odds-playoffs/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-18-picks-and-score-predictions-best-bets-odds/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -64,7 +64,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2025/12/22/nfl-week-17-picks-predictions-projections-game-scores/85063638007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2025/12/29/nfl-week-18-picks-predictions-score-projections-2025-season/87842933007/',
     'name': 'Jeremy Cluff', # Jenna Ortiz', # 
     'searchTerm': 'Score prediction:', # cluff: 'Prediction:'
     'searchTag': 'strong',
@@ -87,7 +87,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-17-game-01kd1w4bxerd/',
+    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-18-game-as-playoffs-approach-01kdnm2vdddw',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -113,7 +113,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-17/d978e065bd0128d1b3b29a2d',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-18/871ee4da0eb0a67e78a84c74',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -122,7 +122,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-17/3ecdb38d2014637a2ee2fa2c'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-18/553a362f0e7dc3032c3d335c'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -141,7 +141,7 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2025/12/25/nfl-week-17-picks-predictions-ai/87909937007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2026/01/01/nfl-week-18-picks-predictions-ai/87963374007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -149,17 +149,17 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/fa47e863-f698-447a-8b86-3461a5db4e06?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/b29a56b9-5696-4974-9716-3320c4e81518?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide47337400/nfl-week-16-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': 'https://www.espn.com/nfl/story?page=viewersguide47473045&_slug_=nfl-week-18-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
 nfl = {
-    'url': 'https://www.nfl.com/news/nfl-picks-week-17-2025-nfl-season'
+    'url': 'https://www.nfl.com/news/nfl-picks-week-18-2025-nfl-season'
     # https://www.nfl.com/news/series/game-picks-news
     # 'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season' - https://www.nfl.com/news/nfl-picks-divisional-round-2024-nfl-season
 
@@ -174,7 +174,7 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/beating-the-book-100960', # https://www.rotowire.com/football/column/beating-the-book-20
+    'url': 'https://www.rotowire.com/football/article/beating-the-book-101805', # https://www.rotowire.com/football/column/beating-the-book-20
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
@@ -473,15 +473,17 @@ try:
             raise TimeoutException("Page load timeout")
         
         wait = WebDriverWait(driver, timeout=10)
-        try:
-            games = wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "h3")))
-            picks = wait.until(EC.presence_of_all_elements_located(
-                (By.XPATH, "//*[contains(text(), 'Pick:')]/parent::*")
-            ))
-        except TimeoutException:
-            print("Timeout waiting for Iyer elements")
-            games = []
-            picks = []
+        # try:
+        #     games = wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "h3")))
+        #     picks = wait.until(EC.presence_of_all_elements_located(
+        #         (By.XPATH, "//*[contains(text(), 'Pick:')]/parent::*")
+        #     ))
+        # except TimeoutException:
+        #     print("Timeout waiting for Iyer elements")
+        #     games = []
+        #     picks = []
+        games = driver.find_elements(By.TAG_NAME, "h3")
+        picks = driver.find_elements(By.XPATH, "//*[contains(text(), 'Pick:')]/parent::*")
         # response = requests.get()
         # print(response)
         # soup = BeautifulSoup(response.text, 'html.parser')
@@ -597,118 +599,118 @@ try:
             errors.append(['ESPN', str(e), 'Exception'])
 
         # dimers formatting
-        try:
-            if not safe_get_url(driver, 'https://www.dimers.com/bet-hub/nfl/schedule', timeout=30):
-                print("Failed to load Dimers, skipping...")
-                raise TimeoutException("Page load timeout")
+        # try:
+        #     if not safe_get_url(driver, 'https://www.dimers.com/bet-hub/nfl/schedule', timeout=30):
+        #         print("Failed to load Dimers, skipping...")
+        #         raise TimeoutException("Page load timeout")
             
-            wait = WebDriverWait(driver, timeout=10)
-            driver.refresh()
+        #     wait = WebDriverWait(driver, timeout=10)
+        #     driver.refresh()
 
-            matchgrid = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "match-list-grid")))
-            games = matchgrid.find_elements(By.CLASS_NAME,"game-link")    
-            firstGame = wait.until(EC.element_to_be_clickable((By.CLASS_NAME,"game-link")))
+        #     matchgrid = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "match-list-grid")))
+        #     games = matchgrid.find_elements(By.CLASS_NAME,"game-link")    
+        #     firstGame = wait.until(EC.element_to_be_clickable((By.CLASS_NAME,"game-link")))
             
-            popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
-            if len(popup) > 0:
-                try:
-                    wait.until(EC.element_to_be_clickable(popup[0]))
-                    popup[0].click()
-                except TimeoutException:
-                    print("Popup close timeout, continuing...")
-            try: 
-                pageBlocker = driver.find_element(By.CLASS_NAME, 'ab-page-blocker')
-                if pageBlocker is not None:
-                    closeButton = driver.find_element(By.CLASS_NAME, "ab-close-button")
-                    wait.until(EC.element_to_be_clickable(closeButton))
-                    closeButton.click()
-            except (TimeoutException, NoSuchElementException):
-                print('ad blocker not found or timeout')            
+        #     popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
+        #     if len(popup) > 0:
+        #         try:
+        #             wait.until(EC.element_to_be_clickable(popup[0]))
+        #             popup[0].click()
+        #         except TimeoutException:
+        #             print("Popup close timeout, continuing...")
+        #     try: 
+        #         pageBlocker = driver.find_element(By.CLASS_NAME, 'ab-page-blocker')
+        #         if pageBlocker is not None:
+        #             closeButton = driver.find_element(By.CLASS_NAME, "ab-close-button")
+        #             wait.until(EC.element_to_be_clickable(closeButton))
+        #             closeButton.click()
+        #     except (TimeoutException, NoSuchElementException):
+        #         print('ad blocker not found or timeout')            
             
-            try:
-                wait.until(EC.element_to_be_clickable(firstGame))
-                if firstGame is not None:
-                    firstGame.click()
-            except TimeoutException:
-                print("First game not clickable, skipping Dimers...")
-                raise
-                # response = requests.get()
-                # print(response)
-                # soup = BeautifulSoup(response.text, 'html.parser')
-                # games = soup.find_all('h3')
-                # picks = soup.find_all('strong', string="Pick: ") #, attrs={'class': 'Article-content'}
+        #     try:
+        #         wait.until(EC.element_to_be_clickable(firstGame))
+        #         if firstGame is not None:
+        #             firstGame.click()
+        #     except TimeoutException:
+        #         print("First game not clickable, skipping Dimers...")
+        #         raise
+        #         # response = requests.get()
+        #         # print(response)
+        #         # soup = BeautifulSoup(response.text, 'html.parser')
+        #         # games = soup.find_all('h3')
+        #         # picks = soup.find_all('strong', string="Pick: ") #, attrs={'class': 'Article-content'}
 
-                # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
+        #         # print([t.parent.text for t in soup.findAll('strong', string="Projected score")])
                 
-                # print('gamesObject: ', gamesObject)
-                g = 0
-                while g < len(games)-1: 
-                    try:
-                        teams = wait.until(EC.presence_of_all_elements_located(
-                            (By.CLASS_NAME, "team-column")
-                        ))
-                    except TimeoutException:
-                        print(f"Timeout waiting for teams at game {g}, skipping...")
-                        g = g + 1
-                        continue
+        #         # print('gamesObject: ', gamesObject)
+        #         g = 0
+        #         while g < len(games)-1: 
+        #             try:
+        #                 teams = wait.until(EC.presence_of_all_elements_located(
+        #                     (By.CLASS_NAME, "team-column")
+        #                 ))
+        #             except TimeoutException:
+        #                 print(f"Timeout waiting for teams at game {g}, skipping...")
+        #                 g = g + 1
+        #                 continue
                     
-                    if teams is not None and len(teams) > 0:
-                        try:
-                            scores = wait.until(EC.presence_of_all_elements_located(
-                                (By.CLASS_NAME, "score")
-                            ))
-                        except TimeoutException:
-                            print(f"Timeout waiting for scores at game {g}, skipping...")
-                            g = g + 1
-                            continue
-                        awayTeam = teams[0].text
-                        awayScore = scores[0].text
-                        homeTeam = teams[1].text
-                        homeScore = scores[1].text
+        #             if teams is not None and len(teams) > 0:
+        #                 try:
+        #                     scores = wait.until(EC.presence_of_all_elements_located(
+        #                         (By.CLASS_NAME, "score")
+        #                     ))
+        #                 except TimeoutException:
+        #                     print(f"Timeout waiting for scores at game {g}, skipping...")
+        #                     g = g + 1
+        #                     continue
+        #                 awayTeam = teams[0].text
+        #                 awayScore = scores[0].text
+        #                 homeTeam = teams[1].text
+        #                 homeScore = scores[1].text
                         
                         
-                        print('awayTeam, awayScore, homeTeam, homeScore: ', awayTeam, awayScore, homeTeam, homeScore)
-                        if awayScore > homeScore:
-                            winner = awayTeam
-                            winnerScore = awayScore
-                            loser = homeTeam
-                            loserScore = homeScore
-                        else:
-                            winner = homeTeam
-                            winnerScore = homeScore
-                            loser = awayTeam
-                            loserScore = awayScore    
+        #                 print('awayTeam, awayScore, homeTeam, homeScore: ', awayTeam, awayScore, homeTeam, homeScore)
+        #                 if awayScore > homeScore:
+        #                     winner = awayTeam
+        #                     winnerScore = awayScore
+        #                     loser = homeTeam
+        #                     loserScore = homeScore
+        #                 else:
+        #                     winner = homeTeam
+        #                     winnerScore = homeScore
+        #                     loser = awayTeam
+        #                     loserScore = awayScore    
                             
-                        rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
-                        try:
-                            navButtons = wait.until(EC.presence_of_all_elements_located(
-                                (By.CLASS_NAME,"match-nav-link")
-                            ))
-                            if len(navButtons) > 1:
-                                wait.until(EC.element_to_be_clickable(navButtons[1]))
-                                navButtons[1].click()
-                                # Give a moment for page to update, but don't wait for staleness
-                                import time
-                                time.sleep(1)
-                        except (TimeoutException, StaleElementReferenceException) as e:
-                            print(f"Navigation error at game {g}: {e}")
-                        g = g + 1
-                        print('g:', g)
-                    else:
-                        g = g + 1
+        #                 rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
+        #                 try:
+        #                     navButtons = wait.until(EC.presence_of_all_elements_located(
+        #                         (By.CLASS_NAME,"match-nav-link")
+        #                     ))
+        #                     if len(navButtons) > 1:
+        #                         wait.until(EC.element_to_be_clickable(navButtons[1]))
+        #                         navButtons[1].click()
+        #                         # Give a moment for page to update, but don't wait for staleness
+        #                         import time
+        #                         time.sleep(1)
+        #                 except (TimeoutException, StaleElementReferenceException) as e:
+        #                     print(f"Navigation error at game {g}: {e}")
+        #                 g = g + 1
+        #                 print('g:', g)
+        #             else:
+        #                 g = g + 1
                     
-        except KeyboardInterrupt:
-            print(f"\nManual skip triggered! Moving to next URL...")
-        except TimeoutException:
-            print("Dimers timeout, skipping...")
-            errors.append(['Dimers', 'Timeout', 'TimeoutException'])
-        except ValueError:
-            print(ValueError)
-            print(['dimers',winner, winnerScore, loser, loserScore])
-            rows.append(['dimers',winner, winnerScore, loser, loserScore])
-        except Exception as e:
-            print(f"Dimers error: {e}")
-            errors.append(['Dimers', str(e), 'Exception'])
+        # except KeyboardInterrupt:
+        #     print(f"\nManual skip triggered! Moving to next URL...")
+        # except TimeoutException:
+        #     print("Dimers timeout, skipping...")
+        #     errors.append(['Dimers', 'Timeout', 'TimeoutException'])
+        # except ValueError:
+        #     print(ValueError)
+        #     print(['dimers',winner, winnerScore, loser, loserScore])
+        #     rows.append(['dimers',winner, winnerScore, loser, loserScore])
+        # except Exception as e:
+        #     print(f"Dimers error: {e}")
+        #     errors.append(['Dimers', str(e), 'Exception'])
 
 
     # usatoday formatting
@@ -863,11 +865,11 @@ finally:
         csvwriter.writerows(rows) 
         csvwriter.writerows(errors)
         csvwriter.writerows(nopicks)
-finally:
-    # Always clean up the driver
-    try:
-        driver.quit()
-        print("Driver closed successfully")
-    except:
-        pass
-# print(picks)
+# finally:
+#     # Always clean up the driver
+#     try:
+#         driver.quit()
+#         print("Driver closed successfully")
+#     except:
+#         pass
+# # print(picks)
