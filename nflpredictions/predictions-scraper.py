@@ -153,7 +153,7 @@ usatoday = {
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide47337400/nfl-week-16-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': 'https://www.espn.com/nfl/story/_/page/viewersguide47389291/nfl-week-17-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
     # https://www.espn.com/nfl/
 }
 
@@ -173,7 +173,7 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/beating-the-book-100960', # https://www.rotowire.com/football/column/beating-the-book-20
+    'url': 'https://www.rotowire.com/football/article/beating-the-book-101343', # https://www.rotowire.com/football/column/beating-the-book-20
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '

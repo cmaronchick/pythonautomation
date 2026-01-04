@@ -327,10 +327,49 @@ copilot,Steelers,24,Browns,13,PITCLE,4765908,PIT,Steelers,Pittsburgh Steelers,CL
 copilot,Saints,23,Titans,17,NOTEN,4765910,NO,Saints,New Orleans Saints,TEN,Titans,Tennessee Titans,23,17,2.5,39.5
 copilot,Jaguars,27,Colts,20,JACIND,4765912,JAC,Jaguars,Jacksonville Jaguars,IND,Colts,Indianapolis Colts,27,20,6,48
 copilot,Buccaneers,24,Dolphins,17,TBMIA,4765904,TB,Buccaneers,Tampa Bay Buccaneers,MIA,Dolphins,Miami Dolphins,24,17,6,46
-copilot,Patriots,31,Jets,1/14/1900,NENYJ,4765905,NE,Patriots,New England Patriots,NYJ,Jets,New York Jets,31,14,13.5,43
+copilot,Patriots,31,Jets,14,NENYJ,4765905,NE,Patriots,New England Patriots,NYJ,Jets,New York Jets,31,14,13.5,43
 copilot,Seahawks,27,Panthers,17,SEACAR,4765913,SEA,Seahawks,Seattle Seahawks,CAR,Panthers,Carolina Panthers,27,17,7,43
 copilot,Raiders,20,Giants,16,NYGLV,4765907,NYG,Giants,New York Giants,LV,Raiders,Las Vegas Raiders,16,20,1,41.5
 copilot,Bills,27,Eagles,24,PHIBUF,4765914,PHI,Eagles,Philadelphia Eagles,BUF,Bills,Buffalo Bills,24,27,-1,44
 copilot,49ers,28,Bears,24,CHISF,4765915,CHI,Bears,Chicago Bears,SF,49ers,San Francisco 49ers,24,28,-3.5,52.5
 copilot,Rams,31,Falcons,20,LARATL,4765916,LAR,Rams,Los Angeles Rams,ATL,Falcons,Atlanta Falcons,31,20,9,50
 NickWhalen,Seahawks,23,Panthers,21,SEACAR,4765913,SEA,Seahawks,Seattle Seahawks,CAR,Panthers,Carolina Panthers,23,21,7,43
+MaldonadoESPN,Chargers,30,Texans,27,HOULAC,4765906,HOU,Texans,Houston Texans,LAC,Chargers,Los Angeles Chargers,27,30,-1,39.5
+MoodyESPN,Texans,21,Chargers,17,HOULAC,4765906,HOU,Texans,Houston Texans,LAC,Chargers,Los Angeles Chargers,21,17,-1,39.5
+WalderESPN,Texans,23,Chargers,20,HOULAC,4765906,HOU,Texans,Houston Texans,LAC,Chargers,Los Angeles Chargers,23,20,-1,39.5
+MaldonadoESPN,Packers,24,Ravens,22,BALGB,4765911,BAL,Ravens,Baltimore Ravens,GB,Packers,Green Bay Packers,22,24,-3.5,40.5
+MoodyESPN,Packers,24,Ravens,21,BALGB,4765911,BAL,Ravens,Baltimore Ravens,GB,Packers,Green Bay Packers,21,24,-3.5,40.5
+WalderESPN,Packers,23,Ravens,17,BALGB,4765911,BAL,Ravens,Baltimore Ravens,GB,Packers,Green Bay Packers,17,23,-3.5,40.5
+MaldonadoESPN,Jaguars,34,Colts,28,JACIND,4765912,JAC,Jaguars,Jacksonville Jaguars,IND,Colts,Indianapolis Colts,34,28,6,48
+MoodyESPN,Jaguars,26,Colts,20,JACIND,4765912,JAC,Jaguars,Jacksonville Jaguars,IND,Colts,Indianapolis Colts,26,20,6,48
+WalderESPN,Jaguars,24,Colts,16,JACIND,4765912,JAC,Jaguars,Jacksonville Jaguars,IND,Colts,Indianapolis Colts,24,16,6,48
+MaldonadoESPN,Seahawks,31,Panthers,13,SEACAR,4765913,SEA,Seahawks,Seattle Seahawks,CAR,Panthers,Carolina Panthers,31,13,7,43
+MoodyESPN,Seahawks,24,Panthers,14,SEACAR,4765913,SEA,Seahawks,Seattle Seahawks,CAR,Panthers,Carolina Panthers,24,14,7,43
+WalderESPN,Seahawks,27,Panthers,20,SEACAR,4765913,SEA,Seahawks,Seattle Seahawks,CAR,Panthers,Carolina Panthers,27,20,7,43
+MaldonadoESPN,Bengals,31,Cardinals,9,ARICIN,4765909,ARI,Cardinals,Arizona Cardinals,CIN,Bengals,Cincinnati Bengals,9,31,-7.5,53
+MoodyESPN,Bengals,31,Cardinals,24,ARICIN,4765909,ARI,Cardinals,Arizona Cardinals,CIN,Bengals,Cincinnati Bengals,24,31,-7.5,53
+WalderESPN,Bengals,24,Cardinals,22,ARICIN,4765909,ARI,Cardinals,Arizona Cardinals,CIN,Bengals,Cincinnati Bengals,22,24,-7.5,53
+MaldonadoESPN,Dolphins,23,Buccaneers,17,TBMIA,4765904,TB,Buccaneers,Tampa Bay Buccaneers,MIA,Dolphins,Miami Dolphins,17,23,6,46
+MoodyESPN,Buccaneers,27,Dolphins,23,TBMIA,4765904,TB,Buccaneers,Tampa Bay Buccaneers,MIA,Dolphins,Miami Dolphins,27,23,6,46
+WalderESPN,Buccaneers,23,Dolphins,20,TBMIA,4765904,TB,Buccaneers,Tampa Bay Buccaneers,MIA,Dolphins,Miami Dolphins,23,20,6,46
+MaldonadoESPN,Browns,31,Packers,29,PITCLE,4765908,PIT,Steelers,Pittsburgh Steelers,GB,Packers,Green Bay Packers,29,29,3,34.5
+MoodyESPN,Steelers,20,Browns,13,PITCLE,4765908,PIT,Steelers,Pittsburgh Steelers,CLE,Browns,Cleveland Browns,20,13,3,34.5
+WalderESPN,Steelers,22,Browns,19,PITCLE,4765908,PIT,Steelers,Pittsburgh Steelers,CLE,Browns,Cleveland Browns,22,19,3,34.5
+MaldonadoESPN,Patriots,35,Jets,10,NENYJ,4765905,NE,Patriots,New England Patriots,NYJ,Jets,New York Jets,35,10,13.5,43
+MoodyESPN,Patriots,27,Jets,16,NENYJ,4765905,NE,Patriots,New England Patriots,NYJ,Jets,New York Jets,27,16,13.5,43
+WalderESPN,Patriots,24,Jets,12,NENYJ,4765905,NE,Patriots,New England Patriots,NYJ,Jets,New York Jets,24,12,13.5,43
+MaldonadoESPN,Titans,27,Saints,24,NOTEN,4765910,NO,Saints,New Orleans Saints,TEN,Titans,Tennessee Titans,24,27,2.5,39.5
+MoodyESPN,Saints,21,Titans,17,NOTEN,4765910,NO,Saints,New Orleans Saints,TEN,Titans,Tennessee Titans,21,17,2.5,39.5
+WalderESPN,Saints,26,Titans,16,NOTEN,4765910,NO,Saints,New Orleans Saints,TEN,Titans,Tennessee Titans,26,16,2.5,39.5
+MaldonadoESPN,Giants,20,Raiders,19,NYGLV,4765907,NYG,Giants,New York Giants,LV,Raiders,Las Vegas Raiders,20,19,1,41.5
+MoodyESPN,Giants,24,Raiders,20,NYGLV,4765907,NYG,Giants,New York Giants,LV,Raiders,Las Vegas Raiders,24,20,1,41.5
+WalderESPN,Giants,27,Raiders,14,NYGLV,4765907,NYG,Giants,New York Giants,LV,Raiders,Las Vegas Raiders,27,14,1,41.5
+MaldonadoESPN,Eagles,19,Bills,16,PHIBUF,4765914,PHI,Eagles,Philadelphia Eagles,BUF,Bills,Buffalo Bills,19,16,-1,44
+MoodyESPN,Bills,28,Eagles,24,PHIBUF,4765914,PHI,Eagles,Philadelphia Eagles,BUF,Bills,Buffalo Bills,24,28,-1,44
+WalderESPN,Bills,24,Eagles,21,PHIBUF,4765914,PHI,Eagles,Philadelphia Eagles,BUF,Bills,Buffalo Bills,21,24,-1,44
+MaldonadoESPN,49ers,44,Bears,23,CHISF,4765915,CHI,Bears,Chicago Bears,SF,49ers,San Francisco 49ers,23,44,-3.5,52.5
+MoodyESPN,49ers,30,Bears,17,CHISF,4765915,CHI,Bears,Chicago Bears,SF,49ers,San Francisco 49ers,17,30,-3.5,52.5
+WalderESPN,49ers,40,Bears,30,CHISF,4765915,CHI,Bears,Chicago Bears,SF,49ers,San Francisco 49ers,30,40,-3.5,52.5
+MaldonadoESPN,Rams,34,Falcons,24,LARATL,4765916,LAR,Rams,Los Angeles Rams,ATL,Falcons,Atlanta Falcons,34,24,9,50
+MoodyESPN,Rams,31,Falcons,20,LARATL,4765916,LAR,Rams,Los Angeles Rams,ATL,Falcons,Atlanta Falcons,31,20,9,50
+WalderESPN,Rams,42,Falcons,20,LARATL,4765916,LAR,Rams,Los Angeles Rams,ATL,Falcons,Atlanta Falcons,42,20,9,50
