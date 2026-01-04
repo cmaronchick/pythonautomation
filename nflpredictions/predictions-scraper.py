@@ -7,7 +7,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
 import csv, traceback, array
+import signal
+from contextlib import contextmanager
 from scraper_nfl import fetch_nfl_data
 from scraper_usatoday import fetch_usatoday_data
 from scraper_espn import fetch_espn_data
@@ -213,9 +216,36 @@ request_headers = {'User-Agent': 'Mozilla/5.0'}
 errors = []
 nopicks = []
 
+# Timeout decorator for function calls
+@contextmanager
+def timeout_context(seconds):
+    def timeout_handler(signum, frame):
+        raise TimeoutException(f"Operation timed out after {seconds} seconds")
+    
+    original_handler = signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(seconds)
+    try:
+        yield
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, original_handler)
 
-
-
+def safe_get_url(driver, url, timeout=35):
+    """Safely load a URL with timeout protection"""
+    try:
+        driver.set_page_load_timeout(timeout)
+        driver.get(url)
+        return True
+    except TimeoutException:
+        print(f"Timeout loading {url}, stopping page load...")
+        try:
+            driver.execute_script("window.stop();")
+        except:
+            pass
+        return False
+    except Exception as e:
+        print(f"Error loading {url}: {e}")
+        return False
 
 # article = driver.find_element(By.CLASS_NAME, "Article-content")
 # picks = driver.find_element(By.TAG_NAME, "strong")
@@ -238,52 +268,52 @@ weboptions.page_load_strategy = 'eager'
 
 driver = webdriver.Chrome(options=weboptions)
 
-driver.set_page_load_timeout(35) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+driver.set_page_load_timeout(30) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 try:
     i = 0
     for writer in writersArray:
         print('i: ', i)
         if i % 5 == 0:
-            driver.close()
+            try:
+                driver.quit()
+            except:
+                pass
             driver = webdriver.Chrome(options=weboptions)
-            driver.set_page_load_timeout(35) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+            driver.set_page_load_timeout(30)
         if writer['url'] != '':
             print('writer[\'name\']:', writer['name'])
-            # response = requests.get(writer['url'], headers=request_headers)
-            # response = requests.get(writer['url'])
-            # print(response)
-            # soup = BeautifulSoup(response.text, 'html.parser')
-            # picks = soup.find_all('strong', string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
-
-            # http = urllib3.PoolManager()
-            # response = http.request('GET', writer['url'], headers=request_headers)
-            # print(response.status)
-            # soup = BeautifulSoup(response.data, 'html.parser')
             
-            # weboptions.add_argument("silentDriverLogs=true")
-            # weboptions.set_capability("accept")
-            # weboptions.add_argument('--ignore-certificate-errors')
-            # weboptions.add_argument('--ignore-ssl-errors')
             print('getting url')
-            driver.get(writer['url'])
+            if not safe_get_url(driver, writer['url'], timeout=30):
+                print(f"Failed to load {writer['name']}, skipping...")
+                nopicks.append([writer.get('name'), writer.get('url'), 'Timeout'])
+                i = i + 1
+                continue
+            
             print('waiting')
-            wait = WebDriverWait(driver, timeout=2)
-            driver.implicitly_wait(10)
+            wait = WebDriverWait(driver, timeout=5)
             print('done waiting')
-            # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-            # wait.until(lambda d : resultsTable.is_displayed())
             print('hasattr()', writer.get("searchTerm"))
             searchTerm = writer.get("searchTerm")
             searchTag = writer.get("searchTag")
             searchXPath = writer.get("searchXPath")
 
-            if searchTerm:
-                picks = driver.find_elements(By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
-            elif searchTag:
-                picks = driver.find_elements(By.TAG_NAME, writer["searchTag"])
-            else:
-                picks = driver.find_elements(By.TAG_NAME, writer["searchXPath"])
-            #find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
+            try:
+                if searchTerm:
+                    picks = wait.until(EC.presence_of_all_elements_located(
+                        (By.XPATH, "//*[contains(text(), '" + writer['searchTerm'] + "')]/parent::*")
+                    ))
+                elif searchTag:
+                    picks = wait.until(EC.presence_of_all_elements_located(
+                        (By.TAG_NAME, writer["searchTag"])
+                    ))
+                else:
+                    picks = wait.until(EC.presence_of_all_elements_located(
+                        (By.XPATH, writer["searchXPath"])
+                    ))
+            except TimeoutException:
+                print(f"Timeout waiting for picks from {writer['name']}")
+                picks = []
             # if writer['name'] == 'PetePrisco':
             #     print(response.data)
             # picks = soup.find_all(writer['searchTag'], string = writer['searchTerm']) #, attrs={'class': 'Article-content'}
@@ -328,10 +358,9 @@ try:
                     except KeyboardInterrupt:
                         print(f"\nManual skip triggered! Moving to next URL...")
                         continue  # Skips the rest of this loop iteration
-                    # except TimeoutException:
-                    #     print("Page took too long! Stopping load and skipping...")
-                    #     driver.execute_script("window.stop();") # Stops the loading spinner
-                    #     continue # Proceed to next page logic
+                    except TimeoutException:
+                        print(f"Timeout processing pick from {writer['name']}, skipping...")
+                        continue
                     except ValueError:
                         errors.append([writer['name'], traceback.print_exc(), ValueError])
                         print(ValueError, [writer['name'],winner, winnerScore, loser, loserScore])
@@ -443,13 +472,20 @@ try:
 
     # vinnie iyer formatting
     try: 
-        driver.get(iyer["url"])
-        # wait = WebDriverWait(driver, timeout=2)
-        # driver.implicitly_wait(10)
-        # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-        # wait.until(lambda d : resultsTable.is_displayed())
-        games = driver.find_elements(By.TAG_NAME,"h3")
-        picks = driver.find_elements(By.XPATH, "//*[contains(text(), 'Pick:')]/parent::*")
+        if not safe_get_url(driver, iyer["url"], timeout=30):
+            print("Failed to load Vinnie Iyer page, skipping...")
+            raise TimeoutException("Page load timeout")
+        
+        wait = WebDriverWait(driver, timeout=10)
+        try:
+            games = wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "h3")))
+            picks = wait.until(EC.presence_of_all_elements_located(
+                (By.XPATH, "//*[contains(text(), 'Pick:')]/parent::*")
+            ))
+        except TimeoutException:
+            print("Timeout waiting for Iyer elements")
+            games = []
+            picks = []
         # response = requests.get()
         # print(response)
         # soup = BeautifulSoup(response.text, 'html.parser')
@@ -540,43 +576,66 @@ try:
     
     except KeyboardInterrupt:
         print(f"\nManual skip triggered! Moving to next URL...")
+    except TimeoutException:
+        print('Iyer timeout, skipping...')
+        errors.append(['Iyer', 'Timeout', 'TimeoutException'])
     except ValueError:
         errors.append(['Iyer', traceback.print_exc(), ValueError])
         print('iyer ValueError: ', ValueError)
-        driver.close()
+    except Exception as e:
+        print(f'Iyer error: {e}')
+        errors.append(['Iyer', str(e), 'Exception'])
 
 
     if espn['url'] is not None:
-        espnrows = fetch_espn_data(weeknum, espn['url'], weboptions)
-        for espnrow in espnrows:
-            rows.append(espnrow)
+        try:
+            with timeout_context(60):
+                espnrows = fetch_espn_data(weeknum, espn['url'], weboptions)
+                for espnrow in espnrows:
+                    rows.append(espnrow)
+        except TimeoutException:
+            print("ESPN scraper timed out, skipping...")
+            errors.append(['ESPN', 'Timeout', 'TimeoutException'])
+        except Exception as e:
+            print(f"ESPN scraper error: {e}")
+            errors.append(['ESPN', str(e), 'Exception'])
 
         # dimers formatting
         try:
-            driver.get('https://www.dimers.com/bet-hub/nfl/schedule') # https://www.dimers.com/bet-hub/nfl/schedule
-            driver.implicitly_wait(10)
+            if not safe_get_url(driver, 'https://www.dimers.com/bet-hub/nfl/schedule', timeout=30):
+                print("Failed to load Dimers, skipping...")
+                raise TimeoutException("Page load timeout")
+            
+            wait = WebDriverWait(driver, timeout=10)
             driver.refresh()
-            driver.implicitly_wait(10)
 
-            matchgrid = driver.find_element(By.CLASS_NAME, "match-list-grid")
+            matchgrid = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "match-list-grid")))
             games = matchgrid.find_elements(By.CLASS_NAME,"game-link")    
-            firstGame = matchgrid.find_element(By.CLASS_NAME,"game-link")
+            firstGame = wait.until(EC.element_to_be_clickable((By.CLASS_NAME,"game-link")))
             
             popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
             if len(popup) > 0:
-                wait.until(EC.element_to_be_clickable(popup[0]))
-                popup[0].click()
+                try:
+                    wait.until(EC.element_to_be_clickable(popup[0]))
+                    popup[0].click()
+                except TimeoutException:
+                    print("Popup close timeout, continuing...")
             try: 
                 pageBlocker = driver.find_element(By.CLASS_NAME, 'ab-page-blocker')
                 if pageBlocker is not None:
                     closeButton = driver.find_element(By.CLASS_NAME, "ab-close-button")
                     wait.until(EC.element_to_be_clickable(closeButton))
                     closeButton.click()
-            except:
-                print('ad blocker not found')            
-            wait.until(EC.element_to_be_clickable(firstGame))
-            if firstGame is not None:
-                firstGame.click()
+            except (TimeoutException, NoSuchElementException):
+                print('ad blocker not found or timeout')            
+            
+            try:
+                wait.until(EC.element_to_be_clickable(firstGame))
+                if firstGame is not None:
+                    firstGame.click()
+            except TimeoutException:
+                print("First game not clickable, skipping Dimers...")
+                raise
                 # response = requests.get()
                 # print(response)
                 # soup = BeautifulSoup(response.text, 'html.parser')
@@ -588,10 +647,24 @@ try:
                 # print('gamesObject: ', gamesObject)
                 g = 0
                 while g < len(games)-1: 
-                    teams = driver.find_elements(By.CLASS_NAME, "team-column")
+                    try:
+                        teams = wait.until(EC.presence_of_all_elements_located(
+                            (By.CLASS_NAME, "team-column")
+                        ))
+                    except TimeoutException:
+                        print(f"Timeout waiting for teams at game {g}, skipping...")
+                        g = g + 1
+                        continue
+                    
                     if teams is not None and len(teams) > 0:
-                        wait.until(lambda d : teams[0].is_displayed())
-                        scores = driver.find_elements(By.CLASS_NAME, "score")
+                        try:
+                            scores = wait.until(EC.presence_of_all_elements_located(
+                                (By.CLASS_NAME, "score")
+                            ))
+                        except TimeoutException:
+                            print(f"Timeout waiting for scores at game {g}, skipping...")
+                            g = g + 1
+                            continue
                         awayTeam = teams[0].text
                         awayScore = scores[0].text
                         homeTeam = teams[1].text
@@ -611,10 +684,18 @@ try:
                             loserScore = awayScore    
                             
                         rows.append(['Dimers',winner, int(winnerScore), loser, int(loserScore)])
-                        navButtons = driver.find_elements(By.CLASS_NAME,"match-nav-link")
-                        wait.until(EC.element_to_be_clickable(navButtons[1]))
-                        navButtons[1].click()
-                        wait.until(EC.staleness_of(teams[0]))
+                        try:
+                            navButtons = wait.until(EC.presence_of_all_elements_located(
+                                (By.CLASS_NAME,"match-nav-link")
+                            ))
+                            if len(navButtons) > 1:
+                                wait.until(EC.element_to_be_clickable(navButtons[1]))
+                                navButtons[1].click()
+                                # Give a moment for page to update, but don't wait for staleness
+                                import time
+                                time.sleep(1)
+                        except (TimeoutException, StaleElementReferenceException) as e:
+                            print(f"Navigation error at game {g}: {e}")
                         g = g + 1
                         print('g:', g)
                     else:
@@ -622,62 +703,139 @@ try:
                     
         except KeyboardInterrupt:
             print(f"\nManual skip triggered! Moving to next URL...")
+        except TimeoutException:
+            print("Dimers timeout, skipping...")
+            errors.append(['Dimers', 'Timeout', 'TimeoutException'])
         except ValueError:
             print(ValueError)
             print(['dimers',winner, winnerScore, loser, loserScore])
             rows.append(['dimers',winner, winnerScore, loser, loserScore])
+        except Exception as e:
+            print(f"Dimers error: {e}")
+            errors.append(['Dimers', str(e), 'Exception'])
 
 
     # usatoday formatting
-    
-    usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
-    for usatodayrow in usatodayrows:
-        rows.append(usatodayrow)
-        
-                # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
+    try:
+        with timeout_context(60):
+            usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
+            for usatodayrow in usatodayrows:
+                rows.append(usatodayrow)
+    except TimeoutException:
+        print("USA Today scraper timed out, skipping...")
+        errors.append(['USAToday', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"USA Today error: {e}")
+        errors.append(['USAToday', str(e), 'Exception'])
 
     # nfl formatting
-    
-    nflrows = fetch_nfl_data(weeknum, nfl['url'], weboptions)
-    for nflrow in nflrows:
-        rows.append(nflrow)
+    try:
+        with timeout_context(60):
+            nflrows = fetch_nfl_data(weeknum, nfl['url'], weboptions)
+            for nflrow in nflrows:
+                rows.append(nflrow)
+    except TimeoutException:
+        print("NFL scraper timed out, skipping...")
+        errors.append(['NFL', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"NFL error: {e}")
+        errors.append(['NFL', str(e), 'Exception'])
+
+    try:
+        with timeout_context(60):
+            oddssharkrows = fetch_oddsshark_data(weeknum, weboptions)
+            for oddssharkrow in oddssharkrows:
+                rows.append(oddssharkrow)
+    except TimeoutException:
+        print("OddsShark timed out, skipping...")
+        errors.append(['OddsShark', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"OddsShark error: {e}")
+        errors.append(['OddsShark', str(e), 'Exception'])
         
-                # /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[1] /html/body/div[2]/main/article/div[5]/p[10]/a[3]
+    try:
+        with timeout_context(60):
+            dratingsrows = fetch_dratings_data(weeknum, weboptions)
+            for dratingsrow in dratingsrows:
+                rows.append(dratingsrow)
+    except TimeoutException:
+        print("DRatings timed out, skipping...")
+        errors.append(['DRatings', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"DRatings error: {e}")
+        errors.append(['DRatings', str(e), 'Exception'])
 
-    oddssharkrows = fetch_oddsshark_data(weeknum, weboptions)
-    for oddssharkrow in oddssharkrows:
-        rows.append(oddssharkrow)
-        
-    dratingsrows = fetch_dratings_data(weeknum, weboptions)
-    for dratingsrow in dratingsrows:
-        rows.append(dratingsrow)
+    try:
+        with timeout_context(60):
+            oddstraderrows = fetch_oddstrader_data(weeknum, weboptions)
+            for oddstraderrow in oddstraderrows:
+                rows.append(oddstraderrow)
+    except TimeoutException:
+        print("OddsTrader timed out, skipping...")
+        errors.append(['OddsTrader', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"OddsTrader error: {e}")
+        errors.append(['OddsTrader', str(e), 'Exception'])
 
-    oddstraderrows = fetch_oddstrader_data(weeknum, weboptions)
-    for oddstraderrow in oddstraderrows:
-        rows.append(oddstraderrow)
+    try:
+        with timeout_context(60):
+            nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, weboptions)
+            for nflspinzonerow in nflspinzonerows:
+                rows.append(nflspinzonerow)
+    except TimeoutException:
+        print("NFL Spinzone timed out, skipping...")
+        errors.append(['NFLSpinzone', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"NFL Spinzone error: {e}")
+        errors.append(['NFLSpinzone', str(e), 'Exception'])
 
-        
+    try:
+        with timeout_context(60):
+            sbrrows = fetch_sbr_data(weeknum, sbr['url'], weboptions)
+            for sbrrow in sbrrows:
+                rows.append(sbrrow)
+    except TimeoutException:
+        print("SBR timed out, skipping...")
+        errors.append(['SBR', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"SBR error: {e}")
+        errors.append(['SBR', str(e), 'Exception'])
 
-    nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, weboptions)
-    for nflspinzonerow in nflspinzonerows:
-        rows.append(nflspinzonerow)
+    try:
+        with timeout_context(60):
+            clutchpointsrows = fetch_clutchpoints_data(weeknum, clutchpoints['url'], weboptions)
+            for clutchpointsrow in clutchpointsrows:
+                rows.append(clutchpointsrow)
+    except TimeoutException:
+        print("ClutchPoints timed out, skipping...")
+        errors.append(['ClutchPoints', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"ClutchPoints error: {e}")
+        errors.append(['ClutchPoints', str(e), 'Exception'])
 
-    sbrrows = fetch_sbr_data(weeknum, sbr['url'], weboptions)
-    for sbrrow in sbrrows:
-        rows.append(sbrrow)
-
-    clutchpointsrows = fetch_clutchpoints_data(weeknum, clutchpoints['url'], weboptions)
-    for clutchpointsrow in clutchpointsrows:
-        rows.append(clutchpointsrow)
-
+    try:
+        with timeout_context(60):
+            copilotrows = fetch_copilot_data(weeknum, copilot['url'], weboptions)
+            for copilotrow in copilotrows:
+                rows.append(copilotrow)
+    except TimeoutException:
+        print("Copilot timed out, skipping...")
+        errors.append(['Copilot', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"Copilot error: {e}")
+        errors.append(['Copilot', str(e), 'Exception'])
     
-    copilotrows = fetch_copilot_data(weeknum, copilot['url'], weboptions)
-    for copilotrow in copilotrows:
-        rows.append(copilotrow)
-    
-    rotowirerows = fetch_rotowire_data(weeknum, rotowire['url'], weboptions)
-    for rotowirerow in rotowirerows:
-        rows.append(rotowirerow)
+    try:
+        with timeout_context(60):
+            rotowirerows = fetch_rotowire_data(weeknum, rotowire['url'], weboptions)
+            for rotowirerow in rotowirerows:
+                rows.append(rotowirerow)
+    except TimeoutException:
+        print("Rotowire timed out, skipping...")
+        errors.append(['Rotowire', 'Timeout', 'TimeoutException'])
+    except Exception as e:
+        print(f"Rotowire error: {e}")
+        errors.append(['Rotowire', str(e), 'Exception'])
 
 
     ### Final Row for printing picks ###
@@ -716,4 +874,11 @@ except:
         csvwriter.writerows(rows) 
         csvwriter.writerows(errors)
         csvwriter.writerows(nopicks)
+finally:
+    # Always clean up the driver
+    try:
+        driver.quit()
+        print("Driver closed successfully")
+    except:
+        pass
 # print(picks)
