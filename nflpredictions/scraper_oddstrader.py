@@ -49,13 +49,14 @@ def fetch_oddstrader_data(weeknum, weboptions):
     print('fetch_oddstrader_data:')
     
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     oddstraderrows = []
     try:
         for url in articleTable:
             print('url: ', url)
             # oddstrader formatting
             driver.get(url)
-            wait = WebDriverWait(driver, timeout=2)
+            wait = WebDriverWait(driver, timeout=10)
             driver.implicitly_wait(3)
             writersText = []
             upcomingGamesTable = driver.find_element(By.XPATH, "//*[contains(@class, 'leagueGroup')]") # //*[@id="PageHandler"]/div/div[1]/div/section/div[1]/div[3]/div/a[2]/div[2]/div[1]/div
@@ -94,12 +95,12 @@ def fetch_oddstrader_data(weeknum, weboptions):
                     print('Exception: ', e)
                 columnIndex = columnIndex + 1
         print('oddstraderrows:', oddstraderrows)
-        driver.close()
+        driver.quit()
         return oddstraderrows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
-        driver.close()
+        driver.quit()
         return oddstraderrows
 
 

@@ -88,13 +88,14 @@ def fetch_nflspinzone_data(url, weeknum, weboptions):
         #   https://nflspinzone.com/author/sayrebedinger/
     }
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     print('fetch_nflspinzone_data:')
     nflspinzonerows = []
     try:
         i = 0
         driver.get(url)
         
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
         driver.implicitly_wait(5)
         buttonIsClickable = True
         while buttonIsClickable:
@@ -191,12 +192,12 @@ def fetch_nflspinzone_data(url, weeknum, weboptions):
                 nextButton.click()
             i = i + 1
         print('nflspinzonerows:', nflspinzonerows)
-        driver.close()
+        driver.quit()
         return nflspinzonerows
     except Exception as e:
         print('Exception:', e)
         traceback.print_exc()
-        driver.close()
+        driver.quit()
         return nflspinzonerows
 
 

@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+from selenium.common.exceptions import TimeoutException, WebDriverException, NoSuchElementException, StaleElementReferenceException
 import csv, traceback, array
 import signal
 from contextlib import contextmanager
@@ -22,8 +22,6 @@ from scraper_sbr import fetch_sbr_data
 from scraper_clutchpoints import fetch_clutchpoints_data
 from scraper_copilot import fetch_copilot_data
 from scraper_rotowire import fetch_rotowire_data
-
-
 
 weeknum = int(sys.argv[1])
 year = int(sys.argv[2])
@@ -426,14 +424,12 @@ try:
             # print(['Sportsnaut',winner, int(winnerScore), loser, int(loserScore)])
             try:
                 rows.append(['JohnBreech',winner, int(winnerScore), loser, int(loserScore)])
-                driver.close()
             except KeyboardInterrupt:
                 print(f"\nManual skip triggered! Moving to next URL...")
                 continue  # Skips the rest of this loop iteration
             except ValueError:
                 errors.append(['JohnBreech', traceback.print_exc(), ValueError])
                 print(ValueError)
-                driver.close()
         # # sportsnaut formatting
 
         response = requests.get(sportsnaut['url'])
@@ -838,27 +834,20 @@ try:
         errors.append(['Rotowire', str(e), 'Exception'])
 
 
-    ### Final Row for printing picks ###
-    week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
-    with week1picks as csvfile:
-        
-        # creating a csv writer object  
-        csvwriter = csv.writer(csvfile)  
-            
-        # writing the fields  
-        
-        fields = ['Source', 'Winner', 'Winner Score', 'Loser', 'Loser Score']
-        csvwriter.writerow(fields)  
-            
-        # writing the data rows  
-        csvwriter.writerows(rows) 
-        csvwriter.writerows(errors)
-        csvwriter.writerows(nopicks)
-
 except KeyboardInterrupt:
     print(f"\nManual skip triggered! Moving to next URL...")
-except:    
-    print(traceback.print_exc())
+except Exception as e:    
+    print(f"Unexpected error: {e}")
+finally:
+    # Ensure driver is closed properly
+    if 'driver' in locals():
+        try:
+            driver.quit()
+        except Exception as cleanup_error:
+            # Log but don't raise - we're already in cleanup
+            print(f"Warning: Error during driver cleanup: {cleanup_error}")
+    
+    # Write results to CSV file
     week1picks = open(str(year) + season + "week" + str(weeknum) + "picks.csv", 'w+', newline='')
     with week1picks as csvfile:
         
