@@ -1,5 +1,6 @@
 import requests, csv, traceback
 adids = open('./wwe_impact_installs.csv',newline='')
+import token from config
 
 rows = []
 with adids as csvfile:
@@ -8,7 +9,7 @@ with adids as csvfile:
         try: 
             if row[0] != 'inst_time':
                 adid = row[10]
-                response = requests.get('https://api.adjust.com/device_service/api/v2/inspect_device?advertising_id=' + adid + '&app_token=cq2wyunmfl5f', headers={'Authorization': 'Bearer 2tuES44W1hG1oRx8tdxB'})
+                response = requests.get('https://api.adjust.com/device_service/api/v2/inspect_device?advertising_id=' + adid + '&app_token=cq2wyunmfl5f', headers={'Authorization': 'Bearer ' + token + ''})
                 # print('response:', response.json())
                 events = response.json()
                 print('events: ', events)
