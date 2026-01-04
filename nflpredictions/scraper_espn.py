@@ -14,14 +14,16 @@ chrome_driver_path = './chromedriver'
 service = Service(chrome_driver_path)
 weboptions = webdriver.ChromeOptions()
 weboptions.accept_insecure_certs = True
-driver = webdriver.Chrome(options=weboptions)
+weboptions.add_argument("--log-level=3")
 
 # espn formatting
-def fetch_espn_data(weeknum, url):
+def fetch_espn_data(weeknum, url, weboptions):
+    driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     espnrows = []
     try: 
         driver.get(url)
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
         driver.implicitly_wait(10)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         # wait.until(lambda d : resultsTable.is_displayed())
@@ -38,11 +40,13 @@ def fetch_espn_data(weeknum, url):
         picks = []
         for graphs in picksGraph:
             splitPicks = graphs.text.split("\n")
-            # print('splitPicks:', splitPicks)
+            print('splitPicks:', splitPicks)
             for pick in splitPicks:
                 picks.append(pick)
-        print('picks:', len(picks))
-        for predictionString in picks:
+        print('picks:', len(picks), picks)
+        for pick in picks:
+            predictionString = pick
+            print('predictionString: ', predictionString)
             if predictionString.find("FPI") > -1:
                 continue
             separatorString = ", "
@@ -73,13 +77,15 @@ def fetch_espn_data(weeknum, url):
             
             print([writer + 'ESPN',winningTeam, winnerScore, losingTeam, loserScore])
             espnrows.append([writer + 'ESPN',winningTeam, winnerScore, losingTeam, loserScore])
+        driver.quit()
         return espnrows
     except Exception as e:
         print('espn exception: ', e)
+        driver.quit()
         return espnrows
-def main(weeknum):
+def main(weeknum, weboptions):
     print('weeknum:', weeknum)
-    html_content = fetch_espn_data(1,'https://www.espn.com/nfl/story/_/id/41108396/nfl-week-1-picks-schedule-fantasy-football-odds-injuries-stats-2024')
+    html_content = fetch_espn_data(weeknum,'https://www.espn.com/nfl/story/_/page/viewersguide46941264/nfl-week-11-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025', {})
     if html_content:
         print(html_content)
         return html_content
@@ -87,7 +93,7 @@ def main(weeknum):
         print("Failed to retrieve data")
 
 if __name__ == "__main__":
-    espnrows = main(sys.argv[1])
+    espnrows = main(sys.argv[1], {})
     print('espnrows:', espnrows)
 
     week1picks = open("2024week" + str(sys.argv[1]) + "espnpicks.csv", 'w+', newline='')

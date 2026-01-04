@@ -1,0 +1,10 @@
+,,,,,,,,,Moneyline,Spread,Total
+Row Labels,Count of season,Sum of crowd.results.winner.correct,Sum of crowd.results.spread.correct,Sum of crowd.results.spread.push,Sum of crowd.results.total.correct,Sum of crowd.results.total.push,,,0.694444444,0.556603774,0.61682243
+1,16,11,8,1,10,0,,,,,
+2,16,13,11,0,5,0,,,,,
+3,16,11,7,1,12,0,,,,,
+4,16,10,6,0,11,0,,,,,
+5,14,7,10,0,10,0,,,,,
+6,15,10,7,0,10,1,,,,,
+7,15,13,10,0,8,0,,,,,
+Grand Total,108,75,59,2,66,1,,,,,

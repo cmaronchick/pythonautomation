@@ -10,16 +10,17 @@ from selenium.webdriver.support import expected_conditions as EC
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-weboptions = webdriver.ChromeOptions()
-weboptions.accept_insecure_certs = True
-driver = webdriver.Chrome(options=weboptions)
+# weboptions = webdriver.ChromeOptions()
+# weboptions.accept_insecure_certs = True
 
-def fetch_nfl_data(weeknum):
+def fetch_nfl_data(weeknum, url, weboptions):
+    driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     try: 
         # nfl formatting
         nflrows = []
-        driver.get('https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season')
-        wait = WebDriverWait(driver, timeout=2)
+        driver.get(url) #'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season'
+        wait = WebDriverWait(driver, timeout=10)
         # driver.implicitly_wait(10)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         articleBody = driver.find_element(By.CLASS_NAME, "nfl-c-article__body")
@@ -71,9 +72,11 @@ def fetch_nfl_data(weeknum):
                     nflrows.append([author,winningTeam, winningScore, losingTeam, losingScore]) 
             tableIndex = tableIndex + 1
         # print(nflrows)
+        driver.quit()
         return nflrows
     except Exception as e:
         print('nfl exception: ', e)
+        driver.quit()
         return nflrows
 
 def main(weeknum):
