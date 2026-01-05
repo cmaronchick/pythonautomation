@@ -15,11 +15,12 @@ service = Service(chrome_driver_path)
 
 def fetch_sbr_data(weeknum, url, weboptions):
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     try: 
         # nfl formatting
         sbrrows = []
         driver.get(url) #'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season'
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
         # driver.implicitly_wait(10)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         articleBody = driver.find_element(By.CLASS_NAME, "container")
@@ -59,11 +60,11 @@ def fetch_sbr_data(weeknum, url, weboptions):
                         print('sbr table exception: ', e)
 
         # print(sbrrows)
-        driver.close()
+        driver.quit()
         return sbrrows
     except Exception as e:
         print('sbr exception: ', e)
-        driver.close()
+        driver.quit()
         return sbrrows
 
 def main(weeknum):

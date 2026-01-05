@@ -58,19 +58,23 @@ articleTable = [
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-weboptions = webdriver.ChromeOptions()
-weboptions.accept_insecure_certs = True
-weboptions.add_argument('--ignore-certificate-errors')
-weboptions.add_argument('disable-notifications')
-weboptions.page_load_strategy = 'eager'
-driver = webdriver.Chrome(options=weboptions)
+# Global driver removed to prevent resource leaks and hanging issues.
+# Each function now creates and manages its own driver instance for better isolation.
+
 def fetch_usatoday_data(weeknum, url):
+    weboptions = webdriver.ChromeOptions()
+    weboptions.accept_insecure_certs = True
+    weboptions.add_argument('--ignore-certificate-errors')
+    weboptions.add_argument('disable-notifications')
+    weboptions.page_load_strategy = 'eager'
+    driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(35)
     print('fetch_usatoday_data:', url)
     usatodayrows = []
     try:
         # usatoday formatting
         driver.get(url)
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
         driver.implicitly_wait(3)
         writersText = []
             
@@ -353,6 +357,8 @@ def fetch_usatoday_data(weeknum, url):
         print('Exception:', e)
         traceback.print_exc()
         return usatodayrows
+    finally:
+        driver.quit()
 
 
 def main(weeknum):
