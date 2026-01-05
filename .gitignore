@@ -4,4 +4,4 @@
 *.pyc
 *.exe
 **config.py
-*/venv/
+*venv/*
