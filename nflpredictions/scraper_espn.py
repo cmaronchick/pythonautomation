@@ -19,12 +19,11 @@ weboptions.add_argument("--log-level=3")
 # espn formatting
 def fetch_espn_data(weeknum, url, weboptions):
     driver = webdriver.Chrome(options=weboptions)
-    driver.set_page_load_timeout(35)
+    driver.set_page_load_timeout(20)
     espnrows = []
     try: 
         driver.get(url)
-        wait = WebDriverWait(driver, timeout=10)
-        driver.implicitly_wait(10)
+        wait = WebDriverWait(driver, timeout=5)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         # wait.until(lambda d : resultsTable.is_displayed())
         gamesBody = driver.find_element(By.CLASS_NAME, "article-body")

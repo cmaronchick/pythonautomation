@@ -55,7 +55,7 @@ service = Service(chrome_driver_path)
 # weboptions.page_load_strategy = 'eager'
 def fetch_dratings_data(weeknum, weboptions):
     driver = webdriver.Chrome(options=weboptions)
-    driver.set_page_load_timeout(35)
+    driver.set_page_load_timeout(20)
     print('fetch_dratings_data:')
     dratingsrows = []
     try:
@@ -63,17 +63,15 @@ def fetch_dratings_data(weeknum, weboptions):
             print('url: ', url)
             # dratings formatting
             driver.get(url)
-            wait = WebDriverWait(driver, timeout=10)
-            driver.implicitly_wait(3)
+            wait = WebDriverWait(driver, timeout=5)
             writersText = []
-            upcomingGames = driver.find_element(By.ID, "scroll-upcoming")
+            upcomingGames = wait.until(EC.presence_of_element_located((By.ID, "scroll-upcoming")))
             # original_window = driver.current_window_handle
             # windowhandles = len(driver.window_handles)
             # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
             
             # articleBody = driver.find_element(By.TAG_NAME, "article")            
-            table = upcomingGames.find_element(By.TAG_NAME, "table")
-            wait.until(lambda d : table.is_displayed())
+            table = wait.until(EC.presence_of_element_located((By.TAG_NAME, "table")))
             writers = table.find_elements(By.TAG_NAME, "tr")
             
             # use for tallysight URL

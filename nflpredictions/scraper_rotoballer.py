@@ -28,13 +28,14 @@ def fetch_rotoballer_data(weeknum, url, weboptions):
         #   https://rotoballer.com/author/sayrebedinger/
     }
     driver = webdriver.Chrome(options=weboptions)
+    driver.set_page_load_timeout(20)
     print('fetch_rotoballer_data:', url)
     rotoballerrows = []
     try:
         i = 0
         driver.get(url)
         
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=5)
         
         
         # response = requests.get(writer['url'], headers=request_headers)

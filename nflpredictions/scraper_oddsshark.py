@@ -53,7 +53,7 @@ service = Service(chrome_driver_path)
 def fetch_oddsshark_data(weeknum, weboptions):
     
     driver = webdriver.Chrome(options=weboptions)
-    driver.set_page_load_timeout(35)
+    driver.set_page_load_timeout(20)
     print('fetch_dratings_data:')
     oddssharkrows = []
     try:
@@ -61,11 +61,9 @@ def fetch_oddsshark_data(weeknum, weboptions):
             print('url: ', url)
             # dratings formatting
             driver.get(url)
-            wait = WebDriverWait(driver, timeout=10)
-            driver.implicitly_wait(3)
+            wait = WebDriverWait(driver, timeout=5)
             writersText = []
-            gamesDiv = driver.find_element(By.CLASS_NAME, 'computer-picks-content')
-            wait.until(lambda d : gamesDiv.is_displayed())
+            gamesDiv = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'computer-picks-content')))
             upcomingGames = gamesDiv.find_elements(By.CLASS_NAME, "predicted-score")
             for game in upcomingGames:
                 

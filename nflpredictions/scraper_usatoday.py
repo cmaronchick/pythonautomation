@@ -20,7 +20,7 @@ imageTable = {
     'https://images.jifo.co/21540751_1589234344689.png': 'Broncos',
     'https://images.jifo.co/21540751_1589234683953.png': 'Bengals',
     'Entity_1599884617535.png': 'Rams',
-    'Entity_1569032080155.png': 'Cardinals',
+    'https://images.jifo.co/21540751_1589235305066.png': 'Cardinals',
     'https://images.jifo.co/21540751_1589234794134.png': 'Titans',
     'Entity_1569032073772.png': 'Jaguars',
     'https://images.jifo.co/21540751_1589235745366.png': 'Buccaneers',
@@ -68,14 +68,13 @@ def fetch_usatoday_data(weeknum, url):
     weboptions.add_argument('disable-notifications')
     weboptions.page_load_strategy = 'eager'
     driver = webdriver.Chrome(options=weboptions)
-    driver.set_page_load_timeout(35)
+    driver.set_page_load_timeout(20)
     print('fetch_usatoday_data:', url)
     usatodayrows = []
     try:
         # usatoday formatting
         driver.get(url)
-        wait = WebDriverWait(driver, timeout=10)
-        driver.implicitly_wait(3)
+        wait = WebDriverWait(driver, timeout=5)
         writersText = []
             
         # original_window = driver.current_window_handle
@@ -84,8 +83,7 @@ def fetch_usatoday_data(weeknum, url):
         
         # articleBody = driver.find_element(By.TAG_NAME, "article")
         if url.find("tallysight") > -1:            
-            table = driver.find_element(By.TAG_NAME, "table")
-            wait.until(lambda d : table.is_displayed())
+            table = wait.until(EC.presence_of_element_located((By.TAG_NAME, "table")))
             writers = table.find_elements(By.TAG_NAME, "th")
             
             writersText = []
@@ -137,8 +135,7 @@ def fetch_usatoday_data(weeknum, url):
                         usatodayrows.append([author,winningTeam, winningScore, losingTeam, losingScore])
                     columnIndex = columnIndex + 1
         elif url.find("infogram") > -1:
-            table = driver.find_element(By.TAG_NAME, "table")
-            wait.until(lambda d : table.is_displayed())
+            table = wait.until(EC.presence_of_element_located((By.TAG_NAME, "table")))
             writers = table.find_elements(By.TAG_NAME, "th")
             
             writersText = []
@@ -222,9 +219,8 @@ def fetch_usatoday_data(weeknum, url):
         elif url.find('sportsdata') > -1:
             print('trying sportsdata', url)
             try:
-                mainDiv = driver.find_element(By.ID, "__next")
+                mainDiv = wait.until(EC.presence_of_element_located((By.ID, "__next")))
                 print('mainDiv: ', mainDiv.text)
-                wait.until(lambda d : mainDiv.is_displayed())
                 picks = mainDiv.find_elements(By.XPATH, "//*[contains(text(), 'Projected scoring')]")
                 print ('picks:', len(picks))
 
@@ -304,8 +300,7 @@ def fetch_usatoday_data(weeknum, url):
                 traceback.print_exc()
         else:
             pickLinkIndex = 0
-            articleBody = driver.find_element(By.TAG_NAME, "article")
-            wait.until(lambda d : articleBody.is_displayed())
+            articleBody = wait.until(EC.presence_of_element_located((By.TAG_NAME, "article")))
             pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')    # pickLinks2 = driver.find_elements(By.XPATH, "/html/body/div[3]/main/article/div[5]/p[10]/a")
             print('usatoday picklinks 37:', len(pickLinks))
             while pickLinkIndex < len(pickLinks):
@@ -316,10 +311,8 @@ def fetch_usatoday_data(weeknum, url):
                 pickLinks[pickLinkIndex].click()
                 if len(driver.window_handles) > 1:
                     driver.switch_to.window(driver.window_handles[len(driver.window_handles)-1])
-                articleBody = driver.find_element(By.TAG_NAME, "article")
-                wait.until(lambda d : articleBody.is_displayed())
-                title = driver.find_element(By.TAG_NAME, "h1")
-                wait.until(lambda d : title.is_displayed())
+                articleBody = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "article-body")))
+                title = wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
                 headers = driver.find_elements(By.TAG_NAME, "h2")
                 headerIndex = 0
                 for header in headers:
@@ -346,8 +339,7 @@ def fetch_usatoday_data(weeknum, url):
                 popup = driver.find_elements(By.CLASS_NAME, "gnt_mol_xb")
                 if len(popup) > 0:
                     popup[0].click()
-                articleBody = driver.find_element(By.TAG_NAME, "article")
-                wait.until(lambda d : articleBody.is_displayed())
+                articleBody = wait.until(EC.presence_of_element_located((By.TAG_NAME, "article")))
 
                 pickLinks = articleBody.find_elements(By.XPATH,'//a[contains(text(), " vs. ")]')
                 print('usatoday picklinks 80:', len(pickLinks))
@@ -362,7 +354,7 @@ def fetch_usatoday_data(weeknum, url):
 
 
 def main(weeknum):
-    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/261b9fc7-b905-4282-ac75-00eb799a2a09?src=embed#async_embed') #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/b29a56b9-5696-4974-9716-3320c4e81518?src=embed#async_embed') #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:

@@ -49,24 +49,24 @@ def fetch_oddstrader_data(weeknum, weboptions):
     print('fetch_oddstrader_data:')
     
     driver = webdriver.Chrome(options=weboptions)
-    driver.set_page_load_timeout(35)
+    driver.set_page_load_timeout(20)
     oddstraderrows = []
     try:
         for url in articleTable:
             print('url: ', url)
             # oddstrader formatting
             driver.get(url)
-            wait = WebDriverWait(driver, timeout=10)
-            driver.implicitly_wait(3)
+            wait = WebDriverWait(driver, timeout=5)
             writersText = []
-            upcomingGamesTable = driver.find_element(By.XPATH, "//*[contains(@class, 'leagueGroup')]") # //*[@id="PageHandler"]/div/div[1]/div/section/div[1]/div[3]/div/a[2]/div[2]/div[1]/div
+            upcomingGamesTable = wait.until(EC.presence_of_element_located(
+                (By.XPATH, "//*[contains(@class, 'leagueGroup')]")
+            )) # //*[@id="PageHandler"]/div/div[1]/div/section/div[1]/div[3]/div/a[2]/div[2]/div[1]/div
             # original_window = driver.current_window_handle
             # windowhandles = len(driver.window_handles)
             # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
             
             # articleBody = driver.find_element(By.TAG_NAME, "article")          
             print('leagueGroup found')  
-            wait.until(lambda d : upcomingGamesTable.is_displayed())
             upcomingGames = upcomingGamesTable.find_elements(By.XPATH, "//div[contains(@class, 'participantsWrapper')]")
             print(len(upcomingGames))
             columnIndex = 0

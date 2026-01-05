@@ -26,14 +26,14 @@ def fetch_copilot_data(weeknum, url, weboptions):
         'separator': ', '
     }
     driver = webdriver.Chrome(options=weboptions)
-    driver.set_page_load_timeout(35)
+    driver.set_page_load_timeout(20)
     print('fetch_copilot_data:', url)
     copilotrows = []
     try:
         i = 0
         driver.get(url)
         
-        wait = WebDriverWait(driver, timeout=10)
+        wait = WebDriverWait(driver, timeout=5)
         
         
         # response = requests.get(writer['url'], headers=request_headers)
@@ -56,8 +56,7 @@ def fetch_copilot_data(weeknum, url, weboptions):
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         
         print('hasattr()', copilot.get("searchTerm"))
-        article = driver.find_element(By.TAG_NAME, "article")
-        wait.until(lambda d : article.is_displayed())
+        article = wait.until(EC.presence_of_element_located((By.TAG_NAME, "article")))
         searchTerm = copilot.get("searchTerm")
         if searchTerm:
             picks = article.find_elements(By.XPATH, "//strong[contains(text(), '" + copilot['searchTerm'] + "')]/parent::*")

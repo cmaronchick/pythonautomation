@@ -9,7 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, WebDriverException, NoSuchElementException, StaleElementReferenceException
 import csv, traceback, array
-import signal
+import threading
 from contextlib import contextmanager
 from scraper_nfl import fetch_nfl_data
 from scraper_usatoday import fetch_usatoday_data
@@ -37,7 +37,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-18-picks-and-score-predictions-best-bets-odds/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-18-nfl-picks-best-bets-predictions/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -66,7 +66,7 @@ foxsports = {
 azc = {
     'url': 'https://www.azcentral.com/story/sports/nfl/2025/12/29/nfl-week-18-picks-predictions-score-projections-2025-season/87842933007/',
     'name': 'Jeremy Cluff', # Jenna Ortiz', # 
-    'searchTerm': 'Score prediction:', # cluff: 'Prediction:'
+    'searchTerm': 'Prediction:', # cluff: 'Prediction:'
     'searchTag': 'strong',
     'separator': ', '
     # https://www.azcentral.com/staff/2648096001/jeremy-cluff/
@@ -214,21 +214,35 @@ request_headers = {'User-Agent': 'Mozilla/5.0'}
 errors = []
 nopicks = []
 
-# Timeout decorator for function calls
-@contextmanager
-def timeout_context(seconds):
-    def timeout_handler(signum, frame):
-        raise TimeoutException(f"Operation timed out after {seconds} seconds")
-    
-    original_handler = signal.signal(signal.SIGALRM, timeout_handler)
-    signal.alarm(seconds)
-    try:
-        yield
-    finally:
-        signal.alarm(0)
-        signal.signal(signal.SIGALRM, original_handler)
+# Thread-based timeout for function calls
+class TimeoutError(Exception):
+    pass
 
-def safe_get_url(driver, url, timeout=35):
+def run_with_timeout(func, args=(), kwargs={}, timeout=60):
+    """Run a function with a timeout using threading"""
+    result = [TimeoutError(f"Operation timed out after {timeout} seconds")]
+    
+    def target():
+        try:
+            result[0] = func(*args, **kwargs)
+        except Exception as e:
+            result[0] = e
+    
+    thread = threading.Thread(target=target)
+    thread.daemon = True
+    thread.start()
+    thread.join(timeout)
+    
+    if thread.is_alive():
+        print(f"Function timed out after {timeout} seconds")
+        raise TimeoutError(f"Operation timed out after {timeout} seconds")
+    
+    if isinstance(result[0], Exception):
+        raise result[0]
+    
+    return result[0]
+
+def safe_get_url(driver, url, timeout=20):
     """Safely load a URL with timeout protection"""
     try:
         driver.set_page_load_timeout(timeout)
@@ -240,7 +254,12 @@ def safe_get_url(driver, url, timeout=35):
             driver.execute_script("window.stop();")
         except:
             pass
-        return False
+        # Even after timeout, check if page is usable
+        try:
+            driver.execute_script("return document.readyState");
+            return True  # Page might be partially loaded but usable
+        except:
+            return False
     except Exception as e:
         print(f"Error loading {url}: {e}")
         return False
@@ -262,11 +281,11 @@ weboptions.add_argument("--disable-gpu"); # https://stackoverflow.com/questions/
 weboptions.add_argument("--disable-webgl")
 weboptions.add_argument("--enable-unsafe-swiftshader")
 weboptions.add_argument("--log-level=3")
-weboptions.page_load_strategy = 'eager'
+weboptions.page_load_strategy = 'normal'  # Changed from 'eager' for better compatibility
 
 driver = webdriver.Chrome(options=weboptions)
 
-driver.set_page_load_timeout(30) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+driver.set_page_load_timeout(20)  # Reduced from 30 to 20 seconds
 try:
     i = 0
     for writer in writersArray:
@@ -277,19 +296,19 @@ try:
             except:
                 pass
             driver = webdriver.Chrome(options=weboptions)
-            driver.set_page_load_timeout(30)
+            driver.set_page_load_timeout(20)
         if writer['url'] != '':
             print('writer[\'name\']:', writer['name'])
             
             print('getting url')
-            if not safe_get_url(driver, writer['url'], timeout=30):
+            if not safe_get_url(driver, writer['url'], timeout=20):
                 print(f"Failed to load {writer['name']}, skipping...")
                 nopicks.append([writer.get('name'), writer.get('url'), 'Timeout'])
                 i = i + 1
                 continue
             
             print('waiting')
-            wait = WebDriverWait(driver, timeout=5)
+            wait = WebDriverWait(driver, timeout=3)  # Reduced from 5 to 3 seconds
             print('done waiting')
             print('hasattr()', writer.get("searchTerm"))
             searchTerm = writer.get("searchTerm")
@@ -468,11 +487,11 @@ try:
 
     # vinnie iyer formatting
     try: 
-        if not safe_get_url(driver, iyer["url"], timeout=30):
+        if not safe_get_url(driver, iyer["url"], timeout=20):
             print("Failed to load Vinnie Iyer page, skipping...")
             raise TimeoutException("Page load timeout")
         
-        wait = WebDriverWait(driver, timeout=10)
+        wait = WebDriverWait(driver, timeout=5)  # Reduced from 10 to 5
         # try:
         #     games = wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "h3")))
         #     picks = wait.until(EC.presence_of_all_elements_located(
@@ -587,24 +606,23 @@ try:
 
     if espn['url'] is not None:
         try:
-            with timeout_context(60):
-                espnrows = fetch_espn_data(weeknum, espn['url'], weboptions)
-                for espnrow in espnrows:
-                    rows.append(espnrow)
-        except TimeoutException:
+            espnrows = run_with_timeout(fetch_espn_data, args=(weeknum, espn['url'], weboptions), timeout=45)
+            for espnrow in espnrows:
+                rows.append(espnrow)
+        except TimeoutError:
             print("ESPN scraper timed out, skipping...")
-            errors.append(['ESPN', 'Timeout', 'TimeoutException'])
+            errors.append(['ESPN', 'Timeout', 'TimeoutError'])
         except Exception as e:
             print(f"ESPN scraper error: {e}")
             errors.append(['ESPN', str(e), 'Exception'])
 
         # dimers formatting
         # try:
-        #     if not safe_get_url(driver, 'https://www.dimers.com/bet-hub/nfl/schedule', timeout=30):
-        #         print("Failed to load Dimers, skipping...")
-        #         raise TimeoutException("Page load timeout")
+            if not safe_get_url(driver, 'https://www.dimers.com/bet-hub/nfl/schedule', timeout=20):
+                print("Failed to load Dimers, skipping...")
+                raise TimeoutException("Page load timeout")
             
-        #     wait = WebDriverWait(driver, timeout=10)
+            wait = WebDriverWait(driver, timeout=5)  # Reduced from 10 to 5
         #     driver.refresh()
 
         #     matchgrid = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "match-list-grid")))
@@ -715,122 +733,112 @@ try:
 
     # usatoday formatting
     try:
-        with timeout_context(60):
-            usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
-            for usatodayrow in usatodayrows:
-                rows.append(usatodayrow)
-    except TimeoutException:
+        usatodayrows = run_with_timeout(fetch_usatoday_data, args=(weeknum, usatoday['url']), timeout=45)
+        for usatodayrow in usatodayrows:
+            rows.append(usatodayrow)
+    except TimeoutError:
         print("USA Today scraper timed out, skipping...")
-        errors.append(['USAToday', 'Timeout', 'TimeoutException'])
+        errors.append(['USAToday', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"USA Today error: {e}")
         errors.append(['USAToday', str(e), 'Exception'])
 
     # nfl formatting
     try:
-        with timeout_context(60):
-            nflrows = fetch_nfl_data(weeknum, nfl['url'], weboptions)
-            for nflrow in nflrows:
-                rows.append(nflrow)
-    except TimeoutException:
+        nflrows = run_with_timeout(fetch_nfl_data, args=(weeknum, nfl['url'], weboptions), timeout=45)
+        for nflrow in nflrows:
+            rows.append(nflrow)
+    except TimeoutError:
         print("NFL scraper timed out, skipping...")
-        errors.append(['NFL', 'Timeout', 'TimeoutException'])
+        errors.append(['NFL', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"NFL error: {e}")
         errors.append(['NFL', str(e), 'Exception'])
 
     try:
-        with timeout_context(60):
-            oddssharkrows = fetch_oddsshark_data(weeknum, weboptions)
-            for oddssharkrow in oddssharkrows:
-                rows.append(oddssharkrow)
-    except TimeoutException:
+        oddssharkrows = run_with_timeout(fetch_oddsshark_data, args=(weeknum, weboptions), timeout=45)
+        for oddssharkrow in oddssharkrows:
+            rows.append(oddssharkrow)
+    except TimeoutError:
         print("OddsShark timed out, skipping...")
-        errors.append(['OddsShark', 'Timeout', 'TimeoutException'])
+        errors.append(['OddsShark', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"OddsShark error: {e}")
         errors.append(['OddsShark', str(e), 'Exception'])
         
     try:
-        with timeout_context(60):
-            dratingsrows = fetch_dratings_data(weeknum, weboptions)
-            for dratingsrow in dratingsrows:
-                rows.append(dratingsrow)
-    except TimeoutException:
+        dratingsrows = run_with_timeout(fetch_dratings_data, args=(weeknum, weboptions), timeout=45)
+        for dratingsrow in dratingsrows:
+            rows.append(dratingsrow)
+    except TimeoutError:
         print("DRatings timed out, skipping...")
-        errors.append(['DRatings', 'Timeout', 'TimeoutException'])
+        errors.append(['DRatings', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"DRatings error: {e}")
         errors.append(['DRatings', str(e), 'Exception'])
 
     try:
-        with timeout_context(60):
-            oddstraderrows = fetch_oddstrader_data(weeknum, weboptions)
-            for oddstraderrow in oddstraderrows:
-                rows.append(oddstraderrow)
-    except TimeoutException:
+        oddstraderrows = run_with_timeout(fetch_oddstrader_data, args=(weeknum, weboptions), timeout=45)
+        for oddstraderrow in oddstraderrows:
+            rows.append(oddstraderrow)
+    except TimeoutError:
         print("OddsTrader timed out, skipping...")
-        errors.append(['OddsTrader', 'Timeout', 'TimeoutException'])
+        errors.append(['OddsTrader', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"OddsTrader error: {e}")
         errors.append(['OddsTrader', str(e), 'Exception'])
 
     try:
-        with timeout_context(60):
-            nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, weboptions)
-            for nflspinzonerow in nflspinzonerows:
-                rows.append(nflspinzonerow)
-    except TimeoutException:
+        nflspinzonerows = run_with_timeout(fetch_nflspinzone_data, args=(sz['url'], weeknum, weboptions), timeout=45)
+        for nflspinzonerow in nflspinzonerows:
+            rows.append(nflspinzonerow)
+    except TimeoutError:
         print("NFL Spinzone timed out, skipping...")
-        errors.append(['NFLSpinzone', 'Timeout', 'TimeoutException'])
+        errors.append(['NFLSpinzone', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"NFL Spinzone error: {e}")
         errors.append(['NFLSpinzone', str(e), 'Exception'])
 
     try:
-        with timeout_context(60):
-            sbrrows = fetch_sbr_data(weeknum, sbr['url'], weboptions)
-            for sbrrow in sbrrows:
-                rows.append(sbrrow)
-    except TimeoutException:
+        sbrrows = run_with_timeout(fetch_sbr_data, args=(weeknum, sbr['url'], weboptions), timeout=45)
+        for sbrrow in sbrrows:
+            rows.append(sbrrow)
+    except TimeoutError:
         print("SBR timed out, skipping...")
-        errors.append(['SBR', 'Timeout', 'TimeoutException'])
+        errors.append(['SBR', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"SBR error: {e}")
         errors.append(['SBR', str(e), 'Exception'])
 
     try:
-        with timeout_context(60):
-            clutchpointsrows = fetch_clutchpoints_data(weeknum, clutchpoints['url'], weboptions)
-            for clutchpointsrow in clutchpointsrows:
-                rows.append(clutchpointsrow)
-    except TimeoutException:
+        clutchpointsrows = run_with_timeout(fetch_clutchpoints_data, args=(weeknum, clutchpoints['url'], weboptions), timeout=45)
+        for clutchpointsrow in clutchpointsrows:
+            rows.append(clutchpointsrow)
+    except TimeoutError:
         print("ClutchPoints timed out, skipping...")
-        errors.append(['ClutchPoints', 'Timeout', 'TimeoutException'])
+        errors.append(['ClutchPoints', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"ClutchPoints error: {e}")
         errors.append(['ClutchPoints', str(e), 'Exception'])
 
     try:
-        with timeout_context(60):
-            copilotrows = fetch_copilot_data(weeknum, copilot['url'], weboptions)
-            for copilotrow in copilotrows:
-                rows.append(copilotrow)
-    except TimeoutException:
+        copilotrows = run_with_timeout(fetch_copilot_data, args=(weeknum, copilot['url'], weboptions), timeout=45)
+        for copilotrow in copilotrows:
+            rows.append(copilotrow)
+    except TimeoutError:
         print("Copilot timed out, skipping...")
-        errors.append(['Copilot', 'Timeout', 'TimeoutException'])
+        errors.append(['Copilot', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"Copilot error: {e}")
         errors.append(['Copilot', str(e), 'Exception'])
     
     try:
-        with timeout_context(60):
-            rotowirerows = fetch_rotowire_data(weeknum, rotowire['url'], weboptions)
-            for rotowirerow in rotowirerows:
-                rows.append(rotowirerow)
-    except TimeoutException:
+        rotowirerows = run_with_timeout(fetch_rotowire_data, args=(weeknum, rotowire['url'], weboptions), timeout=45)
+        for rotowirerow in rotowirerows:
+            rows.append(rotowirerow)
+    except TimeoutError:
         print("Rotowire timed out, skipping...")
-        errors.append(['Rotowire', 'Timeout', 'TimeoutException'])
+        errors.append(['Rotowire', 'Timeout', 'TimeoutError'])
     except Exception as e:
         print(f"Rotowire error: {e}")
         errors.append(['Rotowire', str(e), 'Exception'])

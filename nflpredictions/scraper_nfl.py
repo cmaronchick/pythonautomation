@@ -15,16 +15,14 @@ service = Service(chrome_driver_path)
 
 def fetch_nfl_data(weeknum, url, weboptions):
     driver = webdriver.Chrome(options=weboptions)
-    driver.set_page_load_timeout(35)
+    driver.set_page_load_timeout(20)
     try: 
         # nfl formatting
         nflrows = []
         driver.get(url) #'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season'
-        wait = WebDriverWait(driver, timeout=10)
-        # driver.implicitly_wait(10)
+        wait = WebDriverWait(driver, timeout=5)
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
-        articleBody = driver.find_element(By.CLASS_NAME, "nfl-c-article__body")
-        wait.until(lambda d : articleBody.is_displayed())
+        articleBody = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "nfl-c-article__body")))
         tables = driver.find_elements(By.CLASS_NAME, "d3-o-table--detailed")
         print('nfltables:', len(tables))
         tableIndex = 0

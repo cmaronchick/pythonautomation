@@ -27,14 +27,14 @@ def fetch_rotowire_data(weeknum, url, weboptions):
         #   https://rotowire.com/author/sayrebedinger/
     }
     driver = webdriver.Chrome(options=weboptions)
-    driver.set_page_load_timeout(35)
+    driver.set_page_load_timeout(20)
     print('fetch_rotowire_data:', url)
     rotowirerows = []
     try:
         i = 0
         driver.get(url)
         
-        wait = WebDriverWait(driver, timeout=10)
+        wait = WebDriverWait(driver, timeout=5)
         
         
         # response = requests.get(writer['url'], headers=request_headers)
@@ -57,8 +57,7 @@ def fetch_rotowire_data(weeknum, url, weboptions):
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         
         print('hasattr()', rotowire.get("searchTerm"))
-        article = driver.find_element(By.TAG_NAME, "article")
-        wait.until(lambda d : article.is_displayed())
+        article = wait.until(EC.presence_of_element_located((By.TAG_NAME, "article")))
         searchTerm = rotowire.get("searchTerm")
         if searchTerm:
             picks = article.find_elements(By.XPATH, "//strong[contains(text(), '" + rotowire['searchTerm'] + "')]/parent::*")
@@ -121,10 +120,10 @@ def fetch_rotowire_data(weeknum, url, weboptions):
                 teamsString = predictionString[predictionString.find(":")+2:]
                 # print('teamsString: ', teamsString)
                 firstSpace = teamsString.find(" ")
-                separatorText = " -- "
+                separatorText = " – "
                 dashSpace = teamsString.find(separatorText)
                 lastSpace = teamsString.rfind(" ")
-                # print('dashSpace: ', dashSpace)
+                print('dashSpace: ', dashSpace)
                 winner = teamsString[:firstSpace]
                 winnerScore = teamsString[firstSpace:dashSpace]
                 loser = teamsString[dashSpace+len(separatorText):lastSpace]
@@ -153,7 +152,7 @@ def fetch_rotowire_data(weeknum, url, weboptions):
 def main(weeknum, weboptions):
     if weeknum == None:
         weeknum = sys.argv[1]
-    url = "https://www.rotowire.com/football/article/beating-the-book-99145"
+    url = "https://www.rotowire.com/football/article/beating-the-book-101805"
     html_content = fetch_rotowire_data(weeknum, url, weboptions) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
