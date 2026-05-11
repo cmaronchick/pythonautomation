@@ -4,7 +4,7 @@ import gspread
 from jira import JIRA
 import pandas as pd
 from datetime import datetime
-import config
+# import config
 
 # --- Configuration ---
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
