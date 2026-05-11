@@ -1,3 +1,6 @@
+import os
+import json
+import gspread
 from jira import JIRA
 import pandas as pd
 from datetime import datetime
@@ -8,6 +11,9 @@ JIRA_SERVER = 'https://2kcatd.atlassian.net/'
 JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
 JIRA_API_TOKEN = config.JIRA_API_TOKEN
 FIX_VERSION = 'S8 Update 4'
+STORY_POINTS_FIELD = 'customfield_10026' 
+GOOGLE_SHEET_ID = '1uwAg2ohnYHb_bwdZXDsEG_kkytT0lLQzsU6TIuxEsCU' # Paste your ID here
+SHEET_TAB_NAME = 'Sheet1' # Change if your tab is named differently
 
 # The custom field ID for Story Points varies by Jira instance.
 # You can find yours by looking at the JSON of a single issue via the API.
@@ -68,31 +74,43 @@ def fetch_daily_sprint_data(jira):
             #         print(f"ID: {field['id']}, Name: {field['name']}")
                 fieldsPrinted = True
 
-        data.append({
-            'Date': today,
-            'Issue Key': issue_key,
-            'Epic': epic_key,
-            'Parent Link': parent_link,
-            'Summary': summary,
-            'Status': status,
-            'Story Points': story_points
-        })
+        data.append([
+            today,
+            issue.key,
+            epic_key,
+            parent_link,
+            issue.fields.summary,
+            issue.fields.status.name,
+            story_points if story_points is not None else 0
+        ])
 
-    return pd.DataFrame(data)
+    return data
+
+def append_to_google_sheet(data):
+    # Load credentials from the GitHub Secret JSON string
+    creds_json = os.environ['GOOGLE_CREDENTIALS']
+    creds_dict = json.loads(creds_json)
+    
+    # Authenticate with Google
+    gc = gspread.service_account_from_dict(creds_dict)
+    
+    # Open the sheet and target tab
+    sh = gc.open_by_key(GOOGLE_SHEET_ID)
+    worksheet = sh.worksheet(SHEET_TAB_NAME)
+    
+    # Append the new rows at the bottom of the sheet
+    worksheet.append_rows(data)
+    print(f"Successfully added {len(data)} rows to Google Sheets.")
 
 if __name__ == "__main__":
-    print('starting)')
+    print("Authenticating with Jira...")
     jira_client = get_jira_client()
-    df = fetch_daily_sprint_data(jira_client)
-    # Assuming 'eoh_df' is your final DataFrame from the previous step
-    filename = today + "-splash.csv"
-
-    # Index=False prevents pandas from adding an extra column for the row numbers
     
-    print(f"Extracted {len(df)} issues for fix version {FIX_VERSION}")
-    print(df.head())
-    df.to_csv(filename, index=False)
+    print("Fetching issues...")
+    daily_data = fetch_daily_sprint_data(jira_client)
     
-    
-    # Save to CSV (append mode so you build a daily trend)
-    # df.to_csv('burndown_data.csv', mode='a', header=not pd.io.common.file_exists('burndown_data.csv'), index=False)
+    if daily_data:
+        print("Uploading to Google Sheets...")
+        append_to_google_sheet(daily_data)
+    else:
+        print("No data found for today.")
