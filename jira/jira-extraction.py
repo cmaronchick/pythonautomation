@@ -9,7 +9,7 @@ import config
 # --- Configuration ---
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
 JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
-JIRA_API_TOKEN = config.JIRA_API_TOKEN
+JIRA_API_TOKEN = os.environ['JIRA_API_TOKEN']
 FIX_VERSION = 'S8 Update 4'
 STORY_POINTS_FIELD = 'customfield_10026' 
 GOOGLE_SHEET_ID = '1uwAg2ohnYHb_bwdZXDsEG_kkytT0lLQzsU6TIuxEsCU' # Paste your ID here
