@@ -45,21 +45,47 @@ def fetch_daily_sprint_data(jira):
     data = []
     
     fieldsPrinted = False 
-    for issue in issues:
-        # Extract fields
-        issue_key = issue.key
-        summary = issue.fields.summary
-        status = issue.fields.status.name
+    # for issue in issues:
+    #     # Extract fields
+    #     issue_key = issue.key
+    #     summary = issue.fields.summary
+    #     status = issue.fields.status.name
         
-        # Safely get story points (returns None if not estimated)
-        story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
-        if story_points is None:
-            story_points = 0
-        # else:
-        #     estimatedStories = estimatedStories + 1
+    #     # Safely get story points (returns None if not estimated)
+    #     story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
+    #     if story_points is None:
+    #         story_points = 0
+    #     # else:
+    #     #     estimatedStories = estimatedStories + 1
             
-        # Get the Epic Link (Custom field ID varies, often customfield_10014)
-        # In newer Jira Cloud, Epic Link is often replaced by 'parent'
+    #     # Get the Epic Link (Custom field ID varies, often customfield_10014)
+    #     # In newer Jira Cloud, Epic Link is often replaced by 'parent'
+    #     epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
+    #     parent_link = ''
+    #     if epic_key != "No Epic":
+    #         # fields = issueObj.fields
+    #         parent = getattr(issue.fields, 'parent')
+    #         print('parent fields: ', parent.raw)
+    #         parent_link = getattr(parent.fields, 'summary')
+    #         if fieldsPrinted == False:
+    #             print(dir(issue))
+    #             print('issue with epic: ', issue.fields.parent.raw)
+    #         #     for field in fields:
+    #         #         print(f"ID: {field['id']}, Name: {field['name']}")
+    #             fieldsPrinted = True
+
+    #     data.append([
+    #         today,
+    #         issue.key,
+    #         epic_key,
+    #         parent_link,
+    #         issue.fields.summary,
+    #         issue.fields.status.name,
+    #         story_points if story_points is not None else 0
+    #     ])
+
+    for issue in issues:
+        story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
         epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
         parent_link = ''
         if epic_key != "No Epic":
@@ -83,34 +109,59 @@ def fetch_daily_sprint_data(jira):
             issue.fields.status.name,
             story_points if story_points is not None else 0
         ])
+    return data
 
     return data
 
-def append_to_google_sheet(data):
-    # Load credentials from the GitHub Secret JSON string
+def upsert_to_google_sheet(daily_data):
+    # 1. Authenticate with Google
     creds_json = os.environ['GOOGLE_CREDENTIALS']
     creds_dict = json.loads(creds_json)
-    
-    # Authenticate with Google
     gc = gspread.service_account_from_dict(creds_dict)
     
-    # Open the sheet and target tab
     sh = gc.open_by_key(GOOGLE_SHEET_ID)
     worksheet = sh.worksheet(SHEET_TAB_NAME)
     
-    # Append the new rows at the bottom of the sheet
-    worksheet.append_rows(data)
-    print(f"Successfully added {len(data)} rows to Google Sheets.")
+    # 2. Fetch existing data from the sheet
+    existing_data = worksheet.get_all_records()
+    df_existing = pd.DataFrame(existing_data)
+    
+    # 3. Convert today's new Jira pull into a DataFrame
+    columns = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points']
+    df_new = pd.DataFrame(daily_data, columns=columns)
+    
+    # 4. Combine and Deduplicate (The "Upsert" Magic)
+    if not df_existing.empty:
+        # Combine old data and new data
+        df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+        
+        # Drop duplicates based on the Date and Issue Key. 
+        # keep='last' ensures that if an issue changed status mid-day, the newer pull overwrites the morning pull.
+        df_combined = df_combined.drop_duplicates(subset=['Date', 'Issue Key'], keep='last')
+    else:
+        df_combined = df_new
+        
+    # Fill any missing values with empty strings so Google Sheets doesn't throw an error
+    df_combined = df_combined.fillna('')
+        
+    # 5. Overwrite the Google Sheet with the clean data
+    worksheet.clear()
+    
+    # Convert dataframe back to a list of lists for gspread
+    final_data = [df_combined.columns.values.tolist()] + df_combined.values.tolist()
+    worksheet.update(values=final_data, range_name='A1')
+    
+    print(f"Successfully synced {len(df_combined)} total records without duplicates.")
 
 if __name__ == "__main__":
     print("Authenticating with Jira...")
     jira_client = get_jira_client()
     
-    print("Fetching issues...")
+    print("Fetching latest issues...")
     daily_data = fetch_daily_sprint_data(jira_client)
     
     if daily_data:
-        print("Uploading to Google Sheets...")
-        append_to_google_sheet(daily_data)
+        print("Upserting data to Google Sheets...")
+        upsert_to_google_sheet(daily_data)
     else:
         print("No data found for today.")
