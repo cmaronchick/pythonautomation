@@ -127,7 +127,7 @@ def upsert_to_google_sheet(daily_data):
     df_existing = pd.DataFrame(existing_data)
     
     # 3. Convert today's new Jira pull into a DataFrame
-    columns = ['Date', 'Issue Key', 'Epic', 'Summary', 'Status', 'Story Points']
+    columns = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points']
     df_new = pd.DataFrame(daily_data, columns=columns)
     
     # 4. Combine and Deduplicate (The "Upsert" Magic)
