@@ -9,6 +9,8 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 # import config
 
+from dotenv import load_dotenv
+
 # --- Configuration ---
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
 JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
@@ -94,7 +96,7 @@ def fetch_daily_sprint_data(jira):
         if epic_key != "No Epic":
             # fields = issueObj.fields
             parent = getattr(issue.fields, 'parent')
-            print('parent fields: ', parent.raw)
+            # print('parent fields: ', parent.raw)
             parent_link = getattr(parent.fields, 'summary')
             if fieldsPrinted == False:
                 print(dir(issue))
@@ -182,6 +184,6 @@ if __name__ == "__main__":
     
     if daily_data:
         print("Upserting data to Google Sheets...")
-        upsert_to_google_sheet(daily_data)
+        upsert_to_google_drive_excel(daily_data)
     else:
         print("No data found for today.")
