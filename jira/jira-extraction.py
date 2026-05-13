@@ -2,12 +2,13 @@ import os
 import json
 import io
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, time
 from jira import JIRA
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 # import config
+
 
 # --- Configuration ---
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
@@ -161,11 +162,22 @@ def upsert_to_google_drive_excel(daily_data):
 
     # 6. Upload the modified file back to Google Drive
     print("Uploading updated file to Google Drive...")
-    media = MediaFileUpload(temp_filename, mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    drive_service.files().update(
-        fileId=DRIVE_FILE_ID,
-        media_body=media
-    ).execute()
+    media = MediaFileUpload(temp_filename, mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', resumable=True)
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            drive_service.files().update(
+                fileId=DRIVE_FILE_ID,
+                media_body=media
+            ).execute()
+        except Exception as e:
+            print(f"Upload attempt {attempt + 1} failed: {e}")
+            if attempt < max_retries - 1:
+                print("Retrying in 5 seconds...")
+                time.sleep(5)
+            else:
+                print("All upload attempts failed.")
+                raise  # Crash the script so GitHub Actions flags it as a failure
     
     # Cleanup temp file
     if os.path.exists(temp_filename):
