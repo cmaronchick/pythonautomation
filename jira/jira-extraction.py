@@ -15,7 +15,7 @@ JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
 JIRA_API_TOKEN = os.environ['JIRA_API_TOKEN']
 FIX_VERSION = 'S8 Update 4'
 STORY_POINTS_FIELD = 'customfield_10026' 
-GOOGLE_SHEET_ID = '1WulP_8RKqm5r7TlIsnGjZ2KIg2NfBA2c' # Paste your ID here
+DRIVE_FILE_ID = '1WulP_8RKqm5r7TlIsnGjZ2KIg2NfBA2c' # Paste your ID here
 SHEET_TAB_NAME = 'Sheet1' # Change if your tab is named differently
 
 # The custom field ID for Story Points varies by Jira instance.
