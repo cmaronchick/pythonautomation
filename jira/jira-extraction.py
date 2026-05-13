@@ -9,8 +9,6 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 # import config
 
-from dotenv import load_dotenv
-
 # --- Configuration ---
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
 JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
