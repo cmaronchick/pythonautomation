@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install jira pandas openpyxl google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
       - name: Run Jira Export Script
         env:
