@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install jira pandas gspread
+          pip install -r requirements.txt
 
       - name: Run Jira Export Script
         env:
