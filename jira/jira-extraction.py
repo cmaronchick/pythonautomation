@@ -1,10 +1,14 @@
 import os
 import json
-import gspread
-from jira import JIRA
+import io
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, time
+from jira import JIRA
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 # import config
+
 
 # --- Configuration ---
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
@@ -12,8 +16,8 @@ JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
 JIRA_API_TOKEN = os.environ['JIRA_API_TOKEN']
 FIX_VERSION = 'S8 Update 4'
 STORY_POINTS_FIELD = 'customfield_10026' 
-GOOGLE_SHEET_ID = '1uwAg2ohnYHb_bwdZXDsEG_kkytT0lLQzsU6TIuxEsCU' # Paste your ID here
-SHEET_TAB_NAME = 'Sheet1' # Change if your tab is named differently
+DRIVE_FILE_ID = '1WulP_8RKqm5r7TlIsnGjZ2KIg2NfBA2c' # Paste your ID here
+SHEET_NAME = 'Data' # Change if your tab is named differently
 
 # The custom field ID for Story Points varies by Jira instance.
 # You can find yours by looking at the JSON of a single issue via the API.
@@ -91,7 +95,7 @@ def fetch_daily_sprint_data(jira):
         if epic_key != "No Epic":
             # fields = issueObj.fields
             parent = getattr(issue.fields, 'parent')
-            print('parent fields: ', parent.raw)
+            # print('parent fields: ', parent.raw)
             parent_link = getattr(parent.fields, 'summary')
             if fieldsPrinted == False:
                 print(dir(issue))
@@ -113,45 +117,73 @@ def fetch_daily_sprint_data(jira):
 
     return data
 
-def upsert_to_google_sheet(daily_data):
-    # 1. Authenticate with Google
+def upsert_to_google_drive_excel(daily_data):
+    # 1. Authenticate with Google Drive
     creds_json = os.environ['GOOGLE_CREDENTIALS']
     creds_dict = json.loads(creds_json)
-    gc = gspread.service_account_from_dict(creds_dict)
+    credentials = service_account.Credentials.from_service_account_info(
+        creds_dict, scopes=['https://www.googleapis.com/auth/drive']
+    )
+    drive_service = build('drive', 'v3', credentials=credentials)
+
+    # 2. Download the existing Excel file into memory
+    print("Downloading Excel file from Google Drive...")
+    request = drive_service.files().get_media(fileId=DRIVE_FILE_ID)
+    fh = io.BytesIO()
+    downloader = MediaIoBaseDownload(fh, request)
+    done = False
+    while done is False:
+        status, done = downloader.next_chunk()
     
-    sh = gc.open_by_key(GOOGLE_SHEET_ID)
-    worksheet = sh.worksheet(SHEET_TAB_NAME)
+    fh.seek(0)
     
-    # 2. Fetch existing data from the sheet
-    existing_data = worksheet.get_all_records()
-    df_existing = pd.DataFrame(existing_data)
+    # 3. Save it temporarily so we can safely edit it
+    temp_filename = 'temp_burndown.xlsx'
+    with open(temp_filename, 'wb') as f:
+        f.write(fh.read())
+
+    # 4. Upsert Data (Remove duplicates, keep latest)
+    df_new = pd.DataFrame(daily_data)
     
-    # 3. Convert today's new Jira pull into a DataFrame
-    columns = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points']
-    df_new = pd.DataFrame(daily_data, columns=columns)
-    
-    # 4. Combine and Deduplicate (The "Upsert" Magic)
-    if not df_existing.empty:
-        # Combine old data and new data
+    try:
+        df_existing = pd.read_excel(temp_filename, sheet_name=SHEET_NAME)
         df_combined = pd.concat([df_existing, df_new], ignore_index=True)
-        
-        # Drop duplicates based on the Date and Issue Key. 
-        # keep='last' ensures that if an issue changed status mid-day, the newer pull overwrites the morning pull.
+        # Drop duplicates based on Date and Issue Key
         df_combined = df_combined.drop_duplicates(subset=['Date', 'Issue Key'], keep='last')
-    else:
+    except Exception as e:
+        print(f"Could not read existing data (might be empty): {e}")
         df_combined = df_new
-        
-    # Fill any missing values with empty strings so Google Sheets doesn't throw an error
-    df_combined = df_combined.fillna('')
-        
-    # 5. Overwrite the Google Sheet with the clean data
-    worksheet.clear()
+
+    # 5. Safely write back to the Excel file, replacing ONLY the Data sheet 
+    # (This preserves your PivotCharts on the other tabs!)
+    print("Updating Excel data...")
+    with pd.ExcelWriter(temp_filename, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
+        df_combined.to_excel(writer, sheet_name=SHEET_NAME, index=False)
+
+    # 6. Upload the modified file back to Google Drive
+    print("Uploading updated file to Google Drive...")
+    media = MediaFileUpload(temp_filename, mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', resumable=True)
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            drive_service.files().update(
+                fileId=DRIVE_FILE_ID,
+                media_body=media
+            ).execute()
+        except Exception as e:
+            print(f"Upload attempt {attempt + 1} failed: {e}")
+            if attempt < max_retries - 1:
+                print("Retrying in 5 seconds...")
+                time.sleep(5)
+            else:
+                print("All upload attempts failed.")
+                raise  # Crash the script so GitHub Actions flags it as a failure
     
-    # Convert dataframe back to a list of lists for gspread
-    final_data = [df_combined.columns.values.tolist()] + df_combined.values.tolist()
-    worksheet.update(values=final_data, range_name='A1')
-    
-    print(f"Successfully synced {len(df_combined)} total records without duplicates.")
+    # Cleanup temp file
+    if os.path.exists(temp_filename):
+        os.remove(temp_filename)
+        
+    print(f"Success! Deduplicated and synced {len(df_combined)} total records.")
 
 if __name__ == "__main__":
     print("Authenticating with Jira...")
@@ -162,6 +194,6 @@ if __name__ == "__main__":
     
     if daily_data:
         print("Upserting data to Google Sheets...")
-        upsert_to_google_sheet(daily_data)
+        upsert_to_google_drive_excel(daily_data)
     else:
         print("No data found for today.")
