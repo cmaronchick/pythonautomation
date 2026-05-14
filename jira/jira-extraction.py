@@ -91,7 +91,9 @@ def fetch_daily_sprint_data(jira):
     for issue in issues:
         story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
         epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
-        parent_link = ''
+        
+        # Replace this with your exact logic if you pull Parent Link differently!
+        parent_link = getattr(issue.fields, 'customfield_10014', epic_key)
         if epic_key != "No Epic":
             # fields = issueObj.fields
             parent = getattr(issue.fields, 'parent')
@@ -104,19 +106,19 @@ def fetch_daily_sprint_data(jira):
             #         print(f"ID: {field['id']}, Name: {field['name']}")
                 fieldsPrinted = True
 
-        data.append([
-            today,
-            issue.key,
-            epic_key,
-            parent_link,
-            issue.fields.summary,
-            issue.fields.status.name,
-            story_points if story_points is not None else 0
-        ])
+        # We now use dictionaries instead of lists so Pandas NEVER uses numbers for columns
+        data.append({
+            'Date': today,
+            'Issue Key': issue.key,
+            'Epic': epic_key,
+            'Parent Link': parent_link, # Your newly added column
+            'Summary': issue.fields.summary,
+            'Status': issue.fields.status.name,
+            'Story Points': story_points if story_points is not None else 0
+        })
     return data
 
 def upsert_to_google_drive_excel(daily_data):
-    # 1. Authenticate with Google Drive
     creds_json = os.environ['GOOGLE_CREDENTIALS']
     creds_dict = json.loads(creds_json)
     credentials = service_account.Credentials.from_service_account_info(
@@ -124,13 +126,12 @@ def upsert_to_google_drive_excel(daily_data):
     )
     drive_service = build('drive', 'v3', credentials=credentials)
 
-    # 2. Download the existing Excel file into memory
     print("Downloading Excel file from Google Drive...")
     request = drive_service.files().get_media(fileId=DRIVE_FILE_ID)
     fh = io.BytesIO()
     downloader = MediaIoBaseDownload(fh, request)
     done = False
-    while done is False:
+    while not done:
         status, done = downloader.next_chunk()
     
     fh.seek(0)
@@ -138,39 +139,47 @@ def upsert_to_google_drive_excel(daily_data):
     with open(temp_filename, 'wb') as f:
         f.write(fh.read())
 
-    # 3. Define the strict columns we expect
+    # 1. We strictly define the 7 columns we expect
     expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points']
-    df_new = pd.DataFrame(daily_data, columns=expected_cols)
+    df_new = pd.DataFrame(daily_data)
     
+    # Ensure df_new has all expected columns (prevents crashes if Jira returned empty data for one)
+    for col in expected_cols:
+        if col not in df_new.columns:
+            df_new[col] = ""
+    df_new = df_new[expected_cols]
+
     try:
-        # Read the Excel file
+        # 2. Read the existing Excel file
         df_existing = pd.read_excel(temp_filename, sheet_name=SHEET_NAME)
         
-        # FIX: Drop any weird 'Unnamed' ghost columns pandas might have picked up
-        df_existing = df_existing.loc[:, ~df_existing.columns.str.contains('^Unnamed')]
+        # 3. THE FIX: Aggressively obliterate any ghost columns or numbered columns
+        df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.contains('^Unnamed')]
+        df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.match(r'^\d+$')]
         
-        # FIX: Only keep the columns we care about to prevent misalignment
-        valid_cols = [c for c in expected_cols if c in df_existing.columns]
-        df_existing = df_existing[valid_cols]
+        # 4. Handle backwards compatibility: If the old spreadsheet doesn't have 'Parent Link' yet, add it as a blank column
+        for col in expected_cols:
+            if col not in df_existing.columns:
+                df_existing[col] = ""
 
-        # Combine old and new
+        # Lock existing data into the exact column order
+        df_existing = df_existing[expected_cols]
+
+        # 5. Combine and deduplicate
         df_combined = pd.concat([df_existing, df_new], ignore_index=True)
-        
-        # Deduplicate safely now that columns are aligned
         df_combined = df_combined.drop_duplicates(subset=['Date', 'Issue Key'], keep='last')
+        
     except Exception as e:
         print(f"Could not read existing data cleanly: {e}")
         df_combined = df_new
 
-    # FIX: Force the final dataframe into the exact column order before saving
+    # Final lock before saving
     df_combined = df_combined[expected_cols]
 
-    # 4. Safely write back to the Excel file
     print("Updating Excel data...")
     with pd.ExcelWriter(temp_filename, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
         df_combined.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
-    # 5. Upload back to Google Drive (with resumable uploads)
     print("Uploading updated file to Google Drive...")
     media = MediaFileUpload(
         temp_filename, 
@@ -178,7 +187,6 @@ def upsert_to_google_drive_excel(daily_data):
         resumable=True
     )
     
-    import time
     max_retries = 3
     for attempt in range(max_retries):
         try:
