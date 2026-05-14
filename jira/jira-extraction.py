@@ -139,7 +139,7 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # 3. Define the strict columns we expect
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Summary', 'Status', 'Story Points']
+    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points']
     df_new = pd.DataFrame(daily_data, columns=expected_cols)
     
     try:
