@@ -139,41 +139,39 @@ def upsert_to_google_drive_excel(daily_data):
     with open(temp_filename, 'wb') as f:
         f.write(fh.read())
 
-    # 1. We strictly define the 7 columns we expect
     expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points']
     df_new = pd.DataFrame(daily_data)
     
-    # Ensure df_new has all expected columns (prevents crashes if Jira returned empty data for one)
     for col in expected_cols:
         if col not in df_new.columns:
             df_new[col] = ""
     df_new = df_new[expected_cols]
 
     try:
-        # 2. Read the existing Excel file
         df_existing = pd.read_excel(temp_filename, sheet_name=SHEET_NAME)
-        
-        # 3. THE FIX: Aggressively obliterate any ghost columns or numbered columns
         df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.contains('^Unnamed')]
         df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.match(r'^\d+$')]
         
-        # 4. Handle backwards compatibility: If the old spreadsheet doesn't have 'Parent Link' yet, add it as a blank column
         for col in expected_cols:
             if col not in df_existing.columns:
                 df_existing[col] = ""
-
-        # Lock existing data into the exact column order
         df_existing = df_existing[expected_cols]
 
-        # 5. Combine and deduplicate
+        # Combine old and new
         df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+        
+        # 5. THE FIX: Standardize the Date column format to strictly YYYY-MM-DD
+        # This forces Excel datetimes and Python strings to match exactly
+        df_combined['Date'] = pd.to_datetime(df_combined['Date'], errors='coerce').dt.strftime('%Y-%m-%d')
+        
+        # Drop any totally blank rows that might have snuck in, then deduplicate
+        df_combined = df_combined.dropna(subset=['Date', 'Issue Key'])
         df_combined = df_combined.drop_duplicates(subset=['Date', 'Issue Key'], keep='last')
         
     except Exception as e:
         print(f"Could not read existing data cleanly: {e}")
         df_combined = df_new
 
-    # Final lock before saving
     df_combined = df_combined[expected_cols]
 
     print("Updating Excel data...")
