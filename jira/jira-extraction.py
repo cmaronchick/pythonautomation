@@ -115,8 +115,6 @@ def fetch_daily_sprint_data(jira):
         ])
     return data
 
-    return data
-
 def upsert_to_google_drive_excel(daily_data):
     # 1. Authenticate with Google Drive
     creds_json = os.environ['GOOGLE_CREDENTIALS']
@@ -136,33 +134,51 @@ def upsert_to_google_drive_excel(daily_data):
         status, done = downloader.next_chunk()
     
     fh.seek(0)
-    
-    # 3. Save it temporarily so we can safely edit it
     temp_filename = 'temp_burndown.xlsx'
     with open(temp_filename, 'wb') as f:
         f.write(fh.read())
 
-    # 4. Upsert Data (Remove duplicates, keep latest)
-    df_new = pd.DataFrame(daily_data)
+    # 3. Define the strict columns we expect
+    expected_cols = ['Date', 'Issue Key', 'Epic', 'Summary', 'Status', 'Story Points']
+    df_new = pd.DataFrame(daily_data, columns=expected_cols)
     
     try:
+        # Read the Excel file
         df_existing = pd.read_excel(temp_filename, sheet_name=SHEET_NAME)
+        
+        # FIX: Drop any weird 'Unnamed' ghost columns pandas might have picked up
+        df_existing = df_existing.loc[:, ~df_existing.columns.str.contains('^Unnamed')]
+        
+        # FIX: Only keep the columns we care about to prevent misalignment
+        valid_cols = [c for c in expected_cols if c in df_existing.columns]
+        df_existing = df_existing[valid_cols]
+
+        # Combine old and new
         df_combined = pd.concat([df_existing, df_new], ignore_index=True)
-        # Drop duplicates based on Date and Issue Key
+        
+        # Deduplicate safely now that columns are aligned
         df_combined = df_combined.drop_duplicates(subset=['Date', 'Issue Key'], keep='last')
     except Exception as e:
-        print(f"Could not read existing data (might be empty): {e}")
+        print(f"Could not read existing data cleanly: {e}")
         df_combined = df_new
 
-    # 5. Safely write back to the Excel file, replacing ONLY the Data sheet 
-    # (This preserves your PivotCharts on the other tabs!)
+    # FIX: Force the final dataframe into the exact column order before saving
+    df_combined = df_combined[expected_cols]
+
+    # 4. Safely write back to the Excel file
     print("Updating Excel data...")
     with pd.ExcelWriter(temp_filename, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
         df_combined.to_excel(writer, sheet_name=SHEET_NAME, index=False)
 
-    # 6. Upload the modified file back to Google Drive
+    # 5. Upload back to Google Drive (with resumable uploads)
     print("Uploading updated file to Google Drive...")
-    media = MediaFileUpload(temp_filename, mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', resumable=True)
+    media = MediaFileUpload(
+        temp_filename, 
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        resumable=True
+    )
+    
+    import time
     max_retries = 3
     for attempt in range(max_retries):
         try:
@@ -170,16 +186,15 @@ def upsert_to_google_drive_excel(daily_data):
                 fileId=DRIVE_FILE_ID,
                 media_body=media
             ).execute()
+            print("Upload successful!")
+            break
         except Exception as e:
             print(f"Upload attempt {attempt + 1} failed: {e}")
             if attempt < max_retries - 1:
-                print("Retrying in 5 seconds...")
                 time.sleep(5)
             else:
-                print("All upload attempts failed.")
-                raise  # Crash the script so GitHub Actions flags it as a failure
-    
-    # Cleanup temp file
+                raise
+
     if os.path.exists(temp_filename):
         os.remove(temp_filename)
         
