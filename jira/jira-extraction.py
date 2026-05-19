@@ -40,6 +40,7 @@ def fetch_daily_sprint_data(jira):
     
     data = []
     today = datetime.now().strftime('%Y-%m-%d')
+    fieldsPrinted = False
 
     for issue in issues:
         story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
