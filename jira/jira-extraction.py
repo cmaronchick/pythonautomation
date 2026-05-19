@@ -19,6 +19,9 @@ STORY_POINTS_FIELD = 'customfield_10026'
 DRIVE_FILE_ID = '1WulP_8RKqm5r7TlIsnGjZ2KIg2NfBA2c' # Paste your ID here
 SHEET_NAME = 'Data' # Change if your tab is named differently
 
+# Define what "Done" means in your Jira instance
+DONE_STATUSES = ['Done', 'Closed', 'Resolved']
+
 # The custom field ID for Story Points varies by Jira instance.
 # You can find yours by looking at the JSON of a single issue via the API.
 STORY_POINTS_FIELD = 'customfield_10026' 
