@@ -44,8 +44,20 @@ def fetch_daily_sprint_data(jira):
     for issue in issues:
         story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
         epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
-        parent_link = getattr(issue.fields, 'customfield_10014', epic_key) 
         status_name = issue.fields.status.name
+        parent_link = getattr(issue.fields, 'customfield_10014', epic_key)
+        if epic_key != "No Epic":
+            # fields = issueObj.fields
+            parent = getattr(issue.fields, 'parent')
+            # print('parent fields: ', parent.raw)
+            parent_link = getattr(parent.fields, 'summary')
+            if fieldsPrinted == False:
+                print(dir(issue))
+                print('issue with epic: ', issue.fields.parent.raw)
+            #     for field in fields:
+            #         print(f"ID: {field['id']}, Name: {field['name']}")
+                fieldsPrinted = True
+
 
         data.append({
             'Date': today,
