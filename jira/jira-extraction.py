@@ -59,6 +59,11 @@ def fetch_daily_sprint_data(jira):
             #         print(f"ID: {field['id']}, Name: {field['name']}")
                 fieldsPrinted = True
 
+        # NEW: Grab Issue Type and Created Date
+        issue_type = issue.fields.issuetype.name
+        created_raw = issue.fields.created
+        created_date = created_raw[:10] if created_raw else "" # Extracts just the YYYY-MM-DD
+
 
         data.append({
             'Date': today,
@@ -129,6 +134,52 @@ def upsert_to_google_drive_excel(daily_data):
     )
 
     df_combined = df_combined[expected_cols]
+
+    # --- NEW QA METRICS LOGIC ---
+    print("Calculating QA Metrics...")
+    latest_date = df_combined['Date'].max()
+    df_current_state = df_combined[df_combined['Date'] == latest_date]
+
+    # 1. Get unique Epics
+    all_epics = df_current_state[['Epic', 'Parent Link']].drop_duplicates()
+    
+    # 2. Find the exact date each Epic hit 0 remaining story points (excluding bugs)
+    df_stories = df_combined[df_combined['Issue Type'] != 'Bug']
+    epic_daily_points = df_stories.groupby(['Epic', 'Date'])['Remaining Story Points'].sum().reset_index()
+    df_zero_points = epic_daily_points[epic_daily_points['Remaining Story Points'] == 0]
+    dev_complete_dates = df_zero_points.groupby('Epic')['Date'].min().reset_index()
+    dev_complete_dates.rename(columns={'Date': 'Dev Complete Date'}, inplace=True)
+    
+    # 3. Analyze the Bugs
+    df_bugs = df_current_state[df_current_state['Issue Type'] == 'Bug'].copy()
+    df_bugs = pd.merge(df_bugs, dev_complete_dates, on='Epic', how='left')
+    
+    df_bugs['Is Post-Dev Bug?'] = False
+    
+    # If the bug was created on or after the Dev Complete Date, flag it!
+    bug_created_dt = pd.to_datetime(df_bugs['Created Date'], errors='coerce')
+    dev_complete_dt = pd.to_datetime(df_bugs['Dev Complete Date'], errors='coerce')
+    mask = (bug_created_dt >= dev_complete_dt) & (df_bugs['Dev Complete Date'].notna())
+    df_bugs.loc[mask, 'Is Post-Dev Bug?'] = True
+    
+    # 4. Summarize for the new tab
+    bug_counts = df_bugs.groupby('Epic').agg(
+        Total_Bugs=('Issue Key', 'count'),
+        Post_Dev_Bugs=('Is Post-Dev Bug?', 'sum')
+    ).reset_index()
+    
+    qa_metrics = pd.merge(all_epics, dev_complete_dates, on='Epic', how='left')
+    qa_metrics = pd.merge(qa_metrics, bug_counts, on='Epic', how='left')
+    
+    qa_metrics['Total_Bugs'] = qa_metrics['Total_Bugs'].fillna(0).astype(int)
+    qa_metrics['Post_Dev_Bugs'] = qa_metrics['Post_Dev_Bugs'].fillna(0).astype(int)
+    qa_metrics['Dev Complete Date'] = qa_metrics['Dev Complete Date'].fillna("Dev In Progress")
+    
+    qa_metrics.rename(columns={
+        'Total_Bugs': 'Total Bugs Logged',
+        'Post_Dev_Bugs': 'Bugs Logged After Dev Complete'
+    }, inplace=True)
+    # -----------------------------
 
     print("Updating Excel data...")
     latest_date = df_combined['Date'].max()
