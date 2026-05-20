@@ -190,6 +190,8 @@ def upsert_to_google_drive_excel(daily_data):
     with pd.ExcelWriter(temp_filename, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
         df_combined.to_excel(writer, sheet_name=SHEET_NAME, index=False)
         df_current_state.to_excel(writer, sheet_name='Current State', index=False)
+        # Write the new QA Metrics tab
+        qa_metrics.to_excel(writer, sheet_name='QA Metrics', index=False)
 
     print("Uploading updated file to Google Drive...")
     media = MediaFileUpload(
