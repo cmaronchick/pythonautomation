@@ -72,7 +72,9 @@ def fetch_daily_sprint_data(jira):
             'Parent Link': parent_link,
             'Summary': issue.fields.summary,
             'Status': status_name,
-            'Story Points': story_points if story_points is not None else 0
+            'Story Points': story_points if story_points is not None else 0,
+            'Issue Type': issue_type,
+            'Created Date': created_date
         })
     return data
 
