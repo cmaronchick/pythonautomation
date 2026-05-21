@@ -47,13 +47,29 @@ def fetch_daily_sprint_data(jira):
         epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
         status_name = issue.fields.status.name
         parent_link = getattr(issue.fields, 'customfield_10014', epic_key)
+
+        # NEW: Grab Issue Type and Created Date
+        issue_type = issue.fields.issuetype.name
+        created_raw = issue.fields.created
+        created_date = created_raw[:10] if created_raw else "" # Extracts just the YYYY-MM-DD
+        
         if epic_key != "No Epic":
             # fields = issueObj.fields
             parent = getattr(issue.fields, 'parent')
             # print('parent fields: ', parent.raw)
             parent_link = getattr(parent.fields, 'summary')
             if fieldsPrinted == False:
-                print(dir(issue))
+                print(dir(issue), {
+            'Date': today,
+            'Issue Key': issue.key,
+            'Epic': epic_key,
+            'Parent Link': parent_link,
+            'Summary': issue.fields.summary,
+            'Status': status_name,
+            'Story Points': story_points if story_points is not None else 0,
+            'Issue Type': issue_type,
+            'Created Date': created_date
+        })
                 print('issue with epic: ', issue.fields.parent.raw)
             #     for field in fields:
             #         print(f"ID: {field['id']}, Name: {field['name']}")
@@ -67,7 +83,9 @@ def fetch_daily_sprint_data(jira):
             'Parent Link': parent_link,
             'Summary': issue.fields.summary,
             'Status': status_name,
-            'Story Points': story_points if story_points is not None else 0
+            'Story Points': story_points if story_points is not None else 0,
+            'Issue Type': issue_type,
+            'Created Date': created_date
         })
     return data
 
@@ -93,7 +111,7 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # Added the new column to our expected columns
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points']
+    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date']
     df_new = pd.DataFrame(daily_data)
     
     for col in expected_cols:
@@ -130,6 +148,52 @@ def upsert_to_google_drive_excel(daily_data):
 
     df_combined = df_combined[expected_cols]
 
+    # --- NEW QA METRICS LOGIC ---
+    print("Calculating QA Metrics...")
+    latest_date = df_combined['Date'].max()
+    df_current_state = df_combined[df_combined['Date'] == latest_date]
+
+    # 1. Get unique Epics
+    all_epics = df_current_state[['Epic', 'Parent Link']].drop_duplicates()
+    
+    # 2. Find the exact date each Epic hit 0 remaining story points (excluding bugs)
+    df_stories = df_combined[df_combined['Issue Type'] != 'Bug']
+    epic_daily_points = df_stories.groupby(['Epic', 'Date'])['Remaining Story Points'].sum().reset_index()
+    df_zero_points = epic_daily_points[epic_daily_points['Remaining Story Points'] == 0]
+    dev_complete_dates = df_zero_points.groupby('Epic')['Date'].min().reset_index()
+    dev_complete_dates.rename(columns={'Date': 'Dev Complete Date'}, inplace=True)
+    
+    # 3. Analyze the Bugs
+    df_bugs = df_current_state[df_current_state['Issue Type'] == 'Bug'].copy()
+    df_bugs = pd.merge(df_bugs, dev_complete_dates, on='Epic', how='left')
+    
+    df_bugs['Is Post-Dev Bug?'] = False
+    
+    # If the bug was created on or after the Dev Complete Date, flag it!
+    bug_created_dt = pd.to_datetime(df_bugs['Created Date'], errors='coerce')
+    dev_complete_dt = pd.to_datetime(df_bugs['Dev Complete Date'], errors='coerce')
+    mask = (bug_created_dt >= dev_complete_dt) & (df_bugs['Dev Complete Date'].notna())
+    df_bugs.loc[mask, 'Is Post-Dev Bug?'] = True
+    
+    # 4. Summarize for the new tab
+    bug_counts = df_bugs.groupby('Epic').agg(
+        Total_Bugs=('Issue Key', 'count'),
+        Post_Dev_Bugs=('Is Post-Dev Bug?', 'sum')
+    ).reset_index()
+    
+    qa_metrics = pd.merge(all_epics, dev_complete_dates, on='Epic', how='left')
+    qa_metrics = pd.merge(qa_metrics, bug_counts, on='Epic', how='left')
+    
+    qa_metrics['Total_Bugs'] = qa_metrics['Total_Bugs'].fillna(0).astype(int)
+    qa_metrics['Post_Dev_Bugs'] = qa_metrics['Post_Dev_Bugs'].fillna(0).astype(int)
+    qa_metrics['Dev Complete Date'] = qa_metrics['Dev Complete Date'].fillna("Dev In Progress")
+    
+    qa_metrics.rename(columns={
+        'Total_Bugs': 'Total Bugs Logged',
+        'Post_Dev_Bugs': 'Bugs Logged After Dev Complete'
+    }, inplace=True)
+    # -----------------------------
+
     print("Updating Excel data...")
     latest_date = df_combined['Date'].max()
     df_current_state = df_combined[df_combined['Date'] == latest_date]
@@ -137,6 +201,8 @@ def upsert_to_google_drive_excel(daily_data):
     with pd.ExcelWriter(temp_filename, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
         df_combined.to_excel(writer, sheet_name=SHEET_NAME, index=False)
         df_current_state.to_excel(writer, sheet_name='Current State', index=False)
+        # Write the new QA Metrics tab
+        qa_metrics.to_excel(writer, sheet_name='QA Metrics', index=False)
 
     print("Uploading updated file to Google Drive...")
     media = MediaFileUpload(
