@@ -2,6 +2,7 @@ import os
 import json
 import io
 import time
+from matplotlib.pylab import fix
 import pandas as pd
 from datetime import datetime
 from jira import JIRA
@@ -14,7 +15,7 @@ from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
 JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
 JIRA_API_TOKEN = os.environ['JIRA_API_TOKEN']
-FIX_VERSION = 'S8 Update 5'
+FIX_VERSION = 'S8 Update 6'
 STORY_POINTS_FIELD = 'customfield_10026' 
 DRIVE_FILE_ID = '1WulP_8RKqm5r7TlIsnGjZ2KIg2NfBA2c' # Paste your ID here
 SHEET_NAME = 'Data' # Change if your tab is named differently
@@ -46,7 +47,8 @@ def fetch_daily_sprint_data(jira):
         story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
         epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
         status_name = issue.fields.status.name
-        parent_link = getattr(issue.fields, 'customfield_10014', epic_key)
+        parent_link = getattr(issue.fields, 'customfield_10014', epic_key),
+        fix_version = getattr(issue.fields, 'fixVersion')
 
         # NEW: Grab Issue Type and Created Date
         issue_type = issue.fields.issuetype.name
@@ -68,7 +70,8 @@ def fetch_daily_sprint_data(jira):
             'Status': status_name,
             'Story Points': story_points if story_points is not None else 0,
             'Issue Type': issue_type,
-            'Created Date': created_date
+            'Created Date': created_date,
+            'Fix Version': fix_version
         })
                 print('issue with epic: ', issue.fields.parent.raw)
             #     for field in fields:
@@ -85,7 +88,8 @@ def fetch_daily_sprint_data(jira):
             'Status': status_name,
             'Story Points': story_points if story_points is not None else 0,
             'Issue Type': issue_type,
-            'Created Date': created_date
+            'Created Date': created_date,
+            'Fix Version': fix_version
         })
     return data
 
