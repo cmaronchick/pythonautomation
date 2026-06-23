@@ -47,7 +47,7 @@ def fetch_daily_sprint_data(jira):
         epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
         status_name = issue.fields.status.name
         parent_link = getattr(issue.fields, 'customfield_10014', epic_key),
-        fix_version = getattr(issue.fields, 'fixVersion')
+        fix_version = getattr(issue.fields, 'fixVersions')
 
         # NEW: Grab Issue Type and Created Date
         issue_type = issue.fields.issuetype.name
