@@ -2,7 +2,6 @@ import os
 import json
 import io
 import time
-from matplotlib.pylab import fix
 import pandas as pd
 from datetime import datetime
 from jira import JIRA
