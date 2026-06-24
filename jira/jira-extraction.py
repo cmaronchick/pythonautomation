@@ -70,7 +70,7 @@ def fetch_daily_sprint_data(jira):
             'Story Points': story_points if story_points is not None else 0,
             'Issue Type': issue_type,
             'Created Date': created_date,
-            'Fix Version': fix_version
+            'Fix Version': fix_version[0] if len(fix_version) > 0 else 'None' 
         })
                 print('issue with epic: ', issue.fields.parent.raw)
             #     for field in fields:
@@ -114,7 +114,7 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # Added the new column to our expected columns
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date']
+    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions']
     df_new = pd.DataFrame(daily_data)
     
     for col in expected_cols:
