@@ -59,23 +59,23 @@ def fetch_daily_sprint_data(jira):
             parent = getattr(issue.fields, 'parent')
             # print('parent fields: ', parent.raw)
             parent_link = getattr(parent.fields, 'summary')
-            if fieldsPrinted == False:
-                print(dir(issue), {
-            'Date': today,
-            'Issue Key': issue.key,
-            'Epic': epic_key,
-            'Parent Link': parent_link,
-            'Summary': issue.fields.summary,
-            'Status': status_name,
-            'Story Points': story_points if story_points is not None else 0,
-            'Issue Type': issue_type,
-            'Created Date': created_date,
-            'Fix Version': fix_version[0] if len(fix_version) > 0 else 'None' 
-        })
-                print('issue with epic: ', issue.fields.parent.raw)
-            #     for field in fields:
-            #         print(f"ID: {field['id']}, Name: {field['name']}")
-                fieldsPrinted = True
+        if fieldsPrinted == False:
+            print(dir(issue), {
+                'Date': today,
+                'Issue Key': issue.key,
+                'Epic': epic_key,
+                'Parent Link': parent_link,
+                'Summary': issue.fields.summary,
+                'Status': status_name,
+                'Story Points': story_points if story_points is not None else 0,
+                'Issue Type': issue_type,
+                'Created Date': created_date,
+                'Fix Version': fix_version[0] if len(fix_version) > 0 else 'None' 
+            })
+            print('issue with epic: ', issue.fields.parent.raw)
+        #     for field in fields:
+        #         print(f"ID: {field['id']}, Name: {field['name']}")
+            fieldsPrinted = True
 
 
         data.append({
@@ -88,7 +88,7 @@ def fetch_daily_sprint_data(jira):
             'Story Points': story_points if story_points is not None else 0,
             'Issue Type': issue_type,
             'Created Date': created_date,
-            'Fix Version': fix_version
+            'Fix Version': fix_version[0] if len(fix_version) > 0 else 'None' 
         })
     return data
 
