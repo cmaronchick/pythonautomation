@@ -46,8 +46,10 @@ def fetch_daily_sprint_data(jira):
         story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
         epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
         status_name = issue.fields.status.name
-        parent_link = getattr(issue.fields, 'customfield_10014', epic_key),
-        fix_version = getattr(issue.fields, 'fixVersions')
+        parent_link = getattr(issue.fields, 'customfield_10014', epic_key)
+        # NEW: Safely extract and join all Fix Versions into a single text string
+        fix_versions_list = issue.fields.fixVersions
+        fix_versions_str = ", ".join([fv.name for fv in fix_versions_list]) if fix_versions_list else "None"
 
         # NEW: Grab Issue Type and Created Date
         issue_type = issue.fields.issuetype.name
@@ -70,7 +72,7 @@ def fetch_daily_sprint_data(jira):
                 'Story Points': story_points if story_points is not None else 0,
                 'Issue Type': issue_type,
                 'Created Date': created_date,
-                'Fix Version': fix_version[0] if len(fix_version) > 0 else 'None' 
+                'Fix Versions': fix_versions_str # NEW: Add to the dictionary
             })
             print('issue with epic: ', issue.fields.parent.raw)
         #     for field in fields:
@@ -88,7 +90,7 @@ def fetch_daily_sprint_data(jira):
             'Story Points': story_points if story_points is not None else 0,
             'Issue Type': issue_type,
             'Created Date': created_date,
-            'Fix Version': fix_version[0] if len(fix_version) > 0 else 'None' 
+            'Fix Versions': fix_versions_str # NEW: Add to the dictionary
         })
     return data
 
