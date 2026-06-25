@@ -61,6 +61,7 @@ def fetch_daily_sprint_data(jira):
             parent = getattr(issue.fields, 'parent')
             # print('parent fields: ', parent.raw)
             parent_link = getattr(parent.fields, 'summary')
+            print('issue with epic: ', issue.fields.parent.raw)
         if fieldsPrinted == False:
             print(dir(issue), {
                 'Date': today,
@@ -74,7 +75,7 @@ def fetch_daily_sprint_data(jira):
                 'Created Date': created_date,
                 'Fix Versions': fix_versions_str # NEW: Add to the dictionary
             })
-            print('issue with epic: ', issue.fields.parent.raw)
+            # 
         #     for field in fields:
         #         print(f"ID: {field['id']}, Name: {field['name']}")
             fieldsPrinted = True
