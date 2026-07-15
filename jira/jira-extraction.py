@@ -64,14 +64,15 @@ def fetch_daily_sprint_data(jira):
         issue_type = issue.fields.issuetype.name
         created_raw = issue.fields.created
         created_date = created_raw[:10] if created_raw else "" # Extracts just the YYYY-MM-DD
-        
+        parentFields = ""
         if epic_key != "No Epic":
             # fields = issueObj.fields
             parent = getattr(issue.fields, 'parent')
             # print('parent fields: ', parent.raw)
             parent_link = getattr(parent.fields, 'summary')
+            parentFields = issue.fields.parent.raw
         if fieldsPrinted == False:
-            print('issue with epic: ', issue.fields.parent.raw)
+            print('issue with epic: ', parentFields)
             print(dir(issue), {
                 'Date': today,
                 'Issue Key': issue.key,
