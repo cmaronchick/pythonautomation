@@ -70,8 +70,8 @@ def fetch_daily_sprint_data(jira):
             parent = getattr(issue.fields, 'parent')
             # print('parent fields: ', parent.raw)
             parent_link = getattr(parent.fields, 'summary')
-            print('issue with epic: ', issue.fields.parent.raw)
         if fieldsPrinted == False:
+            print('issue with epic: ', issue.fields.parent.raw)
             print(dir(issue), {
                 'Date': today,
                 'Issue Key': issue.key,
