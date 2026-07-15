@@ -35,7 +35,16 @@ def get_jira_client():
     )
 
 def fetch_daily_sprint_data(jira):
-    jql_query = f'fixVersion = "{FIX_VERSION}" AND issueType in (Story, Task, Bug)'
+    jql_query = (
+        f'(fixVersion = "{FIX_VERSION}" AND issueType in (Story, Task)) OR '
+        f'(issueType = Bug AND ('
+        f'fixVersion = "{FIX_VERSION}" OR '
+        f'"Season/Update Number" = "S8 Update 6" OR '
+        f'"Found on QA Version" ~ "QA8.6.*"'
+        f'))'
+    )
+    
+    print(f"Executing JQL: {jql_query}") # This prints to GitHub Actions logs so you can verify it
     issues = jira.search_issues(jql_query, maxResults=False)
     
     data = []
