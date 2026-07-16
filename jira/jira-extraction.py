@@ -35,16 +35,22 @@ def get_jira_client():
     )
 
 def fetch_daily_sprint_data(jira):
+    # We define your specific QA versions here to keep the query readable
+    qa_versions = "QA8.6.1, QA8.6.2, QA8.6.3, QA8.6.4, QA8.6.5, QA8.6.6, QA8.6.7, QA8.6.8, QA8.6.9, QA8.6.10, QA8.6.12, QA8.6.13, QA8.6.14, QA8.6.15"
+
+    # Group 1: Pulls the standard Stories and Tasks for the release
+    # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
     jql_query = (
         f'(fixVersion = "{FIX_VERSION}" AND issueType in (Story, Task)) OR '
         f'(issueType = Bug AND ('
         f'fixVersion = "{FIX_VERSION}" OR '
-        f'"Season/Update Number[Version Picker (single version)]" = "S8 Update 6" OR '
-        f'"Found on QA Version[Labels]" ~ "QA8.6.*"'
+        f'"Season/Update Number" = "S8 Update 6" OR '
+        f'"Found on QA Version" in ({qa_versions})'
         f'))'
     )
     
-    print(f"Executing JQL: {jql_query}") # This prints to GitHub Actions logs so you can verify it
+    print(f"Executing JQL: {jql_query}")
+    
     issues = jira.search_issues(jql_query, maxResults=False)
     
     data = []
