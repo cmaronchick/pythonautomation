@@ -28,6 +28,10 @@ STORY_POINTS_FIELD = 'customfield_10026'
 today = datetime.now().strftime('%Y-%m-%d')
 estimatedStories = 0
 
+# NEW: Add your custom field ID for Severity here
+SEVERITY_FIELD = 'customfield_10030'
+DONE_STATUSES = ['Done', 'Closed', 'Claim Fix', 'Will Not Fix', 'Duplicate', 'Deferred', 'Not A Bug']
+
 def get_jira_client():
     return JIRA(
         server=JIRA_SERVER,
@@ -66,6 +70,14 @@ def fetch_daily_sprint_data(jira):
         fix_versions_list = issue.fields.fixVersions
         fix_versions_str = ", ".join([fv.name for fv in fix_versions_list]) if fix_versions_list else "None"
 
+        # NEW: Safely extract Priority (Standard Field)
+        priority = issue.fields.priority.name if hasattr(issue.fields, 'priority') and issue.fields.priority else "None"
+        
+        # NEW: Safely extract Severity (Custom Field)
+        # Some Jira instances store custom dropdowns as objects, some as plain text. This handles both.
+        severity_raw = getattr(issue.fields, SEVERITY_FIELD, None)
+        severity = severity_raw.value if hasattr(severity_raw, 'value') else (severity_raw if isinstance(severity_raw, str) else "None")
+
         # NEW: Grab Issue Type and Created Date
         issue_type = issue.fields.issuetype.name
         created_raw = issue.fields.created
@@ -92,7 +104,9 @@ def fetch_daily_sprint_data(jira):
                 'Story Points': story_points if story_points is not None else 0,
                 'Issue Type': issue_type,
                 'Created Date': created_date,
-                'Fix Versions': fix_versions_str # NEW: Add to the dictionary
+                'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
+                'Priority': priority,          # Added to dictionary
+                'Severity': severity          # Added to dictionary
             })
             # 
         #     for field in fields:
@@ -110,7 +124,9 @@ def fetch_daily_sprint_data(jira):
             'Story Points': story_points if story_points is not None else 0,
             'Issue Type': issue_type,
             'Created Date': created_date,
-            'Fix Versions': fix_versions_str # NEW: Add to the dictionary
+            'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
+            'Priority': priority,          # Added to dictionary
+            'Severity': severity          # Added to dictionary
         })
     return data
 
@@ -136,7 +152,7 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # Added the new column to our expected columns
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions']
+    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions', 'Priority', 'Severity']
     df_new = pd.DataFrame(daily_data)
     
     for col in expected_cols:
