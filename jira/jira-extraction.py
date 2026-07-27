@@ -14,7 +14,7 @@ from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
 JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
 JIRA_API_TOKEN = os.environ['JIRA_API_TOKEN']
-FIX_VERSION = 'S8 Update 6'
+# FIX_VERSION = 'S8 Update 7'
 STORY_POINTS_FIELD = 'customfield_10026' 
 DRIVE_FILE_ID = '1WulP_8RKqm5r7TlIsnGjZ2KIg2NfBA2c' # Paste your ID here
 SHEET_NAME = 'Data' # Change if your tab is named differently
@@ -45,10 +45,9 @@ def fetch_daily_sprint_data(jira):
     # Group 1: Pulls the standard Stories and Tasks for the release
     # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
     jql_query = (
-        f'(fixVersion = "{FIX_VERSION}" AND issueType in (Story, Task)) OR '
+        f'(issueType in (Story, Task)) OR '
         f'(issueType = Bug AND ('
-        f'fixVersion = "{FIX_VERSION}" OR '
-        f'"Season/Update Number" = "S8 Update 6" OR '
+        f'"Season/Update Number" = "S8 Update 7" OR '
         f'"Found on QA Version" in ({qa_versions})'
         f'))'
     )
