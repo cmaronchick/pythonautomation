@@ -172,7 +172,7 @@ def upsert_to_google_drive_excel(daily_data):
         df_existing = df_existing[expected_cols]
 
         df_combined = pd.concat([df_existing, df_new], ignore_index=True)
-        df_combined['Date'] = pd.to_datetime(df_combined['Date'], errors='coerce').dt.strftime('%Y-%m-%d')
+        df_combined['Date'] = pd.to_datetime(df_combined['Date'], errors='coerce').dt.date
         df_combined = df_combined.dropna(subset=['Date', 'Issue Key'])
         df_combined = df_combined.drop_duplicates(subset=['Date', 'Issue Key'], keep='last')
         
