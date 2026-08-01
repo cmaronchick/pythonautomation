@@ -47,6 +47,7 @@ def build_historical_timeline(jira):
     today = datetime.now()
     
     secondParentPrinted = 0
+    printedHistories = 0
     for issue in issues:
         # 1. Grab the static fields that don't change daily
         story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
@@ -65,20 +66,6 @@ def build_historical_timeline(jira):
         severity = severity_raw.value if hasattr(severity_raw, 'value') else (severity_raw if isinstance(severity_raw, str) else "None")
         summary = issue.fields.summary
 
-        # 2. Determine Current State
-        current_status = issue.fields.status.name
-        current_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
-        current_points = float(current_points) if current_points is not None else 0.0
-
-        # 3. Sort the changelog from oldest to newest
-        histories = sorted(issue.changelog.histories, key=lambda h: h.created)
-        
-        status_changes_by_date = {}
-        points_changes_by_date = {}
-        
-        initial_status = current_status
-        initial_points = current_points
-        
         if epic_key != "No Epic":
             # fields = issueObj.fields
             parent = getattr(issue.fields, 'parent')
@@ -105,22 +92,64 @@ def build_historical_timeline(jira):
                 })
                 fieldsPrinted = True
 
-        # 4. Extract the changes
-        for history in histories:
-            change_date = history.created[:10]
-            for item in history.items:
-                if item.field == 'status':
-                    # If this is the very first status change, the 'fromString' is our initial creation status
-                    if initial_status == current_status and item.fromString: 
-                        initial_status = item.fromString
-                    status_changes_by_date[change_date] = item.toString
-                elif item.field == 'Story Points' or item.field == STORY_POINTS_FIELD:
-                    if initial_points == current_points and item.fromString:
-                        try: initial_points = float(item.fromString)
-                        except: pass
-                    try: points_changes_by_date[change_date] = float(item.toString) if item.toString else 0.0
-                    except: pass
+        # 2. Determine Current State
+        current_status = issue.fields.status.name
+        current_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
+        current_points = float(current_points) if current_points is not None else 0.0
 
+        # NEW: Grab the official Jira Resolution Date as an absolute failsafe
+        res_date_raw = getattr(issue.fields, 'resolutiondate', None)
+        resolution_date = res_date_raw[:10] if res_date_raw else None
+        # 3. Sort the changelog from oldest to newest
+        histories = sorted(issue.changelog.histories, key=lambda h: h.created)
+        
+        status_changes_by_date = {}
+        points_changes_by_date = {}
+        
+        initial_status = current_status
+        initial_points = current_points
+        
+        # NEW: Flags to ensure we only grab the absolute FIRST historical state
+        found_first_status = False
+        found_first_points = False
+
+        # 4. Extract the changes safely
+        for history in histories:
+            raw_date = history.created[:10].replace('/', '-').strip()
+            change_date = raw_date
+            
+            for item in history.items:
+                # Safely grab the field name and force it to lowercase to avoid Jira capitalization quirks
+                field_name = getattr(item, 'field', '').lower()
+                field_id = getattr(item, 'fieldId', '').lower()
+
+                from_str = getattr(item, 'fromString', None)
+                to_str = getattr(item, 'toString', None)
+                to_id = getattr(item, 'to', None)
+                
+                # Check for Status changes
+                if field_name == 'status' or field_id == 'status':
+                    if not found_first_status and from_str: 
+                        initial_status = from_str
+                        found_first_status = True
+                        
+                    new_status = to_str if to_str else to_id
+                    if new_status:
+                        # If multiple changes happen on the same day, this correctly overwrites it with the final status of that day
+                        status_changes_by_date[change_date] = new_status
+                        
+                elif field_name == 'story points' or field_name == STORY_POINTS_FIELD.lower() or field_id == STORY_POINTS_FIELD.lower():
+                    if not found_first_points and from_str:
+                        try: 
+                            initial_points = float(from_str)
+                            found_first_points = True
+                        except: pass
+                    try: 
+                        points_changes_by_date[change_date] = float(to_str) if to_str else 0.0
+                    except: pass
+                # if epic_key == "SPLASH-20395":
+                #     print('issue.key:', issue.key)
+                #     print('status_changes_by_date:', status_changes_by_date)
         # 5. Forward-Fill the Timeline
         date_range = pd.date_range(start=created_date, end=today)
         cutoff_date = datetime.strptime(START_DATE_LIMIT, '%Y-%m-%d') # NEW
@@ -128,23 +157,36 @@ def build_historical_timeline(jira):
         running_status = initial_status
         running_points = initial_points
         for dt in date_range:
-            d_str = dt.strftime('%m/%d/%Y')
+            d_str = dt.strftime('%Y-%m-%d')
             
             # Did it change on this specific day?
             if d_str in status_changes_by_date:
                 running_status = status_changes_by_date[d_str]
             if d_str in points_changes_by_date:
                 running_points = points_changes_by_date[d_str]
+            
+            if epic_key == "SPLASH-20395":
+                print('issue.key:', issue.key)
+                print('status_changes_by_date:', status_changes_by_date)
+                print('d_str:', d_str)
+                print('running_status:', running_status)
             # 2. NEW: If this date is before our cutoff limit, just skip to the next day!
+            # NEW: The Self-Healing Anchor. If Jira's history log missed the status change 
+            # (due to API truncation), but Jira knows this task was officially resolved 
+            # on this date, we override the missing history and force it closed!
+            # if resolution_date and d_str >= resolution_date and running_status not in DONE_STATUSES:
+            #     running_status = current_status
+                
             if dt < cutoff_date:
-                continue
+                continue 
                 
             remaining_points = 0.0 if running_status in DONE_STATUSES else running_points
-            if parent_link != "No Epic" and secondParentPrinted < 10:
+            if epic_key == "SPLASH-20395" and secondParentPrinted < 10:
                 print('parent_link:', parent_link)
+                print('issue.key:', issue.key)
+                print('running_status:', running_status)
                 print('secondParentPrinted: ', secondParentPrinted)
-                
-            secondParentPrinted = secondParentPrinted + 1
+                secondParentPrinted += 1
             historical_records.append({
                 'Date': dt.date(),
                 'Issue Key': issue.key,
