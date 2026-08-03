@@ -29,3 +29,20 @@ jobs:
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: python ./jira/jira-extraction.py
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com # Change if using Outlook/Office365
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Daily Jira Burndown & QA Metrics Updated"
+          to: your-team-distro@company.com, product-manager@company.com
+          from: GitHub Actions Automations
+          body: |
+            The daily Jira metrics have been successfully pulled and updated!
+            
+            You can view the latest Epic Burndown, Task Status, and Bug trends here:
+            https://docs.google.com/spreadsheets/d/YOUR_FILE_ID/edit
+

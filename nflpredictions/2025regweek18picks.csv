@@ -1,0 +1,35 @@
+Source,Winner,Winner Score,Loser,Loser Score
+TylerSullivan,Panthers,24,Buccaneers,21
+TylerSullivan,Ravens,24,Steelers,20
+TylerSullivan,Jaguars,33,Titans,20
+TylerSullivan,Rams,30,Cardinals,17
+TylerSullivan,Patriots,33,Dolphins,20
+TylerSullivan,49ers,27,Seahawks,23
+TylerSullivan,Bengals,30,Browns,16
+TylerSullivan,Cowboys,30,Giants,23
+TylerSullivan,Vikings,27,Packers,17
+TylerSullivan,Texans,27,Colts,16
+TylerSullivan,Falcons,24,Saints,20
+TylerSullivan,Bears,30,Lions,23
+TylerSullivan,Chiefs,20,Raiders,17
+TylerSullivan,Broncos,27,Chargers,17
+TylerSullivan,Bills,24,Jets,19
+TylerSullivan,Eagles,28,Commanders,20
+BillBender,Buccaneers,24,Panthers,20
+BillBender,49ers,30,Seahawks,27
+BillBender,Saints,26,Falcons,21
+BillBender,Bengals,24,Browns,14
+BillBender,Vikings,21,Packers,16
+BillBender,Cowboys,28,Giants,19
+BillBender,Jaguars,31,Titans,17
+BillBender,Texans,23,Colts,14
+BillBender,Bills,23,Jets,13
+BillBender,Bears,28,Lions,24
+BillBender,Broncos,27,Chargers,17
+BillBender,Chiefs,21,Raiders,13
+BillBender,Rams,25,Cardinals,22
+BillBender,Patriots,24,Dolphins,16
+BillBender,Eagles,28,Commanders,17
+BillBender,Ravens,22,Steelers,19
+TylerSullivan,,<class 'ValueError'>
+PetePrisco,https://www.cbssports.com/nfl/news/nfl-week-18-picks-and-score-predictions-best-bets-odds/
