@@ -8,7 +8,8 @@ from jira import JIRA
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 # --- Configuration ---
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
@@ -40,7 +41,7 @@ def get_jira_client():
 
 def fetch_daily_sprint_data(jira):
     # We define your specific QA versions here to keep the query readable
-    qa_versions = "QA8.6.1, QA8.6.2, QA8.6.3, QA8.6.4, QA8.6.5, QA8.6.6, QA8.6.7, QA8.6.8, QA8.6.9, QA8.6.10, QA8.6.12, QA8.6.13, QA8.6.14, QA8.6.15"
+    qa_versions = "QA8.7.0, QA8.7.2, QA8.7.3"
 
     # Group 1: Pulls the standard Stories and Tasks for the release
     # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
@@ -56,12 +57,16 @@ def fetch_daily_sprint_data(jira):
     print(f"Executing JQL: {jql_query}")
     
     issues = jira.search_issues(jql_query, maxResults=False)
+    print(f"SUCCESS: Downloaded {len(issues)} total issues from Jira.")
     
     data = []
     today = datetime.now().strftime('%Y-%m-%d')
     fieldsPrinted = False
 
-    for issue in issues:
+    # Use enumerate to keep a count of where we are in the loop
+    for index, issue in enumerate(issues):
+        if index % 100 == 0:
+            print(f"Processing issue {index} of {len(issues)}...")
         story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
         epic_key = issue.fields.parent.key if hasattr(issue.fields, 'parent') else "No Epic"
         status_name = issue.fields.status.name
@@ -161,8 +166,11 @@ def upsert_to_google_drive_excel(daily_data):
             
     df_new = df_new[expected_cols]
 
+    print("Attempting to load existing Excel file into memory...")
     try:
         df_existing = pd.read_excel(temp_filename, sheet_name=SHEET_NAME)
+        print(f"Successfully loaded {len(df_existing)} existing rows into memory.")
+        # ... (keep the rest exactly the same)
         df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.contains('^Unnamed')]
         df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.match(r'^\d+$')]
         
