@@ -4,3 +4,5 @@
 *.pyc
 *.exe
 **config.py
+.env
+*cd-nba*
