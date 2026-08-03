@@ -8,6 +8,8 @@ from jira import JIRA
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
+from config import JIRA_API_TOKEN
+
 
 # --- 1. TEMPORARY CREDENTIALS (DO NOT COMMIT THIS FILE TO GIT) ---
 # Paste your actual credentials here just for this one-time run
