@@ -8,17 +8,12 @@ from jira import JIRA
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
-from config import JIRA_API_TOKEN
-
 
 # --- 1. TEMPORARY CREDENTIALS (DO NOT COMMIT THIS FILE TO GIT) ---
 # Paste your actual credentials here just for this one-time run
 JIRA_SERVER = 'https://2kcatd.atlassian.net/'
 JIRA_EMAIL = 'christopher.aronchick@catdaddy.com'
-JIRA_API_TOKEN = 'Dummy'
-
-
-# Paste the ENTIRE JSON string from your Google Service Account here
+JIRA_API_TOKEN = 'dummy'
 GOOGLE_CREDS_JSON_STRING = "Dummy"
 
 DRIVE_FILE_ID = '1LpmkksTQ6MbrPeu5vmDRMW7OA7rA04XI' 
