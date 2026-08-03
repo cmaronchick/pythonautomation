@@ -46,11 +46,11 @@ def fetch_daily_sprint_data(jira):
     # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
     jql_query = (
         f'project = SPLASH AND '
-        f'(issueType in (Story, Task)) OR '
+        f'(issueType in (Story, Task) OR '
         f'(issueType = Bug AND ('
         f'"Season/Update Number" = "S8 Update 7" OR '
         f'"Found on QA Version" in ({qa_versions})'
-        f'))'
+        f')))'
     )
     
     print(f"Executing JQL: {jql_query}")
