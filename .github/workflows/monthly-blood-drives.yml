@@ -27,15 +27,15 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Scrape Bloodworks Northwest
-        run: python scraper.py
+        run: python ./blood-drive-finder/scraper.py
 
       - name: Generate website
-        run: python generate_site.py
+        run: python ./blood-drive-finder/generate_site.py
 
       - name: Commit updated results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/blood-drives.json docs/index.html
+          git add data/blood-drives.json ./docs/index.html
           git diff --cached --quiet || git commit -m "Update blood drives"
           git push
