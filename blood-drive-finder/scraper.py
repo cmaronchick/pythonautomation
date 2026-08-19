@@ -24,7 +24,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from config import AO_ZIPCODES, OUTPUT_DIR, SEARCH_DAYS
+from blooddrivedata import AO_ZIPCODES, OUTPUT_DIR, SEARCH_DAYS
 
 URL = "https://donate.bloodworksnw.org/donor/schedules/zip"
 
