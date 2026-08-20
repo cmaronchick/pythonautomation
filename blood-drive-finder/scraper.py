@@ -17,6 +17,8 @@ import time
 from collections import defaultdict
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 import requests
 from selenium import webdriver
@@ -40,10 +42,17 @@ from blooddrivedata import (
 
 BLOODWORKS_URL = "https://donate.bloodworksnw.org/donor/schedules/zip"
 
+load_dotenv()
 
 def fetch_f3_locations() -> list[dict]:
     """Fetch active F3 locations from the configured bounding box."""
-    api_key = os.environ.get("F3_API_KEY")
+    api_key = ""
+    if os.getenv("DEBUG") == "True":
+        print(' 1os.getenv:', os.getenv("DEBUG"), os.getenv("F3NATION_API_KEY"))
+        api_key = os.getenv("F3NATION_API_KEY")
+    else:    
+        print('2 os.getenv:', os.getenv("DEBUG"), os.getenv("F3NATION_API_KEY"))
+        os.environ.get("F3_API_KEY")
     if not api_key:
         raise RuntimeError(
             "F3_API_KEY is not set. Add it as a GitHub Actions repository secret."
@@ -167,17 +176,29 @@ def search_zip(driver, zip_code: str, end_date: str) -> list[dict]:
 
     # Preserve the original scraper's search-radius behavior.
     slider = wait.until(
-        EC.presence_of_element_located((By.CLASS_NAME, "slider-handle"))
+        EC.presence_of_element_located((By.CSS_SELECTOR, '[role="slider"]'))
     )
-    for _ in range(22):
-        slider.send_keys(Keys.ARROW_LEFT)
-
+    print("slider:", slider)
     distance_label = wait.until(
         EC.presence_of_element_located((By.ID, "distance-label"))
     )
+    for _ in range(30):
+        miles = distance_label.text[:distance_label.text.find(" ")].strip()
+        # writerPrediction[writerPrediction.find(" ")+1:writerPrediction.find("-")].strip()
+        print('distance label: ', miles)
+        if int(miles) == 5:
+            break
+        slider.send_keys(Keys.ARROW_LEFT)
+        time.sleep(0.05)
+
     wait.until(
-        lambda d: distance_label.text.strip() == "5"
+        lambda d: int(miles) == 5
     )
+    # driver.execute_script("""
+    #     arguments[0].value = 5;
+    #     arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
+    #     arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
+    # """, slider)
 
     print(f"Searching ZIP code: {zip_code} with end date: {end_date} at distance: {distance_label.text.strip()}")
 
@@ -233,6 +254,8 @@ def search_zip(driver, zip_code: str, end_date: str) -> list[dict]:
 
             if "disabled" in classes:
                 break
+            
+            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", next_button)
 
             next_link = next_button.find_element(By.TAG_NAME, "a")
             next_link.click()
