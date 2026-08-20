@@ -1,18 +1,24 @@
-"""Scrape Bloodworks Northwest drives for the configured AO ZIP codes.
+"""Scrape Bloodworks Northwest drives for active F3 locations.
 
-The scraper intentionally keeps the Bloodworks interaction close to the original
-script: Selenium is used because the search form/table is rendered interactively.
+The F3 Nation location API is the source of truth for AO names and ZIP codes.
+For every active location with a ZIP code, we search Bloodworks using that ZIP.
+If an AO has multiple locations/ZIPs, a drive can be associated with that AO
+through any of those locations.
+
+The F3 API key must be supplied through the F3_API_KEY environment variable.
 """
 
 from __future__ import annotations
 
 import json
+import os
 import re
 import time
 from collections import defaultdict
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
+import requests
 from selenium import webdriver
 from selenium.common.exceptions import (
     NoSuchElementException,
@@ -24,18 +30,90 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from blooddrivedata import AO_ZIPCODES, OUTPUT_DIR, SEARCH_DAYS
+from blooddrivedata import (
+    F3_API_URL,
+    F3_BOUNDING_BOX,
+    OUTPUT_DIR,
+    SEARCH_DAYS,
+)
 
-URL = "https://donate.bloodworksnw.org/donor/schedules/zip"
 
-#curl 'https://api.f3nation.com/v1/location/in-bounding-box?minLng=-122.474213&minLat=47.271986&maxLng=-121.701050&maxLat=47.851010'   --header 'client: scalar-api'   --header 'Authorization: Bearer API_KEY'
+BLOODWORKS_URL = "https://donate.bloodworksnw.org/donor/schedules/zip"
 
 
-def parse_date_time(value: str) -> tuple[str, str]:
-    """Best-effort split of the site's combined date/time text."""
-    value = " ".join(value.replace("\n", " ").split())
-    # Keep the raw display value too; parsing is only for sorting.
-    return value, ""
+def fetch_f3_locations() -> list[dict]:
+    """Fetch active F3 locations from the configured bounding box."""
+    api_key = os.environ.get("F3_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "F3_API_KEY is not set. Add it as a GitHub Actions repository secret."
+        )
+
+    response = requests.get(
+        F3_API_URL,
+        params=F3_BOUNDING_BOX,
+        headers={
+            "client": "scalar-api",
+            "Authorization": f"Bearer {api_key}",
+            "Accept": "application/json",
+        },
+        timeout=30,
+    )
+    response.raise_for_status()
+
+    payload = response.json()
+    locations = payload.get("locations", [])
+
+    # locationName is the AO name in the supplied F3 map data.
+    # Ignore inactive locations and records without an AO or ZIP.
+    active = []
+    for location in locations:
+        if not location.get("isActive"):
+            continue
+
+        ao = (location.get("locationName") or "").strip()
+        zip_code = (
+            str(location.get("addressZip") or "").strip()
+            or str((location.get("meta") or {}).get("postalCode") or "").strip()
+        )
+
+        if not ao or not re.fullmatch(r"\d{5}", zip_code):
+            continue
+
+        active.append(
+            {
+                "id": location.get("id"),
+                "ao": ao,
+                "zip_code": zip_code,
+                "location_name": location.get("locationName"),
+                "address": " ".join(
+                    x for x in [
+                        location.get("addressStreet"),
+                        location.get("addressStreet2"),
+                        location.get("addressCity"),
+                        location.get("addressState"),
+                        location.get("addressZip"),
+                    ]
+                    if x
+                ),
+                "latitude": location.get("latitude"),
+                "longitude": location.get("longitude"),
+            }
+        )
+
+    return active
+
+
+def build_zip_to_aos(locations: list[dict]) -> dict[str, list[str]]:
+    """Build ZIP -> AOs from the F3 location data."""
+    mapping = defaultdict(set)
+    for location in locations:
+        mapping[location["zip_code"]].add(location["ao"])
+
+    return {
+        zip_code: sorted(aos)
+        for zip_code, aos in sorted(mapping.items())
+    }
 
 
 def make_driver() -> webdriver.Chrome:
@@ -47,26 +125,56 @@ def make_driver() -> webdriver.Chrome:
     return webdriver.Chrome(options=options)
 
 
-def search_zip(driver, zip_code: int, end_date: str) -> list[dict]:
+def parse_drive_date(value: str) -> str | None:
+    """Return an ISO date for the Bloodworks display text when possible."""
+    value = " ".join(value.replace("\n", " ").split())
+
+    patterns = [
+        r"\b\d{1,2}/\d{1,2}/\d{4}\b",
+        r"\b[A-Za-z]{3,9}\s+\d{1,2},\s+\d{4}\b",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, value)
+        if not match:
+            continue
+
+        raw = match.group(0)
+        for fmt in ("%m/%d/%Y", "%B %d, %Y", "%b %d, %Y"):
+            try:
+                return datetime.strptime(raw, fmt).date().isoformat()
+            except ValueError:
+                pass
+
+    return None
+
+
+def search_zip(driver, zip_code: str, end_date: str) -> list[dict]:
     wait = WebDriverWait(
         driver,
         30,
         ignored_exceptions=(NoSuchElementException, StaleElementReferenceException),
     )
 
-    driver.get(URL)
+    driver.get(BLOODWORKS_URL)
 
-    zipcode_box = wait.until(EC.presence_of_element_located((By.NAME, "zipcode")))
+    zipcode_box = wait.until(
+        EC.presence_of_element_located((By.NAME, "zipcode"))
+    )
     zipcode_box.click()
     zipcode_box.send_keys(Keys.HOME)
-    zipcode_box.send_keys(str(zip_code))
+    zipcode_box.send_keys(zip_code)
 
-    # Match the original script's behavior: move the distance slider left.
-    slider = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "slider-handle")))
+    # Preserve the original scraper's search-radius behavior.
+    slider = wait.until(
+        EC.presence_of_element_located((By.CLASS_NAME, "slider-handle"))
+    )
     for _ in range(22):
         slider.send_keys(Keys.ARROW_LEFT)
 
-    end_date_box = wait.until(EC.presence_of_element_located((By.NAME, "end_date")))
+    end_date_box = wait.until(
+        EC.presence_of_element_located((By.NAME, "end_date"))
+    )
     end_date_box.click()
     end_date_box.send_keys(Keys.CONTROL + "a")
     end_date_box.send_keys(end_date)
@@ -77,8 +185,11 @@ def search_zip(driver, zip_code: int, end_date: str) -> list[dict]:
     wait.until(EC.presence_of_element_located((By.ID, "item_table")))
 
     rows_out = []
+
     while True:
-        table = wait.until(EC.visibility_of_element_located((By.ID, "item_table")))
+        table = wait.until(
+            EC.visibility_of_element_located((By.ID, "item_table"))
+        )
         rows = table.find_elements(By.TAG_NAME, "tr")
 
         for row in rows:
@@ -90,78 +201,84 @@ def search_zip(driver, zip_code: int, end_date: str) -> list[dict]:
             drive_date_time = " ".join(cols[3].text.split())
 
             try:
-                link = cols[4].find_element(By.TAG_NAME, "a").get_attribute("href")
+                drive_link = cols[4].find_element(
+                    By.TAG_NAME, "a"
+                ).get_attribute("href")
             except NoSuchElementException:
-                link = ""
+                drive_link = ""
 
-            if drive_name and link:
+            if drive_name and drive_link:
                 rows_out.append(
                     {
-                        "zip_code": zip_code,
+                        "search_zip": zip_code,
                         "drive_name": drive_name,
                         "date_time": drive_date_time,
-                        "url": link,
+                        "date": parse_drive_date(drive_date_time),
+                        "url": drive_link,
                     }
                 )
 
-        # Stop when the next-page button is disabled.
         try:
             next_button = driver.find_element(By.ID, "item_table_next")
             classes = next_button.get_attribute("class") or ""
+
             if "disabled" in classes:
                 break
 
             next_link = next_button.find_element(By.TAG_NAME, "a")
             next_link.click()
             time.sleep(0.5)
+
         except NoSuchElementException:
             break
 
     return rows_out
 
 
-def deduplicate(rows: list[dict]) -> list[dict]:
-    """Merge duplicate drives found from multiple ZIP-code searches."""
+def deduplicate(rows: list[dict], zip_to_aos: dict[str, list[str]]) -> list[dict]:
+    """Merge duplicate drives returned by searches around multiple F3 ZIPs."""
     grouped = {}
 
     for row in rows:
-        key = row["url"] or (
-            row["drive_name"],
-            row["date_time"],
-        )
+        key = row["url"] or (row["drive_name"], row["date_time"])
 
         if key not in grouped:
             grouped[key] = {
                 "drive_name": row["drive_name"],
                 "date_time": row["date_time"],
+                "date": row["date"],
                 "url": row["url"],
                 "zip_codes": set(),
                 "aos": set(),
             }
 
-        grouped[key]["zip_codes"].add(row["zip_code"])
+        grouped[key]["zip_codes"].add(row["search_zip"])
+        grouped[key]["aos"].update(zip_to_aos.get(row["search_zip"], []))
 
-    # Map every search ZIP back to its AO(s).
-    zip_to_aos = defaultdict(list)
-    for ao, zip_code in AO_ZIPCODES.items():
-        zip_to_aos[zip_code].append(ao)
+        if not grouped[key]["date"]:
+            grouped[key]["date"] = row["date"]
 
     result = []
     for item in grouped.values():
-        for zip_code in item["zip_codes"]:
-            item["aos"].update(zip_to_aos[zip_code])
-
         result.append(
             {
                 "drive_name": item["drive_name"],
                 "date_time": item["date_time"],
+                "date": item["date"],
                 "url": item["url"],
                 "zip_codes": sorted(item["zip_codes"]),
                 "aos": sorted(item["aos"]),
             }
         )
 
-    return sorted(result, key=lambda x: (x["date_time"], x["drive_name"]))
+    return sorted(
+        result,
+        key=lambda x: (
+            x["date"] or "9999-12-31",
+            x["date_time"],
+            x["drive_name"],
+        ),
+    )
 
 
 def main():
@@ -169,34 +286,55 @@ def main():
     end_date = today + timedelta(days=SEARCH_DAYS)
     end_date_string = f"{end_date.month}/{end_date.day}/{end_date.year}"
 
-    print(f"Searching through {end_date_string}...")
+    print("Fetching active F3 locations...")
+    locations = fetch_f3_locations()
+
+    if not locations:
+        raise RuntimeError("F3 API returned no active locations with ZIP codes.")
+
+    zip_to_aos = build_zip_to_aos(locations)
+
+    print(f"Found {len(locations)} active F3 locations.")
+    print(f"Searching {len(zip_to_aos)} unique ZIP codes.")
+    print(f"Searching Bloodworks through {end_date_string}.")
 
     driver = make_driver()
     all_rows = []
 
     try:
-        # The original script searched each ZIP independently. We retain that behavior.
-        for zip_code in sorted(set(AO_ZIPCODES.values())):
-            print(f"Searching ZIP {zip_code}")
+        for zip_code in zip_to_aos:
+            print(
+                f"Searching ZIP {zip_code} "
+                f"({', '.join(zip_to_aos[zip_code])})"
+            )
             try:
-                all_rows.extend(search_zip(driver, zip_code, end_date_string))
+                all_rows.extend(
+                    search_zip(driver, zip_code, end_date_string)
+                )
             except Exception as exc:
+                # Don't lose the entire monthly run because one ZIP failed.
                 print(f"ERROR searching {zip_code}: {exc}")
     finally:
         driver.quit()
 
-    drives = deduplicate(all_rows)
+    drives = deduplicate(all_rows, zip_to_aos)
 
     output = {
         "generated_at": today.isoformat(),
         "search_through": end_date.isoformat(),
+        "location_count": len(locations),
+        "zip_count": len(zip_to_aos),
         "drive_count": len(drives),
+        "locations": locations,
         "drives": drives,
     }
 
     output_path = Path(OUTPUT_DIR) / "blood-drives.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    output_path.write_text(
+        json.dumps(output, indent=2),
+        encoding="utf-8",
+    )
 
     print(f"Wrote {len(drives)} unique drives to {output_path}")
 
