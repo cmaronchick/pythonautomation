@@ -172,6 +172,15 @@ def search_zip(driver, zip_code: str, end_date: str) -> list[dict]:
     for _ in range(22):
         slider.send_keys(Keys.ARROW_LEFT)
 
+    distance_label = wait.until(
+        EC.presence_of_element_located((By.ID, "distance-label"))
+    )
+    wait.until(
+        lambda d: distance_label.text.strip() == "5"
+    )
+
+    print(f"Searching ZIP code: {zip_code} with end date: {end_date} at distance: {distance_label.text.strip()}")
+
     end_date_box = wait.until(
         EC.presence_of_element_located((By.NAME, "end_date"))
     )
