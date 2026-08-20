@@ -45,3 +45,10 @@ AO_ZIPCODES = {
 SEARCH_DAYS = 30
 OUTPUT_DIR = "data"
 SITE_DIR = "docs"
+F3_API_URL = "https://api.f3nation.com/v1/location/in-bounding-box"
+F3_BOUNDING_BOX = {
+    "minLng": -122.474213,
+    "minLat": 47.271986,
+    "maxLng": -121.701050,
+    "maxLat": 47.851010
+}
