@@ -48,10 +48,10 @@ def fetch_f3_locations() -> list[dict]:
     """Fetch active F3 locations from the configured bounding box."""
     api_key = ""
     if os.getenv("DEBUG") == "True":
-        print(' 1os.getenv:', os.getenv("DEBUG"), os.getenv("F3NATION_API_KEY"))
+        print('1 os.getenv:', os.getenv("DEBUG"), os.getenv("F3NATION_API_KEY"))
         api_key = os.getenv("F3NATION_API_KEY")
     else:    
-        print('2 os.getenv:', os.getenv("DEBUG"), os.getenv("F3NATION_API_KEY"))
+        print('2 os.getenv:', os.getenv("DEBUG"), os.environ.get("F3NATION_API_KEY"))
         api_key = os.environ.get("F3NATION_API_KEY")
     if not api_key:
         raise RuntimeError(
