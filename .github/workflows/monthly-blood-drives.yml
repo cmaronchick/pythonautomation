@@ -29,10 +29,10 @@ jobs:
       - name: Scrape Bloodworks Northwest
         env:
           F3_API_KEY: ${{ secrets.F3NATION_API_KEY }}
-        run: python scraper.py
+        run: python ./blood-drive-finder/scraper.py
 
       - name: Generate website
-        run: python generate_site.py
+        run: python ./blood-drive-finder/generate_site.py
 
       - name: Commit updated results
         run: |
