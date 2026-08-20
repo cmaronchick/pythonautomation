@@ -6,7 +6,7 @@ import json
 from html import escape
 from pathlib import Path
 
-from config import OUTPUT_DIR, SITE_DIR
+from blooddrivedata import OUTPUT_DIR, SITE_DIR
 
 
 def generate():
