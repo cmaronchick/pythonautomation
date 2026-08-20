@@ -52,7 +52,7 @@ def fetch_f3_locations() -> list[dict]:
         api_key = os.getenv("F3NATION_API_KEY")
     else:    
         print('2 os.getenv:', os.getenv("DEBUG"), os.getenv("F3NATION_API_KEY"))
-        os.environ.get("F3_API_KEY")
+        api_key = os.environ.get("F3NATION_API_KEY")
     if not api_key:
         raise RuntimeError(
             "F3_API_KEY is not set. Add it as a GitHub Actions repository secret."
