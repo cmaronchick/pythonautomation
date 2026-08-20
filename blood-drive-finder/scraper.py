@@ -28,6 +28,8 @@ from blooddrivedata import AO_ZIPCODES, OUTPUT_DIR, SEARCH_DAYS
 
 URL = "https://donate.bloodworksnw.org/donor/schedules/zip"
 
+#curl 'https://api.f3nation.com/v1/location/in-bounding-box?minLng=-122.474213&minLat=47.271986&maxLng=-121.701050&maxLat=47.851010'   --header 'client: scalar-api'   --header 'Authorization: Bearer API_KEY'
+
 
 def parse_date_time(value: str) -> tuple[str, str]:
     """Best-effort split of the site's combined date/time text."""
