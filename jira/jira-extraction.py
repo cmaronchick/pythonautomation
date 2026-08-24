@@ -49,7 +49,7 @@ def fetch_daily_sprint_data(jira):
         f'project = SPLASH AND created >= "2025-07-01" AND'
         f'(issueType in (Story, Task) OR '
         f'(issueType = Bug AND ('
-        f'"Season/Update Number" = "S8 Update 7" OR '
+        f'"Season/Update Number" = "S9 Launch" OR '
         f'"Found on QA Version" in ({qa_versions})'
         f')))'
     )
@@ -74,7 +74,7 @@ def fetch_daily_sprint_data(jira):
         # NEW: Safely extract and join all Fix Versions into a single text string
         fix_versions_list = issue.fields.fixVersions
         fix_versions_str = ", ".join([fv.name for fv in fix_versions_list]) if fix_versions_list else "None"
-
+        milestone = getattr(issue.fields, 'Milestone[Dropdown]')
         # NEW: Safely extract Priority (Standard Field)
         priority = issue.fields.priority.name if hasattr(issue.fields, 'priority') and issue.fields.priority else "None"
         
@@ -110,6 +110,7 @@ def fetch_daily_sprint_data(jira):
                 'Issue Type': issue_type,
                 'Created Date': created_date,
                 'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
+                'Milestone': milestone,
                 'Priority': priority,          # Added to dictionary
                 'Severity': severity          # Added to dictionary
             })
@@ -130,6 +131,7 @@ def fetch_daily_sprint_data(jira):
             'Issue Type': issue_type,
             'Created Date': created_date,
             'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
+            'Milestone': milestone,
             'Priority': priority,          # Added to dictionary
             'Severity': severity          # Added to dictionary
         })
@@ -157,7 +159,7 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # Added the new column to our expected columns
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions', 'Priority', 'Severity']
+    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions', 'Milestone', 'Priority', 'Severity']
     df_new = pd.DataFrame(daily_data)
     
     for col in expected_cols:
