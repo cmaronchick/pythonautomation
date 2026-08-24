@@ -62,9 +62,13 @@ def fetch_daily_sprint_data(jira):
     data = []
     today = datetime.now().strftime('%Y-%m-%d')
     fieldsPrinted = False
-
+    i = 0
     # Use enumerate to keep a count of where we are in the loop
     for index, issue in enumerate(issues):
+        # Temporarily add this to your script to see all field keys
+        if i < 20:
+            print(issue.raw['fields'].keys())
+            i = i + 1
         if index % 100 == 0:
             print(f"Processing issue {index} of {len(issues)}...")
         story_points = getattr(issue.fields, STORY_POINTS_FIELD, 0)
@@ -74,7 +78,7 @@ def fetch_daily_sprint_data(jira):
         # NEW: Safely extract and join all Fix Versions into a single text string
         fix_versions_list = issue.fields.fixVersions
         fix_versions_str = ", ".join([fv.name for fv in fix_versions_list]) if fix_versions_list else "None"
-        milestone = getattr(issue.fields, 'Milestone[Dropdown]')
+        milestone = getattr(issue.fields, 'Milestone[Dropdown]',None)
         # NEW: Safely extract Priority (Standard Field)
         priority = issue.fields.priority.name if hasattr(issue.fields, 'priority') and issue.fields.priority else "None"
         
