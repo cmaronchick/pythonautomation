@@ -63,6 +63,15 @@ def fetch_daily_sprint_data(jira):
     today = datetime.now().strftime('%Y-%m-%d')
     fieldsPrinted = False
     i = 0
+    # Assuming your active Jira connection object is named 'jira'
+    all_fields = jira.fields()
+
+    print("--- JIRA FIELD MAPPING ---")
+    for field in all_fields:
+        # Look for custom fields to narrow down the noise
+        if field['custom']:
+            print(f"Name: {field['name']} | ID: {field['id']}")
+    print("--------------------------")
     # Use enumerate to keep a count of where we are in the loop
     for index, issue in enumerate(issues):
         # Temporarily add this to your script to see all field keys
