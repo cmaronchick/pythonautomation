@@ -157,7 +157,7 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # Added the new column to our expected columns
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions', 'Priority', 'Severity']
+    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions', 'Milestone', 'Priority', 'Severity']
     df_new = pd.DataFrame(daily_data)
     
     for col in expected_cols:
@@ -170,7 +170,7 @@ def upsert_to_google_drive_excel(daily_data):
     try:
         df_existing = pd.read_excel(temp_filename, sheet_name=SHEET_NAME)
         print(f"Successfully loaded {len(df_existing)} existing rows into memory.")
-        # ... (keep the rest exactly the same)
+        
         df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.contains('^Unnamed')]
         df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.match(r'^\d+$')]
         
@@ -243,6 +243,16 @@ def upsert_to_google_drive_excel(daily_data):
     }, inplace=True)
     # -----------------------------
 
+    # --- NEW MILESTONE AND EPIC BURNDOWN LOGIC ---
+    print("Calculating Milestone and Epic Burndowns...")
+    
+    # Group remaining story points by Date and Milestone
+    milestone_burndown = df_combined.groupby(['Date', 'Milestone'])['Remaining Story Points'].sum().reset_index()
+    
+    # Group remaining story points by Date, Epic, and Parent Link (Epic Name)
+    epic_burndown = df_combined.groupby(['Date', 'Epic', 'Parent Link'])['Remaining Story Points'].sum().reset_index()
+    # ---------------------------------------------
+
     print("Updating Excel data...")
     latest_date = df_combined['Date'].max()
     df_current_state = df_combined[df_combined['Date'] == latest_date]
@@ -252,6 +262,10 @@ def upsert_to_google_drive_excel(daily_data):
         df_current_state.to_excel(writer, sheet_name='Current State', index=False)
         # Write the new QA Metrics tab
         qa_metrics.to_excel(writer, sheet_name='QA Metrics', index=False)
+        
+        # Write the new Milestone and Epic summary tabs
+        milestone_burndown.to_excel(writer, sheet_name='Milestone Burndown', index=False)
+        epic_burndown.to_excel(writer, sheet_name='Epic Burndown', index=False)
 
     print("Uploading updated file to Google Drive...")
     media = MediaFileUpload(
