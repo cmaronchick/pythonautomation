@@ -246,11 +246,26 @@ def upsert_to_google_drive_excel(daily_data):
     # --- NEW MILESTONE AND EPIC BURNDOWN LOGIC ---
     print("Calculating Milestone and Epic Burndowns...")
     
-    # Group remaining story points by Date and Milestone
-    milestone_burndown = df_combined.groupby(['Date', 'Milestone'])['Remaining Story Points'].sum().reset_index()
+    # Pivot to create a chart-ready format for Milestones (Dates as rows, Milestones as columns)
+    milestone_burndown = df_combined.pivot_table(
+        index='Date', 
+        columns='Milestone', 
+        values='Remaining Story Points', 
+        aggfunc='sum'
+    ).reset_index()
     
-    # Group remaining story points by Date, Epic, and Parent Link (Epic Name)
-    epic_burndown = df_combined.groupby(['Date', 'Epic', 'Parent Link'])['Remaining Story Points'].sum().reset_index()
+    # Fill any blank days with 0 to keep the trendline continuous
+    milestone_burndown = milestone_burndown.fillna(0)
+    
+    # Pivot to create a chart-ready format for Epics (Dates as rows, Epics as columns)
+    epic_burndown = df_combined.pivot_table(
+        index='Date', 
+        columns='Parent Link', # 'Parent Link' holds the readable Epic name
+        values='Remaining Story Points', 
+        aggfunc='sum'
+    ).reset_index()
+    
+    epic_burndown = epic_burndown.fillna(0)
     # ---------------------------------------------
 
     print("Updating Excel data...")
