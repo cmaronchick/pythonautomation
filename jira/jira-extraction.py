@@ -246,94 +246,23 @@ def upsert_to_google_drive_excel(daily_data):
     # --- NEW MILESTONE AND EPIC BURNDOWN LOGIC ---
     print("Calculating Milestone and Epic Burndowns...")
     
-    # THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
-    df_combined['Story Points'] = pd.to_numeric(df_combined['Story Points'], errors='coerce').fillna(0)
-    df_combined['Remaining Story Points'] = df_combined.apply(
-        lambda row: 0 if str(row['Status']) in DONE_STATUSES else row['Story Points'], 
-        axis=1
-    )
-
-    # NEW: Calculate total remaining points for the Milestone on that specific date
-    df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
-        ['Date', 'Milestone']
-    )['Remaining Story Points'].transform('sum')
-
-    # NEW: Calculate total remaining points for the Epic on that specific date
-    df_combined['Remaining Epic Story Points'] = df_combined.groupby(
-        ['Date', 'Epic']
-    )['Remaining Story Points'].transform('sum')
+    # 2. Filter the data to ONLY include those specific Epics
+    df_filtered = df_combined[df_combined['Parent Link'].isin(target_epics)].copy()
     
-    df_combined = df_combined[expected_cols]# THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
-    df_combined['Story Points'] = pd.to_numeric(df_combined['Story Points'], errors='coerce').fillna(0)
-    df_combined['Remaining Story Points'] = df_combined.apply(
-        lambda row: 0 if str(row['Status']) in DONE_STATUSES else row['Story Points'], 
-        axis=1
-    )
+    # 3. Create a combined column label for Excel (e.g., "First Playable (Sep 11) - UI Overhaul")
+    df_filtered['Milestone & Epic'] = df_filtered['Milestone'].astype(str) + " - " + df_filtered['Parent Link'].astype(str)
 
-    # NEW: Calculate total remaining points for the Milestone on that specific date
-    df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
-        ['Date', 'Milestone']
-    )['Remaining Story Points'].transform('sum')
-
-    # NEW: Calculate total remaining points for the Epic on that specific date
-    df_combined['Remaining Epic Story Points'] = df_combined.groupby(
-        ['Date', 'Epic']
-    )['Remaining Story Points'].transform('sum')
+    # 4. Pivot the data using the new combined label
+    milestone_burndown = df_filtered.pivot_table(
+        index='Date', 
+        columns='Milestone & Epic', 
+        values='Remaining Story Points', 
+        aggfunc='sum'
+    ).reset_index()
     
-    df_combined = df_combined[expected_cols]# THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
-    df_combined['Story Points'] = pd.to_numeric(df_combined['Story Points'], errors='coerce').fillna(0)
-    df_combined['Remaining Story Points'] = df_combined.apply(
-        lambda row: 0 if str(row['Status']) in DONE_STATUSES else row['Story Points'], 
-        axis=1
-    )
-
-    # NEW: Calculate total remaining points for the Milestone on that specific date
-    df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
-        ['Date', 'Milestone']
-    )['Remaining Story Points'].transform('sum')
-
-    # NEW: Calculate total remaining points for the Epic on that specific date
-    df_combined['Remaining Epic Story Points'] = df_combined.groupby(
-        ['Date', 'Epic']
-    )['Remaining Story Points'].transform('sum')
-    
-    df_combined = df_combined[expected_cols]# THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
-    df_combined['Story Points'] = pd.to_numeric(df_combined['Story Points'], errors='coerce').fillna(0)
-    df_combined['Remaining Story Points'] = df_combined.apply(
-        lambda row: 0 if str(row['Status']) in DONE_STATUSES else row['Story Points'], 
-        axis=1
-    )
-
-    # NEW: Calculate total remaining points for the Milestone on that specific date
-    df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
-        ['Date', 'Milestone']
-    )['Remaining Story Points'].transform('sum')
-
-    # NEW: Calculate total remaining points for the Epic on that specific date
-    df_combined['Remaining Epic Story Points'] = df_combined.groupby(
-        ['Date', 'Epic']
-    )['Remaining Story Points'].transform('sum')
-    
-    df_combined = df_combined[expected_cols]
-
-    # THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
-    df_combined['Story Points'] = pd.to_numeric(df_combined['Story Points'], errors='coerce').fillna(0)
-    df_combined['Remaining Story Points'] = df_combined.apply(
-        lambda row: 0 if str(row['Status']) in DONE_STATUSES else row['Story Points'], 
-        axis=1
-    )
-
-    # NEW: Calculate total remaining points for the Milestone on that specific date
-    df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
-        ['Date', 'Milestone']
-    )['Remaining Story Points'].transform('sum')
-
-    # NEW: Calculate total remaining points for the Epic on that specific date
-    df_combined['Remaining Epic Story Points'] = df_combined.groupby(
-        ['Date', 'Epic']
-    )['Remaining Story Points'].transform('sum')
-    
-    df_combined = df_combined[expected_cols]
+    # Fill any blank days with 0 to keep the trendlines continuous
+    milestone_burndown = milestone_burndown.fillna(0)
+    # ---------------------------------------------
     
     # 2. Define the specific Epics you want to track (Use the 'Parent Link' summary names)
     # Replace these with the actual names of the Epics you are demonstrating!
