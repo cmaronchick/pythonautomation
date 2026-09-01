@@ -41,15 +41,15 @@ def get_jira_client():
 
 def fetch_daily_sprint_data(jira):
     # We define your specific QA versions here to keep the query readable
-    qa_versions = "QA8.7.0, QA8.7.2, QA8.7.3"
+    qa_versions = "QA9.0.1, QA9.0.2"
 
     # Group 1: Pulls the standard Stories and Tasks for the release
     # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
     jql_query = (
-        f'project = SPLASH AND created >= "2026-03-01" AND'
+        f'project = SPLASH AND created >= "2026-04-01" AND'
         f'(issueType in (Story, Task) OR '
         f'(issueType = Bug AND ('
-        f'"Season/Update Number" = "S8 Update 7" OR '
+        f'"Season/Update Number" = "S9 Launch" OR '
         f'"Found on QA Version" in ({qa_versions})'
         f')))'
     )
