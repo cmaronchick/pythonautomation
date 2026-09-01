@@ -157,7 +157,12 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # Added the new column to our expected columns
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions', 'Milestone', 'Priority', 'Severity']
+    expected_cols = [
+        'Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 
+        'Story Points', 'Remaining Story Points', 'Remaining Milestone Story Points', 
+        'Remaining Epic Story Points', 'Issue Type', 'Created Date', 
+        'Fix Versions', 'Milestone', 'Priority', 'Severity (S)'
+    ]
     df_new = pd.DataFrame(daily_data)
     
     for col in expected_cols:
@@ -195,6 +200,16 @@ def upsert_to_google_drive_excel(daily_data):
         axis=1
     )
 
+    # NEW: Calculate total remaining points for the Milestone on that specific date
+    df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
+        ['Date', 'Milestone']
+    )['Remaining Story Points'].transform('sum')
+
+    # NEW: Calculate total remaining points for the Epic on that specific date
+    df_combined['Remaining Epic Story Points'] = df_combined.groupby(
+        ['Date', 'Epic']
+    )['Remaining Story Points'].transform('sum')
+    
     df_combined = df_combined[expected_cols]
 
     # --- NEW QA METRICS LOGIC ---
@@ -268,13 +283,16 @@ def upsert_to_google_drive_excel(daily_data):
         'S9 UI Overhaul'
     ]
     
-    # 3. Filter the combined dataframe to ONLY include those specific Epics
-    df_filtered_epics = df_combined[df_combined['Parent Link'].isin(target_epics)]
+    # 2. Filter the data to ONLY include those specific Epics
+    df_filtered = df_combined[df_combined['Parent Link'].isin(target_epics)].copy()
+    
+    # 3. Create a combined column label for Excel (e.g., "First Playable (Sep 11) - UI Overhaul")
+    df_filtered['Milestone & Epic'] = df_filtered['Milestone'].astype(str) + " - " + df_filtered['Parent Link'].astype(str)
 
-    # 4. Pivot to create the Epic Burndown using the FILTERED data
-    epic_burndown = df_filtered_epics.pivot_table(
+    # 4. Pivot the data using the new combined label
+    milestone_burndown = df_filtered.pivot_table(
         index='Date', 
-        columns='Parent Link', 
+        columns='Milestone & Epic', 
         values='Remaining Story Points', 
         aggfunc='sum'
     ).reset_index()
