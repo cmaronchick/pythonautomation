@@ -257,10 +257,24 @@ def upsert_to_google_drive_excel(daily_data):
     # Fill any blank days with 0 to keep the trendline continuous
     milestone_burndown = milestone_burndown.fillna(0)
     
-    # Pivot to create a chart-ready format for Epics (Dates as rows, Epics as columns)
-    epic_burndown = df_combined.pivot_table(
+    # 2. Define the specific Epics you want to track (Use the 'Parent Link' summary names)
+    # Replace these with the actual names of the Epics you are demonstrating!
+    target_epics = [
+        'S9: Objectives Overhaul', 
+        'S9: Tip-Off Frenzy', 
+        'S9 Launch Tech Debt',
+        'S9 Sim Art',
+        'S9 Annual Art Update',
+        'S9 UI Overhaul'
+    ]
+    
+    # 3. Filter the combined dataframe to ONLY include those specific Epics
+    df_filtered_epics = df_combined[df_combined['Parent Link'].isin(target_epics)]
+
+    # 4. Pivot to create the Epic Burndown using the FILTERED data
+    epic_burndown = df_filtered_epics.pivot_table(
         index='Date', 
-        columns='Parent Link', # 'Parent Link' holds the readable Epic name
+        columns='Parent Link', 
         values='Remaining Story Points', 
         aggfunc='sum'
     ).reset_index()
