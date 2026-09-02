@@ -111,7 +111,7 @@ def fetch_daily_sprint_data(jira):
                 'Created Date': created_date,
                 'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
                 'Priority': priority,          # Added to dictionary
-                'Severity': severity          # Added to dictionary
+                'Severity (S)': severity          # Added to dictionary
             })
             # 
         #     for field in fields:
@@ -131,7 +131,7 @@ def fetch_daily_sprint_data(jira):
             'Created Date': created_date,
             'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
             'Priority': priority,          # Added to dictionary
-            'Severity': severity          # Added to dictionary
+            'Severity (S)': severity          # Added to dictionary
         })
     return data
 
@@ -157,7 +157,12 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # Added the new column to our expected columns
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions', 'Milestone', 'Priority', 'Severity']
+    expected_cols = [
+        'Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 
+        'Story Points', 'Remaining Story Points', 'Remaining Milestone Story Points', 
+        'Remaining Epic Story Points', 'Issue Type', 'Created Date', 
+        'Fix Versions', 'Milestone', 'Priority', 'Severity (S)'
+    ]
     df_new = pd.DataFrame(daily_data)
     
     for col in expected_cols:
@@ -194,6 +199,16 @@ def upsert_to_google_drive_excel(daily_data):
         lambda row: 0 if str(row['Status']) in DONE_STATUSES else row['Story Points'], 
         axis=1
     )
+    
+    # NEW: Calculate total remaining points for the Milestone on that specific date
+    df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
+        ['Date', 'Milestone']
+    )['Remaining Story Points'].transform('sum')
+
+    # NEW: Calculate total remaining points for the Epic on that specific date
+    df_combined['Remaining Epic Story Points'] = df_combined.groupby(
+        ['Date', 'Epic']
+    )['Remaining Story Points'].transform('sum')
 
     df_combined = df_combined[expected_cols]
 
