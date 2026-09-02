@@ -199,7 +199,7 @@ def upsert_to_google_drive_excel(daily_data):
         lambda row: 0 if str(row['Status']) in DONE_STATUSES else row['Story Points'], 
         axis=1
     )
-    
+
     # NEW: Calculate total remaining points for the Milestone on that specific date
     df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
         ['Date', 'Milestone']
@@ -315,8 +315,8 @@ def upsert_to_google_drive_excel(daily_data):
         qa_metrics.to_excel(writer, sheet_name='QA Metrics', index=False)
         
         # Write the new Milestone and Epic summary tabs
-        milestone_burndown.to_excel(writer, sheet_name='Milestone Burndown', index=False)
-        epic_burndown.to_excel(writer, sheet_name='Epic Burndown', index=False)
+        # milestone_burndown.to_excel(writer, sheet_name='Milestone Burndown', index=False)
+        # epic_burndown.to_excel(writer, sheet_name='Epic Burndown', index=False)
 
     print("Uploading updated file to Google Drive...")
     media = MediaFileUpload(
