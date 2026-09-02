@@ -246,6 +246,17 @@ def upsert_to_google_drive_excel(daily_data):
     # --- NEW MILESTONE AND EPIC BURNDOWN LOGIC ---
     print("Calculating Milestone and Epic Burndowns...")
     
+    # 2. Define the specific Epics you want to track (Use the 'Parent Link' summary names)
+    # Replace these with the actual names of the Epics you are demonstrating!
+    target_epics = [
+        'S9: Objectives Overhaul', 
+        'S9: Tip-Off Frenzy', 
+        'S9 Launch Tech Debt',
+        'S9 Sim Art',
+        'S9 Annual Art Update',
+        'S9 UI Overhaul'
+    ]
+    
     # 2. Filter the data to ONLY include those specific Epics
     df_filtered = df_combined[df_combined['Parent Link'].isin(target_epics)].copy()
     
@@ -263,17 +274,6 @@ def upsert_to_google_drive_excel(daily_data):
     # Fill any blank days with 0 to keep the trendlines continuous
     milestone_burndown = milestone_burndown.fillna(0)
     # ---------------------------------------------
-    
-    # 2. Define the specific Epics you want to track (Use the 'Parent Link' summary names)
-    # Replace these with the actual names of the Epics you are demonstrating!
-    target_epics = [
-        'S9: Objectives Overhaul', 
-        'S9: Tip-Off Frenzy', 
-        'S9 Launch Tech Debt',
-        'S9 Sim Art',
-        'S9 Annual Art Update',
-        'S9 UI Overhaul'
-    ]
     
     # 3. Filter the combined dataframe to ONLY include those specific Epics
     df_filtered_epics = df_combined[df_combined['Parent Link'].isin(target_epics)]
