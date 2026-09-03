@@ -46,7 +46,7 @@ def fetch_daily_sprint_data(jira):
     # Group 1: Pulls the standard Stories and Tasks for the release
     # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
     jql_query = (
-        f'project = SPLASH AND createdDate >= "2026-04-01" AND'
+        f'project = SPLASH AND created >= "2026-04-01" AND'
         f'(issueType in (Story, Task) OR '
         f'(issueType = Bug AND ('
         f'"Season/Update Number" = "S9 Launch" OR '
@@ -161,7 +161,7 @@ def upsert_to_google_drive_excel(daily_data):
         'Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 
         'Story Points', 'Remaining Story Points', 'Remaining Milestone Story Points', 
         'Remaining Epic Story Points', 'Issue Type', 'Created Date', 
-        'Fix Versions', 'Milestone', 'Priority', 'Severity (S)', 'Epic - Milestone'
+        'Fix Versions', 'Milestone', 'Priority', 'Severity (S)'
     ]
     df_new = pd.DataFrame(daily_data)
     
