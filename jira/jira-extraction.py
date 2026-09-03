@@ -46,7 +46,7 @@ def fetch_daily_sprint_data(jira):
     # Group 1: Pulls the standard Stories and Tasks for the release
     # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
     jql_query = (
-        f'project = SPLASH AND created >= "2026-04-01" AND'
+        f'project = SPLASH AND createdDate >= "2026-04-01" AND'
         f'(issueType in (Story, Task) OR '
         f'(issueType = Bug AND ('
         f'"Season/Update Number" = "S9 Launch" OR '
@@ -161,7 +161,7 @@ def upsert_to_google_drive_excel(daily_data):
         'Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 
         'Story Points', 'Remaining Story Points', 'Remaining Milestone Story Points', 
         'Remaining Epic Story Points', 'Issue Type', 'Created Date', 
-        'Fix Versions', 'Milestone', 'Priority', 'Severity (S)'
+        'Fix Versions', 'Milestone', 'Priority', 'Severity (S)', 'Epic - Milestone'
     ]
     df_new = pd.DataFrame(daily_data)
     
@@ -209,6 +209,9 @@ def upsert_to_google_drive_excel(daily_data):
     df_combined['Remaining Epic Story Points'] = df_combined.groupby(
         ['Date', 'Epic']
     )['Remaining Story Points'].transform('sum')
+
+    # Combine Epic Name (Parent Link) and Milestone into a single field
+    df_combined['Epic - Milestone'] = df_combined['Parent Link'].astype(str) + " - " + df_combined['Milestone'].astype(str)
 
     df_combined = df_combined[expected_cols]
 
