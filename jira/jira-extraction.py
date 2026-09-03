@@ -83,6 +83,10 @@ def fetch_daily_sprint_data(jira):
         severity_raw = getattr(issue.fields, SEVERITY_FIELD, None)
         severity = severity_raw.value if hasattr(severity_raw, 'value') else (severity_raw if isinstance(severity_raw, str) else "None")
 
+        # NEW: Safely extract Milestone Dropdown
+        milestone_raw = getattr(issue.fields, 'customfield_10538', None)
+        milestone = milestone_raw.value if hasattr(milestone_raw, 'value') else (milestone_raw if isinstance(milestone_raw, str) else "None")
+
         # NEW: Grab Issue Type and Created Date
         issue_type = issue.fields.issuetype.name
         created_raw = issue.fields.created
@@ -200,10 +204,10 @@ def upsert_to_google_drive_excel(daily_data):
     # 1. Create a temporary copy to isolate the latest VALID data
     df_temp = df_combined.copy()
     
-    # 2. Treat 0, empty strings, and 'None' as true pandas nulls
-    df_temp['Milestone'] = df_temp['Milestone'].replace({0: pd.NA, '0': pd.NA, '': pd.NA, 'None': pd.NA})
-    df_temp['Fix Versions'] = df_temp['Fix Versions'].replace({'None': pd.NA, '': pd.NA})
-    df_temp['Parent Link'] = df_temp['Parent Link'].replace({'None': pd.NA, '': pd.NA})
+    # 2. Treat 0, empty strings, string 'None', and true Python None as pandas nulls
+    df_temp['Milestone'] = df_temp['Milestone'].replace({0: pd.NA, '0': pd.NA, '': pd.NA, 'None': pd.NA, None: pd.NA})
+    df_temp['Fix Versions'] = df_temp['Fix Versions'].replace({'None': pd.NA, '': pd.NA, None: pd.NA})
+    df_temp['Parent Link'] = df_temp['Parent Link'].replace({'None': pd.NA, '': pd.NA, None: pd.NA})
     
     # 3. Drop the nulls first, THEN grab the last entry. This ensures we only capture real data.
     milestone_map = df_temp.dropna(subset=['Milestone']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Milestone'].to_dict()
