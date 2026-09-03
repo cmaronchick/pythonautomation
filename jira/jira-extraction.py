@@ -193,6 +193,25 @@ def upsert_to_google_drive_excel(daily_data):
         print(f"Could not read existing data cleanly: {e}")
         df_combined = df_new
 
+    # --- NEW: BACKFILL HISTORICAL TICKET DATA ---
+    print("Backfilling historical Milestone and Fix Version data...")
+    # Sort chronologically so the 'last' entry is always the most recent Jira pull
+    df_combined = df_combined.sort_values(by=['Issue Key', 'Date'])
+    
+    # Isolate the latest state for each issue
+    latest_issue_data = df_combined.drop_duplicates(subset=['Issue Key'], keep='last')
+    
+    # Create mapping dictionaries for the fields you want to backfill
+    milestone_map = latest_issue_data.set_index('Issue Key')['Milestone'].to_dict()
+    fix_versions_map = latest_issue_data.set_index('Issue Key')['Fix Versions'].to_dict()
+    epic_map = latest_issue_data.set_index('Issue Key')['Parent Link'].to_dict() # Added this in case Epics change too!
+    
+    # Map the newest values back onto the entire historical dataset
+    df_combined['Milestone'] = df_combined['Issue Key'].map(milestone_map)
+    df_combined['Fix Versions'] = df_combined['Issue Key'].map(fix_versions_map)
+    df_combined['Parent Link'] = df_combined['Issue Key'].map(epic_map)
+    # --------------------------------------------
+
     # THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
     df_combined['Story Points'] = pd.to_numeric(df_combined['Story Points'], errors='coerce').fillna(0)
     df_combined['Remaining Story Points'] = df_combined.apply(
