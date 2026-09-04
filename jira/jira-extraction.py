@@ -203,6 +203,10 @@ def upsert_to_google_drive_excel(daily_data):
     
     # 1. Create a temporary copy to isolate the latest VALID data
     df_temp = df_combined.copy()
+
+    # Check what the data looks like BEFORE we do anything
+    null_count_before = df_combined['Milestone'].isin([0, '0', '', 'None', None]).sum()
+    print(f"Rows with null/empty Milestones BEFORE backfill: {null_count_before}")
     
     # 2. Treat 0, empty strings, string 'None', and true Python None as pandas nulls
     df_temp['Milestone'] = df_temp['Milestone'].replace({0: pd.NA, '0': pd.NA, '': pd.NA, 'None': pd.NA, None: pd.NA})
@@ -213,12 +217,23 @@ def upsert_to_google_drive_excel(daily_data):
     milestone_map = df_temp.dropna(subset=['Milestone']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Milestone'].to_dict()
     fix_versions_map = df_temp.dropna(subset=['Fix Versions']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Fix Versions'].to_dict()
     epic_map = df_temp.dropna(subset=['Parent Link']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Parent Link'].to_dict()
+
+    # Print the mapping results to verify it found the updated Jira data
+    print(f"SUCCESS: Found {len(milestone_map)} unique issues with a valid Milestone.")
+    if len(milestone_map) > 0:
+        print(f"Sample Milestone Map: {list(milestone_map.items())[:5]}")
     
     # 4. Map the latest valid values back onto the entire historical dataset. 
     # The fillna() ensures that if a ticket truly never had a milestone, it just keeps its original 0.
     df_combined['Milestone'] = df_combined['Issue Key'].map(milestone_map).fillna(df_combined['Milestone'])
     df_combined['Fix Versions'] = df_combined['Issue Key'].map(fix_versions_map).fillna(df_combined['Fix Versions'])
     df_combined['Parent Link'] = df_combined['Issue Key'].map(epic_map).fillna(df_combined['Parent Link'])
+
+    # Check what the data looks like AFTER the backfill
+    null_count_after = df_combined['Milestone'].isna().sum()
+    print(f"Rows with null/empty Milestones AFTER backfill: {null_count_after}")
+    print("--- FINISHED BACKFILL PROCESS ---\n")
+
     # --------------------------------------------
 
     # THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
