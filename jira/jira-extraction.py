@@ -83,6 +83,10 @@ def fetch_daily_sprint_data(jira):
         severity_raw = getattr(issue.fields, SEVERITY_FIELD, None)
         severity = severity_raw.value if hasattr(severity_raw, 'value') else (severity_raw if isinstance(severity_raw, str) else "None")
 
+        # NEW: Safely extract Milestone Dropdown
+        milestone_raw = getattr(issue.fields, 'customfield_10538', None)
+        milestone = milestone_raw.value if hasattr(milestone_raw, 'value') else (milestone_raw if isinstance(milestone_raw, str) else "None")
+
         # NEW: Grab Issue Type and Created Date
         issue_type = issue.fields.issuetype.name
         created_raw = issue.fields.created
@@ -192,6 +196,30 @@ def upsert_to_google_drive_excel(daily_data):
     except Exception as e:
         print(f"Could not read existing data cleanly: {e}")
         df_combined = df_new
+
+    # --- NEW: BACKFILL HISTORICAL TICKET DATA (FIXED) ---
+    print("Backfilling historical Milestone and Fix Version data...")
+    df_combined = df_combined.sort_values(by=['Issue Key', 'Date'])
+    
+    # 1. Create a temporary copy to isolate the latest VALID data
+    df_temp = df_combined.copy()
+    
+    # 2. Treat 0, empty strings, string 'None', and true Python None as pandas nulls
+    df_temp['Milestone'] = df_temp['Milestone'].replace({0: pd.NA, '0': pd.NA, '': pd.NA, 'None': pd.NA, None: pd.NA})
+    df_temp['Fix Versions'] = df_temp['Fix Versions'].replace({'None': pd.NA, '': pd.NA, None: pd.NA})
+    df_temp['Parent Link'] = df_temp['Parent Link'].replace({'None': pd.NA, '': pd.NA, None: pd.NA})
+    
+    # 3. Drop the nulls first, THEN grab the last entry. This ensures we only capture real data.
+    milestone_map = df_temp.dropna(subset=['Milestone']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Milestone'].to_dict()
+    fix_versions_map = df_temp.dropna(subset=['Fix Versions']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Fix Versions'].to_dict()
+    epic_map = df_temp.dropna(subset=['Parent Link']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Parent Link'].to_dict()
+    
+    # 4. Map the latest valid values back onto the entire historical dataset. 
+    # The fillna() ensures that if a ticket truly never had a milestone, it just keeps its original 0.
+    df_combined['Milestone'] = df_combined['Issue Key'].map(milestone_map).fillna(df_combined['Milestone'])
+    df_combined['Fix Versions'] = df_combined['Issue Key'].map(fix_versions_map).fillna(df_combined['Fix Versions'])
+    df_combined['Parent Link'] = df_combined['Issue Key'].map(epic_map).fillna(df_combined['Parent Link'])
+    # --------------------------------------------
 
     # THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
     df_combined['Story Points'] = pd.to_numeric(df_combined['Story Points'], errors='coerce').fillna(0)
