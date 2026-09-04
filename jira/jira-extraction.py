@@ -117,6 +117,7 @@ def fetch_daily_sprint_data(jira):
                 'Milestone': milestone,
                 'Priority': priority,          # Added to dictionary
                 'Severity (S)': severity,          # Added to dictionary
+                'Epic - Milestone': f"{epic_key} - {milestone}" if epic_key != "No Epic" and milestone != "None" else f"{epic_key}"
             })
             # 
         #     for field in fields:
@@ -137,7 +138,8 @@ def fetch_daily_sprint_data(jira):
             'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
             'Milestone': milestone,
             'Priority': priority,          # Added to dictionary
-            'Severity (S)': severity          # Added to dictionary
+            'Severity (S)': severity,          # Added to dictionary
+            'Epic - Milestone': f"{epic_key} - {milestone}" if epic_key != "No Epic" and milestone != "None" else f"{epic_key}"
         })
     return data
 
