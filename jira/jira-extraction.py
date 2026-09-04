@@ -114,9 +114,9 @@ def fetch_daily_sprint_data(jira):
                 'Issue Type': issue_type,
                 'Created Date': created_date,
                 'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
+                'Milestone': milestone,
                 'Priority': priority,          # Added to dictionary
                 'Severity (S)': severity,          # Added to dictionary
-                'Milestone': milestone
             })
             # 
         #     for field in fields:
@@ -135,9 +135,9 @@ def fetch_daily_sprint_data(jira):
             'Issue Type': issue_type,
             'Created Date': created_date,
             'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
+            'Milestone': milestone,
             'Priority': priority,          # Added to dictionary
-            'Severity (S)': severity,          # Added to dictionary
-            'Milestone': milestone
+            'Severity (S)': severity          # Added to dictionary
         })
     return data
 
