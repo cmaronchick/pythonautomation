@@ -41,12 +41,12 @@ def get_jira_client():
 
 def fetch_daily_sprint_data(jira):
     # We define your specific QA versions here to keep the query readable
-    qa_versions = "QA8.7.0, QA8.7.2, QA8.7.3"
+    qa_versions = "QA9.0.1, QA9.0.2"
 
     # Group 1: Pulls the standard Stories and Tasks for the release
     # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
     jql_query = (
-        f'project = SPLASH AND created >= "2026-01-01" AND'
+        f'project = SPLASH AND createdDate >= "2026-04-01" AND'
         f'(issueType in (Story, Task) OR '
         f'(issueType = Bug AND ('
         f'"Season/Update Number" = "S9 Launch" OR '
@@ -96,6 +96,10 @@ def fetch_daily_sprint_data(jira):
         severity_raw = getattr(issue.fields, SEVERITY_FIELD, None)
         severity = severity_raw.value if hasattr(severity_raw, 'value') else (severity_raw if isinstance(severity_raw, str) else "None")
 
+        # NEW: Safely extract Milestone Dropdown
+        milestone_raw = getattr(issue.fields, 'customfield_10538', None)
+        milestone = milestone_raw.value if hasattr(milestone_raw, 'value') else (milestone_raw if isinstance(milestone_raw, str) else "None")
+
         # NEW: Grab Issue Type and Created Date
         issue_type = issue.fields.issuetype.name
         created_raw = issue.fields.created
@@ -125,7 +129,8 @@ def fetch_daily_sprint_data(jira):
                 'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
                 'Milestone': milestone,
                 'Priority': priority,          # Added to dictionary
-                'Severity': severity          # Added to dictionary
+                'Severity (S)': severity,          # Added to dictionary
+                'Epic - Milestone': f"{epic_key} - {milestone}" if epic_key != "No Epic" and milestone != "None" else f"{epic_key}"
             })
             # 
         #     for field in fields:
@@ -146,7 +151,8 @@ def fetch_daily_sprint_data(jira):
             'Fix Versions': fix_versions_str, # NEW: Add to the dictionary
             'Milestone': milestone,
             'Priority': priority,          # Added to dictionary
-            'Severity': severity          # Added to dictionary
+            'Severity (S)': severity,          # Added to dictionary
+            'Epic - Milestone': f"{epic_key} - {milestone}" if epic_key != "No Epic" and milestone != "None" else f"{epic_key}"
         })
     return data
 
@@ -172,7 +178,12 @@ def upsert_to_google_drive_excel(daily_data):
         f.write(fh.read())
 
     # Added the new column to our expected columns
-    expected_cols = ['Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 'Story Points', 'Remaining Story Points', 'Issue Type', 'Created Date', 'Fix Versions', 'Milestone', 'Priority', 'Severity']
+    expected_cols = [
+        'Date', 'Issue Key', 'Epic', 'Parent Link', 'Summary', 'Status', 
+        'Story Points', 'Remaining Story Points', 'Remaining Milestone Story Points', 
+        'Remaining Epic Story Points', 'Issue Type', 'Created Date', 
+        'Fix Versions', 'Milestone', 'Priority', 'Severity (S)', 'Epic - Milestone'
+    ]
     df_new = pd.DataFrame(daily_data)
     
     for col in expected_cols:
@@ -185,7 +196,7 @@ def upsert_to_google_drive_excel(daily_data):
     try:
         df_existing = pd.read_excel(temp_filename, sheet_name=SHEET_NAME)
         print(f"Successfully loaded {len(df_existing)} existing rows into memory.")
-        # ... (keep the rest exactly the same)
+        
         df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.contains('^Unnamed')]
         df_existing = df_existing.loc[:, ~df_existing.columns.astype(str).str.match(r'^\d+$')]
         
@@ -203,12 +214,64 @@ def upsert_to_google_drive_excel(daily_data):
         print(f"Could not read existing data cleanly: {e}")
         df_combined = df_new
 
+    # --- NEW: BACKFILL HISTORICAL TICKET DATA (FIXED) ---
+    print("Backfilling historical Milestone and Fix Version data...")
+    df_combined = df_combined.sort_values(by=['Issue Key', 'Date'])
+    
+    # 1. Create a temporary copy to isolate the latest VALID data
+    df_temp = df_combined.copy()
+
+    # Check what the data looks like BEFORE we do anything
+    null_count_before = df_combined['Milestone'].isin([0, '0', '', 'None', None]).sum()
+    print(f"Rows with null/empty Milestones BEFORE backfill: {null_count_before}")
+    
+    # 2. Treat 0, empty strings, string 'None', and true Python None as pandas nulls
+    df_temp['Milestone'] = df_temp['Milestone'].replace({0: pd.NA, '0': pd.NA, '': pd.NA, 'None': pd.NA, None: pd.NA})
+    df_temp['Fix Versions'] = df_temp['Fix Versions'].replace({'None': pd.NA, '': pd.NA, None: pd.NA})
+    df_temp['Parent Link'] = df_temp['Parent Link'].replace({'None': pd.NA, '': pd.NA, None: pd.NA})
+    
+    # 3. Drop the nulls first, THEN grab the last entry. This ensures we only capture real data.
+    milestone_map = df_temp.dropna(subset=['Milestone']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Milestone'].to_dict()
+    fix_versions_map = df_temp.dropna(subset=['Fix Versions']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Fix Versions'].to_dict()
+    epic_map = df_temp.dropna(subset=['Parent Link']).drop_duplicates(subset=['Issue Key'], keep='last').set_index('Issue Key')['Parent Link'].to_dict()
+
+    # Print the mapping results to verify it found the updated Jira data
+    print(f"SUCCESS: Found {len(milestone_map)} unique issues with a valid Milestone.")
+    if len(milestone_map) > 0:
+        print(f"Sample Milestone Map: {list(milestone_map.items())[:5]}")
+    
+    # 4. Map the latest valid values back onto the entire historical dataset. 
+    # The fillna() ensures that if a ticket truly never had a milestone, it just keeps its original 0.
+    df_combined['Milestone'] = df_combined['Issue Key'].map(milestone_map).fillna(df_combined['Milestone'])
+    df_combined['Fix Versions'] = df_combined['Issue Key'].map(fix_versions_map).fillna(df_combined['Fix Versions'])
+    df_combined['Parent Link'] = df_combined['Issue Key'].map(epic_map).fillna(df_combined['Parent Link'])
+
+    # Check what the data looks like AFTER the backfill
+    null_count_after = df_combined['Milestone'].isna().sum()
+    print(f"Rows with null/empty Milestones AFTER backfill: {null_count_after}")
+    print("--- FINISHED BACKFILL PROCESS ---\n")
+
+    # --------------------------------------------
+
     # THE FIX: Calculate "Remaining Story Points" dynamically for the entire historical dataset
     df_combined['Story Points'] = pd.to_numeric(df_combined['Story Points'], errors='coerce').fillna(0)
     df_combined['Remaining Story Points'] = df_combined.apply(
         lambda row: 0 if str(row['Status']) in DONE_STATUSES else row['Story Points'], 
         axis=1
     )
+
+    # NEW: Calculate total remaining points for the Milestone on that specific date
+    df_combined['Remaining Milestone Story Points'] = df_combined.groupby(
+        ['Date', 'Milestone']
+    )['Remaining Story Points'].transform('sum')
+
+    # NEW: Calculate total remaining points for the Epic on that specific date
+    df_combined['Remaining Epic Story Points'] = df_combined.groupby(
+        ['Date', 'Epic']
+    )['Remaining Story Points'].transform('sum')
+
+    # Combine Epic Name (Parent Link) and Milestone into a single field
+    df_combined['Epic - Milestone'] = df_combined['Parent Link'].astype(str) + " - " + df_combined['Milestone'].astype(str)
 
     df_combined = df_combined[expected_cols]
 
@@ -258,6 +321,52 @@ def upsert_to_google_drive_excel(daily_data):
     }, inplace=True)
     # -----------------------------
 
+    # --- NEW MILESTONE AND EPIC BURNDOWN LOGIC ---
+    print("Calculating Milestone and Epic Burndowns...")
+    
+    # 2. Define the specific Epics you want to track (Use the 'Parent Link' summary names)
+    # Replace these with the actual names of the Epics you are demonstrating!
+    target_epics = [
+        'S9: Objectives Overhaul', 
+        'S9: Tip-Off Frenzy', 
+        'S9 Launch Tech Debt',
+        'S9 Sim Art',
+        'S9 Annual Art Update',
+        'S9 UI Overhaul'
+    ]
+    
+    # 2. Filter the data to ONLY include those specific Epics
+    df_filtered = df_combined[df_combined['Parent Link'].isin(target_epics)].copy()
+    
+    # 3. Create a combined column label for Excel (e.g., "First Playable (Sep 11) - UI Overhaul")
+    df_filtered['Milestone & Epic'] = df_filtered['Milestone'].astype(str) + " - " + df_filtered['Parent Link'].astype(str)
+
+    # 4. Pivot the data using the new combined label
+    milestone_burndown = df_filtered.pivot_table(
+        index='Date', 
+        columns='Milestone & Epic', 
+        values='Remaining Story Points', 
+        aggfunc='sum'
+    ).reset_index()
+    
+    # Fill any blank days with 0 to keep the trendlines continuous
+    milestone_burndown = milestone_burndown.fillna(0)
+    # ---------------------------------------------
+    
+    # 3. Filter the combined dataframe to ONLY include those specific Epics
+    df_filtered_epics = df_combined[df_combined['Parent Link'].isin(target_epics)]
+
+    # 4. Pivot to create the Epic Burndown using the FILTERED data
+    epic_burndown = df_filtered_epics.pivot_table(
+        index='Date', 
+        columns='Parent Link', 
+        values='Remaining Story Points', 
+        aggfunc='sum'
+    ).reset_index()
+    
+    epic_burndown = epic_burndown.fillna(0)
+    # ---------------------------------------------
+
     print("Updating Excel data...")
     latest_date = df_combined['Date'].max()
     df_current_state = df_combined[df_combined['Date'] == latest_date]
@@ -267,6 +376,10 @@ def upsert_to_google_drive_excel(daily_data):
         df_current_state.to_excel(writer, sheet_name='Current State', index=False)
         # Write the new QA Metrics tab
         qa_metrics.to_excel(writer, sheet_name='QA Metrics', index=False)
+        
+        # Write the new Milestone and Epic summary tabs
+        # milestone_burndown.to_excel(writer, sheet_name='Milestone Burndown', index=False)
+        # epic_burndown.to_excel(writer, sheet_name='Epic Burndown', index=False)
 
     print("Uploading updated file to Google Drive...")
     media = MediaFileUpload(
