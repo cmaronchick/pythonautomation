@@ -170,7 +170,7 @@ def normalize_team_name(team):
     return re.sub(r"\s+", " ", team.strip()).lower()
 
 
-def fetch_nfl_data(url, make_driver_func=make_driver):
+def fetch_nfl_data(weeknum, url, make_driver_func=make_driver):
     driver = make_driver_func()
     driver.set_page_load_timeout(35)
 

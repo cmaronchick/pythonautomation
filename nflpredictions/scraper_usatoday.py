@@ -2,6 +2,7 @@
 import sys, re, traceback, requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,6 +11,14 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 # Setup the Chrome WebDriver
+
+def make_driver() -> webdriver.Chrome:
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1440,1200")
+    return webdriver.Chrome(options=options)
 
 imageTable = {
     'https://images.jifo.co/21540751_1589234381582.png': 'Steelers',
@@ -22,6 +31,7 @@ imageTable = {
     'Entity_1599884617535.png': 'Rams',
     'Entity_1569032080155.png': 'Cardinals',
     'https://images.jifo.co/21540751_1589234794134.png': 'Titans',
+    'https://images.jifo.co/21540751_1788967740030.svg': 'Titans',
     'Entity_1569032073772.png': 'Jaguars',
     'https://images.jifo.co/21540751_1589235745366.png': 'Buccaneers',
     'Entity_1569032073400.png': 'Colts',
@@ -47,7 +57,9 @@ imageTable = {
     'https://images.jifo.co/21540751_1589235730471.png': 'Panthers',
     'https://images.jifo.co/21540751_1589235220318.png': '49ers',
     'https://images.jifo.co/21540751_1589234832987.png': 'Texans',
-    'https://images.jifo.co/21540751_1589235848819.png': 'Giants'
+    'https://images.jifo.co/21540751_1589235848819.png': 'Giants',
+    'https://images.jifo.co/21540751_1788967616727.svg': 'Rams',
+    'https://images.jifo.co/21540751_1589235220318.png': '49ers',
 }
 
 articleTable = [
@@ -61,13 +73,13 @@ service = Service(chrome_driver_path)
 # Global driver removed to prevent resource leaks and hanging issues.
 # Each function now creates and manages its own driver instance for better isolation.
 
-def fetch_usatoday_data(weeknum, url):
+def fetch_usatoday_data(weeknum, url, make_driver):
     weboptions = webdriver.ChromeOptions()
     weboptions.accept_insecure_certs = True
     weboptions.add_argument('--ignore-certificate-errors')
     weboptions.add_argument('disable-notifications')
     weboptions.page_load_strategy = 'eager'
-    driver = webdriver.Chrome(options=weboptions)
+    driver = make_driver() #  webdriver.Chrome(options=weboptions)
     driver.set_page_load_timeout(35)
     print('fetch_usatoday_data:', url)
     usatodayrows = []
@@ -362,7 +374,7 @@ def fetch_usatoday_data(weeknum, url):
 
 
 def main(weeknum):
-    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/261b9fc7-b905-4282-ac75-00eb799a2a09?src=embed#async_embed') #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/579df8d6-d61a-4cb4-a23a-29468dce8fcb?src=embed#async_embed', make_driver) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:

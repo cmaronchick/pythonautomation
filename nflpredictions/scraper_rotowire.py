@@ -18,7 +18,7 @@ weboptionsHC.add_argument('disable-notifications')
 weboptionsHC.add_argument("--log-level=3")
 weboptionsHC.page_load_strategy = 'eager'
 articleNumber = 16
-def fetch_rotowire_data(weeknum, url, weboptions):
+def fetch_rotowire_data(weeknum, url, make_driver):
     
     rotowire = {
         'name': 'NickWhalen',
@@ -26,7 +26,7 @@ def fetch_rotowire_data(weeknum, url, weboptions):
         'separator': ' - '
         #   https://rotowire.com/author/sayrebedinger/
     }
-    driver = webdriver.Chrome(options=weboptions)
+    driver = make_driver() # webdriver.Chrome(options=weboptions)
     driver.set_page_load_timeout(35)
     print('fetch_rotowire_data:', url)
     rotowirerows = []
@@ -121,8 +121,10 @@ def fetch_rotowire_data(weeknum, url, weboptions):
                 teamsString = predictionString[predictionString.find(":")+2:]
                 # print('teamsString: ', teamsString)
                 firstSpace = teamsString.find(" ")
-                separatorText = " -- "
+                separatorText = " – "
                 dashSpace = teamsString.find(separatorText)
+                if dashSpace == -1 or dashSpace is None:
+                    dashSpace = teamsString.find(" -- ")
                 lastSpace = teamsString.rfind(" ")
                 # print('dashSpace: ', dashSpace)
                 winner = teamsString[:firstSpace]

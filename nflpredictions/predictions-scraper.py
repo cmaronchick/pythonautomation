@@ -7,11 +7,19 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    StaleElementReferenceException,
+)
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException, WebDriverException, NoSuchElementException, StaleElementReferenceException
-import csv, traceback, array
-import signal
+import csv, traceback
 from contextlib import contextmanager
-from scraper_nfl import fetch_nfl_data
+from scraper_nfl_updated import fetch_nfl_data
 from scraper_usatoday import fetch_usatoday_data
 from scraper_espn import fetch_espn_data
 from scraper_oddsshark import fetch_oddsshark_data
@@ -22,13 +30,24 @@ from scraper_sbr import fetch_sbr_data
 from scraper_clutchpoints import fetch_clutchpoints_data
 from scraper_copilot import fetch_copilot_data
 from scraper_rotowire import fetch_rotowire_data
+import threading
 
 weeknum = int(sys.argv[1])
 year = int(sys.argv[2])
 season = sys.argv[3]
 
+def make_driver() -> webdriver.Chrome:
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1440,1200")
+    return webdriver.Chrome(options=options)
+
+#https://www.cbssports.com/writers/jared-dubin/6/
+
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-18-picks-best-bets-predictions/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-1-odds-picks-best-bets-sullivan/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -37,7 +56,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-18-picks-and-score-predictions-best-bets-odds/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-1-nfl-picks/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -47,7 +66,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-18-picks-and-score-predictions-best-bets-odds/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-1-picks-and-predictions-chiefs-seahawks-patriots/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -56,7 +75,7 @@ breech = {
 }
 
 foxsports = {
-    'url': 'https://www.foxsports.com/articles/nfl/2025-nfl-week-' + str(weeknum) + '-predictions-betting-odds-tv-schedule',
+    'url': 'https://www.foxsports.com/articles/nfl/2026-nfl-week-' + str(weeknum) + '-predictions-betting-odds-tv-schedule',
     'name': 'DataSkrive',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -64,7 +83,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2025/12/29/nfl-week-18-picks-predictions-score-projections-2025-season/87842933007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2026/09/03/nfl-week-1-picks-predictions-projections-game-scores/90786340007/',
     'name': 'Jeremy Cluff', # Jenna Ortiz', # 
     'searchTerm': 'Score prediction:', # cluff: 'Prediction:'
     'searchTag': 'strong',
@@ -78,7 +97,7 @@ dratings = {
 }
 
 pfn = {
-    'url': 'https://www.profootballnetwork.com/week-' + str(weeknum) + '-nfl-picks-predictions-2025/',
+    'url': 'https://www.profootballnetwork.com/week-' + str(weeknum) + '-nfl-picks-predictions-2026/',
     'name': 'PFN',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -87,7 +106,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2025-nfl-picks-score-predictions-for-every-week-18-game-as-playoffs-approach-01kdnm2vdddw',
+    'url': 'https://nflspinzone.com/2026-nfl-picks-and-score-predictions-for-every-week-1-game',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -113,7 +132,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-18/871ee4da0eb0a67e78a84c74',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-1/6da43321d693306b024c53d1',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -122,7 +141,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-18/553a362f0e7dc3032c3d335c'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-1/79858f64007e8ab7ad1b1a01'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -136,12 +155,12 @@ thirtythirdteam = {
 }
 
 sportsnaut = {
-    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-nfl-picks-this-week'
+    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-2026'
     # https://sportsnaut.com/nfl/nfl-week-11-predictions-picks-nfl-schdeule-this-week
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2026/01/01/nfl-week-18-picks-predictions-ai/87963374007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2026/09/06/nfl-week-1-ai-picks-predictions-2026/91594590007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -149,24 +168,24 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/b29a56b9-5696-4974-9716-3320c4e81518?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/579df8d6-d61a-4cb4-a23a-29468dce8fcb?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story?page=viewersguide47473045&_slug_=nfl-week-18-picks-predictions-schedule-fantasy-football-odds-injuries-stats-2025'
+    'url': 'https://www.espn.com/nfl/story/_/id/49805531/week-1-picks-predictions-schedule-fantasy-odds-2026'
     # https://www.espn.com/nfl/
 }
 
 nfl = {
-    'url': 'https://www.nfl.com/news/nfl-picks-week-18-2025-nfl-season'
+    'url': 'https://www.nfl.com/news/nfl-picks-week-1-2026-nfl-season'
     # https://www.nfl.com/news/series/game-picks-news
     # 'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season' - https://www.nfl.com/news/nfl-picks-divisional-round-2024-nfl-season
 
 }
 
 clutchpoints = {
-    'url': 'https://clutchpoints.com/nfl/nfl-stories/nfl-picks-predictions-odds-week-' + str(weeknum) + '-2025', #https://clutchpoints.com/nfl/nfl-stories/nfl-picks-predictions-odds-week-3-2025
+    'url': 'https://clutchpoints.com/nfl/nfl-stories/nfl-picks-predictions-odds-week-' + str(weeknum) + '-2026', #https://clutchpoints.com/nfl/nfl-stories/nfl-picks-predictions-odds-week-3-2025
     'name': 'TimCrean',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -174,7 +193,7 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/beating-the-book-101805', # https://www.rotowire.com/football/column/beating-the-book-20
+    'url': 'https://www.rotowire.com/football/article/nfl-week-1-spread-picks-133188', # https://www.rotowire.com/football/column/beating-the-book-20
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
@@ -188,12 +207,12 @@ rotowire2 = {
 }
 
 sbr = {
-    'url': 'https://www.sportsbookreview.com/picks/nfl/ai-predictions-beat-the-bot-week-' + str(weeknum) + '-2025/'
+    'url': 'https://www.sportsbookreview.com/picks/nfl/ai-predictions-beat-the-bot-week-' + str(weeknum) + '-2026/'
 }
 
 rotoballer = {
-    'url': 'https://www.rotoballer.com/nfl-predictions-week-13-picks-and-analysis-for-every-game-2025/1765373',
-    'name': 'JimNicely',
+    'url': 'https://www.rotoballer.com/nfl-predictions-week-1-picks-and-analysis-for-every-game-2026/1926815',
+    'name': 'JoeNicely',
     'separator': ', ',
     'searchTag': 'h2',
     'endPickTerm': ' ('
@@ -220,13 +239,14 @@ def timeout_context(seconds):
     def timeout_handler(signum, frame):
         raise TimeoutException(f"Operation timed out after {seconds} seconds")
     
-    original_handler = signal.signal(signal.SIGALRM, timeout_handler)
-    signal.alarm(seconds)
+    original_handler = threading.Timer(seconds, timeout_handler) # signal.signal(signal.signal, timeout_handler)
+    # signal.alarm(seconds)
     try:
         yield
     finally:
-        signal.alarm(0)
-        signal.signal(signal.SIGALRM, original_handler)
+        # signal.alarm(0)
+        # signal.signal(signal.SIGALRM, original_handler)
+        original_handler.cancel()
 
 def safe_get_url(driver, url, timeout=35):
     """Safely load a URL with timeout protection"""
@@ -264,7 +284,9 @@ weboptions.add_argument("--enable-unsafe-swiftshader")
 weboptions.add_argument("--log-level=3")
 weboptions.page_load_strategy = 'eager'
 
-driver = webdriver.Chrome(options=weboptions)
+# driver = webdriver.Chrome(options=weboptions)
+
+driver = make_driver()
 
 driver.set_page_load_timeout(30) # .manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 try:
@@ -276,7 +298,8 @@ try:
                 driver.quit()
             except:
                 pass
-            driver = webdriver.Chrome(options=weboptions)
+            # driver = webdriver.Chrome(options=weboptions)
+            driver = make_driver()
             driver.set_page_load_timeout(30)
         if writer['url'] != '':
             print('writer[\'name\']:', writer['name'])
@@ -716,7 +739,7 @@ try:
     # usatoday formatting
     try:
         with timeout_context(60):
-            usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'])
+            usatodayrows = fetch_usatoday_data(weeknum, usatoday['url'], make_driver)
             for usatodayrow in usatodayrows:
                 rows.append(usatodayrow)
     except TimeoutException:
@@ -729,7 +752,7 @@ try:
     # nfl formatting
     try:
         with timeout_context(60):
-            nflrows = fetch_nfl_data(weeknum, nfl['url'], weboptions)
+            nflrows = fetch_nfl_data(weeknum, nfl['url'], make_driver)
             for nflrow in nflrows:
                 rows.append(nflrow)
     except TimeoutException:
@@ -741,7 +764,7 @@ try:
 
     try:
         with timeout_context(60):
-            oddssharkrows = fetch_oddsshark_data(weeknum, weboptions)
+            oddssharkrows = fetch_oddsshark_data(weeknum, make_driver)
             for oddssharkrow in oddssharkrows:
                 rows.append(oddssharkrow)
     except TimeoutException:
@@ -753,7 +776,7 @@ try:
         
     try:
         with timeout_context(60):
-            dratingsrows = fetch_dratings_data(weeknum, weboptions)
+            dratingsrows = fetch_dratings_data(weeknum, make_driver)
             for dratingsrow in dratingsrows:
                 rows.append(dratingsrow)
     except TimeoutException:
@@ -765,7 +788,7 @@ try:
 
     try:
         with timeout_context(60):
-            oddstraderrows = fetch_oddstrader_data(weeknum, weboptions)
+            oddstraderrows = fetch_oddstrader_data(weeknum, make_driver)
             for oddstraderrow in oddstraderrows:
                 rows.append(oddstraderrow)
     except TimeoutException:
@@ -777,7 +800,7 @@ try:
 
     try:
         with timeout_context(60):
-            nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, weboptions)
+            nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, make_driver)
             for nflspinzonerow in nflspinzonerows:
                 rows.append(nflspinzonerow)
     except TimeoutException:
@@ -813,7 +836,7 @@ try:
 
     try:
         with timeout_context(60):
-            copilotrows = fetch_copilot_data(weeknum, copilot['url'], weboptions)
+            copilotrows = fetch_copilot_data(weeknum, copilot['url'], make_driver)
             for copilotrow in copilotrows:
                 rows.append(copilotrow)
     except TimeoutException:
@@ -825,7 +848,7 @@ try:
     
     try:
         with timeout_context(60):
-            rotowirerows = fetch_rotowire_data(weeknum, rotowire['url'], weboptions)
+            rotowirerows = fetch_rotowire_data(weeknum, rotowire['url'], make_driver)
             for rotowirerow in rotowirerows:
                 rows.append(rotowirerow)
     except TimeoutException:
