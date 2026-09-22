@@ -39,7 +39,7 @@ imageTable = {
 }
 
 articleTable = [
-    "https://www.oddsshark.com/nfl/computer-picks"
+    "https://www.covers.com/picks/nfl"
     
 ]
 

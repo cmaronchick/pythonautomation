@@ -47,7 +47,7 @@ def make_driver() -> webdriver.Chrome:
 #https://www.cbssports.com/writers/jared-dubin/6/
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-1-odds-picks-best-bets-sullivan/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-2-odds-picks-jets-browns/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -56,7 +56,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-1-nfl-picks/',
+    'url': 'https://www.cbssports.com/nfl/news/priscos-week-2-nfl-picks/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -66,7 +66,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-1-picks-and-predictions-chiefs-seahawks-patriots/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-2-picks-score-predictions/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -83,7 +83,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2026/09/03/nfl-week-1-picks-predictions-projections-game-scores/90786340007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2026/09/14/nfl-week-2-picks-predictions-projections-game-scores/90786737007/',
     'name': 'Jeremy Cluff', # Jenna Ortiz', # 
     'searchTerm': 'Score prediction:', # cluff: 'Prediction:'
     'searchTag': 'strong',
@@ -106,12 +106,12 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2026-nfl-picks-and-score-predictions-for-every-week-1-game',
+    'url': 'https://nflspinzone.com/2026-nfl-picks-score-predictions-for-every-week-2-game-01m2fzpye5s3',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
     'separator': ', '
-    #   https://www.bing.com/search?FORM=U523DF&PC=U523&q=spinzone+2025+week+10&PC=U316&FORM=CHROMN
+    #   https://www.bing.com/search?FORM=U523DF&PC=U523&q=spinzone+2026+week+2&PC=U316&FORM=CHROMN
 }
 
 cowherd = {
@@ -132,7 +132,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-1/6da43321d693306b024c53d1',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-2/830bbe1e7598cf3caadc2a70',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -141,7 +141,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-1/79858f64007e8ab7ad1b1a01'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-2/ac8832bceab0d79753295421'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -160,7 +160,7 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2026/09/06/nfl-week-1-ai-picks-predictions-2026/91594590007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2026/09/17/nfl-week-2-ai-picks-predictions-2026/91785230007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -168,17 +168,17 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/579df8d6-d61a-4cb4-a23a-29468dce8fcb?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/5e71e6d9-2d86-440a-a301-e664bb500020?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/id/49805531/week-1-picks-predictions-schedule-fantasy-odds-2026'
+    'url': 'https://www.espn.com/nfl/story/_/id/49957149/week-2-picks-predictions-schedule-fantasy-odds-2026'
     # https://www.espn.com/nfl/
 }
 
 nfl = {
-    'url': 'https://www.nfl.com/news/nfl-picks-week-1-2026-nfl-season'
+    'url': 'https://www.nfl.com/news/nfl-picks-week-' + str(weeknum) + '-2026-nfl-season'
     # https://www.nfl.com/news/series/game-picks-news
     # 'https://www.nfl.com/news/week-' + str(weeknum) + '-nfl-picks-2024-nfl-season' - https://www.nfl.com/news/nfl-picks-divisional-round-2024-nfl-season
 
@@ -193,7 +193,7 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/nfl-week-1-spread-picks-133188', # https://www.rotowire.com/football/column/beating-the-book-20
+    'url': 'https://www.rotowire.com/football/article/nfl-week-2-ats-picks-134887', # https://www.rotowire.com/football/column/beating-the-book-20
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
@@ -211,7 +211,7 @@ sbr = {
 }
 
 rotoballer = {
-    'url': 'https://www.rotoballer.com/nfl-predictions-week-1-picks-and-analysis-for-every-game-2026/1926815',
+    'url': 'https://www.rotoballer.com/nfl-predictions-week-2-picks-and-analysis-for-every-game-2026/1933899',
     'name': 'JoeNicely',
     'separator': ', ',
     'searchTag': 'h2',
