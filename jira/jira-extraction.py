@@ -372,7 +372,7 @@ def upsert_to_google_drive_excel(daily_data):
     latest_date = df_combined['Date'].max()
     df_current_state = df_combined[df_combined['Date'] == latest_date]
 
-    with pd.ExcelWriter(temp_filename, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
+    with pd.ExcelWriter(temp_filename, engine='openpyxl', mode='w', if_sheet_exists='replace') as writer:
         df_combined.to_excel(writer, sheet_name=SHEET_NAME, index=False)
         df_current_state.to_excel(writer, sheet_name='Current State', index=False)
         # Write the new QA Metrics tab
