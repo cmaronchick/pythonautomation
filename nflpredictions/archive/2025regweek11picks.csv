@@ -1,0 +1,426 @@
+Source,Winner,Winner Score,Loser,Loser Score,GameID,GameIDInt,Away Code,Away Short Name,Away Full Name,Home Code,Home Short Name,Home Full Name,AwayScore,HomeScore,Spread,Total
+TylerSullivan,Ravens,28,Browns,17,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,28,17,7.5,39.5
+PetePrisco,Ravens,22,Browns,16,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,22,16,7.5,39.5
+BillBender,Ravens,26,Browns,19,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,26,19,7.5,39.5
+DataSkrive,Ravens,27,Browns,19,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,27,19,7.5,39.5
+Sportsnaut,Ravens,24,Browns,13,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,13,7.5,39.5
+VinnieIyer,Ravens,24,Browns,13,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,13,7.5,39.5
+Dimers,RAVENS,23,BROWNS,16,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,23,16,7.5,39.5
+JarrettBell,Ravens,23,Browns,16,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,23,16,7.5,39.5
+NickBrinkerhoff,Ravens,24,Browns,13,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,13,7.5,39.5
+ChrisBumbaca,Ravens,24,Browns,17,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,17,7.5,39.5
+NateDavis,Ravens,30,Browns,17,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,30,17,7.5,39.5
+TylerDragon,Ravens,30,Browns,20,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,30,20,7.5,39.5
+MikeMiddlehurst-Schwartz,Ravens,26,Browns,12,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,26,12,7.5,39.5
+AliNFL,Ravens,24,Browns,16,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,16,7.5,39.5
+BrookeNFL,Ravens,24,Browns,13,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,13,7.5,39.5
+DanNFL,Ravens,22,Browns,13,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,22,13,7.5,39.5
+GennaroNFL,Ravens,23,Browns,14,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,23,14,7.5,39.5
+TomNFL,Ravens,24,Browns,14,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,14,7.5,39.5
+oddsshark,Ravens,28,Browns,19,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,28,19,7.5,39.5
+DRatings,Ravens,24,Browns,17,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,17,7.5,39.5
+oddstrader,Ravens,24,Browns,14,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,14,7.5,39.5
+clutchpoints,Ravens,27,Browns,15,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,27,15,7.5,39.5
+NFLSpinzone,Ravens,38,Browns,17,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,38,17,7.5,39.5
+Copilot,Ravens,24,Browns,13,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,13,7.5,39.5
+Jeremy Cluff,Ravens,27,Browns,17,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,27,17,7.5,39.5
+JimNicely,Ravens,28,Browns,16,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,28,16,7.5,39.5
+MaldonadoESPN,Ravens,24,Browns,9,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,9,7.5,39.5
+MoodyESPN,Ravens,38,Browns,20,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,38,20,7.5,39.5
+WalderESPN,Ravens,27,Browns,13,BALCLE,4765829,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,27,13,7.5,39.5
+TylerSullivan,Panthers,23,Falcons,21,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,23,21,-3.5,42.5
+PetePrisco,Falcons,24,Panthers,17,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,17,24,-3.5,42.5
+BillBender,Falcons,24,Panthers,21,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,21,24,-3.5,42.5
+DataSkrive,Falcons,23,Panthers,18,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,18,23,-3.5,42.5
+Sportsnaut,Falcons,23,Panthers,17,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,17,23,-3.5,42.5
+VinnieIyer,Falcons,20,Panthers,17,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,17,20,-3.5,42.5
+Dimers,FALCONS,23,PANTHERS,20,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,20,23,-3.5,42.5
+JarrettBell,Falcons,27,Panthers,24,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,24,27,-3.5,42.5
+NickBrinkerhoff,Panthers,28,Falcons,24,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,28,24,-3.5,42.5
+ChrisBumbaca,Falcons,21,Panthers,19,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,19,21,-3.5,42.5
+NateDavis,Falcons,27,Panthers,24,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,24,27,-3.5,42.5
+TylerDragon,Falcons,27,Panthers,20,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,20,27,-3.5,42.5
+MikeMiddlehurst-Schwartz,Panthers,21,Falcons,20,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,21,20,-3.5,42.5
+AliNFL,Falcons,23,Panthers,21,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,21,23,-3.5,42.5
+BrookeNFL,Falcons,27,Panthers,23,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,23,27,-3.5,42.5
+DanNFL,Falcons,25,Panthers,22,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,22,25,-3.5,42.5
+GennaroNFL,Falcons,20,Panthers,14,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,14,20,-3.5,42.5
+TomNFL,Falcons,23,Panthers,19,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,19,23,-3.5,42.5
+oddsshark,Panthers,20,Falcons,30,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,20,30,-3.5,42.5
+DRatings,Panthers,21,Falcons,24,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,21,24,-3.5,42.5
+oddstrader,Panthers,20,Falcons,22,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,20,22,-3.5,42.5
+clutchpoints,Falcons,28,Panthers,16,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,16,28,-3.5,42.5
+NFLSpinzone,Falcons,23,Panthers,20,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,20,23,-3.5,42.5
+Copilot,Falcons,20,Panthers,16,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,16,20,-3.5,42.5
+Jeremy Cluff,Falcons,23,Panthers,20,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,20,23,-3.5,42.5
+JimNicely,Falcons,21,Panthers,20,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,20,21,-3.5,42.5
+MaldonadoESPN,Falcons,28,Panthers,21,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,21,28,-3.5,42.5
+MoodyESPN,Falcons,23,Panthers,20,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,20,23,-3.5,42.5
+WalderESPN,Falcons,19,Panthers,16,CARATL,4765824,CAR,Panthers,Carolina Panthers,ATL,Falcons,Atlanta Falcons,16,19,-3.5,42.5
+TylerSullivan,Vikings,24,Bears,20,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,20,24,-3,48.5
+PetePrisco,Vikings,27,Bears,20,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,20,27,-3,48.5
+BillBender,Vikings,28,Bears,23,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,23,28,-3,48.5
+DataSkrive,Vikings,26,Bears,24,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,24,26,-3,48.5
+Sportsnaut,Bears,27,Vikings,24,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,27,24,-3,48.5
+VinnieIyer,Bears,27,Vikings,24,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,27,24,-3,48.5
+Dimers,VIKINGS,25,BEARS,22,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,22,25,-3,48.5
+JarrettBell,Vikings,31,Bears,30,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,30,31,-3,48.5
+NickBrinkerhoff,Vikings,27,Bears,23,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,23,27,-3,48.5
+ChrisBumbaca,Vikings,24,Bears,20,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,20,24,-3,48.5
+NateDavis,Vikings,27,Bears,23,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,23,27,-3,48.5
+TylerDragon,Vikings,24,Bears,20,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,20,24,-3,48.5
+MikeMiddlehurst-Schwartz,Vikings,24,Bears,16,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,16,24,-3,48.5
+AliNFL,Vikings,26,Bears,22,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,22,26,-3,48.5
+BrookeNFL,Vikings,25,Bears,20,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,20,25,-3,48.5
+DanNFL,Vikings,27,Bears,26,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,26,27,-3,48.5
+GennaroNFL,Vikings,27,Bears,26,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,26,27,-3,48.5
+TomNFL,Bears,26,Vikings,21,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,26,21,-3,48.5
+oddsshark,Bears,25,Vikings,25,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,25,25,-3,48.5
+DRatings,Bears,22,Vikings,23,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,22,23,-3,48.5
+oddstrader,Bears,23,Vikings,24,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,23,24,-3,48.5
+clutchpoints,Vikings,26,Bears,21,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,21,26,-3,48.5
+NFLSpinzone,Vikings,23,Bears,21,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,21,23,-3,48.5
+Copilot,Bears,27,Vikings,23,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,27,23,-3,48.5
+Jeremy Cluff,Bears,28,Vikings,20,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,28,20,-3,48.5
+JimNicely,Bears,27,Vikings,24,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,27,24,-3,48.5
+MaldonadoESPN,Vikings,24,Bears,14,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,14,24,-3,48.5
+MoodyESPN,Vikings,26,Bears,24,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,24,26,-3,48.5
+WalderESPN,Bears,23,Vikings,17,CHIMIN,4765821,CHI,Bears,Chicago Bears,MIN,Vikings,Minnesota Vikings,23,17,-3,48.5
+TylerSullivan,Steelers,30,Bengals,27,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,27,30,-6,48.5
+PetePrisco,Steelers,36,Bengals,30,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,30,36,-6,48.5
+BillBender,Steelers,31,Bengals,24,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,24,31,-6,48.5
+DataSkrive,Steelers,32,Bengals,21,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,21,32,-6,48.5
+Sportsnaut,Steelers,34,Bengals,31,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,31,34,-6,48.5
+VinnieIyer,Steelers,30,Bengals,27,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,27,30,-6,48.5
+Dimers,STEELERS,27,BENGALS,22,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,22,27,-6,48.5
+JarrettBell,Steelers,26,Bengals,24,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,24,26,-6,48.5
+NickBrinkerhoff,Steelers,24,Bengals,17,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,17,24,-6,48.5
+ChrisBumbaca,Steelers,28,Bengals,21,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,21,28,-6,48.5
+NateDavis,Steelers,27,Bengals,23,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,23,27,-6,48.5
+TylerDragon,Steelers,28,Bengals,21,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,21,28,-6,48.5
+MikeMiddlehurst-Schwartz,Steelers,31,Bengals,24,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,24,31,-6,48.5
+AliNFL,Bengals,27,Steelers,24,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,27,24,-6,48.5
+BrookeNFL,Steelers,28,Bengals,26,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,26,28,-6,48.5
+DanNFL,Steelers,27,Bengals,24,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,24,27,-6,48.5
+GennaroNFL,Steelers,30,Bengals,27,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,27,30,-6,48.5
+TomNFL,Steelers,26,Bengals,22,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,22,26,-6,48.5
+oddsshark,Bengals,19,Steelers,30,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,19,30,-6,48.5
+DRatings,Bengals,19,Steelers,26,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,19,26,-6,48.5
+oddstrader,Bengals,22,Steelers,26,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,22,26,-6,48.5
+clutchpoints,Bengals,35,Steelers,33,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,35,33,-6,48.5
+NFLSpinzone,Steelers,27,Bengals,26,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,26,27,-6,48.5
+Copilot,Steelers,30,Bengals,27,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,27,30,-6,48.5
+Jeremy Cluff,Bengals,34,Steelers,27,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,34,27,-6,48.5
+JimNicely,Steelers,28,Bengals,24,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,24,28,-6,48.5
+MaldonadoESPN,Steelers,34,Bengals,28,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,28,34,-6,48.5
+MoodyESPN,Bengals,27,Steelers,21,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,27,21,-6,48.5
+WalderESPN,Bengals,30,Steelers,23,CINPIT,4765825,CIN,Bengals,Cincinnati Bengals,PIT,Steelers,Pittsburgh Steelers,30,23,-6,48.5
+TylerSullivan,Cowboys,28,Raiders,24,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,28,24,3,50
+PetePrisco,Cowboys,31,Raiders,20,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,31,20,3,50
+BillBender,Cowboys,31,Raiders,20,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,31,20,3,50
+DataSkrive,Raiders,25,Cowboys,24,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,24,25,3,50
+Sportsnaut,Cowboys,31,Raiders,27,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,31,27,3,50
+VinnieIyer,Cowboys,31,Raiders,20,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,31,20,3,50
+JarrettBell,Cowboys,30,Raiders,24,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,30,24,3,50
+NickBrinkerhoff,Cowboys,27,Raiders,14,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,27,14,3,50
+ChrisBumbaca,Cowboys,28,Raiders,22,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,28,22,3,50
+NateDavis,Cowboys,30,Raiders,23,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,30,23,3,50
+TylerDragon,Cowboys,30,Raiders,24,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,30,24,3,50
+MikeMiddlehurst-Schwartz,Cowboys,31,Raiders,20,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,31,20,3,50
+AliNFL,Cowboys,30,Raiders,23,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,30,23,3,50
+BrookeNFL,Cowboys,30,Raiders,24,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,30,24,3,50
+DanNFL,Cowboys,28,Raiders,24,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,28,24,3,50
+GennaroNFL,Cowboys,32,Raiders,24,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,32,24,3,50
+TomNFL,Cowboys,27,Raiders,23,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,27,23,3,50
+oddsshark,Cowboys,25,Raiders,26,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,25,26,3,50
+DRatings,Cowboys,26,Raiders,23,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,26,23,3,50
+oddstrader,Cowboys,29,Raiders,22,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,29,22,3,50
+SBR,Cowboys,27,Raiders,20,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,27,20,3,50
+clutchpoints,Cowboys,33,Raiders,16,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,33,16,3,50
+NFLSpinzone,Cowboys,31,Raiders,20,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,31,20,3,50
+Copilot,Cowboys,30,Raiders,20,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,30,20,3,50
+Jeremy Cluff,Cowboys,33,Raiders,20,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,33,20,3,50
+JimNicely,Cowboys,35,Raiders,21,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,35,21,3,50
+MaldonadoESPN,Cowboys,26,Raiders,23,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,26,23,3,50
+MoodyESPN,Cowboys,34,Raiders,23,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,34,23,3,50
+WalderESPN,Cowboys,28,Raiders,14,DALLV,4765831,DAL,Cowboys,Dallas Cowboys,LV,Raiders,Las Vegas Raiders,28,14,3,50
+TylerSullivan,Lions,27,Eagles,24,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,27,24,-2.5,47
+PetePrisco,Eagles,31,Lions,27,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,27,31,-2.5,47
+BillBender,Lions,28,Eagles,22,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,28,22,-2.5,47
+DataSkrive,Eagles,26,Lions,23,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,23,26,-2.5,47
+Sportsnaut,Lions,31,Eagles,28,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,31,28,-2.5,47
+VinnieIyer,Eagles,41,Lions,38,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,38,41,-2.5,47
+Dimers,EAGLES,25,LIONS,22,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,22,25,-2.5,47
+JarrettBell,Lions,31,Eagles,27,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,31,27,-2.5,47
+NickBrinkerhoff,Lions,31,Eagles,23,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,31,23,-2.5,47
+ChrisBumbaca,Lions,28,Eagles,26,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,28,26,-2.5,47
+NateDavis,Lions,27,Eagles,24,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,27,24,-2.5,47
+TylerDragon,Eagles,27,Lions,26,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,26,27,-2.5,47
+MikeMiddlehurst-Schwartz,Eagles,24,Lions,20,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,20,24,-2.5,47
+AliNFL,Eagles,26,Lions,23,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,23,26,-2.5,47
+BrookeNFL,Eagles,27,Lions,24,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,24,27,-2.5,47
+DanNFL,Lions,26,Eagles,22,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,26,22,-2.5,47
+GennaroNFL,Lions,29,Eagles,27,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,29,27,-2.5,47
+TomNFL,Lions,25,Eagles,22,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,25,22,-2.5,47
+oddsshark,Lions,22,Eagles,26,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,22,26,-2.5,47
+DRatings,Lions,23,Eagles,24,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,23,24,-2.5,47
+clutchpoints,Lions,26,Eagles,25,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,26,25,-2.5,47
+NFLSpinzone,Lions,30,Eagles,24,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,30,24,-2.5,47
+Copilot,Eagles,30,Lions,27,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,27,30,-2.5,47
+Jeremy Cluff,Eagles,27,Lions,20,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,20,27,-2.5,47
+JimNicely,Eagles,27,Lions,24,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,24,27,-2.5,47
+MaldonadoESPN,Eagles,21,Lions,20,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,20,21,-2.5,47
+MoodyESPN,Eagles,30,Lions,24,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,24,30,-2.5,47
+WalderESPN,Lions,24,Eagles,20,DETPHI,4765830,DET,Lions,Detroit Lions,PHI,Eagles,Philadelphia Eagles,24,20,-2.5,47
+TylerSullivan,Packers,27,Giants,17,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,27,17,7,44
+PetePrisco,Packers,30,Giants,20,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,30,30,7,44
+BillBender,Packers,29,Giants,18,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,29,18,7,44
+DataSkrive,Packers,24,Giants,22,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,24,22,7,44
+Sportsnaut,Packers,31,Giants,20,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,31,20,7,44
+VinnieIyer,Packers,27,Giants,13,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,27,13,7,44
+Dimers,PACKERS,24,GIANTS,18,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,24,18,7,44
+JarrettBell,Packers,21,Giants,16,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,21,16,7,44
+NickBrinkerhoff,Packers,27,Giants,21,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,27,21,7,44
+ChrisBumbaca,Packers,30,Giants,24,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,30,24,7,44
+NateDavis,Packers,24,Giants,20,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,24,20,7,44
+TylerDragon,Packers,30,Giants,20,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,30,20,7,44
+MikeMiddlehurst-Schwartz,Packers,26,Giants,13,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,26,13,7,44
+AliNFL,Packers,26,Giants,20,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,26,20,7,44
+BrookeNFL,Packers,23,Giants,20,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,23,20,7,44
+DanNFL,Packers,24,Giants,16,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,24,16,7,44
+GennaroNFL,Packers,29,Giants,17,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,29,17,7,44
+TomNFL,Packers,25,Giants,17,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,25,17,7,44
+oddsshark,Packers,30,Giants,18,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,30,18,7,44
+DRatings,Packers,26,Giants,19,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,26,19,7,44
+oddstrader,Packers,26,Giants,17,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,26,17,7,44
+SBR,Packers,27,Giants,13,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,27,13,7,44
+clutchpoints,Giants,28,Packers,27,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,27,28,7,44
+NFLSpinzone,Packers,23,Eagles,20,GBNYG,4765822,GB,Packers,Green Bay Packers,PHI,Eagles,Philadelphia Eagles,23,20,7,44
+Copilot,Packers,27,Giants,13,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,27,13,7,44
+Jeremy Cluff,Packers,31,Giants,17,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,31,17,7,44
+JimNicely,Packers,23,Giants,17,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,23,17,7,44
+MaldonadoESPN,Packers,24,Giants,10,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,24,10,7,44
+MoodyESPN,Packers,26,Giants,23,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,26,23,7,44
+WalderESPN,Packers,31,Giants,14,GBNYG,4765822,GB,Packers,Green Bay Packers,NYG,Giants,New York Giants,31,14,7,44
+TylerSullivan,Texans,24,Titans,14,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,24,14,7,38
+PetePrisco,Texans,23,Titans,19,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,19,7,38
+BillBender,Texans,28,Titans,17,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,28,17,7,38
+DataSkrive,Texans,27,Titans,14,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,27,14,7,38
+Sportsnaut,Texans,23,Titans,6,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,6,7,38
+VinnieIyer,Texans,20,Titans,14,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,20,14,7,38
+Dimers,TEXANS,22,TITANS,16,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,22,16,7,38
+JarrettBell,Texans,29,Titans,20,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,29,20,7,38
+NickBrinkerhoff,Titans,20,Texans,16,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,16,20,7,38
+ChrisBumbaca,Texans,17,Titans,14,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,17,14,7,38
+NateDavis,Texans,23,Titans,17,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,17,7,38
+TylerDragon,Texans,27,Titans,21,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,27,21,7,38
+MikeMiddlehurst-Schwartz,Texans,23,Titans,20,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,20,7,38
+AliNFL,Texans,23,Titans,16,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,16,7,38
+BrookeNFL,Texans,22,Titans,17,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,22,17,7,38
+DanNFL,Texans,23,Titans,13,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,13,7,38
+GennaroNFL,Texans,21,Titans,13,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,21,13,7,38
+TomNFL,Texans,21,Titans,14,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,21,14,7,38
+oddsshark,Texans,26,Titans,20,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,26,20,7,38
+DRatings,Texans,27,Titans,12,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,27,12,7,38
+oddstrader,Texans,21,Titans,15,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,21,15,7,38
+clutchpoints,Texans,16,Titans,13,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,16,13,7,38
+NFLSpinzone,Texans,27,Titans,9,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,27,9,7,38
+Copilot,Texans,23,Titans,10,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,10,7,38
+Jeremy Cluff,Texans,24,Titans,14,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,24,14,7,38
+JimNicely,Texans,20,Titans,10,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,20,10,7,38
+MaldonadoESPN,Texans,23,Titans,16,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,16,7,38
+MoodyESPN,Texans,30,Titans,13,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,30,13,7,38
+WalderESPN,Texans,23,Titans,13,HOUTEN,4765823,HOU,Texans,Houston Texans,TEN,Titans,Tennessee Titans,23,13,7,38
+TylerSullivan,Chiefs,24,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,24,20,3.5,44.5
+PetePrisco,Chiefs,23,Broncos,17,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,17,3.5,44.5
+BillBender,Chiefs,23,Broncos,21,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,21,3.5,44.5
+DataSkrive,Broncos,23,Chiefs,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,20,23,3.5,44.5
+Sportsnaut,Chiefs,21,Broncos,14,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,21,14,3.5,44.5
+VinnieIyer,Chiefs,27,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,27,20,3.5,44.5
+Dimers,CHIEFS,24,BRONCOS,21,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,24,21,3.5,44.5
+JarrettBell,Broncos,27,Chiefs,23,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,27,3.5,44.5
+NickBrinkerhoff,Chiefs,23,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,20,3.5,44.5
+ChrisBumbaca,Chiefs,25,Broncos,19,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,25,19,3.5,44.5
+NateDavis,Chiefs,23,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,20,3.5,44.5
+TylerDragon,Chiefs,26,Broncos,21,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,26,21,3.5,44.5
+MikeMiddlehurst-Schwartz,Broncos,24,Chiefs,21,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,21,24,3.5,44.5
+AliNFL,Chiefs,23,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,20,3.5,44.5
+BrookeNFL,Chiefs,24,Broncos,22,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,24,22,3.5,44.5
+DanNFL,Chiefs,23,Broncos,18,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,18,3.5,44.5
+GennaroNFL,Chiefs,26,Broncos,19,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,26,19,3.5,44.5
+TomNFL,Chiefs,23,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,20,3.5,44.5
+oddsshark,Chiefs,20,Broncos,27,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,20,27,3.5,44.5
+DRatings,Chiefs,24,Broncos,21,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,24,21,3.5,44.5
+oddstrader,Chiefs,25,Broncos,19,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,25,19,3.5,44.5
+clutchpoints,Chiefs,32,Broncos,22,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,32,22,3.5,44.5
+NFLSpinzone,Chiefs,23,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,23,20,3.5,44.5
+Copilot,Chiefs,24,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,24,20,3.5,44.5
+Jeremy Cluff,Chiefs,27,Broncos,21,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,27,21,3.5,44.5
+JimNicely,Chiefs,20,Broncos,17,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,20,17,3.5,44.5
+MaldonadoESPN,Chiefs,27,Broncos,22,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,27,22,3.5,44.5
+MoodyESPN,Chiefs,27,Broncos,20,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,27,20,3.5,44.5
+WalderESPN,Chiefs,30,Broncos,10,KCDEN,4765828,KC,Chiefs,Kansas City Chiefs,DEN,Broncos,Denver Broncos,30,10,3.5,44.5
+TylerSullivan,Chargers,24,Jaguars,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,20,3,44
+PetePrisco,Chargers,27,Jaguars,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,27,20,3,44
+BillBender,Chargers,23,Jaguars,21,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,23,21,3,44
+Sportsnaut,Chargers,24,Jaguars,17,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,17,3,44
+VinnieIyer,Chargers,24,Jaguars,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,20,3,44
+Dimers,CHARGERS,24,JAGUARS,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,20,3,44
+NickBrinkerhoff,Chargers,30,Jaguars,24,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,30,24,3,44
+NateDavis,Chargers,27,Jaguars,23,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,27,23,3,44
+TylerDragon,Chargers,26,Jaguars,21,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,26,21,3,44
+AliNFL,Chargers,24,Jaguars,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,20,3,44
+BrookeNFL,Chargers,24,Jaguars,18,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,18,3,44
+DanNFL,Chargers,21,Jaguars,16,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,21,16,3,44
+GennaroNFL,Chargers,22,Jaguars,17,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,22,17,3,44
+TomNFL,Chargers,24,Jaguars,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,20,3,44
+oddsshark,Chargers,25,Jaguars,23,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,25,23,3,44
+DRatings,Chargers,23,Jaguars,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,23,20,3,44
+oddstrader,Chargers,24,Jaguars,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,20,3,44
+NFLSpinzone,Chargers,20,Jaguars,17,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,20,17,3,44
+Copilot,Chargers,27,Jaguars,20,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,27,20,3,44
+Jeremy Cluff,Chargers,24,Jaguars,21,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,24,21,3,44
+JimNicely,Chargers,23,Jaguars,21,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,23,21,3,44
+MaldonadoESPN,Chargers,29,Jaguars,16,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,29,16,3,44
+MoodyESPN,Chargers,20,Jaguars,16,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,20,16,3,44
+WalderESPN,Chargers,25,Jaguars,22,LACJAC,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,25,22,3,44
+DataSkrive,Jaguars,24,Chargers,22,LACJAX,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,22,24,3,44
+JarrettBell,Jaguars,26,Chargers,23,LACJAX,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,23,26,3,44
+ChrisBumbaca,Jaguars,21,Chargers,20,LACJAX,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,20,21,3,44
+MikeMiddlehurst-Schwartz,Jaguars,20,Chargers,17,LACJAX,4765819,LAC,Chargers,Los Angeles Chargers,JAC,Jaguars,Jacksonville Jaguars,17,20,3,44
+TylerSullivan,Patriots,30,Jets,16,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,16,30,-13,43.5
+PetePrisco,Patriots,30,Jets,10,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,10,30,-13,43.5
+BillBender,Patriots,27,Jets,17,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,27,-13,43.5
+DataSkrive,Patriots,33,Jets,14,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,14,33,-13,43.5
+Sportsnaut,Patriots,28,Jets,13,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,28,-13,43.5
+VinnieIyer,Patriots,30,Jets,20,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,20,30,-13,43.5
+Dimers,PATRIOTS,27,JETS,16,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,16,27,-13,43.5
+JarrettBell,Patriots,27,Jets,17,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,27,-13,43.5
+NickBrinkerhoff,Patriots,27,Jets,10,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,10,27,-13,43.5
+ChrisBumbaca,Patriots,26,Jets,16,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,16,26,-13,43.5
+NateDavis,Patriots,33,Jets,13,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,33,-13,43.5
+TylerDragon,Patriots,30,Jets,17,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,30,-13,43.5
+MikeMiddlehurst-Schwartz,Patriots,28,Jets,10,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,10,28,-13,43.5
+AliNFL,Patriots,27,Jets,14,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,14,27,-13,43.5
+BrookeNFL,Patriots,28,Jets,13,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,28,-13,43.5
+DanNFL,Patriots,25,Jets,12,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,12,25,-13,43.5
+GennaroNFL,Patriots,24,Jets,13,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,24,-13,43.5
+TomNFL,Patriots,28,Jets,14,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,14,28,-13,43.5
+oddsshark,Jets,15,Patriots,33,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,15,33,-13,43.5
+DRatings,Jets,14,Patriots,26,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,14,26,-13,43.5
+SBR,Patriots,27,Jets,13,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,27,-13,43.5
+clutchpoints,Patriots,20,Jets,10,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,10,20,-13,43.5
+NFLSpinzone,Patriots,33,Jets,16,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,16,33,-13,43.5
+Copilot,Patriots,31,Jets,13,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,31,-13,43.5
+Jeremy Cluff,Patriots,30,Jets,17,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,30,-13,43.5
+JimNicely,Patriots,27,Jets,10,NYJNE,4765818,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,10,27,-13,43.5
+TylerSullivan,Seahawks,24,Rams,21,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,24,21,-3,48.5
+PetePrisco,Seahawks,24,Rams,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,24,23,-3,48.5
+BillBender,Rams,31,Seahawks,27,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,27,31,-3,48.5
+DataSkrive,Rams,27,Seahawks,20,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,20,27,-3,48.5
+Sportsnaut,Seahawks,20,Rams,17,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,20,17,-3,48.5
+VinnieIyer,Seahawks,27,Rams,24,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,27,24,-3,48.5
+Dimers,RAMS,26,SEAHAWKS,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,23,26,-3,48.5
+JarrettBell,Rams,24,Seahawks,20,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,20,24,-3,48.5
+NickBrinkerhoff,Rams,28,Seahawks,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,23,28,-3,48.5
+ChrisBumbaca,Rams,31,Seahawks,30,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,30,31,-3,48.5
+NateDavis,Seahawks,27,Rams,24,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,27,24,-3,48.5
+TylerDragon,Rams,27,Seahawks,26,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,26,27,-3,48.5
+MikeMiddlehurst-Schwartz,Seahawks,28,Rams,27,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,28,27,-3,48.5
+AliNFL,Rams,26,Seahawks,24,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,24,26,-3,48.5
+BrookeNFL,Rams,29,Seahawks,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,23,29,-3,48.5
+DanNFL,Rams,24,Seahawks,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,23,24,-3,48.5
+GennaroNFL,Seahawks,24,Rams,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,24,23,-3,48.5
+TomNFL,Rams,28,Seahawks,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,23,28,-3,48.5
+oddsshark,Seahawks,20,Rams,28,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,20,28,-3,48.5
+DRatings,Seahawks,20,Rams,24,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,20,24,-3,48.5
+oddstrader,Seahawks,24,Rams,26,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,24,26,-3,48.5
+clutchpoints,Seahawks,28,Rams,27,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,28,27,-3,48.5
+NFLSpinzone,Rams,27,Seahawks,24,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,24,27,-3,48.5
+Copilot,Rams,31,Seahawks,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,23,31,-3,48.5
+Jeremy Cluff,Rams,30,Seahawks,27,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,27,30,-3,48.5
+JimNicely,Seahawks,24,Rams,21,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,24,21,-3,48.5
+MaldonadoESPN,Seahawks,28,Rams,23,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,28,23,-3,48.5
+MoodyESPN,Rams,27,Seahawks,24,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,24,27,-3,48.5
+WalderESPN,Rams,26,Seahawks,20,SEALAR,4765827,SEA,Seahawks,Seattle Seahawks,LAR,Rams,Los Angeles Rams,20,26,-3,48.5
+TylerSullivan,Cardinals,24,49ers,23,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,23,24,3,48
+PetePrisco,49ers,30,Cardinals,24,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,30,24,3,48
+BillBender,49ers,28,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,28,20,3,48
+DataSkrive,49ers,25,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,25,20,3,48
+Sportsnaut,Cardinals,28,49ers,27,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,27,28,3,48
+VinnieIyer,49ers,27,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,27,20,3,48
+Dimers,49ERS,25,CARDINALS,22,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,25,22,3,48
+JarrettBell,49ers,20,Cardinals,17,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,20,17,3,48
+NickBrinkerhoff,49ers,24,Cardinals,18,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,24,18,3,48
+ChrisBumbaca,49ers,30,Cardinals,27,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,30,27,3,48
+NateDavis,49ers,35,Cardinals,25,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,35,25,3,48
+TylerDragon,49ers,24,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,24,20,3,48
+MikeMiddlehurst-Schwartz,49ers,28,Cardinals,23,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,28,23,3,48
+AliNFL,49ers,24,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,24,20,3,48
+BrookeNFL,49ers,27,Cardinals,23,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,27,23,3,48
+DanNFL,49ers,24,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,24,20,3,48
+GennaroNFL,49ers,28,Cardinals,23,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,28,23,3,48
+TomNFL,49ers,26,Cardinals,22,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,26,22,3,48
+oddsshark,49ers,24,Cardinals,26,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,24,26,3,48
+DRatings,49ers,25,Cardinals,21,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,25,21,3,48
+oddstrader,49ers,26,Cardinals,21,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,26,21,3,48
+SBR,49ers,30,Cardinals,17,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,30,17,3,48
+clutchpoints,49ers,26,Cardinals,12,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,26,12,3,48
+NFLSpinzone,49ers,28,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,28,20,3,48
+Copilot,49ers,26,Cardinals,23,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,26,23,3,48
+Jeremy Cluff,49ers,27,Cardinals,23,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,27,23,3,48
+MaldonadoESPN,49ers,23,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,23,20,3,48
+MoodyESPN,49ers,31,Cardinals,20,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,31,20,3,48
+WalderESPN,49ers,23,Cardinals,16,SFARI,4765826,SF,49ers,San Francisco 49ers,ARI,Cardinals,Arizona Cardinals,23,16,3,48
+TylerSullivan,Bills,27,Buccaneers,23,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,23,27,-5.5,48
+PetePrisco,Bills,30,Buccaneers,23,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,23,30,-5.5,48
+BillBender,Bills,30,Buccaneers,27,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,27,30,-5.5,48
+DataSkrive,Buccaneers,25,Bills,24,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,25,24,-5.5,48
+Sportsnaut,Bills,27,Buccaneers,21,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,21,27,-5.5,48
+VinnieIyer,Bills,30,Buccaneers,27,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,27,30,-5.5,48
+Dimers,BILLS,27,BUCCANEERS,21,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,21,27,-5.5,48
+JarrettBell,Bills,24,Buccaneers,17,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,17,24,-5.5,48
+NickBrinkerhoff,Bills,31,Buccaneers,23,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,23,31,-5.5,48
+ChrisBumbaca,Bills,29,Buccaneers,22,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,22,29,-5.5,48
+NateDavis,Bills,27,Buccaneers,23,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,23,27,-5.5,48
+TylerDragon,Bills,27,Buccaneers,24,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,24,27,-5.5,48
+MikeMiddlehurst-Schwartz,Bills,23,Buccaneers,21,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,21,23,-5.5,48
+AliNFL,Bills,26,Buccaneers,23,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,23,26,-5.5,48
+BrookeNFL,Bills,27,Buccaneers,22,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,22,27,-5.5,48
+DanNFL,Bills,27,Buccaneers,20,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,20,27,-5.5,48
+GennaroNFL,Bills,28,Buccaneers,25,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,25,28,-5.5,48
+TomNFL,Bills,27,Buccaneers,23,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,23,27,-5.5,48
+oddsshark,Buccaneers,19,Bills,31,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,19,31,-5.5,48
+DRatings,Buccaneers,20,Bills,24,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,20,24,-5.5,48
+oddstrader,Buccaneers,22,Bills,25,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,22,25,-5.5,48
+SBR,Bills,27,Buccaneers,17,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,17,27,-5.5,48
+clutchpoints,Bills,31,Buccaneers,24,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,24,31,-5.5,48
+NFLSpinzone,Buccaneers,27,Bills,24,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,27,24,-5.5,48
+Copilot,Bills,27,Buccaneers,17,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,17,27,-5.5,48
+Jeremy Cluff,Bills,30,Buccaneers,20,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,20,30,-5.5,48
+JimNicely,Bills,24,Buccaneers,23,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,23,24,-5.5,48
+MaldonadoESPN,Bills,27,Buccaneers,20,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,20,27,-5.5,48
+MoodyESPN,Bills,27,Buccaneers,24,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,24,27,-5.5,48
+WalderESPN,Bills,27,Buccaneers,17,TBBUF,4765820,TB,Buccaneers,Tampa Bay Buccaneers,BUF,Bills,Buffalo Bills,17,27,-5.5,48
+TylerSullivan,Commanders,24,Dolphins,21,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,24,21,-3,47.5
+PetePrisco,Dolphins,31,Commanders,21,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,21,31,-3,47.5
+BillBender,Dolphins,28,Commanders,24,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,24,28,-3,47.5
+DataSkrive,Dolphins,25,Commanders,23,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,23,25,-3,47.5
+Sportsnaut,Dolphins,31,Commanders,20,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,20,31,-3,47.5
+VinnieIyer,Dolphins,31,Commanders,24,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,24,31,-3,47.5
+Dimers,DOLPHINS,25,COMMANDERS,23,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,23,25,-3,47.5
+AliNFL,Dolphins,26,Commanders,21,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,21,26,-3,47.5
+BrookeNFL,Dolphins,25,Commanders,21,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,21,25,-3,47.5
+DanNFL,Dolphins,26,Commanders,21,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,21,26,-3,47.5
+GennaroNFL,Dolphins,28,Commanders,16,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,16,28,-3,47.5
+TomNFL,Dolphins,24,Commanders,21,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,21,24,-3,47.5
+oddsshark,Commanders,25,Dolphins,27,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,25,27,-3,47.5
+DRatings,Commanders,22,Dolphins,25,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,22,25,-3,47.5
+oddstrader,Commanders,22,Dolphins,24,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,22,24,-3,47.5
+clutchpoints,Dolphins,16,Commanders,9,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,9,16,-3,47.5
+Copilot,Dolphins,23,Commanders,13,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,13,23,-3,47.5
+Jeremy Cluff,Dolphins,24,Commanders,16,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,16,24,-3,47.5
+JimNicely,Dolphins,24,Commanders,20,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,20,24,-3,47.5
+MaldonadoESPN,Dolphins,20,Commanders,12,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,12,20,-3,47.5
+MoodyESPN,Dolphins,32,Commanders,20,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,20,32,-3,47.5
+WalderESPN,Commanders,27,Dolphins,21,WASMIA,4765639,WAS,Commanders,Washington Commanders,MIA,Dolphins,Miami Dolphins,27,21,-3,47.5
