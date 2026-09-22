@@ -18,14 +18,14 @@ weboptionsHC.add_argument('disable-notifications')
 weboptionsHC.add_argument("--log-level=3")
 weboptionsHC.page_load_strategy = 'eager'
 articleNumber = 16
-def fetch_copilot_data(weeknum, url, weboptions):
+def fetch_copilot_data(weeknum, url, make_driver):
     
     copilot = {
         'name': 'Copilot',
         'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
         'separator': ', '
     }
-    driver = webdriver.Chrome(options=weboptions)
+    driver = make_driver()
     driver.set_page_load_timeout(35)
     print('fetch_copilot_data:', url)
     copilotrows = []

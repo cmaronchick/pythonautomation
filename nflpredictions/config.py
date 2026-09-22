@@ -3,3 +3,4 @@ password = "*dZ2HaWN"
 
 #./mongodb-database-tools-windows-x86_64-100.13.0/bin/mongoexport.exe --uri=mongodb+srv://pcsm.lwx4u.mongodb.net/pcsm --port=27017 --collection=games --username=pcsm-user --password= --out=2025-games-week-7-b.csv --type=csv --query='{"year":2025, "season": "reg
 #", "gameWeek": {"$lt": 8}}' --fieldFile=games-fieldsFile.txt
+# .\mongodb-database-tools-windows-x86_64-100.13.0\bin\mongoexport.exe --uri="mongodb+srv://pcsm-user@pcsm.lwx4u.mongodb.net/pcsm" --collection=games --out=2026-games-week-1-b.csv --type=csv --queryFile=games-query.json --fieldFile=games-fieldsFile.txt

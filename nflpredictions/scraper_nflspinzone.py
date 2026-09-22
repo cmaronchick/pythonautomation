@@ -77,7 +77,7 @@ weboptionsHC.add_argument('disable-notifications')
 weboptionsHC.add_argument("--log-level=3")
 weboptionsHC.page_load_strategy = 'eager'
 articleNumber = 16
-def fetch_nflspinzone_data(url, weeknum, weboptions):
+def fetch_nflspinzone_data(url, weeknum, make_driver):
     
     sz = {
          # https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game
@@ -87,7 +87,7 @@ def fetch_nflspinzone_data(url, weeknum, weboptions):
         'separator': ', '
         #   https://nflspinzone.com/author/sayrebedinger/
     }
-    driver = webdriver.Chrome(options=weboptions)
+    driver = make_driver() # webdriver.Chrome(options=weboptions)
     driver.set_page_load_timeout(35)
     print('fetch_nflspinzone_data:')
     nflspinzonerows = []

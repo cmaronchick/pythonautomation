@@ -53,8 +53,8 @@ service = Service(chrome_driver_path)
 # weboptions.add_argument('disable-notifications')
 # weboptions.add_argument("--log-level=3")
 # weboptions.page_load_strategy = 'eager'
-def fetch_dratings_data(weeknum, weboptions):
-    driver = webdriver.Chrome(options=weboptions)
+def fetch_dratings_data(weeknum, make_driver):
+    driver = make_driver() # webdriver.Chrome(options=weboptions)
     driver.set_page_load_timeout(35)
     print('fetch_dratings_data:')
     dratingsrows = []

@@ -6,9 +6,9 @@ import config
 
 sns = boto3.client('sns', region_name='us-west-2')
 
-weeknum = 3
+weeknum = 1
 season = "reg"
-year = 2025
+year = 2026
 
 byeTeams = [""]
 

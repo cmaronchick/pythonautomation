@@ -19,6 +19,7 @@ imageTable = {
     'Entity_1569032074570.png': 'Broncos',
     'Entity_1569032071904.png': 'Bengals',
     'Entity_1599884617535.png': 'Rams',
+    'https://images.jifo.co/21540751_1788967616727.svg': 'Rams',
     'Entity_1569032080155.png': 'Cardinals',
     'Entity_1569032074153.png': 'Titans',
     'Entity_1569032073772.png': 'Jaguars',
@@ -38,7 +39,7 @@ imageTable = {
 }
 
 articleTable = [
-    "https://www.oddsshark.com/nfl/computer-picks"
+    "https://www.covers.com/picks/nfl"
     
 ]
 
@@ -50,9 +51,9 @@ service = Service(chrome_driver_path)
 # weboptions.add_argument('--ignore-certificate-errors')
 # weboptions.add_argument('disable-notifications')
 # weboptions.page_load_strategy = 'eager'
-def fetch_oddsshark_data(weeknum, weboptions):
+def fetch_oddsshark_data(weeknum, make_driver):
     
-    driver = webdriver.Chrome(options=weboptions)
+    driver = make_driver() # webdriver.Chrome(options=weboptions)
     driver.set_page_load_timeout(35)
     print('fetch_dratings_data:')
     oddssharkrows = []

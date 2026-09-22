@@ -45,10 +45,10 @@ articleTable = [
 chrome_driver_path = './chromedriver'
 
 service = Service(chrome_driver_path)
-def fetch_oddstrader_data(weeknum, weboptions):
+def fetch_oddstrader_data(weeknum, make_driver):
     print('fetch_oddstrader_data:')
     
-    driver = webdriver.Chrome(options=weboptions)
+    driver = make_driver() #  webdriver.Chrome(options=weboptions)
     driver.set_page_load_timeout(35)
     oddstraderrows = []
     try:
