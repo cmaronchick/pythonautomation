@@ -3,7 +3,7 @@ import json
 import io
 import time
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 from jira import JIRA
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -27,6 +27,7 @@ DONE_STATUSES = ['Done', 'Closed', 'Resolved']
 # You can find yours by looking at the JSON of a single issue via the API.
 STORY_POINTS_FIELD = 'customfield_10026' 
 today = datetime.now().strftime('%Y-%m-%d')
+threemonths = datetime.today() - timedelta(days=90)
 estimatedStories = 0
 
 # NEW: Add your custom field ID for Severity here
@@ -46,7 +47,7 @@ def fetch_daily_sprint_data(jira):
     # Group 1: Pulls the standard Stories and Tasks for the release
     # Group 2: Pulls Bugs that match Fix Version, OR Season Number, OR the specific QA Labels
     jql_query = (
-        f'project = SPLASH AND createdDate >= "2026-04-01" AND'
+        f'project = SPLASH AND createdDate >= ' + threemonths.strftime("%Y-%m-%d") + ' AND'
         f'(issueType in (Story, Task) OR '
         f'(issueType = Bug AND ('
         f'"Season/Update Number" = "S9 Launch" OR '
