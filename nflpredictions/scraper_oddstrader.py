@@ -94,7 +94,7 @@ def fetch_oddstrader_data(weeknum, make_driver):
                 except Exception as e:
                     print('Exception: ', e)
                 columnIndex = columnIndex + 1
-        print('oddstraderrows:', oddstraderrows)
+        # print('oddstraderrows:', oddstraderrows)
         driver.quit()
         return oddstraderrows
     except Exception as e:

@@ -19,7 +19,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException, WebDriverException, NoSuchElementException, StaleElementReferenceException
 import csv, traceback
 from contextlib import contextmanager
-from scraper_nfl_updated import fetch_nfl_data
+from scraper_nfl import fetch_nfl_data
 from scraper_usatoday import fetch_usatoday_data
 from scraper_espn import fetch_espn_data
 from scraper_oddsshark import fetch_oddsshark_data
@@ -47,7 +47,7 @@ def make_driver() -> webdriver.Chrome:
 #https://www.cbssports.com/writers/jared-dubin/6/
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-2-odds-picks-jets-browns/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-5-picks-predictions-bets-jaguars-eagles-2026/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -56,7 +56,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/priscos-week-2-nfl-picks/',
+    'url': 'https://www.cbssports.com/nfl/news/pete-priscos-week-5-nfl-picks-odds/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -66,7 +66,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-2-picks-score-predictions/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-5-picks-score-predictions-ravens-bills-49ers/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -83,9 +83,9 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2026/09/14/nfl-week-2-picks-predictions-projections-game-scores/90786737007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2026/10/05/nfl-week-5-picks-predictions-projections-game-scores/90788473007/',
     'name': 'Jeremy Cluff', # Jenna Ortiz', # 
-    'searchTerm': 'Score prediction:', # cluff: 'Prediction:'
+    'searchTerm': 'Prediction', # cluff: 'Prediction:'
     'searchTag': 'strong',
     'separator': ', '
     # https://www.azcentral.com/staff/2648096001/jeremy-cluff/
@@ -106,11 +106,12 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2026-nfl-picks-score-predictions-for-every-week-2-game-01m2fzpye5s3',
+    'url': 'https://nflspinzone.com/2026-nfl-picks-and-score-predictions-for-every-game-week-5',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
-    'separator': ', '
+    'separator': ', ',
+    'gamesLimit': 15
     #   https://www.bing.com/search?FORM=U523DF&PC=U523&q=spinzone+2026+week+2&PC=U316&FORM=CHROMN
 }
 
@@ -132,7 +133,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-2/830bbe1e7598cf3caadc2a70',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-5/04787d3ef5247c02e1b96a88',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -141,7 +142,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-2/ac8832bceab0d79753295421'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-5/eca9ea6e41412f089384daf3'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -155,12 +156,12 @@ thirtythirdteam = {
 }
 
 sportsnaut = {
-    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-2026'
+    'url': 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-2026-nfl-picks-this-week' # 'https://sportsnaut.com/nfl/nfl-week-' + str(weeknum) + '-predictions-2026'
     # https://sportsnaut.com/nfl/nfl-week-11-predictions-picks-nfl-schdeule-this-week
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2026/09/17/nfl-week-2-ai-picks-predictions-2026/91785230007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2026/10/08/nfl-picks-predictions-week-5-ai-2026/92128524007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -168,12 +169,12 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/5e71e6d9-2d86-440a-a301-e664bb500020?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
-    # https://www.usatoday.com/sports/nfl/
+    'url': 'https://e.infogram.com/404cfdf0-399d-4b01-b72e-de31d256158d?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    # https://www.usatoday.com/sports/nfl/ https://www.usatoday.com/staff/2646715001/nate-davis/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/id/49957149/week-2-picks-predictions-schedule-fantasy-odds-2026'
+    'url': 'https://www.espn.com/nfl/story/_/id/50067784/week-4-picks-predictions-schedule-fantasy-odds-2026'
     # https://www.espn.com/nfl/
 }
 
@@ -193,7 +194,7 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/nfl-week-2-ats-picks-134887', # https://www.rotowire.com/football/column/beating-the-book-20
+    'url': 'https://www.rotowire.com/football/article/nfl-week-4-picks-against-the-spread-score-predictions-137993', # https://www.rotowire.com/football/column/beating-the-book-20
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
@@ -211,7 +212,7 @@ sbr = {
 }
 
 rotoballer = {
-    'url': 'https://www.rotoballer.com/nfl-predictions-week-2-picks-and-analysis-for-every-game-2026/1933899',
+    'url': 'https://www.rotoballer.com/nfl-predictions-week-3-picks-and-analysis-for-every-game-2026/1949615',
     'name': 'JoeNicely',
     'separator': ', ',
     'searchTag': 'h2',
@@ -372,7 +373,9 @@ try:
                         winner = predictionString[:firstSpace]
                         winnerScore = predictionString[firstSpace:separator]
                         loser = predictionString[separator+len(writer['separator']):secondSpace]
-                        loserScore = predictionString[secondSpace:].strip()
+                        loserScore = predictionString[secondSpace:]
+                        if loserScore.find(" "):
+                            loserScore = loserScore.strip()
                         # print([writer['name'],winner, winnerScore, loser, loserScore])
                     
                         rows.append([writer['name'],winner, int(winnerScore), loser, int(loserScore)])
@@ -800,7 +803,7 @@ try:
 
     try:
         with timeout_context(60):
-            nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, make_driver)
+            nflspinzonerows = fetch_nflspinzone_data(sz['url'], weeknum, sz['gamesLimit'], make_driver)
             for nflspinzonerow in nflspinzonerows:
                 rows.append(nflspinzonerow)
     except TimeoutException:

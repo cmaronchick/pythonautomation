@@ -375,7 +375,7 @@ def fetch_usatoday_data(weeknum, url, make_driver):
 
 
 def main(weeknum):
-    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/579df8d6-d61a-4cb4-a23a-29468dce8fcb?src=embed#async_embed', make_driver) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/404cfdf0-399d-4b01-b72e-de31d256158d?src=embed#async_embed', make_driver) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:

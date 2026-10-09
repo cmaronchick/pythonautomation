@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -77,7 +78,15 @@ weboptionsHC.add_argument('disable-notifications')
 weboptionsHC.add_argument("--log-level=3")
 weboptionsHC.page_load_strategy = 'eager'
 articleNumber = 16
-def fetch_nflspinzone_data(url, weeknum, make_driver):
+
+def make_driver() -> webdriver.Chrome:
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1440,1200")
+    return webdriver.Chrome(options=options)
+def fetch_nflspinzone_data(url, weeknum, gamesLimit, make_driver):
     
     sz = {
          # https://nflspinzone.com/2025-nfl-picks-and-score-predictions-for-every-week-8-game
@@ -92,13 +101,14 @@ def fetch_nflspinzone_data(url, weeknum, make_driver):
     print('fetch_nflspinzone_data:')
     nflspinzonerows = []
     try:
-        i = 0
-        driver.get(url)
+        i = 1
         
-        wait = WebDriverWait(driver, timeout=10)
-        driver.implicitly_wait(5)
+        
         buttonIsClickable = True
-        while buttonIsClickable:
+        while i <= gamesLimit: # while buttonIsClickable:
+            driver.get(url + '/' + str(i))
+            wait = WebDriverWait(driver, timeout=10)
+            driver.implicitly_wait(5)
         
             # response = requests.get(writer['url'], headers=request_headers)
             # response = requests.get(writer['url'])
@@ -182,14 +192,14 @@ def fetch_nflspinzone_data(url, weeknum, make_driver):
                 except Exception as e:
                     print('Exception:', e)
                     traceback.print_exc()
-            nextButton = driver.find_element(By.ID, "next-button")
-            wait.until(lambda d : nextButton.is_displayed())
-            wait.until(EC.element_to_be_clickable(nextButton))
-            print('nextButton.get_attribute(\'disabled\'):', nextButton.get_attribute('disabled'))
-            if nextButton.get_attribute('disabled') is not None:
-                buttonIsClickable = False
-            else:
-                nextButton.click()
+            # nextButton = driver.find_element(By.ID, "next-button")
+            # wait.until(lambda d : nextButton.is_displayed())
+            # wait.until(EC.element_to_be_clickable(nextButton))
+            # print('nextButton.get_attribute(\'disabled\'):', nextButton.get_attribute('disabled'))
+            # if nextButton.get_attribute('disabled') is not None:
+            #     buttonIsClickable = False
+            # else:
+            #     nextButton.click()
             i = i + 1
         print('nflspinzonerows:', nflspinzonerows)
         driver.quit()
@@ -202,7 +212,7 @@ def fetch_nflspinzone_data(url, weeknum, make_driver):
 
 
 def main(weeknum, weboptions):
-    html_content = fetch_nflspinzone_data(weeknum, weboptions) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+    html_content = fetch_nflspinzone_data('https://nflspinzone.com/2026-nfl-picks-and-score-predictions-for-every-game-week-5', weeknum, make_driver) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:

@@ -6,8 +6,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
 # Setup the Chrome WebDriver
+
+def make_driver() -> webdriver.Chrome:
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1440,1200")
+    return webdriver.Chrome(options=options)
 
 imageTable = {
     'Entity_1569032072644.png': 'Steelers',
@@ -55,7 +64,7 @@ def fetch_oddsshark_data(weeknum, make_driver):
     
     driver = make_driver() # webdriver.Chrome(options=weboptions)
     driver.set_page_load_timeout(35)
-    print('fetch_dratings_data:')
+    print('fetch_oddsshark_data:')
     oddssharkrows = []
     try:
         for url in articleTable:
@@ -65,19 +74,19 @@ def fetch_oddsshark_data(weeknum, make_driver):
             wait = WebDriverWait(driver, timeout=10)
             driver.implicitly_wait(3)
             writersText = []
-            gamesDiv = driver.find_element(By.CLASS_NAME, 'computer-picks-content')
+            gamesDiv = driver.find_element(By.ID, 'ComputerPicks')
             wait.until(lambda d : gamesDiv.is_displayed())
-            upcomingGames = gamesDiv.find_elements(By.CLASS_NAME, "predicted-score")
+            upcomingGames = gamesDiv.find_elements(By.CLASS_NAME, "game-prediction-odds-table")
             for game in upcomingGames:
                 
-                teams = game.find_elements(By.CLASS_NAME, 'team-shortname')
-                scores = game.find_elements(By.CLASS_NAME, 'highlighted-text')
+                teams = game.find_elements(By.CLASS_NAME, 'game-prediction-team-name')
+                scores = game.find_elements(By.CLASS_NAME, 'game-prediction-score')
                 awayTeam = teams[0].text
                 homeTeam = teams[1].text
-                if scores[1].text == '-' or scores[3].text == '-':
-                    continue
-                awayTeamScore = round(float(scores[1].text))
-                homeTeamScore = round(float(scores [3].text))
+                # if scores[1].text == '-' or scores[3].text == '-':
+                #     continue
+                awayTeamScore = round(float(scores[0].text))
+                homeTeamScore = round(float(scores[1].text))
                 # print('awayTeam, awayTeamScore, homeTeam, homeTeamScore:', awayTeam, awayTeamScore, homeTeam, homeTeamScore)
                 oddssharkrows.append(['oddsshark', awayTeam, awayTeamScore, homeTeam, homeTeamScore])
         # print('dratingsrows:', oddssharkrows)
@@ -91,7 +100,7 @@ def fetch_oddsshark_data(weeknum, make_driver):
 
 
 def main(weeknum):
-    html_content = fetch_oddsshark_data(weeknum) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+    html_content = fetch_oddsshark_data(weeknum, make_driver) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:

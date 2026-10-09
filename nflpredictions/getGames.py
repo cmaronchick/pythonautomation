@@ -49,6 +49,7 @@ if (len(sys.argv) > 3):
                 
             # writing the data rows  
             csvwriter.writerows(rows) 
+            csvwriter.writerow([])
             csvwriter.writerow(["GameIds", gameIds])
     except Exception as e:
         print('Exception:', e)

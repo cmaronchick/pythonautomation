@@ -75,42 +75,66 @@ def fetch_nfl_data(weeknum, url, make_driver):
                     "homeTeam": homeMascot
                 }
 
-        print(gamesObject)
+        # print(gamesObject)
         tables = driver.find_elements(
            By.XPATH, "//section[.//h2[text()='AUTHOR PICKS']]"
         )
-        print('nfltables: ', len(tables))
+        # print('nfltables: ', len(tables))
         for table in tables:
-            if tableIndex > 0: 
-                writersText = []
-                writerIndex = 0
-                writers = table.find_elements(By.TAG_NAME, "span")
-                winningTeam = None
-                losingTeam = None
-                print('writers:', len(writers))
-                for writer in writers:
-                    if writer.text != "":
-                        print('writer: ', writer.text)
-                        writersText.append({ "name": writer.text + "NFL", "prediction": "", "index": writerIndex})
-                    writerIndex = writerIndex + 1
-                predictions = table.find_elements(By.XPATH, ".//span[normalize-space()='Predicted score:']")
-                print('predictions: ', len(predictions))
-                for writerObj in writersText:
-                    writerIndex = writerObj["index"]
-                    author = writerObj["name"]
-                    writerPrediction = predictions[writerIndex].text
-                    winner = writerPrediction[:writerPrediction.find(" ")].strip()
-                    winningScore = writerPrediction[writerPrediction.find(" ")+1:writerPrediction.find("-")].strip()
-                    losingScore = writerPrediction[writerPrediction.rfind("-")+1:].strip()
-                    if gamesObject[winner.lower()]["awayTeam"] == winner:
-                        winningTeam = gamesObject[winner.lower()]["awayTeam"]
-                        losingTeam = gamesObject[winner.lower()]["homeTeam"]
-                    else:
-                        winningTeam = gamesObject[winner.lower()]["homeTeam"]
-                        losingTeam = gamesObject[winner.lower()]["awayTeam"]
+            try: 
+                if tableIndex > 0: 
+                    writersText = []
+                    writerIndex = 0
+                    writers = table.find_elements(By.TAG_NAME, "span")
+                    winningTeam = None
+                    losingTeam = None
+                    # print('writers:', len(writers))
+                    for writer in writers:
+                        if writer.text.find('Predicted') == -1 and writer.text.find('pick') == -1:
+                            if writer.text != "":
+                                # print('writer: ', writer.text)
+                                writersText.append({ "name": writer.text + " NFL", "prediction": "", "index": writerIndex})
+                            writerIndex = writerIndex + 1
+                    # print('writers: ', writers)
+                    # predictions = table.find_elements(By.XPATH, ".//span[normalize-space()='Predicted score:']")
+                    # Finds elements containing "Predicted score:" in their aria-label attribute
+                    predicted_score_elements = table.find_elements(
+                        By.CLASS_NAME, 'sr-only'
+                    )
+                    # print('predicted_score_elements: ', len(predicted_score_elements))
+                    predictions = []
+                    winnersImages = table.find_elements(By.TAG_NAME, 'img')
+                    winners = []
+                    for image in winnersImages:
+                        if image.get_attribute("alt") != '':
+                            winnerText = image.get_attribute("alt")[image.get_attribute("alt").rfind(" "):].strip()
+                            winners.append(winnerText)
+                    # print('winners:', winners)
 
-                    nflrows.append([author,winningTeam, winningScore, losingTeam, losingScore]) 
-            tableIndex = tableIndex + 1
+                    for el in predicted_score_elements:
+                        print(el.text)
+                        if el.text.find('Predicted score:') > -1:
+                            predictions.append(el)
+                    # print('predictions: ', len(predictions))
+                    for writerObj in writersText:
+                        writerIndex = writerObj["index"]
+                        author = writerObj["name"]
+                        writerPrediction = predictions[writerIndex].text
+                        winner = winners[writerIndex] # writerPrediction[:writerPrediction.find(" ")].strip()
+                        winningScore = writerPrediction[writerPrediction.find(":")+2:writerPrediction.find("-")].strip()
+                        losingScore = writerPrediction[writerPrediction.rfind("-")+1:].strip()
+                        if gamesObject[winner.lower()]["awayTeam"] == winner:
+                            winningTeam = gamesObject[winner.lower()]["awayTeam"]
+                            losingTeam = gamesObject[winner.lower()]["homeTeam"]
+                        else:
+                            winningTeam = gamesObject[winner.lower()]["homeTeam"]
+                            losingTeam = gamesObject[winner.lower()]["awayTeam"]
+
+                        nflrows.append([author,winningTeam, winningScore, losingTeam, losingScore]) 
+                tableIndex = tableIndex + 1
+            except Exception as predictionE:
+                print('prediction exception: ', predictionE)
+
         # print(nflrows)
         driver.quit()
         return nflrows

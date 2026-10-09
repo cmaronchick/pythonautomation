@@ -57,7 +57,7 @@ def fetch_clutchpoints_data(weeknum, url, weboptions):
 
         # resultsTable = driver.find_elements_by_xpath("//*[contains(text(), " + writer['searchTerm'] + ")]")
         
-        print('hasattr()', clutchpoints.get("searchTerm"))
+        # print('hasattr()', clutchpoints.get("searchTerm"))
         article = driver.find_element(By.TAG_NAME, "article")
         wait.until(lambda d : article.is_displayed())
         searchTerm = clutchpoints.get("searchTerm")
@@ -109,7 +109,7 @@ def fetch_clutchpoints_data(weeknum, url, weboptions):
                 # parent = p.parent.text        
                 # colonIndex = parent.find(':')
                 pText = p.text
-                print('p:', pText)
+                # print('p:', pText)
                 predictionString = ""
                 predictionString = pText
                 # print('predictionString: ', predictionString)
