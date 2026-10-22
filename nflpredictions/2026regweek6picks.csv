@@ -1,0 +1,311 @@
+Source,Winner,Winner Score,Loser,Loser Score,GameID,GameIDInt,Away Code,Away Short Name,Away Full Name,Home Code,Home Short Name,Home Full Name,AwayScore,HomeScore,Spread,Total
+PetePrisco,Seahawks,23,Broncos,17,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,23,17,2.5,40.5
+PetePrisco,Jaguars,24,Texans,20,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,20,24,-2.5,42.5
+PetePrisco,Falcons,27,Bears,21,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,21,27,1.5,51.5
+PetePrisco,Ravens,24,Browns,13,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,13,4.5,41
+PetePrisco,Colts,28,Titans,17,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,17,28,-7,44
+PetePrisco,Patriots,28,Jets,13,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,28,-7,43.5
+PetePrisco,Giants,19,Saints,16,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,16,19,1,45.5
+PetePrisco,Eagles,23,Panthers,20,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,20,23,4,39
+PetePrisco,Bucs,26,Steelers,21,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,21,21,2.5,39
+PetePrisco,Rams,35,Cardinals,20,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,20,35,-12,51.5
+PetePrisco,Chiefs,28,Chargers,21,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,21,28,-8,41.5
+PetePrisco,Bills,35,Raiders,21,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,35,21,4.5,53.5
+PetePrisco,Packers,31,Cowboys,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,31,-1,53
+PetePrisco,49ers,30,Commanders,21,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,21,30,-7.5,51
+Rotowire,Seahawks,23,Broncos,16,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,23,16,2.5,40.5
+Rotowire,Colts,33,Titans,13,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,13,33,-7,44
+Rotowire,Panthers,27,Eagles,17,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,27,17,4,39
+Rotowire,Rams,35,Cardinals,21,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,21,35,-12,51.5
+Rotowire,49ers,30,Commanders,20,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,20,30,-7.5,51
+JarrettBell,Broncos,23,Seahawks,20,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,20,23,2.5,40.5
+NickBrinkerhoff,Broncos,22,Seahawks,17,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,17,22,2.5,40.5
+ChrisBumbaca,Seahawks,23,Broncos,20,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,23,20,2.5,40.5
+NateDavis,Seahawks,23,Broncos,20,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,23,20,2.5,40.5
+AdamKaufman,Seahawks,23,Broncos,17,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,23,17,2.5,40.5
+MikeMiddlehurst-Schwartz,Seahawks,16,Broncos,6,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,16,6,2.5,40.5
+JarrettBell,Texans,20,Jaguars,19,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,20,19,-2.5,42.5
+NickBrinkerhoff,Texans,26,Jaguars,23,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,26,23,-2.5,42.5
+ChrisBumbaca,Texans,24,Jaguars,21,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,24,21,-2.5,42.5
+NateDavis,Jaguars,24,Texans,20,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,20,24,-2.5,42.5
+AdamKaufman,Texans,23,Jaguars,20,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,23,20,-2.5,42.5
+MikeMiddlehurst-Schwartz,Texans,23,Jaguars,20,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,23,20,-2.5,42.5
+JarrettBell,Falcons,24,Bears,21,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,21,24,1.5,51.5
+NickBrinkerhoff,Bears,27,Falcons,20,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,27,20,1.5,51.5
+ChrisBumbaca,Bears,28,Falcons,24,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,28,24,1.5,51.5
+NateDavis,Bears,27,Falcons,23,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,27,23,1.5,51.5
+AdamKaufman,Bears,27,Falcons,24,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,27,24,1.5,51.5
+MikeMiddlehurst-Schwartz,Bears,31,Falcons,24,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,31,24,1.5,51.5
+JarrettBell,Ravens,27,Browns,23,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,27,23,4.5,41
+NickBrinkerhoff,Ravens,28,Browns,20,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,28,20,4.5,41
+ChrisBumbaca,Ravens,28,Browns,21,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,28,21,4.5,41
+NateDavis,Ravens,24,Browns,20,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,20,4.5,41
+AdamKaufman,Ravens,27,Browns,17,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,27,17,4.5,41
+MikeMiddlehurst-Schwartz,Ravens,26,Browns,14,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,26,14,4.5,41
+JarrettBell,Colts,20,Titans,10,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,10,20,-7,44
+NickBrinkerhoff,Colts,24,Titans,14,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,14,24,-7,44
+ChrisBumbaca,Colts,26,Titans,17,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,17,26,-7,44
+NateDavis,Colts,24,Titans,20,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,20,24,-7,44
+AdamKaufman,Colts,24,Titans,16,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,16,24,-7,44
+MikeMiddlehurst-Schwartz,Colts,24,Titans,20,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,20,24,-7,44
+JarrettBell,Patriots,27,Jets,17,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,27,-7,43.5
+NickBrinkerhoff,Patriots,28,Jets,22,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,22,28,-7,43.5
+ChrisBumbaca,Patriots,28,Jets,17,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,28,-7,43.5
+NateDavis,Patriots,30,Jets,24,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,24,30,-7,43.5
+AdamKaufman,Patriots,28,Jets,17,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,28,-7,43.5
+MikeMiddlehurst-Schwartz,Patriots,31,Jets,17,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,31,-7,43.5
+JarrettBell,Giants,20,Saints,16,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,16,20,1,45.5
+NickBrinkerhoff,Giants,24,Saints,17,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,17,24,1,45.5
+ChrisBumbaca,Saints,34,Giants,26,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,34,26,1,45.5
+NateDavis,Giants,27,Saints,24,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,24,27,1,45.5
+AdamKaufman,Giants,27,Saints,23,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,23,27,1,45.5
+MikeMiddlehurst-Schwartz,Giants,21,Saints,17,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,17,21,1,45.5
+JarrettBell,Eagles,23,Panthers,21,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,21,23,4,39
+NickBrinkerhoff,Panthers,23,Eagles,16,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,23,16,4,39
+ChrisBumbaca,Eagles,21,Panthers,18,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,18,21,4,39
+NateDavis,Panthers,25,Eagles,17,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,25,17,4,39
+AdamKaufman,Panthers,24,Eagles,21,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,24,21,4,39
+MikeMiddlehurst-Schwartz,Eagles,19,Panthers,14,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,14,19,4,39
+JarrettBell,Steelers,27,Buccaneers,20,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,27,20,2.5,39
+NickBrinkerhoff,Buccaneers,23,Steelers,20,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,20,23,2.5,39
+ChrisBumbaca,Steelers,22,Buccaneers,17,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,22,17,2.5,39
+NateDavis,Steelers,27,Buccaneers,20,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,27,20,2.5,39
+AdamKaufman,Steelers,23,Buccaneers,17,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,23,17,2.5,39
+MikeMiddlehurst-Schwartz,Steelers,20,Buccaneers,16,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,20,16,2.5,39
+JarrettBell,Rams,31,Cardinals,17,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,17,31,-12,51.5
+NickBrinkerhoff,Rams,31,Cardinals,16,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,16,31,-12,51.5
+ChrisBumbaca,Rams,46,Cardinals,23,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,23,46,-12,51.5
+NateDavis,Rams,46,Cardinals,17,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,17,46,-12,51.5
+AdamKaufman,Rams,34,Cardinals,20,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,20,34,-12,51.5
+MikeMiddlehurst-Schwartz,Rams,38,Cardinals,20,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,20,38,-12,51.5
+JarrettBell,Chiefs,27,Chargers,24,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,24,27,-8,41.5
+NickBrinkerhoff,Chiefs,34,Chargers,14,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,14,34,-8,41.5
+ChrisBumbaca,Chiefs,26,Chargers,16,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,16,26,-8,41.5
+NateDavis,Chiefs,30,Chargers,23,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,23,30,-8,41.5
+AdamKaufman,Chiefs,30,Chargers,13,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,13,30,-8,41.5
+MikeMiddlehurst-Schwartz,Chiefs,28,Chargers,17,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,17,28,-8,41.5
+JarrettBell,Bills,31,Raiders,24,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,31,24,4.5,53.5
+NickBrinkerhoff,Bills,31,Raiders,23,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,31,23,4.5,53.5
+ChrisBumbaca,Bills,30,Raiders,27,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,30,27,4.5,53.5
+NateDavis,Bills,31,Raiders,23,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,31,23,4.5,53.5
+AdamKaufman,Bills,34,Raiders,23,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,34,23,4.5,53.5
+MikeMiddlehurst-Schwartz,Bills,38,Raiders,24,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,38,24,4.5,53.5
+JarrettBell,Packers,31,Cowboys,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,31,-1,53
+NickBrinkerhoff,Cowboys,33,Packers,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,33,27,-1,53
+ChrisBumbaca,Cowboys,38,Packers,36,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,38,36,-1,53
+NateDavis,Cowboys,27,Packers,23,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,23,-1,53
+AdamKaufman,Cowboys,31,Packers,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,31,27,-1,53
+MikeMiddlehurst-Schwartz,Packers,31,Cowboys,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,31,-1,53
+JarrettBell,49ers,35,Commanders,26,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,26,35,-7.5,51
+NickBrinkerhoff,49ers,37,Commanders,23,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,23,37,-7.5,51
+ChrisBumbaca,49ers,31,Commanders,26,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,26,31,-7.5,51
+NateDavis,49ers,31,Commanders,24,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,24,31,-7.5,51
+AdamKaufman,49ers,31,Commanders,23,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,23,31,-7.5,51
+MikeMiddlehurst-Schwartz,49ers,35,Commanders,20,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,20,35,-7.5,51
+oddsshark,Seahawks,22,Broncos,22,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,22,22,2.5,40.5
+oddsshark,Texans,20,Jaguars,24,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,20,24,-2.5,42.5
+oddsshark,Titans,17,Colts,27,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,17,27,-7,44
+oddsshark,Panthers,21,Eagles,19,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,21,19,4,39
+oddsshark,Steelers,20,Buccaneers,18,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,20,18,2.5,39
+oddsshark,Ravens,23,Browns,19,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,23,19,4.5,41
+oddsshark,Saints,21,Giants,21,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,21,21,1,45.5
+oddsshark,Bears,24,Falcons,28,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,24,28,1.5,51.5
+oddsshark,Jets,17,Patriots,25,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,25,-7,43.5
+oddsshark,Cardinals,19,Rams,31,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,19,31,-12,51.5
+oddsshark,Chargers,19,Chiefs,25,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,19,25,-8,41.5
+oddsshark,Bills,30,Raiders,25,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,30,25,4.5,53.5
+oddsshark,Cowboys,26,Packers,28,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,26,28,-1,53
+oddsshark,Commanders,22,49ers,27,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,22,27,-7.5,51
+DRatings,Seahawks,22,Broncos,19,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,22,19,2.5,40.5
+DRatings,Texans,20,Jaguars,23,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,20,23,-2.5,42.5
+DRatings,Jets,16,Patriots,28,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,16,28,-7,43.5
+DRatings,Steelers,22,Buccaneers,18,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,22,18,2.5,39
+DRatings,Ravens,23,Browns,19,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,23,19,4.5,41
+DRatings,Bears,26,Falcons,23,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,26,23,1.5,51.5
+DRatings,Titans,18,Colts,26,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,18,26,-7,44
+DRatings,Panthers,23,Eagles,21,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,23,21,4,39
+DRatings,Saints,21,Giants,23,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,21,23,1,45.5
+DRatings,Cardinals,17,Rams,34,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,17,34,-12,51.5
+DRatings,Bills,30,Raiders,22,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,30,22,4.5,53.5
+DRatings,Chargers,17,Chiefs,26,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,17,26,-8,41.5
+DRatings,Cowboys,25,Packers,25,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,25,25,-1,53
+DRatings,Commanders,19,49ers,32,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,19,32,-7.5,51
+oddstrader,Seahawks,22,Broncos,19,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,22,19,2.5,40.5
+oddstrader,Texans,19,Jaguars,22,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,19,22,-2.5,42.5
+oddstrader,Titans,18,Colts,25,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,18,25,-7,44
+oddstrader,Panthers,22,Eagles,17,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,22,17,4,39
+oddstrader,Steelers,22,Buccaneers,18,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,22,18,2.5,39
+oddstrader,Ravens,23,Browns,17,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,23,17,4.5,41
+oddstrader,Saints,23,Giants,22,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,23,22,1,45.5
+oddstrader,Bears,26,Falcons,24,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,26,24,1.5,51.5
+oddstrader,Jets,20,Patriots,24,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,20,24,-7,43.5
+oddstrader,Cardinals,20,Rams,31,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,20,31,-12,51.5
+oddstrader,Chargers,18,Chiefs,25,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,18,25,-8,41.5
+oddstrader,Bills,30,Raiders,22,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,30,22,4.5,53.5
+oddstrader,Cowboys,27,Packers,25,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,25,-1,53
+oddstrader,Commanders,24,49ers,29,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,24,29,-7.5,51
+NFLSpinzone,Broncos,24,Seahawks,23,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,23,24,2.5,40.5
+NFLSpinzone,Texans,23,Jaguars,19,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,23,19,-2.5,42.5
+NFLSpinzone,Bears,31,Falcons,27,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,31,27,1.5,51.5
+NFLSpinzone,Ravens,24,Browns,20,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,20,4.5,41
+NFLSpinzone,Colts,27,Titans,17,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,17,27,-7,44
+NFLSpinzone,Patriots,28,Jets,22,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,22,28,-7,43.5
+NFLSpinzone,Giants,23,Saints,20,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,20,23,1,45.5
+NFLSpinzone,Eagles,26,Panthers,23,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,23,26,4,39
+NFLSpinzone,Buccaneers,24,Steelers,22,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,22,24,2.5,39
+NFLSpinzone,Rams,34,Cardinals,20,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,20,34,-12,51.5
+NFLSpinzone,Chiefs,27,Chargers,23,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,23,27,-8,41.5
+NFLSpinzone,Bills,34,Raiders,23,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,34,23,4.5,53.5
+NFLSpinzone,Packers,34,Cowboys,31,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,31,34,-1,53
+NFLSpinzone,49ers,33,Commanders,23,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,23,33,-7.5,51
+clutchpoints,Broncos,21,Seahawks,20,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,20,21,2.5,40.5
+clutchpoints,Jaguars,28,Texans,20,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,20,28,-2.5,42.5
+clutchpoints,Bears,33,Falcons,30,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,33,30,1.5,51.5
+clutchpoints,Browns,23,Ravens,21,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,21,23,4.5,41
+clutchpoints,Patriots,21,Jets,16,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,16,21,-7,43.5
+clutchpoints,Giants,19,Saints,17,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,17,19,1,45.5
+clutchpoints,Colts,13,Titans,10,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,10,13,-7,44
+clutchpoints,Eagles,19,Panthers,18,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,18,19,4,39
+clutchpoints,Buccaneers,24,Steelers,23,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,23,24,2.5,39
+clutchpoints,Rams,35,Cardinals,22,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,22,35,-12,51.5
+clutchpoints,Bills,35,Raiders,25,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,35,25,4.5,53.5
+clutchpoints,Chiefs,30,Chargers,17,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,17,30,-8,41.5
+clutchpoints,Packers,28,Cowboys,24,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,24,28,-1,53
+clutchpoints,49ers,33,Commanders,17,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,17,33,-7.5,51
+copilot,Seahawks,24,Broncos,20,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,24,20,2.5,40.5
+copilot,Jaguars,27,Texans,21,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,21,27,-2.5,42.5
+copilot,Bears,30,Falcons,23,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,30,23,1.5,51.5
+copilot,Ravens,24,Browns,17,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,17,4.5,41
+copilot,Colts,27,Titans,16,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,16,27,-7,44
+copilot,Patriots,23,Jets,13,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,23,-7,43.5
+copilot,Giants,21,Saints,20,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,20,21,1,45.5
+copilot,Eagles,28,Panthers,24,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,24,28,4,39
+copilot,Steelers,20,Buccaneers,16,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,20,16,2.5,39
+copilot,Rams,34,Cardinals,20,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,20,34,-12,51.5
+copilot,Chiefs,28,Chargers,21,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,21,28,-8,41.5
+copilot,Bills,31,Raiders,24,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,31,24,4.5,53.5
+copilot,Packers,30,Cowboys,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,30,-1,53
+copilot,49ers,27,Commanders,17,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,17,27,-7.5,51
+NickWhalen,Seahawks,21,Broncos,17,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,21,17,2.5,40.5
+NickWhalen,Texans,24,Jaguars,21,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,24,21,-2.5,42.5
+NickWhalen,Bears,27,Falcons,21,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,27,21,1.5,51.5
+NickWhalen,Ravens,27,Browns,21,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,27,21,4.5,41
+NickWhalen,Colts,27,Titans,17,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,17,27,-7,44
+NickWhalen,Patriots,30,Jets,20,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,20,30,-7,43.5
+NickWhalen,Giants,27,Saints,24,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,24,27,1,45.5
+NickWhalen,Panthers,20,Eagles,17,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,20,17,4,39
+NickWhalen,Steelers,21,Bucs,17,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,21,17,2.5,39
+NickWhalen,Rams,34,Cardinals,23,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,23,34,-12,51.5
+NickWhalen,Chiefs,24,Chargers,17,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,17,24,-8,41.5
+NickWhalen,Bills,30,Raiders,24,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,30,24,4.5,53.5
+NickWhalen,Cowboys,33,Packers,30,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,33,30,-1,53
+NickWhalen,49ers,34,Commanders,20,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,20,34,-7.5,51
+BillBender,Seahawks,23,Broncos,21,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,23,21,2.5,40.5
+BillBender,Texans,22,Jaguars,19,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,22,19,-2.5,42.5
+BillBender,Bears,26,Falcons,20,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,26,20,1.5,51.5
+BillBender,Ravens,28,Browns,17,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,28,17,4.5,41
+BillBender,Colts,30,Titans,19,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,19,30,-7,44
+BillBender,Patriots,24,Jets,14,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,14,24,-7,43.5
+BillBender,Giants,24,Saints,21,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,21,24,1,45.5
+BillBender,Panthers,22,Eagles,20,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,22,20,4,39
+BillBender,Steelers,26,Bucs,16,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,26,16,2.5,39
+BillBender,Rams,34,Cardinals,24,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,24,34,-12,51.5
+BillBender,Chiefs,25,Chargers,19,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,19,25,-8,41.5
+BillBender,Bills,30,Raiders,22,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,30,22,4.5,53.5
+BillBender,Packers,28,Cowboys,20,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,20,28,-1,53
+BillBender,49ers,34,Commanders,20,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,20,34,-7.5,51
+Jeremy Cluff,Seahawks,24,Broncos,21,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,24,21,2.5,40.5
+Jeremy Cluff,Texans,23,Jaguars,20,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,23,20,-2.5,42.5
+Jeremy Cluff,Bears,27,Falcons,20,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,27,20,1.5,51.5
+Jeremy Cluff,Ravens,28,Browns,17,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,28,17,4.5,41
+Jeremy Cluff,Colts,30,Titans,14,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,14,30,-7,44
+Jeremy Cluff,Patriots,31,Jets,13,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,13,31,-7,43.5
+Jeremy Cluff,Giants,27,Saints,23,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,23,27,1,45.5
+Jeremy Cluff,Panthers,24,Eagles,17,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,24,17,4,39
+Jeremy Cluff,Steelers,23,Bucs,16,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,23,16,2.5,39
+Jeremy Cluff,Rams,38,Cardinals,24,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,24,38,-12,51.5
+Jeremy Cluff,Chiefs,28,Chargers,20,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,20,28,-8,41.5
+Jeremy Cluff,Bills,31,Raiders,21,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,31,21,4.5,53.5
+Jeremy Cluff,Packers,30,Cowboys,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,30,-1,53
+Jeremy Cluff,49ers,27,Commanders,24,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,24,27,-7.5,51
+VinnieIyer,Seahawks,24,Broncos,17,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,24,17,2.5,40.5
+VinnieIyer,Packers,31,Cowboys,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,31,-1,53
+VinnieIyer,Bills,34,Raiders,27,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,34,27,4.5,53.5
+VinnieIyer,Chiefs,30,Chargers,14,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,14,30,-8,41.5
+VinnieIyer,Texans,23,Jaguars,20,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,23,20,-2.5,42.5
+VinnieIyer,Bears,27,Falcons,20,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,27,20,1.5,51.5
+VinnieIyer,Ravens,20,Browns,17,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,20,17,4.5,41
+VinnieIyer,Colts,24,Titans,20,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,20,24,-7,44
+VinnieIyer,Patriots,26,Jets,14,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,14,26,-7,43.5
+VinnieIyer,Saints,27,Giants,24,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,27,24,1,45.5
+VinnieIyer,Eagles,23,Panthers,20,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,20,23,4,39
+VinnieIyer,Steelers,24,Bucs,20,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,24,20,2.5,39
+VinnieIyer,Rams,31,Cardinals,20,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,20,31,-12,51.5
+VinnieIyer,49ers,34,Commanders,17,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,17,34,-7.5,51
+TylerSullivan,Panthers,23,Eagles,21,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,23,21,4,39
+TylerSullivan,Buccaneers,24,Steelers,23,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,23,24,2.5,39
+TylerSullivan,Colts,24,Titans,20,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,20,24,-7,44
+TylerSullivan,Rams,30,Cardinals,17,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,17,30,-12,51.5
+TylerSullivan,Patriots,30,Jets,17,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,30,-7,43.5
+TylerSullivan,Seahawks,24,Broncos,19,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,24,19,2.5,40.5
+TylerSullivan,Jaguars,28,Texans,24,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,24,28,-2.5,42.5
+TylerSullivan,Ravens,26,Browns,20,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,26,20,4.5,41
+TylerSullivan,Bears,27,Falcons,23,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,27,23,1.5,51.5
+TylerSullivan,Giants,26,Saints,20,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,20,26,1,45.5
+TylerSullivan,Bills,30,Raiders,21,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,30,21,4.5,53.5
+TylerSullivan,Chiefs,33,Chargers,17,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,17,33,-8,41.5
+TylerSullivan,Cowboys,27,Packers,24,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,24,-1,53
+TylerSullivan,49ers,30,Commanders,20,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,20,30,-7.5,51
+Sportsnaut,Seahawks,20,Broncos,13,SEADEN,4798353,SEA,Seahawks,Seattle Seahawks,DEN,Broncos,Denver Broncos,20,13,2.5,40.5
+Sportsnaut,Jaguars,20,Texans,16,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,16,20,-2.5,42.5
+Sportsnaut,Bears,31,Falcons,21,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,31,21,1.5,51.5
+Sportsnaut,Ravens,24,Browns,17,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,17,4.5,41
+Sportsnaut,Titans,27,Colts,24,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,27,24,-7,44
+Sportsnaut,Patriots,28,Jets,20,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,20,28,-7,43.5
+Sportsnaut,Giants,28,Saints,23,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,23,28,1,45.5
+Sportsnaut,Panthers,24,Eagles,21,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,24,21,4,39
+Sportsnaut,Steelers,27,Bucs,17,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,27,17,2.5,39
+Sportsnaut,Rams,35,Cardinals,17,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,17,35,-12,51.5
+Sportsnaut,Chiefs,27,Chargers,13,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,13,27,-8,41.5
+Sportsnaut,Bills,31,Raiders,24,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,31,24,4.5,53.5
+Sportsnaut,Packers,38,Cowboys,34,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,34,38,-1,53
+Sportsnaut,49ers,28,Commanders,17,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,17,28,-7.5,51
+MaldonadoESPN,Texans,20,Jaguars,19,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,20,19,-2.5,42.5
+MoodyESPN,Jaguars,24,Texans,20,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,20,24,-2.5,42.5
+WalderESPN,Texans,23,Jaguars,21,HOUJAC,4798234,HOU,Texans,Houston Texans,JAC,Jaguars,Jacksonville Jaguars,23,21,-2.5,42.5
+MaldonadoESPN,Falcons,27,Bears,23,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,23,27,1.5,51.5
+MoodyESPN,Bears,27,Falcons,23,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,27,23,1.5,51.5
+WalderESPN,Bears,31,Falcons,13,CHIATL,4798359,CHI,Bears,Chicago Bears,ATL,Falcons,Atlanta Falcons,31,13,1.5,51.5
+MaldonadoESPN,Ravens,21,Browns,20,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,21,20,4.5,41
+MoodyESPN,Ravens,24,Browns,20,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,20,4.5,41
+WalderESPN,Ravens,24,Browns,17,BALCLE,4798357,BAL,Ravens,Baltimore Ravens,CLE,Browns,Cleveland Browns,24,17,4.5,41
+MaldonadoESPN,Colts,27,Titans,19,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,19,27,-7,44
+MoodyESPN,Colts,30,Titans,17,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,17,30,-7,44
+WalderESPN,Colts,23,Titans,10,TENIND,4798354,TEN,Titans,Tennessee Titans,IND,Colts,Indianapolis Colts,10,23,-7,44
+MaldonadoESPN,Patriots,27,Jets,21,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,21,27,-7,43.5
+MoodyESPN,Patriots,30,Jets,17,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,17,30,-7,43.5
+WalderESPN,Patriots,24,Jets,16,NYJNE,4798360,NYJ,Jets,New York Jets,NE,Patriots,New England Patriots,16,24,-7,43.5
+MaldonadoESPN,Giants,24,Saints,20,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,20,24,1,45.5
+MoodyESPN,Saints,27,Giants,24,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,27,24,1,45.5
+WalderESPN,Saints,20,Giants,14,NONYG,4798358,NO,Saints,New Orleans Saints,NYG,Giants,New York Giants,20,14,1,45.5
+MaldonadoESPN,Eagles,20,Panthers,19,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,19,20,4,39
+MoodyESPN,Panthers,21,Eagles,17,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,21,17,4,39
+WalderESPN,Panthers,23,Eagles,20,CARPHI,4798355,CAR,Panthers,Carolina Panthers,PHI,Eagles,Philadelphia Eagles,23,20,4,39
+MaldonadoESPN,Steelers,17,Buccaneers,16,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,17,16,2.5,39
+MoodyESPN,Steelers,20,Buccaneers,17,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,20,17,2.5,39
+WalderESPN,Steelers,23,Buccaneers,20,PITTB,4798356,PIT,Steelers,Pittsburgh Steelers,TB,Buccaneers,Tampa Bay Buccaneers,23,20,2.5,39
+MaldonadoESPN,Rams,28,Cardinals,7,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,7,28,-12,51.5
+MoodyESPN,Rams,38,Cardinals,17,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,17,38,-12,51.5
+WalderESPN,Rams,31,Cardinals,16,ARILAR,4798361,ARI,Cardinals,Arizona Cardinals,LAR,Rams,Los Angeles Rams,16,31,-12,51.5
+MaldonadoESPN,Chiefs,24,Chargers,13,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,13,24,-8,41.5
+MoodyESPN,Chiefs,27,Chargers,13,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,13,27,-8,41.5
+WalderESPN,Chiefs,27,Chargers,15,LACKC,4798362,LAC,Chargers,Los Angeles Chargers,KC,Chiefs,Kansas City Chiefs,15,27,-8,41.5
+MaldonadoESPN,Bills,31,Raiders,24,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,31,24,4.5,53.5
+MoodyESPN,Bills,34,Raiders,24,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,34,24,4.5,53.5
+WalderESPN,Bills,30,Raiders,19,BUFLV,4798363,BUF,Bills,Buffalo Bills,LV,Raiders,Las Vegas Raiders,30,19,4.5,53.5
+MaldonadoESPN,Cowboys,30,Packers,28,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,30,28,-1,53
+MoodyESPN,Packers,30,Cowboys,27,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,27,30,-1,53
+WalderESPN,Packers,37,Cowboys,24,DALGB,4798364,DAL,Cowboys,Dallas Cowboys,GB,Packers,Green Bay Packers,24,37,-1,53
+MaldonadoESPN,49ers,35,Commanders,21,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,21,35,-7.5,51
+MoodyESPN,49ers,31,Commanders,20,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,20,31,-7.5,51
+WalderESPN,49ers,29,Commanders,20,WASSF,4798365,WAS,Commanders,Washington Commanders,SF,49ers,San Francisco 49ers,20,29,-7.5,51

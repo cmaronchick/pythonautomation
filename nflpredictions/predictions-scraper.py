@@ -47,7 +47,7 @@ def make_driver() -> webdriver.Chrome:
 #https://www.cbssports.com/writers/jared-dubin/6/
 
 ts = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-5-picks-predictions-bets-jaguars-eagles-2026/',
+    'url': 'https://www.cbssports.com/nfl/news/nfl-week-6-picks-predictions-bets-odds-scores-panthers-eagles/',
     'name': 'TylerSullivan',
     'searchTerm': 'Projected',
     'searchTag': 'strong',
@@ -56,7 +56,7 @@ ts = {
     # https://www.cbssports.com/writers/tyler-sullivan/
 }
 pp = {
-    'url': 'https://www.cbssports.com/nfl/news/pete-priscos-week-5-nfl-picks-odds/',
+    'url': 'https://www.cbssports.com/nfl/news/pete-priscos-week-6-nfl-picks-odds-predictions/',
     'name': 'PetePrisco',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -66,7 +66,7 @@ pp = {
 }
 
 breech = {
-    'url': 'https://www.cbssports.com/nfl/news/nfl-week-5-picks-score-predictions-ravens-bills-49ers/',
+    'url': 'https://www.cbssports.com/nfl/news/breech-nfl-week-6-picks-score-predictions-odds/',
     'name': 'JohnBreech',
     'searchTerm': 'PICK:',
     'searchTag': 'strong',
@@ -83,7 +83,7 @@ foxsports = {
 }
 
 azc = {
-    'url': 'https://www.azcentral.com/story/sports/nfl/2026/10/05/nfl-week-5-picks-predictions-projections-game-scores/90788473007/',
+    'url': 'https://www.azcentral.com/story/sports/nfl/2026/10/12/nfl-week-6-picks-predictions-score-projections-2026-season/90788673007/',
     'name': 'Jeremy Cluff', # Jenna Ortiz', # 
     'searchTerm': 'Prediction', # cluff: 'Prediction:'
     'searchTag': 'strong',
@@ -106,7 +106,7 @@ pfn = {
 }
 
 sz = {
-    'url': 'https://nflspinzone.com/2026-nfl-picks-and-score-predictions-for-every-game-week-5',
+    'url': 'https://nflspinzone.com/2026-nfl-picks-score-predictions-for-every-week-6-game-01m4rpy0rb18',
     'name': 'NFL Spinzone',
     'searchTerm': 'Prediction:',
     'searchTag': 'strong',
@@ -133,7 +133,7 @@ bleacher = {
 }
 
 bender = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-5/04787d3ef5247c02e1b96a88',
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-week-6/96ca7b5b371e7b64cd933e96',
     'name': 'BillBender',
     'searchTerm': 'Pick:',
     'searchTag': 'strong',
@@ -142,7 +142,7 @@ bender = {
 }
 
 iyer = {
-    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-5/eca9ea6e41412f089384daf3'
+    'url': 'https://www.sportingnews.com/us/nfl/news/nfl-picks-predictions-against-spread-week-6/1ce346bbf97b40ebc57b16ab'
     # https://www.sportingnews.com/us/author/vinnie-iyer
 }
 
@@ -161,7 +161,7 @@ sportsnaut = {
 }
 
 copilot = {
-    'url': 'https://www.usatoday.com/story/sports/nfl/2026/10/08/nfl-picks-predictions-week-5-ai-2026/92128524007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
+    'url': 'https://www.usatoday.com/story/sports/nfl/2026/10/15/nfl-picks-predictions-week-6-ai-2026/92233970007/', # https://www.usatoday.com/staff/75156654007/jacob-camenker/
     'name': 'Copilot',
     'searchXPath': "//h3[@class='gnt_ar_b_h3']", #gnt_ar_b_h3
     'separator': ', '
@@ -169,12 +169,12 @@ copilot = {
 }
 
 usatoday = {
-    'url': 'https://e.infogram.com/404cfdf0-399d-4b01-b72e-de31d256158d?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
+    'url': 'https://e.infogram.com/7e08cf3d-a093-48d2-8f8e-baa048b3b27e?src=embed#async_embed' #https://e.infogram.com/ad6b49fa-d4a5-4787-b6ae-9e8592ca802a?src=embed#async_embed'
     # https://www.usatoday.com/sports/nfl/ https://www.usatoday.com/staff/2646715001/nate-davis/
 }
 
 espn = {
-    'url': 'https://www.espn.com/nfl/story/_/id/50067784/week-4-picks-predictions-schedule-fantasy-odds-2026'
+    'url': 'https://www.espn.com/nfl/story/_/id/50188997/week-6-picks-predictions-schedule-fantasy-odds-2026'
     # https://www.espn.com/nfl/
 }
 
@@ -194,7 +194,7 @@ clutchpoints = {
 }
 
 rotowire = {
-    'url': 'https://www.rotowire.com/football/article/nfl-week-4-picks-against-the-spread-score-predictions-137993', # https://www.rotowire.com/football/column/beating-the-book-20
+    'url': 'https://www.rotowire.com/football/article/beating-the-book-141258', # https://www.rotowire.com/football/column/beating-the-book-20
     'name': 'NickWhalen',
     'searchTerm': 'The pick:',
     'separator': ' - '
@@ -212,7 +212,7 @@ sbr = {
 }
 
 rotoballer = {
-    'url': 'https://www.rotoballer.com/nfl-predictions-week-3-picks-and-analysis-for-every-game-2026/1949615',
+    'url': 'https://www.rotoballer.com/nfl-week-3-predictions-picks-and-analysis-for-every-football-game/1966993',
     'name': 'JoeNicely',
     'separator': ', ',
     'searchTag': 'h2',

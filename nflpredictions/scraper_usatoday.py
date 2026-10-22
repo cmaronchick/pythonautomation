@@ -60,7 +60,9 @@ imageTable = {
     'https://images.jifo.co/21540751_1589235848819.png': 'Giants',
     'https://images.jifo.co/21540751_1788967616727.svg': 'Rams',
     'https://images.jifo.co/21540751_1589235220318.png': '49ers',
-    'https://images.jifo.co/21540751_1589235305066.png': 'Cardinals'
+    'https://images.jifo.co/21540751_1589235305066.png': 'Cardinals',
+    'https://images.jifo.co/21540751_1791999166207.svg': 'Broncos',
+    'https://images.jifo.co/21540751_1759424386799.png': 'Seahawks'
 }
 
 articleTable = [
@@ -375,7 +377,7 @@ def fetch_usatoday_data(weeknum, url, make_driver):
 
 
 def main(weeknum):
-    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/404cfdf0-399d-4b01-b72e-de31d256158d?src=embed#async_embed', make_driver) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
+    html_content = fetch_usatoday_data(weeknum, 'https://e.infogram.com/7e08cf3d-a093-48d2-8f8e-baa048b3b27e?src=embed#async_embed', make_driver) #'https://tallysight.com/new/widget/staff-picks/usa-today-sports/nfl/event:2024-25-week-17/default:ml/types:ml,ats/extras:condensed/performances:bboverall,overall?id=5fef16ef-7f0c-41e5-81c9-a000636d9d0c'
     if html_content:
         print(html_content)
     else:
